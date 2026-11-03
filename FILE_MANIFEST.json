@@ -1,0 +1,1041 @@
+{
+  "format_version": 1,
+  "description": "Complete updated source ZIP integrity snapshot; verify with scripts/validate_project.py --verify-manifest before editing. LICENSE remains in the existing GitHub repository.",
+  "files": [
+    {
+      "path": ".editorconfig",
+      "size": 104,
+      "sha256": "750a8d977ee10a45ffd54aad960bd06ec264e5b0ef3cc5f02118b95b3015c640"
+    },
+    {
+      "path": ".gitattributes",
+      "size": 209,
+      "sha256": "b322ca1839bc3aefe95d5ebf6024238af97aa7f2dc854de632ad683caa98362f"
+    },
+    {
+      "path": ".github/copilot-instructions.md",
+      "size": 2203,
+      "sha256": "f9874a3a5b92f6e4da501586b6bb0dab10bdfba4a59a3566e4d87fbcfd9bde00"
+    },
+    {
+      "path": ".github/instructions/hunts.instructions.md",
+      "size": 374,
+      "sha256": "ca25b22fbfe22f27fb4d5c2ea3ca00bbe74c17b5b26069379094ec84b4366765"
+    },
+    {
+      "path": ".github/instructions/splunk.instructions.md",
+      "size": 545,
+      "sha256": "684e8779dc1279e3af8a1686c19be3adfc9f24103038a02b77d52ff5849a0160"
+    },
+    {
+      "path": ".github/prompts/create-hunt-report.prompt.md",
+      "size": 370,
+      "sha256": "6da37a3813624108247e3d5de4e6761cacc50419c444c5324153faedaca917ec"
+    },
+    {
+      "path": ".github/prompts/review-splunk-config.prompt.md",
+      "size": 378,
+      "sha256": "2773aa7ea033f20b020295d98ee364a8b38668fc28a5b39a363b7b8d799085d0"
+    },
+    {
+      "path": ".github/workflows/azure-oidc.yml",
+      "size": 1465,
+      "sha256": "46b4a4110322dc2d848ba984341c6f754471d2c7e0c25a1d80f55ec25b2a045a"
+    },
+    {
+      "path": ".github/workflows/oidc-claims.yml",
+      "size": 1474,
+      "sha256": "88b9f9b4019213292769ac7ac49926935a77a125a1585c4dbb1ada2c7eeedb01"
+    },
+    {
+      "path": ".github/workflows/validate-project.yml",
+      "size": 838,
+      "sha256": "e15fb288d46f33a5b67c1f6c1865e288e3dae3abfe0fc1fc4477be17b4386785"
+    },
+    {
+      "path": ".gitignore",
+      "size": 685,
+      "sha256": "3da697a2bfe8f992d66b2b3859138cf62a6d88d0780528b5d446ed868ac316d5"
+    },
+    {
+      "path": ".vscode/extensions.json",
+      "size": 137,
+      "sha256": "97c5f753c9d8e477b6c97d0c9a564b29eb30d783911009c892ee43384cdc7a7a"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 433,
+      "sha256": "198339bf894546a01f05e87594909a512e9f74ac762a68551a0be9951895ff56"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "size": 452,
+      "sha256": "62456fea743205e8b723a2ec71a9457742f5f414476cba75433b19ebd329d010"
+    },
+    {
+      "path": "README.md",
+      "size": 4246,
+      "sha256": "91f4993a488ccfc347260df7d139c14e9960671db5580b69910315cb02a38554"
+    },
+    {
+      "path": "SECURITY.md",
+      "size": 785,
+      "sha256": "4dbb10a1acb6be418c99e3c59db2788f40052a9a08e292960b353824f1e1d2e8"
+    },
+    {
+      "path": "START_HERE_WINDOWS.md",
+      "size": 1531,
+      "sha256": "d7c20406fd05ae895cae18af9cb270db9478aad1a2af887d9d7a51d98c5b5af2"
+    },
+    {
+      "path": "START_HERE_WSL.md",
+      "size": 1194,
+      "sha256": "0bb6755568c43b2c45340ccd17026f89a39229a1881bfda563a46247e7cf1a4f"
+    },
+    {
+      "path": "apps/LAB_SIEM/default/data/ui/views/overview.xml",
+      "size": 901,
+      "sha256": "5c50eed0d5ce0d5e29e7ca7aa064af63e2b4957357d21c6df464164d6dc97b1a"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/app.conf",
+      "size": 198,
+      "sha256": "b2c88cb9ffb285209bf436ab4170db62566bf34d5d8fa14400ffb006fe500c16"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/authorize.conf",
+      "size": 276,
+      "sha256": "17955236d902fe8d478f4563ecbc05edc3b6cfdc451252b18ed5a823eda57cdf"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/indexes.conf",
+      "size": 1157,
+      "sha256": "a9496ea2660665ace86df12e67ffc9f43df9d6e7a5043ce3fa63415031db4d3c"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/inputs.conf",
+      "size": 718,
+      "sha256": "4d099571d191b84f9242f2a4671b4a2180594187657f5344e304d82b08604938"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/props.conf",
+      "size": 444,
+      "sha256": "c078a17eb075ec9e62c5006875836869737f34bc4f6cd8ebc10244060da2a078"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/server.conf",
+      "size": 32,
+      "sha256": "9460525f979689aaac4f0a4af08f482a5258e3665b3dae5f3901e8a74d02ccef"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/transforms.conf",
+      "size": 108,
+      "sha256": "3db370af1efdfab0bddcdc26b2e04eb5f247b6e6af580269766bb2e2c7ffbac3"
+    },
+    {
+      "path": "apps/LAB_SIEM/local/web.conf",
+      "size": 185,
+      "sha256": "a94e00ce72aadf38e76e3053493d6632384833ad264940b248041965bdbc3915"
+    },
+    {
+      "path": "apps/LAB_SIEM/metadata/default.meta",
+      "size": 76,
+      "sha256": "7e024946e3a60abbfb18894582d45a9a6dd49baac2ba1a507c6639caf48c0576"
+    },
+    {
+      "path": "apps/LAB_UF_WINDOWS/local/app.conf",
+      "size": 145,
+      "sha256": "ac4526632edec0ec5ea114c6b84e241de91485c55ea9cd0ad00de1c64106fdd4"
+    },
+    {
+      "path": "apps/LAB_UF_WINDOWS/local/inputs.conf",
+      "size": 711,
+      "sha256": "0422b660b27d379cdb2a7d79f2ee2cc4b607524c1a4d8e3d72c960310e07aac2"
+    },
+    {
+      "path": "apps/LAB_UF_WINDOWS/local/outputs.conf",
+      "size": 230,
+      "sha256": "cd4cd112cc6c9a46ea1fa605af81e7ae5d4ff14e1a102a3d779e900439b19c97"
+    },
+    {
+      "path": "apps/LAB_UF_WINDOWS/local/server.conf",
+      "size": 112,
+      "sha256": "fbb53a2a68a36398634c0b4903a083128b6571f6df8f72fad6f506856547e8fb"
+    },
+    {
+      "path": "apps/Splunk_TA_nginx/local/inputs.conf",
+      "size": 219,
+      "sha256": "f53d04b9570e90dd5cdc63a0ff0bd50568612116e0dbcf63e40256d4f39e0106"
+    },
+    {
+      "path": "configs/hec/README.md",
+      "size": 957,
+      "sha256": "4ae398e3027413de36bf5e288dea67d6eb1df9de4da1d22e858256408cb08992"
+    },
+    {
+      "path": "configs/hec/inputs.conf.example",
+      "size": 97,
+      "sha256": "90c9ab698d84cf71db14f1c7c454b9ac73a491631a45b1f0fb8ca3175ec273fc"
+    },
+    {
+      "path": "configs/logrotate/siem-lab",
+      "size": 265,
+      "sha256": "f23d5e88e35baff193c8e4e0729637d252a35b162c101bee5100d860fa402733"
+    },
+    {
+      "path": "configs/nginx/nginx.conf",
+      "size": 535,
+      "sha256": "66c94fdef835ab18a8fb951c4aed1de03677bb76b75ea74dd2083ff95808eb02"
+    },
+    {
+      "path": "configs/pki/splunk01.ext",
+      "size": 181,
+      "sha256": "200d2eefe3f22d80572ad53d06215aacb158a5fafb98e5ae5a9363a5a3ae35bf"
+    },
+    {
+      "path": "configs/redaction/README.md",
+      "size": 1122,
+      "sha256": "04a1df670c1b017417f3004dcf85edf7eda37c188742bd042708d00393d81277"
+    },
+    {
+      "path": "configs/redaction/inputs.conf.example",
+      "size": 106,
+      "sha256": "a37ec300d1784ff3deb9241d1f34f4c7472c1b6493798c6985f2a05ae5019fb0"
+    },
+    {
+      "path": "configs/redaction/props.conf.example",
+      "size": 249,
+      "sha256": "fc1f30ef6aca03d85e3f641e971cc48a7ad25a487832c72a4c628a5966688d73"
+    },
+    {
+      "path": "configs/rsyslog/30-siem-lab.conf",
+      "size": 313,
+      "sha256": "78e1dd68496d28ee9bed7fc68e00b692e2fcc632548b1522200bb00eaec2ce35"
+    },
+    {
+      "path": "configs/systemd/.gitkeep",
+      "size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "configs/systemd/Splunkd-override.conf.example",
+      "size": 66,
+      "sha256": "9b188a02e11d6f58e30aa6eb27cfe5486ea7484011fa44f2710b71e7e4fc26e1"
+    },
+    {
+      "path": "docs/FILE_CREATION_MATRIX.md",
+      "size": 2628,
+      "sha256": "383b275a4a185aadc7d4bfc7790d561c52e715e198b9244f090ee54e210ca1e0"
+    },
+    {
+      "path": "docs/GITHUB_UPLOAD_CHECKLIST.md",
+      "size": 1039,
+      "sha256": "6bd0350393a5d69ef86a9942100990267ff36be37eaa50750a7a1516138eae19"
+    },
+    {
+      "path": "docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx",
+      "size": 171857,
+      "sha256": "dfed2d7511926f6deadadcff43b455a0e63a17508c44984cc9d73ee531fe8a26"
+    },
+    {
+      "path": "docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md",
+      "size": 196633,
+      "sha256": "7047209243ff654e84bf95878dddded782ae721e06e01fe13351e49dabaa466b"
+    },
+    {
+      "path": "docs/SOP_CORRECTIONS.md",
+      "size": 1589,
+      "sha256": "1b170964e5be6d0d464ed2343d6f16f36119235fb51f2a0a46c99c5b3bd3f478"
+    },
+    {
+      "path": "docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md",
+      "size": 15907,
+      "sha256": "3261bef06bffa8e9783d766a07629c04a1f3ee60f019a8c006913363d8e7fdbf"
+    },
+    {
+      "path": "docs/appendices/01-splunk-input-parsing-indexing-and-search-phases.md",
+      "size": 11172,
+      "sha256": "755c6d451749e083df7a4905ea6cc7cb92b2150a5d4202e6e9ff9fed0153f97d"
+    },
+    {
+      "path": "docs/appendices/02-splunk-local-data-integrity-checks.md",
+      "size": 9452,
+      "sha256": "436f8a836245ca218f2c02a938e0ae3d1c24f4a6d5f637012dec2082a1f6033d"
+    },
+    {
+      "path": "docs/appendices/03-github-actions-openid-connect-with-azure.md",
+      "size": 20137,
+      "sha256": "a4389dc1a07655bc3b5a596503074f26925451eccd5063c66bf66ac789a72edc"
+    },
+    {
+      "path": "docs/appendices/04-nginx-log-collection-and-upgrade-safe-configuration.md",
+      "size": 9289,
+      "sha256": "2c6a82c698c93c0a77a95560077ab201e8464048d4a5128e1b56267b1d251bed"
+    },
+    {
+      "path": "docs/appendices/05-use-the-complete-zip-on-windows-and-upload-to-github.md",
+      "size": 9749,
+      "sha256": "32f6966ad4ad0eeca36ad98d35351d524b864fc2e91d4abbfa6baec778af056b"
+    },
+    {
+      "path": "docs/appendices/06-password-redaction-before-indexing.md",
+      "size": 11445,
+      "sha256": "7b6e2a8d830cda9a29362a0834f1f26af4ab06873aaaebaa8736cd6cc6ba9aa8"
+    },
+    {
+      "path": "docs/appendices/07-http-event-collector-endpoint-and-curl-test.md",
+      "size": 8575,
+      "sha256": "40ea983b76e0a539274be5b4da31ba620cc73dabd4a46c84aa358cd2325f92b9"
+    },
+    {
+      "path": "docs/appendices/README.md",
+      "size": 716,
+      "sha256": "4d96149c5c2a81278bff96311330306c8af6f397e0f5e3d62e0726c566610b2e"
+    },
+    {
+      "path": "docs/architecture-diagram.md",
+      "size": 804,
+      "sha256": "8058c7c899c8ed133490c5789eaccd21f2c55e3e2cc0eecf0663c22092e851a9"
+    },
+    {
+      "path": "docs/architecture.md",
+      "size": 811,
+      "sha256": "a37ec2be0e3f2b0899619a7bdd70beac55dfbcddcc6136ba59a1e5e1def49d98"
+    },
+    {
+      "path": "docs/deployment-order.md",
+      "size": 742,
+      "sha256": "c0b856d33d5137b596a562527e1d7e28dca41e49b492c557577378a18e150ee3"
+    },
+    {
+      "path": "docs/downloads.md",
+      "size": 1128,
+      "sha256": "142f8820c1aeef9c2a5ec284a8ef7d2543e904178f5e8d0ed1c8e284f447c889"
+    },
+    {
+      "path": "docs/hunt-report-template.md",
+      "size": 275,
+      "sha256": "1cbf664417356d7a065101d4fb6214e11afad863f9c106444baf59cb6dfe39be"
+    },
+    {
+      "path": "docs/images/.gitkeep",
+      "size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "docs/images/README.md",
+      "size": 213,
+      "sha256": "02719df0752fc8cd17d44d7bd56cfcd17e9e986b7d4d23742a1947dfad38411c"
+    },
+    {
+      "path": "docs/ldap-authentication.conf.example",
+      "size": 781,
+      "sha256": "546e7621b40a5678105ab6e9335e130e3ef468cd3557a660c513572ccbbc65e9"
+    },
+    {
+      "path": "docs/ldap-client.conf.example",
+      "size": 124,
+      "sha256": "bc43a9f890c7d3479077b8f3da47b63f85bc36945980aa5f77ccbab2b9831fc0"
+    },
+    {
+      "path": "docs/network-plan.md",
+      "size": 793,
+      "sha256": "34724368d69463cdfd78762dab74f35e1f5b6621ca120235d3abef6140b1bea8"
+    },
+    {
+      "path": "docs/project-file-list.md",
+      "size": 9124,
+      "sha256": "3de1b6748f42049ec66e5fb30162b8c5c97f7c629e5e35e2caec5101eb1da75a"
+    },
+    {
+      "path": "docs/repository-creation-guide.md",
+      "size": 11585,
+      "sha256": "e82084b83a18b6468dd083f50e1bd2a2bb2c898d6d0f3de60c691596ddcfaa59"
+    },
+    {
+      "path": "docs/screenshot-naming.md",
+      "size": 704,
+      "sha256": "b5baea539f0d74b0345034d1ee26cfddde496907f049a3e1cc09ae506de2a802"
+    },
+    {
+      "path": "docs/security-and-sanitization.md",
+      "size": 1077,
+      "sha256": "e316650552ad8dd37b760272c204d0f791fd4aade3dba9e192b4adc83c7e177d"
+    },
+    {
+      "path": "docs/steps/01-confirm-the-ip-address-plan.md",
+      "size": 2320,
+      "sha256": "685ab6e23d32e0d953ea4c8a3e21eaa19c10814980fda8222c4ff5c7803b83a0"
+    },
+    {
+      "path": "docs/steps/02-understand-the-splunk-components.md",
+      "size": 2245,
+      "sha256": "6305425fdb1e4bb747c99f7b2f4ebc67ba9b6ff215ea29143829117cded0d0e3"
+    },
+    {
+      "path": "docs/steps/03-plan-the-vm-resources.md",
+      "size": 908,
+      "sha256": "106a8c1e263f16ac540ca3227605aa5925c6d43984c73b03de09f2fc2747e4ce"
+    },
+    {
+      "path": "docs/steps/04-download-and-verify-the-software.md",
+      "size": 1388,
+      "sha256": "f63b5fc1c84a06458a0597fbe600abe93dd62213196ea4de2ef180b874ce9601"
+    },
+    {
+      "path": "docs/steps/05-create-and-install-the-rhel-vm.md",
+      "size": 1274,
+      "sha256": "d4a16366fc3bb57f26a00f2d5791f8d6b73356980cba3072be21263019b8280b"
+    },
+    {
+      "path": "docs/steps/06-configure-rhel-networking.md",
+      "size": 1809,
+      "sha256": "092cfcbfb4517b092435993b8d4ea741173f40ffa29df2aa3bd3352d967be21f"
+    },
+    {
+      "path": "docs/steps/07-register-update-and-prepare-rhel.md",
+      "size": 1798,
+      "sha256": "c768203eef164fc50fa885e17468c46df65d54e74a2a410d4936bfcca779f32b"
+    },
+    {
+      "path": "docs/steps/08-create-the-project-folders-on-rhel.md",
+      "size": 1450,
+      "sha256": "6cbd3e0ba42a04370336f35f64d6589a9eaa97b750089950b122240c877e6d95"
+    },
+    {
+      "path": "docs/steps/09-understand-the-configuration-files.md",
+      "size": 1242,
+      "sha256": "830303f2772f2af85a00a2543c2b1ba0b48151917431e197db37b59a705e36fc"
+    },
+    {
+      "path": "docs/steps/10-create-the-rhel-splunk-configuration.md",
+      "size": 4572,
+      "sha256": "da44627771d27ef8ec33ab339b5f8d2bd9b8a2c562f02b95f58207e578893d30"
+    },
+    {
+      "path": "docs/steps/11-create-the-windows-forwarder-configuration.md",
+      "size": 2513,
+      "sha256": "9402df83011864efb0014415f61f7c380068630b9bec1d597e1bfcc5184b15cc"
+    },
+    {
+      "path": "docs/steps/12-create-the-sysmon-rules.md",
+      "size": 1145,
+      "sha256": "74e4f0d3f543a12a9e4e7753b15cf43d5e192a7ee41df3895fc225af1b6f863c"
+    },
+    {
+      "path": "docs/steps/13-create-the-service-account-and-prepare-storage.md",
+      "size": 3382,
+      "sha256": "04e2b76caede7ee4c4043ec021e7ed7b87585c2b3c518fc6b1b67ce8486f78dc"
+    },
+    {
+      "path": "docs/steps/14-transfer-and-install-splunk-enterprise.md",
+      "size": 1640,
+      "sha256": "8c1fe0877004b7d1e0465d45416f668798924bc7cef541313093e7e210f3ead3"
+    },
+    {
+      "path": "docs/steps/15-create-the-lab-certificates.md",
+      "size": 3290,
+      "sha256": "602940aa627e9ac64458a2b18a4f7a0b5a758a807f5f155d056209fea927f557"
+    },
+    {
+      "path": "docs/steps/16-configure-linux-logging.md",
+      "size": 2044,
+      "sha256": "59703952f65eab3fc162be5c4d4df470bc98e38b57ff8c38f633aba1af3728c7"
+    },
+    {
+      "path": "docs/steps/17-deploy-the-splunk-app-and-automatic-startup.md",
+      "size": 1473,
+      "sha256": "746362edf3fa76c53f85d0c714378d8ac54e849ac30b46741600aada150b6652"
+    },
+    {
+      "path": "docs/steps/18-configure-the-rhel-firewall.md",
+      "size": 1626,
+      "sha256": "2c81379a85894d9c52cceaa15d6e4c4fbcb6bbe87d5fd32562c84ea00140b152"
+    },
+    {
+      "path": "docs/steps/19-verify-the-server.md",
+      "size": 992,
+      "sha256": "73c84e90c463e7e7d181c3d5f70bb7fbff2ef4feff61734837798055a1f66b4b"
+    },
+    {
+      "path": "docs/steps/20-open-splunk-and-install-the-add-ons.md",
+      "size": 1503,
+      "sha256": "f8a4c6adb0e4a613952acd9a190e22479ec0d15af5134b4868b5694cabd0d587"
+    },
+    {
+      "path": "docs/steps/21-create-and-install-the-windows-vm.md",
+      "size": 1691,
+      "sha256": "cb711d4bf837090ab8ceb3c36fc1cf2d76f8dc2f3172168f8ce7bc51da1a87cf"
+    },
+    {
+      "path": "docs/steps/22-transfer-the-windows-configuration.md",
+      "size": 1676,
+      "sha256": "8e6f4806d9b84cf7601a2b1b63aee4be154505c54b8f6e200a8efdb38d7589cc"
+    },
+    {
+      "path": "docs/steps/23-enable-windows-auditing-and-powershell-logging.md",
+      "size": 2565,
+      "sha256": "c3f63129e9d1d0b930c764304d561ee27d8656d81b67069e284ef1934ad6f8b7"
+    },
+    {
+      "path": "docs/steps/24-install-sysmon.md",
+      "size": 1932,
+      "sha256": "381e3346a0ad57ab310a1a255cdb7cc713625cfc031a4ea17e501c8637ba87bc"
+    },
+    {
+      "path": "docs/steps/25-install-the-universal-forwarder.md",
+      "size": 990,
+      "sha256": "dfc916a239554d79c47c62ca939e8ed9a3efb9ca025293e60d7c8294c188505e"
+    },
+    {
+      "path": "docs/steps/26-deploy-the-forwarder-configuration.md",
+      "size": 2496,
+      "sha256": "e83de6989739e53f6ac33ea73e7cf313bdb6fb6c6ff68e25f9149eee766327a8"
+    },
+    {
+      "path": "docs/steps/27-verify-event-collection.md",
+      "size": 970,
+      "sha256": "17dd9fd37713426807f4cee755be0f2b335b17b81000b4f96b79b620a7b20102"
+    },
+    {
+      "path": "docs/steps/28-generate-harmless-hunting-activity.md",
+      "size": 2845,
+      "sha256": "584a3c7cc6a658235eae3a1be13d625b10939096c0d6728253dfddda5569e872"
+    },
+    {
+      "path": "docs/steps/29-create-the-hunting-search-files.md",
+      "size": 3669,
+      "sha256": "74c94351ae7f8b2692b5943a481b965d45ce0ffd420a26ca8b66a0db4aacb340"
+    },
+    {
+      "path": "docs/steps/30-create-the-dashboard-and-analyst-role.md",
+      "size": 2391,
+      "sha256": "99980035c2d03ea398cee0e62f42c720dde62693db85322bea7846c3b09cd9ee"
+    },
+    {
+      "path": "docs/steps/31-confirm-ldap-requirements-and-preserve-local-access.md",
+      "size": 2776,
+      "sha256": "0a4d3e0940e28de588d2f2a1098f81b7f55ee7c6ce29b5f53b7d3403721ea3fa"
+    },
+    {
+      "path": "docs/steps/32-create-and-prepare-the-rhel-directory-vm.md",
+      "size": 2534,
+      "sha256": "729d8bea6d8787deb8bb0537e5b29bd57d6b80085e9b6c1898f6cc6c1470f41b"
+    },
+    {
+      "path": "docs/steps/33-install-idm-with-dns-and-its-certificate-authority.md",
+      "size": 3315,
+      "sha256": "98b2e65e650dc02e194e085835122029597869c0863f8ee5252f7825283e4b86"
+    },
+    {
+      "path": "docs/steps/34-create-directory-users-groups-and-the-lookup-account.md",
+      "size": 4405,
+      "sha256": "984810ce2a2e84e5bd05e1a2be82df177190de0a9f6e602e9d8b97f6abfa7b31"
+    },
+    {
+      "path": "docs/steps/35-configure-splunk-dns-and-trust-the-directory-certificate.md",
+      "size": 2025,
+      "sha256": "1c208f4a77106b80a3b8c315847d58171463dfb9f73f57f7746f730e35785a1d"
+    },
+    {
+      "path": "docs/steps/36-verify-ldaps-before-enabling-directory-sign-in.md",
+      "size": 2342,
+      "sha256": "3676f92008efdcab9249e9d3b36fe1c953c7398b0a23b633552b28c30e4f26ee"
+    },
+    {
+      "path": "docs/steps/37-require-certificate-verification-in-splunk-s-ldap-client.md",
+      "size": 2430,
+      "sha256": "fcd19cfbc4f4ec581241831e607b608244e57d90380bed300f7b78e26b8b5998"
+    },
+    {
+      "path": "docs/steps/38-create-the-ldap-strategy-in-splunk-web.md",
+      "size": 2413,
+      "sha256": "38d4bb487558f4ec4401502a825c72beefb4b9eb5a15f6150b14ccee7dc945e2"
+    },
+    {
+      "path": "docs/steps/39-map-the-directory-groups-to-splunk-roles.md",
+      "size": 1269,
+      "sha256": "49da8089e40f31ed67544378da41a5aa9d1950f6080ec0371c96afe111f8ebea"
+    },
+    {
+      "path": "docs/steps/40-verify-the-effective-configuration-and-retain-a-safe-example.md",
+      "size": 2122,
+      "sha256": "9e24b7b7ed396fb42619600bb3b0d8bc7c9d49dbb669e7ecf19f28fe2471df94"
+    },
+    {
+      "path": "docs/steps/41-test-permitted-access-and-denied-access.md",
+      "size": 2629,
+      "sha256": "1ef0083be59b651e415b43e7f1be3f98481eb9045758035963f7da018d37fcd0"
+    },
+    {
+      "path": "docs/steps/42-review-authentication-activity-and-troubleshoot-failures.md",
+      "size": 2246,
+      "sha256": "164f34b167b12511ecc7dda15f63b27facdb9b4ac1c9f2bd990ead57fe7b4259"
+    },
+    {
+      "path": "docs/steps/43-back-up-the-directory-and-document-recovery.md",
+      "size": 2609,
+      "sha256": "87066170da5038f6e1900e73189801e40a57b1dde9e1c453f614613229b5a855"
+    },
+    {
+      "path": "docs/steps/44-record-ldap-validation-and-screenshots.md",
+      "size": 2868,
+      "sha256": "0dd5728a5c67d57f2245e8c1b24b8da3cf1dd002249525090dde1166e6fe31f6"
+    },
+    {
+      "path": "docs/steps/45-create-and-test-an-alert.md",
+      "size": 1519,
+      "sha256": "acb5e49489ad7d57ce969f654f2e326393e87e2ec3969000bcc9938f5ef95866"
+    },
+    {
+      "path": "docs/steps/46-remove-the-test-objects.md",
+      "size": 834,
+      "sha256": "0dc92e385848826de78b3580714c6ca7c078ce17fcc30ab53ac04d90c905ac49"
+    },
+    {
+      "path": "docs/steps/47-create-the-backup-script.md",
+      "size": 2430,
+      "sha256": "20a66e31a34d0bf6db9568e87a790d7bf72416ff7b7fcf995811e552621ef735"
+    },
+    {
+      "path": "docs/steps/48-create-the-github-documentation.md",
+      "size": 5327,
+      "sha256": "172fec7d56a780dba025ce10793e32b79e747eac3eddafd6a172284266bed6cd"
+    },
+    {
+      "path": "docs/steps/49-perform-the-final-checks.md",
+      "size": 3814,
+      "sha256": "aeef5ddf73b7684dce49c62d9a6d9c01c940c8ea6821fa66cdb5b8d93c604a6f"
+    },
+    {
+      "path": "docs/steps/50-export-the-completed-project-from-rhel.md",
+      "size": 922,
+      "sha256": "09d7b79d38d16ec55d926c4affc53a5575cc95f0e10ccf6dcd5fb882e1e316ef"
+    },
+    {
+      "path": "docs/steps/51-open-the-completed-project-in-wsl-and-vs-code.md",
+      "size": 1257,
+      "sha256": "b82c8e220c6f841349018d39d64f6c15bdc2694a5026f2a11be0bac0001158f9"
+    },
+    {
+      "path": "docs/steps/52-upload-to-github.md",
+      "size": 1621,
+      "sha256": "6a3c288b8283fbdc186753d3fb1bb5f0e71b3dac02272269efcbaf5deb45600f"
+    },
+    {
+      "path": "docs/steps/README.md",
+      "size": 4462,
+      "sha256": "3de4df6612250fcbe25516935fa3876baa72c65a3761059a7d3d57026a6a2599"
+    },
+    {
+      "path": "docs/testing.md",
+      "size": 932,
+      "sha256": "2d623210e9cacda381c560cbd0b3ff07ab63bd28736f3c2591d77ae91c94ef70"
+    },
+    {
+      "path": "docs/troubleshooting.md",
+      "size": 931,
+      "sha256": "9222544dd335313a03823b234cad4e201b9af34a035b6f14bc6fca7910e918af"
+    },
+    {
+      "path": "docs/versions.md",
+      "size": 720,
+      "sha256": "a12451a2ef2a72194afa9e14d28e2488aba0a8bda12f1df2b024610ac1497c6b"
+    },
+    {
+      "path": "evidence/sanitized/.gitkeep",
+      "size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "evidence/sanitized/hec-validation.md",
+      "size": 684,
+      "sha256": "ecf3569c9eecd8928a2630a567c7d5a46510d7de99d7f847ad02f2b00de8ddfd"
+    },
+    {
+      "path": "evidence/sanitized/integrity-validation.md",
+      "size": 447,
+      "sha256": "b9ccb0614991a198419046e76d6fc5a005015fbdcdc2969f305541173dc75202"
+    },
+    {
+      "path": "evidence/sanitized/ldap-validation.md",
+      "size": 1512,
+      "sha256": "ebb26ca7a158b4220518b742e8ae5f4d9d2ec73183aa0ed54232fb4574d98dad"
+    },
+    {
+      "path": "evidence/sanitized/nginx-validation.md",
+      "size": 599,
+      "sha256": "b578ab55170c94853f4aa942c3c67d0c12ea04b67b77b6b8d148bb634ce1acd0"
+    },
+    {
+      "path": "evidence/sanitized/oidc-validation.md",
+      "size": 445,
+      "sha256": "fc8dd625c051d5411b3e44f61b45f4499d2b3010f73071311e4af5c6d3f1f95b"
+    },
+    {
+      "path": "evidence/sanitized/redaction-validation.md",
+      "size": 922,
+      "sha256": "a6a48a23295b7770412d2d53f64628becdbbd474eedb1bb73c8035855e5a8082"
+    },
+    {
+      "path": "evidence/sanitized/validation.md",
+      "size": 949,
+      "sha256": "ca15da2115dbbf1f2395508cc799e104233340c59dc9dd2f7b98fe5f8e3484c3"
+    },
+    {
+      "path": "examples/hec/event.json",
+      "size": 191,
+      "sha256": "cfb42c9b333a3ebd1cef06d75eff6661cf808244e70fb39c48e435b6294730f8"
+    },
+    {
+      "path": "examples/nginx/.gitkeep",
+      "size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "examples/nginx/README.md",
+      "size": 243,
+      "sha256": "2949efda8e7f1dc0178a913147317a2345e2ffc8d4b943452a19cee1a6303b48"
+    },
+    {
+      "path": "examples/nginx/access_combined.txt",
+      "size": 101,
+      "sha256": "af9e0e3824b27c3675b1ec3a2c568ece21b87f67c23ce9423a1316f41ef77e72"
+    },
+    {
+      "path": "examples/redaction/README.md",
+      "size": 560,
+      "sha256": "d8dc3788ef90911df180b29b5f03a0eb8b32855b25bb5132b6cdd620c4a97693"
+    },
+    {
+      "path": "examples/redaction/cases.json",
+      "size": 1084,
+      "sha256": "cf4fa766d85ce133c0b6c8ea8a3a356ecdb770c43f07d6aff6bb076ce7d3642c"
+    },
+    {
+      "path": "hunts/00-data-health.spl",
+      "size": 412,
+      "sha256": "c59dbbf704f54ab4424a43d2653599dc9b0527e39d21c5bee972e64f055d0b36"
+    },
+    {
+      "path": "hunts/01-encoded-powershell.spl",
+      "size": 316,
+      "sha256": "26cb67141a38420b5392697defcf9ff4d789b36a0e26316eb6857f58d15c64a3"
+    },
+    {
+      "path": "hunts/02-account-changes.spl",
+      "size": 200,
+      "sha256": "784e65a276ad8fc8c114f54f1abb5393331824293e4143632152d6aa49fcb6de"
+    },
+    {
+      "path": "hunts/03-failed-logons.spl",
+      "size": 318,
+      "sha256": "7701e56a0af6a8f63dc3738e93e9d6e9c1c506a98e94cc4fd973e0aa6465e91d"
+    },
+    {
+      "path": "hunts/04-scheduled-task.spl",
+      "size": 123,
+      "sha256": "908f9f80474380d253921a04a55e97b9619c24ed9d886bceb78b68a90d79cbbc"
+    },
+    {
+      "path": "hunts/05-process-network.spl",
+      "size": 380,
+      "sha256": "1c801ee0a56c7f116c12a66a4e4f73572db369d8d1734b375c8739b09d280724"
+    },
+    {
+      "path": "hunts/06-powershell-scriptblock.spl",
+      "size": 105,
+      "sha256": "0051a2e133babb92103fbff0b242ff42ec4d2beb2328113351e69c10e0960db8"
+    },
+    {
+      "path": "hunts/07-linux-pipeline.spl",
+      "size": 99,
+      "sha256": "c06ab2cf6824b06fd1a91945418b7d591ccdfd0f206b0bc81f4e6af99fa876d9"
+    },
+    {
+      "path": "hunts/08-custom-fields.spl",
+      "size": 90,
+      "sha256": "073f413748799f75c3ca5a423e979160b1a314fdf83e1e04f9aa86d138f12cc9"
+    },
+    {
+      "path": "hunts/09-nginx-access.spl",
+      "size": 97,
+      "sha256": "07542b29a8f3475bc0e964f8f0bb522893660999b5e35c46e8bd153016c18f24"
+    },
+    {
+      "path": "hunts/10-integrity-marker.spl",
+      "size": 115,
+      "sha256": "540ff9f19a1905777ee7a8e9dfa0c4748b7e19e280b8bca83a42eefc947f0ebd"
+    },
+    {
+      "path": "hunts/11-password-redaction-check.spl",
+      "size": 315,
+      "sha256": "65c41f1681721581311ad89d613b2ad164ea246ede11b9056d1efcd9b28b63d1"
+    },
+    {
+      "path": "hunts/12-hec-ingestion-check.spl",
+      "size": 135,
+      "sha256": "5ecac7cb0bbb378fb01151f820870d6511b547de376a9392bfa4686e9daa9071"
+    },
+    {
+      "path": "screenshots/01_RHEL10_2_ISO_SHA256.png",
+      "size": 32322,
+      "sha256": "1f224bf3838b5680402bd7745f823af7e8091a32bd253b891950f11cbedddeb9"
+    },
+    {
+      "path": "screenshots/02_RHEL_SPLUNK01_VM_Overview.png",
+      "size": 58208,
+      "sha256": "3a841e8e3b44f36541a995fd670d820f5144d7a79374b53ea7cfe0e70439ad4a"
+    },
+    {
+      "path": "screenshots/03_RHEL_IDM01_VM_Overview.png",
+      "size": 55781,
+      "sha256": "3b20a18f567f9abcbb35ff27280ec1704afbcde389c975bdfe991160ecc69b6f"
+    },
+    {
+      "path": "screenshots/04_WINHUNT01_VM_Overview.png",
+      "size": 58976,
+      "sha256": "103cef7c742f24eddc6c9003362bd2060292a5f79f1d9c3b560684555c02b3b9"
+    },
+    {
+      "path": "screenshots/05_RHEL_SPLUNK01_Hosts_Config.png",
+      "size": 34409,
+      "sha256": "37ff3e5728fd96807955161e7c5e57a612ff4e6b041bf68cf481294e35b8a07b"
+    },
+    {
+      "path": "screenshots/06_WINHUNT01_Hosts_Config.png",
+      "size": 76738,
+      "sha256": "6526b97c877ddf76f835cdda412b189d36173326bb3a548638059dbb12ebb0c0"
+    },
+    {
+      "path": "screenshots/07_Splunk_Lab_App_Config.png",
+      "size": 35187,
+      "sha256": "a69078c00a7b8189c55ec3b2f6778e5cad3e9dc4b89b529b48528aa66379929c"
+    },
+    {
+      "path": "screenshots/08_Splunk_Server_Config.png",
+      "size": 14772,
+      "sha256": "0091d6ed7a1185361054f1cba3a53c66f6c008297faf02e7ce1fcfd2d60e8fe0"
+    },
+    {
+      "path": "screenshots/09_Splunk_Indexes_Config.png",
+      "size": 143962,
+      "sha256": "6d235c9e31a0a6b576d6ea7f2a25fe745a337fa8eae2f1e85bd94bede16c2ab6"
+    },
+    {
+      "path": "screenshots/10_Splunk_Inputs_Config.png",
+      "size": 101654,
+      "sha256": "58349effbe1b9669976034b9f6c8dafd10ce4ba4e61c39445b8a09f062b4f84d"
+    },
+    {
+      "path": "screenshots/11_Splunk_Props_Config.png",
+      "size": 37324,
+      "sha256": "6782b26b8d4260b595fa6a8720a6544c12940b74c6f2ad22e20f6b8ee333fc92"
+    },
+    {
+      "path": "screenshots/12_Splunk_Transforms_Config.png",
+      "size": 22835,
+      "sha256": "39cf34dc03616ede7cd83a50481ebb015f16de9215ec85a487d033c5f09de8c0"
+    },
+    {
+      "path": "screenshots/13_Splunk_Web_Config.png",
+      "size": 32833,
+      "sha256": "391c9618c98029c82fc7623b1dc3e5f4642fc92a5d86d7bf3e1be6463180895f"
+    },
+    {
+      "path": "screenshots/14_Splunk_Windows_UF_App_Config.png",
+      "size": 29092,
+      "sha256": "8c360ec79d9da8c841a8573f35bad1ef356bf902895076992adac7a7b169a752"
+    },
+    {
+      "path": "screenshots/15_Splunk_Windows_UF_Outputs_Config.png",
+      "size": 45738,
+      "sha256": "c3bd016fdf05c14cba90cbf011ff1a16fb5770452d4d40ada564c4e5ff0ff400"
+    },
+    {
+      "path": "screenshots/16_Splunk_Windows_UF_Server_Config.png",
+      "size": 25088,
+      "sha256": "36eee7c66a91b011a8ba834e7f613eddd5e929c26e680be3c43cf41c1480762c"
+    },
+    {
+      "path": "screenshots/17_Sysmon_Event_Filtering_Config.png",
+      "size": 97709,
+      "sha256": "8a375e77c113615f83ad5277e849b854929797844253e1159b1751b817b32e77"
+    },
+    {
+      "path": "screenshots/18_Rsyslog_SIEM_Lab_Config.png",
+      "size": 45225,
+      "sha256": "1975a03b0a6a71d699699d8419e6fbcd53e2ae0ea869bd91355c22329ca5f6c7"
+    },
+    {
+      "path": "screenshots/19_Logrotate_SIEM_Lab_Config.png",
+      "size": 44941,
+      "sha256": "b0afd96b7d6309f37e1b6dd7976890d88773f153606eea0ddf666444cbc76665"
+    },
+    {
+      "path": "screenshots/20_Splunk_Service_Running.png",
+      "size": 41145,
+      "sha256": "897bcad7fed3c497adf28b7252b54ee884d04383cb2c9a3c6353253edf45e568"
+    },
+    {
+      "path": "screenshots/21_Splunk_Web_Connection_Reset.png",
+      "size": 45890,
+      "sha256": "5c415dd357a4ddad72b1f53ca8df691980e5c7848fa7ea45d6cc0a58f774a92c"
+    },
+    {
+      "path": "screenshots/22_Splunk_Web_Login_Page.png",
+      "size": 531290,
+      "sha256": "b577d545d7bce65ac2883cbc32d965461bceac178196bcfd4beb6f202e20a54b"
+    },
+    {
+      "path": "screenshots/README.md",
+      "size": 4196,
+      "sha256": "fb57eab987ebe2fb825e3e4156a9cd0b150396526ff51bf46c359a32b4886039"
+    },
+    {
+      "path": "scripts/azure/README.md",
+      "size": 637,
+      "sha256": "372d1cc28890a230c65ea2efe298d562ba0a88651b1f671dcf8e258448b0f849"
+    },
+    {
+      "path": "scripts/azure/configure-oidc-identity.sh",
+      "size": 2536,
+      "sha256": "a9399ea5840e13745241a18c7f8aca81335e4379dff3cd7e4207beabd56ae651"
+    },
+    {
+      "path": "scripts/merge_redaction_config.py",
+      "size": 4003,
+      "sha256": "7562ac220a00fed816c382fd17301e0760ecf69152dea01bb3996e6b4ffd4bec"
+    },
+    {
+      "path": "scripts/rhel/README.md",
+      "size": 1743,
+      "sha256": "014595fa821c7f0c116ecfa700de159ebf171b17ee09cdddf46758398bc84ed8"
+    },
+    {
+      "path": "scripts/rhel/apply-nginx-log-acl.sh",
+      "size": 568,
+      "sha256": "699c921e617f22c4f752ccb84d14bc6a5f13993a37dc6ce8346931d32b10a460"
+    },
+    {
+      "path": "scripts/rhel/backup-config.sh",
+      "size": 514,
+      "sha256": "be7a23d41137b614c55cdc761fc81c24da90d1e26b8d7817766b407e0251888e"
+    },
+    {
+      "path": "scripts/rhel/check-integrity.sh",
+      "size": 780,
+      "sha256": "ae0670502865ee9a41eb9014af819d886548e4224e8c7a9098301571c5b30f2f"
+    },
+    {
+      "path": "scripts/rhel/configure-linux-logging.sh",
+      "size": 1598,
+      "sha256": "7d181670d5e770a31a10b0ff73ab0388773cf0a74819d1eea4e22882f60f1af3"
+    },
+    {
+      "path": "scripts/rhel/generate-redaction-marker.sh",
+      "size": 622,
+      "sha256": "40370f9401fe1fb6f818438db3b88f3d8fe9cf41dfd3cee170fa8d057f6a29f5"
+    },
+    {
+      "path": "scripts/rhel/install-nginx-lab.sh",
+      "size": 1979,
+      "sha256": "7c2e5b498a269e5bcf87f2cf750cb7397ea3d52101430b7fadb623eab417f46e"
+    },
+    {
+      "path": "scripts/rhel/install-redaction-lab.sh",
+      "size": 1537,
+      "sha256": "baadc6eb77dc93600eb8b71a673165a292f122f03ae5cd673a4657fed194fd08"
+    },
+    {
+      "path": "scripts/rhel/prepare-storage.sh",
+      "size": 1662,
+      "sha256": "d1f5affbe8ab5d46a7d4a82839e5981e317cf3569f6d6983d4481510da872dbe"
+    },
+    {
+      "path": "scripts/rhel/send-hec-event.sh",
+      "size": 1975,
+      "sha256": "e9830a1d1835d0e7d40d6e548ebcd6ea2f6842ef3f47418da119e382603efbfe"
+    },
+    {
+      "path": "scripts/rhel/verify-server.sh",
+      "size": 674,
+      "sha256": "21ba459eadcb207be85b466ec0d296d5e138f043e0eedbb708bf4fd65650d3b5"
+    },
+    {
+      "path": "scripts/validate_project.py",
+      "size": 7413,
+      "sha256": "c87c2277f68012c76125c428bae41673a0a7e64d04dbc1df4782f1c7c8f39ba1"
+    },
+    {
+      "path": "scripts/windows/01-Initialize-EndpointFolders.ps1",
+      "size": 445,
+      "sha256": "ce1c28b9f8279351a0f3db210d86d88a0cfb84051046b8108287265821c767ba"
+    },
+    {
+      "path": "scripts/windows/02-Enable-Auditing.ps1",
+      "size": 2140,
+      "sha256": "df4c3c4f986e195725614422245b987e25ff1766a6b7fe4f8b74327be19ee46a"
+    },
+    {
+      "path": "scripts/windows/03-Install-SysmonStandalone.ps1",
+      "size": 1720,
+      "sha256": "52147807e981f878046dd6c2608cca91a625afc4029c7b25f58f7aa49bed863a"
+    },
+    {
+      "path": "scripts/windows/04-Deploy-Forwarder.ps1",
+      "size": 2210,
+      "sha256": "7b1fd85cf563416d00334016218015f0181b2ed90aabefa2512785ebe66429cf"
+    },
+    {
+      "path": "scripts/windows/05-Generate-HuntActivity.ps1",
+      "size": 1566,
+      "sha256": "45f3910f526b17131e5cdc86f617c363ec0dc2724878ab7cd54a25d6d09ec0d9"
+    },
+    {
+      "path": "scripts/windows/06-Cleanup-TestObjects.ps1",
+      "size": 865,
+      "sha256": "e0f36491e62095c3f149e637e043f75b6be3b00b23afb0764fc946e45ae545ce"
+    },
+    {
+      "path": "scripts/windows/07-Install-UniversalForwarder.ps1",
+      "size": 964,
+      "sha256": "aed3f5996a3f6223a7989943395191297c856edf8f9c63653a4ddcf1ac30c999"
+    },
+    {
+      "path": "scripts/windows/README.md",
+      "size": 1509,
+      "sha256": "07c2ae1486f347afda39d05b77569213e2b3fddee2e54260bb56c5f77b6b8484"
+    },
+    {
+      "path": "scripts/windows/Test-Project.ps1",
+      "size": 3389,
+      "sha256": "814e9c093ecca126b87468fc6e20af844f79628e54364464d6fe134ea96a513a"
+    },
+    {
+      "path": "scripts/wsl/verify-repository.sh",
+      "size": 678,
+      "sha256": "ebfb1a93c386b827beb582d2117bf883af6fe08016bfa18b17856d4fcc8af111"
+    },
+    {
+      "path": "sysmon/sysmon.xml",
+      "size": 720,
+      "sha256": "dc74a4b83ccb8a5749e633ef33c2118dd1ad88b8dc251bb6f5847581ed99d861"
+    },
+    {
+      "path": "tests/test_hec_sender.py",
+      "size": 3219,
+      "sha256": "a8cd0e12aec486537deae8dba7d8ae6f852e60472f45c20c20f91ce1ec196b2d"
+    },
+    {
+      "path": "tests/test_redaction.py",
+      "size": 4136,
+      "sha256": "2bbdf0af9260cfc732c240cde4f229b44f6577386306daf8302b9fc9cf1730ba"
+    },
+    {
+      "path": "tools/publication_preflight.py",
+      "size": 2377,
+      "sha256": "282580d82d5c80c659eb44607a526e0003106e04423fedbfde7c78240426be1c"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+index=sysmon (EventCode=1 OR EventCode=3) earliest=-30m
+| eval image=coalesce(Image,process_path)
+| search image="*curl.exe"
+| stats earliest(_time) as first_seen values(EventCode) as event_ids values(image) as image values(CommandLine) as command values(DestinationIp) as destination_ip values(DestinationPort) as destination_port by host ProcessGuid
+| convert ctime(first_seen)

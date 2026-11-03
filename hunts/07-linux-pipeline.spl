@@ -1,0 +1,2 @@
+index=linux earliest=-30m "SIEM-LAB-LINUX-PIPELINE-TEST"
+| table _time host source sourcetype _raw

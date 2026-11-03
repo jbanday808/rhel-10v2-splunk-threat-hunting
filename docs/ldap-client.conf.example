@@ -1,0 +1,3 @@
+# Documentation only: /opt/splunk/etc/openldap/ldap.conf
+TLS_REQCERT demand
+TLS_CACERT /opt/splunk/etc/auth/ldap/idm-ca.pem

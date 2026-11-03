@@ -1,0 +1,69 @@
+# RHEL 10.2 Splunk threat hunting lab with LDAP NGINX redaction HEC and Azure OIDC
+
+Build a VMware learning lab with RHEL Splunk Enterprise, a Windows 11 hunting endpoint, and a RHEL IdM directory. The source package includes the complete procedures and assembled custom files.
+
+**Start with VS Code + WSL on Windows 11:** [START_HERE_WSL.md](START_HERE_WSL.md) and the [complete WSL publishing guide](docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md).
+
+For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
+
+**Existing GitHub repository:** [jbanday808/rhel-10v2-splunk-threat-hunting](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting). Do **not** create a duplicate repository. The provided ZIP omits `LICENSE` so the MIT license in GitHub is preserved.
+
+## Guides
+
+- [Complete Word guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
+- [Complete text guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md)
+- [All 52 numbered steps](docs/steps/README.md)
+- [Detailed appendices](docs/appendices/README.md)
+- [Deployment order](docs/deployment-order.md)
+- [Vendor software and generated files](docs/downloads.md)
+
+## Lab systems
+
+| System | Address | Purpose |
+| --- | --- | --- |
+| RHEL-SPLUNK01 | 172.25.250.10 | Indexing, searches, TLS receiver, local NGINX test |
+| WINHUNT01 | 172.25.250.20 | Windows logs, Sysmon, Universal Forwarder |
+| RHEL-IDM01 | 172.25.250.30 | IdM directory, DNS, LDAPS |
+| VMnet8 gateway | 172.25.250.2 | NAT outbound access |
+
+## Included source
+
+| Folder | Contents |
+| --- | --- |
+| apps | Server and forwarder apps plus NGINX local input overlay |
+| configs | Linux logging, NGINX, redaction, HEC, systemd, and PKI examples |
+| scripts/rhel | Storage, logging, backup, verification, NGINX, redaction, and HEC helpers |
+| scripts/windows | Endpoint setup and read-only source validation |
+| scripts/azure | Cloud Shell OIDC identity setup |
+| sysmon | Lab XML rules |
+| hunts | Hunting, redaction, HEC, and data-health searches |
+| tests | Offline dummy redaction, safe merge, and HEC sender checks |
+| docs | Full guide, WSL publishing guide, steps, appendices, architecture, and sanitized LDAP examples |
+| evidence/sanitized | Validation and investigation records |
+| .github/workflows | Linux/Windows source checks and two manual Azure OIDC workflows |
+| .github/instructions and .github/prompts | VS Code / GitHub Copilot project rules and prompt templates |
+| tools | Publication preflight and repository support checks |
+| screenshots | 22 user-supplied lab screenshots; review before public use |
+
+## Source validation
+
+On RHEL or WSL: `python3 scripts/validate_project.py`. Add `--verify-manifest` before editing the downloaded release to verify initial file hashes.
+
+On Windows: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\Test-Project.ps1`. Add `-VerifyManifest` for the initial release.
+
+Run `python3 -B -m unittest discover -s tests -v` on RHEL or WSL for the offline behavior checks.
+
+The source-check workflow runs on push and pull request. The OIDC workflows are manual and need the separate Azure trust setup. No workflow deploys directly into private VMnet8.
+
+## Results
+
+[Validation templates](evidence/sanitized/validation.md) start at Pending. Record actual observed results and sanitized screenshots after each live test. The sample NGINX record is example data.
+
+## Local settings
+
+The official NGINX add-on is installed separately. Apply `apps/Splunk_TA_nginx/local/inputs.conf` after installation. The packaged lab index enables data integrity for new data. The LAB_SIEM app includes the dedicated identity redaction source; follow that appendix to prepare its source file and verify stored events. The HEC settings are examples to merge separately, with tokens created only on your server. LDAP passwords, TLS keys, Azure session tokens, installers, backups, and raw evidence stay outside the repository.
+
+## Repository publication
+
+To publish using VS Code + WSL, open [START_HERE_WSL.md](START_HERE_WSL.md).
+Actual VM results remain in the `Pending` status until observed and verified. The 22 screenshots were supplied by the project author; review them individually for private information before committing.

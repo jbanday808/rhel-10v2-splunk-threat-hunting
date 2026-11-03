@@ -1,0 +1,2 @@
+index=win_security EventCode=4698 earliest=-30m "SIEMLab-HuntTest"
+| table _time host SubjectUserName TaskName TaskContent

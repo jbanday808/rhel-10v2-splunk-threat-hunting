@@ -1,0 +1,5 @@
+(index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h
+| eval ingest_delay_seconds=_indextime-_time
+| stats count latest(_time) as last_event max(_indextime) as last_received perc95(ingest_delay_seconds) as p95_delay_seconds by index host sourcetype
+| eval seconds_since_receipt=now()-last_received
+| convert ctime(last_event) ctime(last_received)

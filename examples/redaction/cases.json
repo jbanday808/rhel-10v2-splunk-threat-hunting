@@ -1,0 +1,11 @@
+[
+  {"name":"simple", "input":"password=LAB-DUMMY-ONE", "expected":"password=REDACTED"},
+  {"name":"commas", "input":"account=lab,password=LAB-DUMMY-TWO,result=success", "expected":"account=lab,password=REDACTED,result=success"},
+  {"name":"spaces", "input":"password=LAB-DUMMY-THREE action=test", "expected":"password=REDACTED action=test"},
+  {"name":"slash in value", "input":"password=LAB/DUMMY/FOUR", "expected":"password=REDACTED"},
+  {"name":"multiple values", "input":"password=LAB-DUMMY-ONE password=LAB-DUMMY-TWO", "expected":"password=REDACTED password=REDACTED"},
+  {"name":"different keys", "input":"notpassword=LAB-DUMMY-ONE old_password=LAB-DUMMY-TWO password=LAB-DUMMY-THREE", "expected":"notpassword=LAB-DUMMY-ONE old_password=LAB-DUMMY-TWO password=REDACTED"},
+  {"name":"empty value", "input":"password= result=test", "expected":"password= result=test"},
+  {"name":"tab boundary", "input":"password=LAB-DUMMY-ONE\taccount=lab", "expected":"password=REDACTED\taccount=lab"},
+  {"name":"already masked", "input":"password=REDACTED", "expected":"password=REDACTED"}
+]

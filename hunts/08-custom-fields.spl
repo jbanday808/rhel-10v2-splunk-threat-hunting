@@ -1,0 +1,2 @@
+index=lab sourcetype=siem:lab earliest=-30m
+| table _time host action result account _raw

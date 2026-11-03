@@ -1,0 +1,23 @@
+<Sysmon schemaversion="4.82">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <EventFiltering>
+    <ProcessCreate onmatch="exclude" />
+
+    <NetworkConnect onmatch="include">
+      <Image condition="end with">powershell.exe</Image>
+      <Image condition="end with">curl.exe</Image>
+    </NetworkConnect>
+
+    <FileCreate onmatch="include">
+      <TargetFilename condition="begin with">C:\SIEMLab\TestFiles\</TargetFilename>
+    </FileCreate>
+
+    <RegistryEvent onmatch="include">
+      <TargetObject condition="contains">\CurrentVersion\Run\SIEMLab</TargetObject>
+    </RegistryEvent>
+
+    <DnsQuery onmatch="include">
+      <Image condition="end with">powershell.exe</Image>
+    </DnsQuery>
+  </EventFiltering>
+</Sysmon>

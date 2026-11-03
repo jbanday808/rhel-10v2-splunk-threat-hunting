@@ -1,0 +1,3 @@
+index=lab sourcetype=nginx:plus:access earliest=-24h
+| stats count by host status
+| sort - count

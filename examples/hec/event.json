@@ -1,0 +1,7 @@
+{
+  "index": "lab",
+  "sourcetype": "siem:hec",
+  "source": "hec:siem-lab",
+  "host": "splunk01",
+  "event": "action=hec_check result=success account=labadmin test_id=SIEM-LAB-HEC-EXAMPLE"
+}

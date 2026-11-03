@@ -1,0 +1,5 @@
+[Unit]
+RequiresMountsFor=/splunkdata
+
+[Service]
+LimitNOFILE=65536

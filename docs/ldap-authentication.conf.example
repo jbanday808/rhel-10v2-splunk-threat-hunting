@@ -1,0 +1,28 @@
+# Documentation only. Enter the real bind password through Splunk Web.
+[authentication]
+authType = LDAP
+authSettings = LAB_IDM_LDAPS
+
+[LAB_IDM_LDAPS]
+host = idm01.lab.test
+port = 636
+SSLEnabled = 1
+bindDN = uid=splunk-bind,cn=sysaccounts,cn=etc,dc=lab,dc=test
+bindDNpassword = REPLACE_THROUGH_SPLUNK_WEB
+userBaseDN = cn=users,cn=accounts,dc=lab,dc=test
+userBaseFilter = (objectClass=person)
+userNameAttribute = uid
+realNameAttribute = cn
+groupBaseDN = cn=groups,cn=accounts,dc=lab,dc=test
+groupBaseFilter = (|(cn=splunk-hunters)(cn=splunk-admins))
+groupNameAttribute = cn
+groupMemberAttribute = member
+groupMappingAttribute = dn
+nestedGroups = 0
+anonymous_referrals = 0
+timelimit = 15
+network_timeout = 20
+
+[roleMap_LAB_IDM_LDAPS]
+lab_hunter = splunk-hunters
+admin = splunk-admins

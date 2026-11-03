@@ -1,0 +1,19 @@
+# Architecture
+
+| System | Address | Purpose |
+| --- | --- | --- |
+| VMware host adapter | 172.25.250.1 | Host access |
+| RHEL-SPLUNK01 | 172.25.250.10 | Splunk Enterprise |
+| WINHUNT01 | 172.25.250.20 | Windows monitoring and tests |
+| RHEL-IDM01 | 172.25.250.30 | IdM directory and lab DNS |
+| NAT gateway | 172.25.250.2 | Outbound access |
+
+RHEL combines indexing and the search interface.
+Windows sends records over verified TLS on TCP 9997.
+Splunk Web uses HTTPS on TCP 8000.
+Splunk queries IdM over verified LDAPS on TCP 636.
+Splunk uses IdM DNS at 172.25.250.30; IdM forwards external queries to .2.
+The splunk-hunters group maps only to lab_hunter.
+The splunk-admins group maps to admin.
+The native Splunk admin remains available for recovery.
+WSL and VS Code are used only for the final GitHub upload.

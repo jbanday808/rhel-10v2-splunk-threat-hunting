@@ -1,0 +1,2 @@
+index=lab sourcetype=siem:lab "action=integrity_check" earliest=-24h
+| table _time host action result account _raw

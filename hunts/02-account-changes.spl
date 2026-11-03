@@ -1,0 +1,3 @@
+index=win_security (EventCode=4720 OR EventCode=4732 OR EventCode=4733 OR EventCode=4726) earliest=-30m
+| table _time host EventCode SubjectUserName TargetUserName MemberName TargetSid
+| sort 0 _time

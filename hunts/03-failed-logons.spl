@@ -1,0 +1,4 @@
+index=win_security EventCode=4625 earliest=-30m
+| eval account=coalesce(TargetUserName,Target_User_Name,user,"unknown"), source_ip=coalesce(IpAddress,Source_Network_Address,src_ip,"local-or-not-recorded")
+| stats count values(LogonType) as logon_types values(Status) as status by host account source_ip
+| sort - count

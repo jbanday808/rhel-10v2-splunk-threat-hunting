@@ -1,0 +1,2 @@
+index=powershell earliest=-30m "SIEM-LAB-ENCODED-TEST"
+| table _time host EventCode ScriptBlockText _raw

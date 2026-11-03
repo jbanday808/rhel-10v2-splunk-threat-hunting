@@ -1,0 +1,5 @@
+[http]
+disabled = 0
+port = 8088
+enableSSL = 1
+serverCert = /opt/splunk/etc/auth/lab/splunk01.pem

@@ -1,0 +1,4 @@
+index=sysmon EventCode=1 earliest=-30m
+| eval command=coalesce(CommandLine,process_command_line), image=coalesce(Image,process_path), account=coalesce(User,user)
+| where match(image,"(?i)powershell[.]exe$") AND match(command,"(?i)-encodedcommand\s+")
+| table _time host account image ParentImage command ProcessGuid

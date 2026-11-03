@@ -1,0 +1,3 @@
+index=lab sourcetype=siem:hec source="hec:siem-lab"
+"SIEM-LAB-HEC-" earliest=-24h latest=now
+| table _time host source sourcetype _raw
