@@ -4,6 +4,8 @@ Build a VMware learning lab with RHEL Splunk Enterprise, a Windows 11 hunting en
 
 **Start with VS Code + WSL on Windows 11:** [START_HERE_WSL.md](START_HERE_WSL.md) and the [complete WSL publishing guide](docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md).
 
+For RHEL 10.2 lab installation, configuration, and validation, see **[START_HERE_RHEL10v2.md](START_HERE_RHEL10v2.md)**.
+
 For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
 
 **Existing GitHub repository:** [jbanday808/rhel-10v2-splunk-threat-hunting](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting). Do **not** create a duplicate repository. The provided ZIP omits `LICENSE` so the MIT license in GitHub is preserved.
