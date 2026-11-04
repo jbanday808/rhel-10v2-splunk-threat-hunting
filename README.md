@@ -8,6 +8,8 @@ For RHEL 10.2 lab installation, configuration, and validation, see **[START_HERE
 
 For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
 
+**New RHEL 10.2 STIG hardening and SCAP assessment (V1R1):** [START_HERE_RHEL10v2_STIG.md](START_HERE_RHEL10v2_STIG.md) · [Full 26-Step STIG Implementation Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md) · [Uploaded Benchmark Metadata](docs/stig-rhel10/BENCHMARK_METADATA.md). Includes 396-rule inventory tooling, controlled non-remediating OpenSCAP scans, risk-aware remediation, POA&M and sanitized evidence. **No live systems are scanned or modified by GitHub files.**
+
 **New optional workstream — DoD-aligned Zero Trust Architecture (WIP):** [START_HERE_ZERO_TRUST.md](START_HERE_ZERO_TRUST.md) · [Complete installation/configuration/deployment guide](docs/zero-trust/IMPLEMENTATION_GUIDE.md) · [Seven DoD Zero Trust pillars and role mapping](docs/zero-trust/02-dod-seven-pillars.md). These files document proposed controls and testing; they do **not** deploy a central ZTNA/PDP or certify DoD Target Level.
 
 
@@ -21,6 +23,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [Detailed appendices](docs/appendices/README.md)
 - [Deployment order](docs/deployment-order.md)
 - [Zero Trust architecture — installation, configuration, deployment, RMF/STIG and testing](docs/zero-trust/README.md)
+- [RHEL 10.2 DISA STIG V1R1 — Complete Installation, Assessment and Safe Hardening Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)
 - [Vendor software and generated files](docs/downloads.md)
 
 ## Lab systems
@@ -45,6 +48,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | hunts | Hunting, redaction, HEC, and data-health searches |
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |
 | docs/zero-trust, configs/zero-trust and scripts/zero-trust | DoD-aligned Zero Trust design, source-limited policy examples, offline checks and evidence templates (optional WIP) |
+| docs/stig-rhel10 and scripts/stig | User-provided V1R1 benchmark documentation, offline rule inventory, private read-only assessment and result summarizer (WIP) |
 | docs | Full guide, WSL publishing guide, steps, appendices, architecture, and sanitized LDAP examples |
 | evidence/sanitized | Validation and investigation records |
 | .github/workflows | Linux/Windows source checks and two manual Azure OIDC workflows |
