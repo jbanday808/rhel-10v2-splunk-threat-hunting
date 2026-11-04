@@ -2,7 +2,7 @@
 
 ## Current documented three-VM architecture
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
   H["Windows 11 host / VS Code + Ubuntu WSL<br/>Management host adapter .1"]
   W["WINHUNT01 .20<br/>Sysmon + Universal Forwarder"]
@@ -14,15 +14,15 @@ flowchart LR
   S -->|"LDAPS TCP 636: lookup"| I
   S -->|"DNS TCP/UDP 53"| I
   H -->|"Git & reviewed docs"| G
-\`\`\`
+```
 
-All VM addresses are on VMware VMnet8 \`172.25.250.0/24\`; gateway \`172.25.250.2\`. The network provides NAT isolation from other networks **but does not automatically prevent lateral movement among VMnet8 peers**.
+All VM addresses are on VMware VMnet8 `172.25.250.0/24`; gateway `172.25.250.2`. The network provides NAT isolation from other networks **but does not automatically prevent lateral movement among VMnet8 peers**.
 
 **Existing implementation statements require live verification.** The diagram illustrates the lab's documented intended data flows, not verified network captures or DoD compliance.
 
 ## Proposed phased Zero Trust architecture
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
   U["Human / service identity"] --> PE["Policy evaluation<br/>Future ZTNA/IdP: NOT DEPLOYED"]
   P["Device posture and risk<br/>Sysmon/Defender/RHEL checks"] -. "proposed signal" .-> PE
@@ -34,7 +34,7 @@ flowchart TD
   S --> SIEM["Splunk analytics + audit evidence"]
   I["IdM LDAPS service"] --> S
   PE -. "not connected today" .-> SIEM
-\`\`\`
+```
 
 This separates **design target** (dynamic policy decision point and enforcement point, MFA and device posture) from **current measures** (firewall rules, native LDAP role mapping, verified TLS and SIEM). Under NIST SP 800-207, a true policy engine and policy administrator decide and orchestrate requests across resources; simply labeling Splunk a PDP would be inaccurate.
 

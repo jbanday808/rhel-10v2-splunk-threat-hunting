@@ -28,4 +28,4 @@ Also see [architecture and trust flows](docs/zero-trust/01-target-architecture.m
 
 **Related:** [START_HERE_RHEL10v2.md](START_HERE_RHEL10v2.md) · [START_HERE_WSL.md](START_HERE_WSL.md) · [Original lab architecture](docs/architecture.md).
 
-**Current repository branch for this addition:** \`feature/dod-zero-trust-rhel10v2\`. Review/merge after tests; existing main-line deployment steps remain intact.
+**Current repository branch for this addition:** `feature/dod-zero-trust-rhel10v2`. Review/merge after tests; existing main-line deployment steps remain intact.

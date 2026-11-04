@@ -1,6 +1,6 @@
 # Complete Step-by-Step Guide — RHEL 10.2 Splunk Zero Trust Architecture
 
-**Goal:** Build and assess a **DoD-aligned Zero Trust lab extension** in the existing repository \`jbanday808/rhel-10v2-splunk-threat-hunting\`, focusing on requirements from Booz Allen **ZT Engineer, Lead (R0242994)**: enterprise design, IAM, workload/endpoint defense, microsegmentation, secure communications, multi-vendor integration planning, RMF/STIG, evidence, maintenance and automation.
+**Goal:** Build and assess a **DoD-aligned Zero Trust lab extension** in the existing repository `jbanday808/rhel-10v2-splunk-threat-hunting`, focusing on requirements from Booz Allen **ZT Engineer, Lead (R0242994)**: enterprise design, IAM, workload/endpoint defense, microsegmentation, secure communications, multi-vendor integration planning, RMF/STIG, evidence, maintenance and automation.
 
 **Tools:** Windows 11, VMware Workstation Pro, VS Code + Ubuntu WSL, two RHEL 10.2 VMs (Splunk and IdM), one Windows 11 VM, Splunk Enterprise, Sysmon and Universal Forwarder.
 
@@ -10,20 +10,20 @@
 
 ### Step 01 — Read and freeze the existing deployment baseline (WSL)
 
-\`\`\`bash
+```bash
 cd ~/projects/rhel-10v2-splunk-threat-hunting
 git status
 git remote -v
 git fetch origin
 git switch --track origin/feature/dod-zero-trust-rhel10v2
 code .
-\`\`\`
+```
 
-If the feature branch already exists locally, use \`git switch feature/dod-zero-trust-rhel10v2\` and then \`git pull --ff-only\`. Review local changes before switching.
+If the feature branch already exists locally, use `git switch feature/dod-zero-trust-rhel10v2` and then `git pull --ff-only`. Review local changes before switching.
 
-**Command overview:** \`git status\` checks uncommitted work; \`remote -v\` identifies GitHub; \`fetch\` downloads branch metadata; \`switch\` selects the new review branch; \`code .\` opens the folder in VS Code WSL.
+**Command overview:** `git status` checks uncommitted work; `remote -v` identifies GitHub; `fetch` downloads branch metadata; `switch` selects the new review branch; `code .` opens the folder in VS Code WSL.
 
-**Check:** \`README.md\`, \`START_HERE_RHEL10v2.md\` and \`docs/steps/README.md\` are still present, with original 52 steps intact.
+**Check:** `README.md`, `START_HERE_RHEL10v2.md` and `docs/steps/README.md` are still present, with original 52 steps intact.
 
 ### Step 02 — Establish public sources and project scope (WSL)
 
@@ -37,7 +37,7 @@ From VMware Workstation Pro, take identifiable snapshots with each VM in a docum
 
 On each **RHEL VM console**, collect baseline **without publishing unredacted files**:
 
-\`\`\`bash
+```bash
 cat /etc/redhat-release
 hostnamectl
 ip -brief address
@@ -45,7 +45,7 @@ nmcli -f NAME,DEVICE,TYPE connection show --active
 sestatus
 sudo firewall-cmd --get-active-zones
 sudo firewall-cmd --list-all
-\`\`\`
+```
 
 **Command overview:** Reports OS, hostname, addresses, connection profiles, SELinux and active firewall rules. Do not change firewalls or NetworkManager while remote without an active console/backout option.
 
@@ -53,7 +53,7 @@ sudo firewall-cmd --list-all
 
 ### Step 04 — Inventory assets and allowed traffic (WSL + VM consoles)
 
-Review [policy matrix](../../configs/zero-trust/allowed-flows.example.json) and [preflight](03-preflight-and-inventory.md). Record the existing VMware NAT network \`172.25.250.0/24\` and lab hosts:
+Review [policy matrix](../../configs/zero-trust/allowed-flows.example.json) and [preflight](03-preflight-and-inventory.md). Record the existing VMware NAT network `172.25.250.0/24` and lab hosts:
 
 | Source | Destination | Service | Port | Why |
 | --- | --- | --- | --- | --- |
@@ -73,7 +73,7 @@ Other protocols for IdM enrollment, updates and time synchronization must be exp
 
 If IdM is already installed according to the lab [Steps 31–34](../steps/README.md), use the IdM VM console:
 
-\`\`\`bash
+```bash
 hostnamectl
 sudo systemctl status ipa --no-pager
 kinit admin
@@ -81,17 +81,17 @@ ipa group-show splunk-hunters
 ipa group-show splunk-admins
 ipa user-show hunter01
 kdestroy
-\`\`\`
+```
 
-**Command overview:** \`systemctl status ipa\` checks IdM status (service names may vary by installed IdM version); \`kinit\` prompts for a Kerberos credential; \`ipa group-show\` and \`ipa user-show\` inspect identities; \`kdestroy\` clears the ticket cache. Run these only with a test identity you are authorized to use. If a specific systemd \`ipa\` service does not exist, use \`ipactl status\` and inspect installed unit names rather than assuming a failure.
+**Command overview:** `systemctl status ipa` checks IdM status (service names may vary by installed IdM version); `kinit` prompts for a Kerberos credential; `ipa group-show` and `ipa user-show` inspect identities; `kdestroy` clears the ticket cache. Run these only with a test identity you are authorized to use. If a specific systemd `ipa` service does not exist, use `ipactl status` and inspect installed unit names rather than assuming a failure.
 
-**Exit:** Groups exist; only intended members are included; no broad \`ipausers\` mapping to Splunk admin.
+**Exit:** Groups exist; only intended members are included; no broad `ipausers` mapping to Splunk admin.
 
 ### Step 06 — Verify encrypted LDAP and least-privilege roles (RHEL-SPLUNK01)
 
 Use the existing [certificate trust procedure](../steps/35-configure-splunk-dns-and-trust-the-directory-certificate.md) and [LDAPS verification procedure](../steps/36-verify-ldaps-before-enabling-directory-sign-in.md). After installing only the **verified public CA**:
 
-\`\`\`bash
+```bash
 getent hosts idm01.lab.test
 sudo -u splunk openssl s_client \
   -connect idm01.lab.test:636 \
@@ -100,39 +100,39 @@ sudo -u splunk openssl s_client \
   -verify_hostname idm01.lab.test \
   -verify_return_error </dev/null
 sudo -u splunk /opt/splunk/bin/splunk btool authorize list role_lab_hunter --debug
-\`\`\`
+```
 
-**Command overview:** \`getent\` checks DNS; \`s_client\` verifies certificate chain/hostname; \`btool\` shows effective Splunk role settings. Never use \`TLS_REQCERT never\` or \`curl -k\` to bypass TLS errors.
+**Command overview:** `getent` checks DNS; `s_client` verifies certificate chain/hostname; `btool` shows effective Splunk role settings. Never use `TLS_REQCERT never` or `curl -k` to bypass TLS errors.
 
-**Exit:** Successful certificate validation and observed \`lab_hunter\` limited to six lab indexes; Splunk native administrator retained as emergency recovery.
+**Exit:** Successful certificate validation and observed `lab_hunter` limited to six lab indexes; Splunk native administrator retained as emergency recovery.
 
 ### Step 07 — Document MFA/conditional access gaps (design review)
 
 **Do not claim MFA is enforced.** Splunk's native LDAP group binding is not equivalent to phishing-resistant MFA and device-risk-aware authorization. Record a **future** design using an approved identity provider with SAML/OIDC or supported Splunk authentication integration, MFA, device compliance and session risk evaluation; check exact installed Splunk version and IdP support first. Document emergency-admin recovery and denial behavior for untrusted devices.
 
-**Exit:** \`MFA/continuous-device-posture = Not implemented\`, unless separately proven.
+**Exit:** `MFA/continuous-device-posture = Not implemented`, unless separately proven.
 
 ### Step 08 — Verify RHEL/Windows endpoint security (both VMs)
 
 **RHEL-SPLUNK01 / RHEL-IDM01, consoles:**
 
-\`\`\`bash
+```bash
 getenforce
 sudo systemctl is-active firewalld
 sudo systemctl is-active auditd
 sudo dnf check-update --security || true
-\`\`\`
+```
 
 **WINHUNT01, PowerShell launched as appropriate to read status:**
 
-\`\`\`powershell
+```powershell
 Get-MpComputerStatus | Select-Object AntivirusEnabled,RealTimeProtectionEnabled
 Get-NetFirewallProfile | Select-Object Name,Enabled,DefaultInboundAction
 Get-Service SplunkForwarder -ErrorAction SilentlyContinue
 Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -MaxEvents 3 -ErrorAction SilentlyContinue
-\`\`\`
+```
 
-**Command overview:** \`getenforce\` checks SELinux; \`firewalld\`/\`auditd\` checks services; \`dnf check-update --security\` lists available fixes (it does not install); PowerShell checks anti-malware, firewalls, forwarder, and collected Sysmon events.
+**Command overview:** `getenforce` checks SELinux; `firewalld`/`auditd` checks services; `dnf check-update --security` lists available fixes (it does not install); PowerShell checks anti-malware, firewalls, forwarder, and collected Sysmon events.
 
 **Exit:** Actual observed posture recorded, gaps open. Do not install unapproved agents or globally disable protections to simplify the lab.
 
@@ -142,14 +142,14 @@ Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -MaxEvents 3 -Error
 
 At **RHEL-SPLUNK01 VM console**:
 
-\`\`\`bash
+```bash
 sudo firewall-cmd --get-active-zones
 sudo firewall-cmd --zone=siem-lab --list-all
 sudo firewall-cmd --zone=siem-lab --list-rich-rules
 sudo ss -lntp
-\`\`\`
+```
 
-**Command overview:** Shows the active zone, rich rules and listeners. If \`siem-lab\` is not attached to the VM's connection, stop and reconcile with [original Step 18](../steps/18-configure-the-rhel-firewall.md).
+**Command overview:** Shows the active zone, rich rules and listeners. If `siem-lab` is not attached to the VM's connection, stop and reconcile with [original Step 18](../steps/18-configure-the-rhel-firewall.md).
 
 **Exit:** Network policy change checklist and management console access are confirmed.
 
@@ -161,20 +161,20 @@ Follow [06-network-microsegmentation.md](06-network-microsegmentation.md) exactl
 
 ### Step 11 — Enforce protected application and data access
 
-In **Splunk Web** confirm \`splunk-hunters → lab_hunter\`, \`splunk-admins → admin\`, no broad implicit mapping. On the server, inspect **effective** \`authorize.conf\`, TLS settings, index permissions and log retention. Keep the admin role for only explicitly approved administrators. See [07-app-data-security.md](07-app-data-security.md).
+In **Splunk Web** confirm `splunk-hunters → lab_hunter`, `splunk-admins → admin`, no broad implicit mapping. On the server, inspect **effective** `authorize.conf`, TLS settings, index permissions and log retention. Keep the admin role for only explicitly approved administrators. See [07-app-data-security.md](07-app-data-security.md).
 
 **Exit:** Positive hunter access, negative unmapped user test, unauthorized index denied; observations recorded.
 
 ### Step 12 — Validate secure endpoint telemetry
 
-From WINHUNT01, confirm Universal Forwarder service and verified TLS configuration; from Splunk Web, confirm actual events. Do not count \`inputs.conf\` or \`outputs.conf\` source files as evidence of collection.
+From WINHUNT01, confirm Universal Forwarder service and verified TLS configuration; from Splunk Web, confirm actual events. Do not count `inputs.conf` or `outputs.conf` source files as evidence of collection.
 
 In Splunk Search (authorized lab, **not WSL**):
 
-\`\`\`spl
+```spl
 (index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h
 | stats count by index host sourcetype
-\`\`\`
+```
 
 **Exit:** Actual event totals, indexing latency and missing sources documented.
 
@@ -200,12 +200,12 @@ Map perimeter-based rules to resource-based access: identify one protected resou
 
 In WSL, validate a **non-deploying example flow matrix**:
 
-\`\`\`bash
+```bash
 python3 scripts/zero-trust/validate_policy.py configs/zero-trust/allowed-flows.example.json
 python3 -B -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/validate_project.py
 python3 tools/publication_preflight.py
-\`\`\`
+```
 
 **Command overview:** Validates example policy syntax and lab paths, runs offline tests, checks original project files and scans for common public-repository risks. These checks do **not** configure firewalls or demonstrate live Zero Trust compliance.
 
@@ -227,20 +227,20 @@ Before publication, strip credentials, SSH fingerprints, internal IDs beyond app
 
 In WSL:
 
-\`\`\`bash
+```bash
 git status
 git diff --check
 git log -3 --oneline
-\`\`\`
+```
 
-Review the GitHub pull request and its source-check workflow. After approval/merge into \`main\`:
+Review the GitHub pull request and its source-check workflow. After approval/merge into `main`:
 
-\`\`\`bash
+```bash
 git switch main
 git pull --ff-only origin main
-\`\`\`
+```
 
-**Command overview:** \`git diff\` checks whitespace; \`git log\` displays recent commits; \`git pull --ff-only\` obtains the merged repository changes.
+**Command overview:** `git diff` checks whitespace; `git log` displays recent commits; `git pull --ff-only` obtains the merged repository changes.
 
 ## Final architecture milestones
 

@@ -19,7 +19,7 @@
 | Windows VM | WINHUNT01 / .20 | Telemetry source | Lab owner | Verify |
 | IdM VM | RHEL-IDM01 / .30 | Directory, DNS, PKI | Lab owner | Verify |
 | Virtual network | VMnet8 172.25.250.0/24 | NAT transit | Lab owner | Verify |
-| GitHub | \`jbanday808/rhel-10v2-splunk-threat-hunting\` | Public source documents | Lab owner | Verified repository; **not** evidence of live deployment |
+| GitHub | `jbanday808/rhel-10v2-splunk-threat-hunting` | Public source documents | Lab owner | Verified repository; **not** evidence of live deployment |
 
 Record installed versions using [docs/versions.md](../versions.md).
 
@@ -27,7 +27,7 @@ Record installed versions using [docs/versions.md](../versions.md).
 
 **RHEL VM console:**
 
-\`\`\`bash
+```bash
 hostnamectl
 ip -brief address
 nmcli -f NAME,DEVICE,TYPE connection show --active
@@ -35,18 +35,18 @@ getenforce
 sudo firewall-cmd --get-active-zones
 sudo ss -lntp
 sudo systemctl status Splunkd.service --no-pager -l
-\`\`\`
+```
 
 Run the Splunk service command on **RHEL-SPLUNK01 only**; it does not apply to the IdM VM.
 
 **Windows 11 hunting endpoint PowerShell:**
 
-\`\`\`powershell
+```powershell
 Get-NetIPConfiguration
 Get-NetFirewallProfile
 Get-MpComputerStatus | Select AntivirusEnabled,RealTimeProtectionEnabled
 Get-Service SplunkForwarder -ErrorAction SilentlyContinue
-\`\`\`
+```
 
 All commands above are **read-only**. Record what actually runs successfully rather than converting exceptions into false passes.
 
@@ -56,9 +56,9 @@ All commands above are **read-only**. Record what actually runs successfully rat
 | --- | --- |
 | Change ID | ZT-CHANGE-001 |
 | Planned change | Narrow Splunk Web 8000 allowed sources |
-| Target | RHEL-SPLUNK01 \`siem-lab\` |
+| Target | RHEL-SPLUNK01 `siem-lab` |
 | Current policy/snapshot | Save privately / Pending |
-| Approved source | Management host \`172.25.250.1/32\` |
+| Approved source | Management host `172.25.250.1/32` |
 | Positive test | Management browser can reach HTTPS 8000 |
 | Negative test | Other *authorized test VM* cannot reach HTTPS 8000 |
 | Rollback | Remove runtime rule or restore saved zone from console |
