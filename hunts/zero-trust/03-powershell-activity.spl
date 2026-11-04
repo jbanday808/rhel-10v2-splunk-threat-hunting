@@ -1,0 +1,4 @@
+index=powershell earliest=-24h
+| stats count latest(_time) as last_event by host sourcetype
+| eval last_seen=strftime(last_event, "%Y-%m-%d %H:%M:%S")
+| table host sourcetype count last_seen

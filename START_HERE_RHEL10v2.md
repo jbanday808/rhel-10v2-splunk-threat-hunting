@@ -173,4 +173,6 @@ To publish *reviewed* changes, use [the WSL GitHub guide](docs/WSL_VSCODE_GITHUB
 - [Architecture](docs/architecture.md)
 - [VS Code + WSL start guide](START_HERE_WSL.md)
 
+**Optional Zero Trust extension:** [START_HERE_ZERO_TRUST.md](START_HERE_ZERO_TRUST.md) and [complete zero-trust implementation guide](docs/zero-trust/IMPLEMENTATION_GUIDE.md) describe additional resource-level identity, network, telemetry and RMF controls. These are separate from the original lab deployment and are WIP.
+
 **Security:** Keep passwords, tokens, private keys, installation packages, raw logs, and backups out of Git. If real passwords shown in older source instructions were ever used, rotate them. Review historical documentation and screenshots before making additional public commits.

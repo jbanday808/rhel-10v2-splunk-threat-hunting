@@ -1,0 +1,5 @@
+(index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h
+| stats count latest(_time) as last_event by index host sourcetype
+| eval last_seen=strftime(last_event, "%Y-%m-%d %H:%M:%S")
+| table index host sourcetype count last_seen
+| sort index host

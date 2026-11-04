@@ -6,4 +6,6 @@
 4. Follow Steps 45 through 52 for alerts, cleanup, backups, documentation, and export.
 5. Follow [the appendices](appendices/README.md) for phases, integrity, OIDC, NGINX, Windows ZIP upload, password redaction, and HEC.
 
+6. **Optional new Zero Trust workstream:** follow [the DoD-aligned RHEL 10.2 Zero Trust guide](zero-trust/IMPLEMENTATION_GUIDE.md) for controlled IAM, device, segmentation and Splunk evidence tests; dynamic ZTNA/PDP and DoD Target Level are **not** implemented by this repo.
+
 The assembled files are already supplied. Review and deploy them at the applicable steps rather than recreating an older version over later additions. VM observations remain Pending until you actually test them.
