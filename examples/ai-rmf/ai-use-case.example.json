@@ -1,0 +1,43 @@
+{
+  "$schema_note": "Project example data; not an official NIST or OSCAL schema.",
+  "id": "AI-SOC-001",
+  "title": "Optional AI-assisted Splunk alert summarization",
+  "status": "proposed_not_deployed",
+  "system_owner": "TBD",
+  "security_reviewer": "TBD",
+  "decision_authority": "TBD",
+  "model_provider": "not_selected",
+  "model_version": "not_selected",
+  "purpose": "Draft a reviewable summary of synthetic or approved sanitized Splunk events.",
+  "existing_splunk_indexes": [
+    "win_security",
+    "win_system",
+    "powershell",
+    "sysmon",
+    "linux",
+    "lab"
+  ],
+  "approved_input_types": [
+    "synthetic_events_only"
+  ],
+  "disallowed_inputs": [
+    "raw_credentials",
+    "tokens",
+    "private_keys",
+    "unsanitized_personal_data",
+    "unapproved_raw_security_logs"
+  ],
+  "outputs": [
+    "draft_summary",
+    "evidence_event_ids",
+    "uncertainties",
+    "investigation_questions"
+  ],
+  "human_review_required": true,
+  "autonomous_actions_allowed": false,
+  "external_model_connection_approved": false,
+  "fips_199_categorization": "pending",
+  "security_controls_assessed": false,
+  "authorization_to_operate": "not_granted",
+  "evidence_status": "pending"
+}

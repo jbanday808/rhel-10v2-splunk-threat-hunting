@@ -1,0 +1,9 @@
+risk_id,risk_statement,impact_area,proposed_control,ai_rmf_function,likelihood,impact,owner,status,evidence_id
+AI-RISK-01,AI produces an unsupported investigative claim,Integrity,Require event-ID grounding and human verification,MEASURE,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-02,Malicious instructions embedded in event text influence output,Integrity,Separate untrusted event data from system instructions,MAP,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-03,Unapproved security-event data reaches external model,Confidentiality,Default deny data export with approved allowlist,MANAGE,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-04,Assistant receives unauthorized Splunk or endpoint permissions,Access control,Use read-only identity and deny side-effect tools,GOVERN,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-05,Model or prompt update changes observed behavior,Change management,Record versions and rerun regression tests,MEASURE,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-06,Private or personal data appears in public evidence,Privacy,Sanitize before storing or publishing,GOVERN,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-07,Model/provider outage blocks analyst investigation,Availability,Maintain normal SPL and manual fallback,MANAGE,TBD,TBD,TBD,Proposed,Pending
+AI-RISK-08,Automated action wrongly blocks an account or service,Safety and security,No autonomous security actions; explicit human review,MANAGE,TBD,TBD,TBD,Proposed,Pending
