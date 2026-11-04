@@ -1,0 +1,3 @@
+index=_internal earliest=-24h (log_level=ERROR OR log_level=WARN OR log_level=FATAL)
+| stats count by host component log_level
+| sort -count

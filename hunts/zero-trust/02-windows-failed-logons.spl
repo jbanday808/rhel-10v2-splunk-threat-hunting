@@ -1,0 +1,4 @@
+index=win_security earliest=-24h (EventCode=4625 OR EventID=4625)
+| stats count latest(_time) as last_failed by host user
+| eval last_failed=strftime(last_failed, "%Y-%m-%d %H:%M:%S")
+| sort -count
