@@ -1,6 +1,6 @@
 # Complete Step-by-Step Guide — RHEL 10.2 Splunk Zero Trust Architecture
 
-**Goal:** Build and assess a **DoD-aligned Zero Trust lab extension** in the existing repository `jbanday808/rhel-10v2-splunk-threat-hunting`, focusing on requirements from Booz Allen **ZT Engineer, Lead (R0242994)**: enterprise design, IAM, workload/endpoint defense, microsegmentation, secure communications, multi-vendor integration planning, RMF/STIG, evidence, maintenance and automation.
+**Goal:** Build and assess a **DoD-aligned Zero Trust lab extension** in the existing repository `jbanday808/rhel-10v2-splunk-threat-hunting`, covering enterprise architecture, identity and access management, endpoint and workload protection, microsegmentation, secure communications, RMF/STIG governance, testing, monitoring, maintenance, and reviewed automation.
 
 **Tools:** Windows 11, VMware Workstation Pro, VS Code + Ubuntu WSL, two RHEL 10.2 VMs (Splunk and IdM), one Windows 11 VM, Splunk Enterprise, Sysmon and Universal Forwarder.
 
