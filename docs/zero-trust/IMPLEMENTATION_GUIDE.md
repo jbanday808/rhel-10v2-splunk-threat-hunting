@@ -14,14 +14,14 @@
 cd ~/projects/rhel-10v2-splunk-threat-hunting
 git status
 git remote -v
-git fetch origin
-git switch --track origin/feature/dod-zero-trust-rhel10v2
+git switch main
+git pull --ff-only origin main
 code .
 ```
 
-If the feature branch already exists locally, use `git switch feature/dod-zero-trust-rhel10v2` and then `git pull --ff-only`. Review local changes before switching.
+If the Zero Trust changes remain in GitHub review, use `git fetch origin` and `git switch --track origin/feature/dod-zero-trust-rhel10v2` instead. Review/commit local edits before switching.
 
-**Command overview:** `git status` checks uncommitted work; `remote -v` identifies GitHub; `fetch` downloads branch metadata; `switch` selects the new review branch; `code .` opens the folder in VS Code WSL.
+**Command overview:** `git status` checks uncommitted work; `remote -v` identifies GitHub; `switch` selects `main`; `pull --ff-only` updates from GitHub without creating a merge; `code .` opens the folder in VS Code WSL.
 
 **Check:** `README.md`, `START_HERE_RHEL10v2.md` and `docs/steps/README.md` are still present, with original 52 steps intact.
 
