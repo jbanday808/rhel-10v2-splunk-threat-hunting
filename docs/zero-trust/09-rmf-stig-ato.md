@@ -71,7 +71,7 @@ sudo oscap xccdf eval \
 - Gap, severity, owner, target date, compensating control, exception and retest.
 - Actual decision authority and status. Never fabricate a signed ATO.
 
-See [Zero Trust risk register](../../examples/zero-trust/risk-register.example.csv), [verification evidence template](../../evidence/sanitized/zero-trust-validation.md) and [NIST AI RMF workstream](../ai-rmf/README.md) **only if that separate draft branch is later merged**.
+See [Zero Trust risk register](../../examples/zero-trust/risk-register.example.csv), [verification evidence template](../../evidence/sanitized/zero-trust-validation.md) and [Separate NIST AI RMF draft pull request](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/pull/1) (not part of this Zero Trust deployment and not assumed merged).
 
 ## DoD Zero Trust Target guidance
 
