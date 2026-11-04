@@ -1,0 +1,11 @@
+risk_id,pillar,risk,proposed_mitigation,owner,status,evidence
+ZT-RISK-01,User,Unauthorized directory-group grants,Least-privilege RBAC and mapping audit,TBD,Proposed,Pending
+ZT-RISK-02,Device,Unmanaged endpoint admitted,Posture validation and approved device-aware PEP,TBD,Gap_Not_Deployed,Pending
+ZT-RISK-03,Network,VMnet8 permits unintended east-west access,Host microperimeter and future ZTNA/SDN,TBD,Proposed,Pending
+ZT-RISK-04,Application,Excessive Splunk permissions,Role denial tests and emergency access review,TBD,Proposed,Pending
+ZT-RISK-05,Data,Unredacted event data leaked in public repo,Sanitization and private retention controls,TBD,Proposed,Pending
+ZT-RISK-06,Visibility,Missing Windows or Linux events obscures attacks,Source health checks and recovery,TBD,Proposed,Pending
+ZT-RISK-07,Automation,Unreviewed policy push disrupts operations,Human-approved change and console rollback,TBD,Proposed,Pending
+ZT-RISK-08,Identity,MFA and adaptive policy absent,Future approved IdP and ZTNA deployment,TBD,Gap_Not_Deployed,Pending
+ZT-RISK-09,Compliance,STIG benchmark mismatch creates false assertions,Verify exact benchmark and record assessor,TBD,Proposed,Pending
+ZT-RISK-10,Resilience,Firewall policy blocks IdM DNS or Splunk forwarding,Dependency inventory and controlled rollback,TBD,Proposed,Pending
