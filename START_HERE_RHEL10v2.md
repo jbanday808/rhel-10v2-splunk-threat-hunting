@@ -8,6 +8,9 @@
 
 For the **VS Code + WSL on Windows 11** workflow, see [START_HERE_WSL.md](START_HERE_WSL.md). For Windows PowerShell, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
 
+**Optional RHEL STIG workstream:** [START_HERE_RHEL10v2_STIG.md](START_HERE_RHEL10v2_STIG.md) and the [complete V1R1 OpenSCAP hardening guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md). Assessment-only until you run scans on each VM; do not auto-remediate IdM or Splunk.
+
+
 ## 1. Know where to run each task
 
 | Machine | Role | Tasks |

@@ -37,7 +37,7 @@
 
 ## DISA STIG and OpenSCAP procedure (RHEL 10.2)
 
-1. Open the official [DISA STIG library](https://public.cyber.mil/stigs/downloads/) and identify the **correct current published benchmark** for each OS and product. Do **not** assume a RHEL 10 STIG exists or use a RHEL 9 STIG as if it covers RHEL 10.
+1. Open the official [DISA STIG library](https://www.cyber.mil/stigs/downloads/) and identify the approved benchmark for each OS and product. The [RHEL 10 V1R1 SCAP package was supplied and inspected](../stig-rhel10/BENCHMARK_METADATA.md) (396 rules); [Red Hat's RHEL 10.2 vendor profile](https://access.redhat.com/compliance/disa-stig) is separately aligned to V1R2. Follow the [complete RHEL 10.2 STIG guide](../stig-rhel10/IMPLEMENTATION_GUIDE.md) and do not mix baselines.
 2. Check whether validated machine-readable content (XCCDF/SCAP) exists and corresponds to installed RHEL 10.2.
 3. Save the benchmark to a **private** lab directory. Review each finding for application dependencies (IdM, SELinux policies, Splunk listeners, audit, FIPS) and documented applicability.
 4. On the appropriate RHEL VM, optionally install/check the official scanner after authorization:

@@ -8,4 +8,6 @@
 
 6. **Optional new Zero Trust workstream:** follow [the DoD-aligned RHEL 10.2 Zero Trust guide](zero-trust/IMPLEMENTATION_GUIDE.md) for controlled IAM, device, segmentation and Splunk evidence tests; dynamic ZTNA/PDP and DoD Target Level are **not** implemented by this repo.
 
+7. **Optional DISA STIG V1R1 assessment/hardening:** [RHEL 10.2 STIG 26-Step Guide](stig-rhel10/IMPLEMENTATION_GUIDE.md) for privately scanning each RHEL VM, reviewing service impact, documenting fixes and retesting; no automated mass-remediation.
+
 The assembled files are already supplied. Review and deploy them at the applicable steps rather than recreating an older version over later additions. VM observations remain Pending until you actually test them.
