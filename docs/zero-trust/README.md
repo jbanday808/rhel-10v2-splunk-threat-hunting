@@ -1,6 +1,6 @@
 # DoD-aligned Zero Trust Architecture — RHEL 10.2 + Splunk (WIP)
 
-This **lab portfolio implementation** maps the skills in Booz Allen Job **R0242994** to public guidance from the [DoD Zero Trust Strategy](https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf), [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final), [CISA Zero Trust Maturity Model v2](https://www.cisa.gov/zero-trust-maturity-model), and applicable NIST RMF/DISA STIG publications.
+This **hands-on Zero Trust architecture lab** follows publicly available security guidance, including the [DoD Zero Trust Strategy](https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf), [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final), [CISA Zero Trust Maturity Model v2](https://www.cisa.gov/zero-trust-maturity-model), and applicable NIST RMF/DISA STIG publications.
 
 **Not a DoD accreditation, contractor deliverable, complete dynamic ZTNA/PDP, or assertion that systems were deployed/tested.** DoD Target maturity is not achieved merely by producing these files.
 
