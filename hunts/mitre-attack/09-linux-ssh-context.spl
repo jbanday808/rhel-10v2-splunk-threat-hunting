@@ -1,0 +1,3 @@
+index=linux sourcetype=syslog source="/var/log/siem-lab/linux.log" earliest=-24h "sshd" ```Question: What SSH authentication messages reached the local Linux lab log?```
+| table _time host source sourcetype _raw
+| sort 0 -_time

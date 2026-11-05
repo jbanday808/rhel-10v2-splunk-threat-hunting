@@ -1,0 +1,10 @@
+index=win_security earliest=-24h (EventCode=4625 OR EventCode=4624 OR EventID=4625 OR EventID=4624) ```Question: Did a source have repeated failures before a successful login to the same account and host?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), account=lower(trim(coalesce(TargetUserName,Target_User_Name,user,""))), account_domain=lower(trim(coalesce(TargetDomainName,Target_Domain_Name,""))), source_ip=lower(trim(coalesce(IpAddress,Source_Network_Address,src_ip,"")))
+| where account!="" AND account!="-" AND source_ip!="" AND source_ip!="-" AND source_ip!="127.0.0.1" AND source_ip!="::1" AND source_ip!="0.0.0.0"
+| eval account_domain=if(account_domain="" OR account_domain="-","not_recorded",account_domain)
+| eval failed=if(event_code=4625,1,0)
+| sort 0 _time
+| streamstats time_window=15m global=false sum(failed) as preceding_failures by host account_domain account source_ip
+| where event_code=4624 AND preceding_failures>=5
+| table _time host account_domain account source_ip LogonType preceding_failures
+| sort 0 -_time

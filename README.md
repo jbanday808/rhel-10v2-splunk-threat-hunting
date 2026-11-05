@@ -12,6 +12,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 
 **New optional workstream — DoD-aligned Zero Trust Architecture (WIP):** [START_HERE_ZERO_TRUST.md](START_HERE_ZERO_TRUST.md) · [Complete installation/configuration/deployment guide](docs/zero-trust/IMPLEMENTATION_GUIDE.md) · [Seven DoD Zero Trust pillars and role mapping](docs/zero-trust/02-dod-seven-pillars.md). These files document proposed controls and testing; they do **not** deploy a central ZTNA/PDP or certify DoD Target Level.
 
+**MITRE ATT&CK threat hunting:** [Start here](docs/mitre-attack/README.md) · [Technique and telemetry mapping](docs/mitre-attack/coverage.md) · [Navigator layer](docs/mitre-attack/navigator-layer.json) · [Hunt playbook](docs/mitre-attack/hunt-playbook.md). Candidate searches, context-only signals, and telemetry gaps are distinguished; no detection is claimed as validated until tested.
+
 
 **Existing GitHub repository:** [jbanday808/rhel-10v2-splunk-threat-hunting](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting). Do **not** create a duplicate repository. The provided ZIP omits `LICENSE` so the MIT license in GitHub is preserved.
 
@@ -46,6 +48,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | scripts/azure | Cloud Shell OIDC identity setup |
 | sysmon | Lab XML rules |
 | hunts | Hunting, redaction, HEC, and data-health searches |
+| hunts/mitre-attack | Hypothesis-driven SPL and an optional Defender XDR KQL example |
+| docs/mitre-attack | ATT&CK mapping, Navigator layer, hunt methodology, and visibility gaps |
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |
 | docs/zero-trust, configs/zero-trust and scripts/zero-trust | DoD-aligned Zero Trust design, source-limited policy examples, offline checks and evidence templates (optional WIP) |
 | docs/stig-rhel10 and scripts/stig | User-provided V1R1 benchmark documentation, offline rule inventory, private read-only assessment and result summarizer (WIP) |

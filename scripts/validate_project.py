@@ -59,7 +59,7 @@ def validate(root: Path, verify_manifest: bool = False) -> list[str]:
              and '.git' not in p.relative_to(root).parts]
     for p in paths:
         rel = p.relative_to(root).as_posix()
-        if p.suffix in ('.py', '.sh', '.ps1', '.conf', '.md', '.yml', '.json', '.xml'):
+        if p.suffix in ('.py', '.sh', '.ps1', '.conf', '.md', '.yml', '.json', '.xml', '.spl', '.kql'):
             try:
                 text = p.read_text(encoding='utf-8-sig')
                 if ('/workspace' + '/scratch/') in text:

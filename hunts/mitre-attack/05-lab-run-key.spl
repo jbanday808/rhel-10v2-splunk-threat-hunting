@@ -1,0 +1,5 @@
+index=sysmon earliest=-7d (EventCode=12 OR EventCode=13 OR EventCode=14 OR EventID=12 OR EventID=13 OR EventID=14) ```Question: What activity touched the specifically monitored SIEMLab Run key?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), registry_path=coalesce(TargetObject,target_object)
+| where isnotnull(registry_path) AND like(lower(registry_path),"%currentversion%run%siemlab%")
+| table _time host event_code User Image registry_path Details ProcessGuid
+| sort 0 -_time

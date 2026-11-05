@@ -26,7 +26,7 @@ for rel in files:
         errors.append(f'Private directory included: {posix}')
     if path.suffix.lower() in forbidden_suffixes:
         errors.append(f'Forbidden file type included: {posix}')
-    if path.suffix.lower() not in {'.md', '.txt', '.sh', '.ps1', '.json', '.conf', '.example', '.xml', '.py', '.yml', '.yaml', '.spl', '.meta'}:
+    if path.suffix.lower() not in {'.md', '.txt', '.sh', '.ps1', '.json', '.conf', '.example', '.xml', '.py', '.yml', '.yaml', '.spl', '.kql', '.meta'}:
         continue
     try:
         body=path.read_text(encoding='utf-8')

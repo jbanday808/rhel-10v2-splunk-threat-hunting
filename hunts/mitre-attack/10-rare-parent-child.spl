@@ -1,0 +1,6 @@
+index=sysmon earliest=-7d (EventCode=1 OR EventID=1) ```Question: Which parent-child process image pairs were rare in the selected observation period?```
+| eval image=lower(coalesce(Image,process_path)), parent_image=lower(coalesce(ParentImage,parent_process_path))
+| where isnotnull(image) AND image!="" AND isnotnull(parent_image) AND parent_image!=""
+| stats count as executions dc(host) as distinct_hosts values(host) as hosts min(_time) as first_seen max(_time) as last_seen by parent_image image
+| where executions<=3
+| sort 0 executions
