@@ -14,6 +14,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 
 **MITRE ATT&CK threat hunting:** [Start here](docs/mitre-attack/README.md) · [Technique and telemetry mapping](docs/mitre-attack/coverage.md) · [Navigator layer](docs/mitre-attack/navigator-layer.json) · [Hunt playbook](docs/mitre-attack/hunt-playbook.md). Candidate searches, context-only signals, and telemetry gaps are distinguished; no detection is claimed as validated until tested.
 
+**Information Assurance Vulnerability Management (IAVM):** [IAVM home](docs/iavm/README.md) · [Splunk Enterprise notice 2026-A-1195](docs/iavm/notices/2026-A-1195.md). The user-provided notice and vendor advisory differences are documented; lab applicability and remediation are unverified.
+
 
 **Existing GitHub repository:** [jbanday808/rhel-10v2-splunk-threat-hunting](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting). Do **not** create a duplicate repository. The provided ZIP omits `LICENSE` so the MIT license in GitHub is preserved.
 
@@ -50,6 +52,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | hunts | Hunting, redaction, HEC, and data-health searches |
 | hunts/mitre-attack | Hypothesis-driven SPL and an optional Defender XDR KQL example |
 | docs/mitre-attack | ATT&CK mapping, Navigator layer, hunt methodology, and visibility gaps |
+| docs/iavm | User-provided vulnerability notice, vendor references, and assessment guidance |
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |
 | docs/zero-trust, configs/zero-trust and scripts/zero-trust | DoD-aligned Zero Trust design, source-limited policy examples, offline checks and evidence templates (optional WIP) |
 | docs/stig-rhel10 and scripts/stig | User-provided V1R1 benchmark documentation, offline rule inventory, private read-only assessment and result summarizer (WIP) |
