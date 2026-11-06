@@ -8,14 +8,36 @@ Demonstrate **passive vulnerability analysis**, network baselining, detection en
 
 ## Roles and responsibilities
 
+These are proposed functional roles for the authorized lab, not evidence of
+staffing, an operational security program, or an Endpoint Security Solution
+(ESS) deployment. One person may perform multiple roles where approved
+separation-of-duties requirements permit. All activities remain within the
+mission and passive-monitoring boundaries above.
+
 | Role | Responsibility |
 | --- | --- |
 | Lab system owner | Approves VM, capture point, data types, retention and change windows |
 | Network engineer | Verifies packets really reach sensor; documents drops, interface and SPAN/TAP dependencies |
+| Senior Cybersecurity Analyst | Correlates authorized network, endpoint and identity evidence; validates vulnerability hypotheses with system owners; assesses severity and confidence; reviews detection quality and mentors analysts |
+| Threat Hunter | Develops MITRE ATT&CK-aligned hypotheses; establishes baselines and investigates deviations across authorized data; documents benign alternatives, evidence and visibility gaps; hands findings to the SOC and incident owner |
+| Senior SOC Analyst | Coordinates assigned shift triage and case prioritization; reviews alert dispositions and evidence timelines; supports analyst handoffs and escalates suspected incidents through approved channels |
 | Detection analyst | Validates protocol events, hunts, Suricata rule matches and alert quality |
-| Splunk administrator | Creates reviewed indexes, TLS/forwarder configuration and RBAC |
+| Splunk administrator | Creates and maintains approved indexes; manages TLS/forwarder settings, role-based access and retention; reviews parsing and monitors ingestion and search health under authorized change control |
+| ESS Administrator | Where ESS is separately deployed and authorized, manages endpoint agents, policies, signatures and telemetry; checks agent health and coordinates findings and proposed endpoint response with the incident owner |
+| System Administrator | Maintains authorized RHEL, Windows and IdM systems, accounts, logging, patching and backups; validates host evidence with analysts and implements approved changes and recovery procedures |
+| System Engineer | Designs and documents the lab architecture, telemetry flows and optional passive sensor dependencies; coordinates integration, security controls, performance checks and change/rollback plans with system owners and the ISSE |
+| ISSO (Information System Security Officer) | Maintains system security documentation, access-review and control evidence, vulnerability records, and plans of action and milestones (POA&Ms); coordinates remediation and reporting with the ISSM and system owner |
+| ISSM (Information System Security Manager) | Oversees security governance, incident reporting and corrective-action tracking; reviews risks and coordinates security decisions with the system owner, ISSO and designated authorizing official |
+| ISSE (Information System Security Engineer) | Translates security requirements into architecture and control designs; evaluates design risks, recommends secure integrations and validation activities, and advises the ISSO and ISSM |
 | Security/compliance reviewer | Reviews CONOPS, risk/800-171 evidence mapping and data protection |
-| Incident owner | Confirms anomalies, exposure and root cause; authorizes notifications and response |
+| Incident owner | Confirms anomalies, exposure and root cause with analysts and system owners; authorizes notifications and response where delegated and coordinates with the organization's designated authorities |
+
+Analysts route suspected findings to the Senior SOC Analyst and incident owner;
+administrators verify affected systems and make only approved changes. Formal
+system authorization and risk acceptance remain with the designated
+authorizing official or a formally delegated authority. These role descriptions
+do not authorize independent active scanning, inline blocking or automatic
+containment.
 
 ## Approved workflow
 
