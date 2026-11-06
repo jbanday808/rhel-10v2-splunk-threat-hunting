@@ -1,0 +1,19 @@
+%YAML 1.1
+---
+# Use only with -r and the isolated HTTP exercise ruleset.
+default-log-dir: .
+unix-command:
+  enabled: no
+stats:
+  enabled: no
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      community-id: true
+      community-id-seed: 0
+      types:
+        - alert
+        - http
+        - flow

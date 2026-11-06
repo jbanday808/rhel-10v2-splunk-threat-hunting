@@ -6,6 +6,8 @@
 
 **Terms:** *PCAP* is a packet capture, *IDS* observes/alerts without blocking, *TAP/SPAN* delivers authorized traffic copies, *EVE* is Suricata JSON event output, *SPL* is Splunk Search Processing Language. Only use packets from owned or explicitly authorized sources.
 
+For a first run on an existing analysis workstation, use the [worked HTTP investigation](OFFLINE_HTTP_WALKTHROUGH.md). It includes known-good and candidate traffic, an alert tuning comparison and a one-time Splunk upload. The following deployment path covers the optional dedicated sensor.
+
 ## Phase 1 — Scope, inventory and preparation
 
 ### Step 01 — Synchronize the existing GitHub repository (Ubuntu WSL)
@@ -18,7 +20,7 @@ git pull --ff-only origin main
 code .
 ~~~
 
-**Command overview:** `cd` enters the existing repo, `git status` displays uncommitted edits, `switch` selects the approved branch, `pull --ff-only` downloads the newest documents, `code .` opens VS Code. If the update is still a pull request, check out `feature/passive-network-defense-zeek-suricata-cmmc` after fetching, rather than expecting files in `main`.
+**Command overview:** `cd` enters the existing repo, `git status` displays uncommitted edits, `switch` selects the main branch, `pull --ff-only` downloads the newest documents, and `code .` opens VS Code.
 
 **Validate:** Original 52 deployment steps and existing six indexes are intact.
 
@@ -37,6 +39,8 @@ From VMware Workstation Pro, document the current Splunk, Windows, and IdM VM st
 ### Step 04 — Choose offline-first sensing (host design)
 
 Use **a new optional sensor VM**, rather than installing Suricata/Zeek on the Splunk indexer or IdM directory server. Allocate resources as your workstation permits (illustrative: 2–4 vCPU, 4–8 GiB RAM, 40+ GiB separate storage), with RHEL 10.2 and **no** active routing/bridging to production. Any second sniffing NIC is **future work**, not needed for offline PCAPs.
+
+Follow the existing [download and verification steps](../steps/04-download-and-verify-the-software.md) and [VMware RHEL installation](../steps/05-create-and-install-the-rhel-vm.md) with a separate VM name and disk. Use the sensor's management address from the architecture table when adapting the [networking steps](../steps/06-configure-rhel-networking.md). Stop before any Splunk-server-specific steps.
 
 **Validate:** Proposed sensor address `172.25.250.40` is free and no existing firewall/network rule is altered.
 
@@ -89,7 +93,7 @@ python3 scripts/network-defense/generate_synthetic_pcap.py \
 sha256sum "$HOME/network-lab/private-pcaps/lab-dns.pcap"
 ~~~
 
-**Command overview:** Creates a **synthetic DNS request** using reserved documentation IP addresses and `lab-marker.example.test`. Does not connect to a network. Store the file privately, and retain its SHA-256 in the evidence record. Use only on a host containing the project script.
+**Command overview:** Creates a **synthetic DNS request** using reserved documentation IP addresses and `lab-marker.example.test`. Store the file privately and retain its SHA-256. The default timestamp is fixed for reproducibility. If replaying into a short-retention Splunk index, pass `--timestamp "$(date -u +%s)"` to the generator and regenerate the sensor logs before indexing.
 
 ### Step 09 — Decode the DNS PCAP with TShark (sensor)
 
@@ -114,7 +118,17 @@ sudo tcpdump -D
 ip -br link
 ~~~
 
-**Command overview:** Lists candidate capture interfaces. **No capture is started**. Only after authorization and packet visibility testing, a bounded example is `sudo timeout 20 tcpdump -i APPROVED_INTERFACE -s 128 -c 50 -w PRIVATE_FILE.pcap`; use a private path and verified interface. This still does not create a TAP/SPAN or provide complete east–west coverage.
+**Command overview:** These commands list interfaces. After the owner approves the exact interface, endpoint pair, protocol, and retention, run a bounded sample. Replace both documentation IPs with the specific endpoints in the approved scope. Check whether a 128-byte snapshot is sufficient for the stated purpose.
+
+~~~bash
+umask 077
+CAPTURE_RUN=$(mktemp -d "$HOME/network-lab/private-pcaps/authorized-XXXXXXXX")
+read -r -p 'Approved capture interface: ' CAPTURE_IFACE
+sudo timeout --signal=INT 20 tcpdump -nn -i "$CAPTURE_IFACE" -s 128 -c 50 -w - \
+  'host 192.0.2.20 and host 192.0.2.10 and tcp port 80' > "$CAPTURE_RUN/bounded.pcap"
+~~~
+
+**Summary:** `timeout` caps the capture at 20 seconds and `-c` stops at 50 matching packets. `-nn` suppresses name lookups, `-s` caps stored bytes per packet, `-w -` streams the capture to the private file, and the quoted filter limits it to the approved flow. Record tcpdump's captured and dropped packet counters and keep separate notes about potential mirror loss and missing directions.
 
 ## Phase 3 — Zeek protocol intelligence
 
@@ -127,19 +141,20 @@ After confirming the exact image tag exists in the vendor registry and approving
 ~~~bash
 podman pull docker.io/zeek/zeek:9.0.1
 podman image inspect docker.io/zeek/zeek:9.0.1 \
-  --format '{{.Id}}'
+  --format '{{range .RepoDigests}}{{println .}}{{end}}'
 ~~~
 
-**Command overview:** Downloads/identifies the official versioned image **if that tag is published**, then records its digest for change control. If the tag is absent, consult the release's actual tag and pin its digest; do not silently use `latest`.
+**Command overview:** Downloads the official versioned image and prints its repository digest. Verify the tag and approve the digest before proceeding. Use the complete `docker.io/zeek/zeek@sha256:...` reference from that check for the next step.
 
 ### Step 13 — Run Zeek offline against the synthetic PCAP
 
 ~~~bash
-podman run --rm --network none \
+read -r -p 'Approved Zeek image reference including digest: ' ZEEK_IMAGE
+podman run --rm --pull=never --network none --cap-drop=all \
   -v "$HOME/network-lab/private-pcaps:/pcaps:ro,Z" \
   -v "$HOME/network-lab/zeek-out:/out:Z" \
   -w /out \
-  docker.io/zeek/zeek:9.0.1 \
+  "$ZEEK_IMAGE" \
   zeek -r /pcaps/lab-dns.pcap LogAscii::use_json=T
 ~~~
 
@@ -165,32 +180,25 @@ A dedicated switch port mirror/TAP or approved VMware vSwitch mirror is required
 
 ### Step 16 — Review RHEL 10 Suricata packaging (RHEL-SENSOR01)
 
-Official OISF Suricata 8 docs describe RHEL 10 COPR packages. **Only if third-party OISF packages are approved**, run:
-
-~~~bash
-sudo dnf install -y epel-release dnf-plugins-core
-sudo dnf copr enable @oisf/suricata-8.0
-sudo dnf install -y suricata
-suricata --build-info
-~~~
-
-**Command overview:** Installs EPEL/COPR repository support and OISF-maintained Suricata. This is a **host/package change**, unlike offline PCAP analysis; confirm source, signatures, approval, and RHEL 10.2 compatibility first. If restricted, use an approved signed container or a separately tested build instead.
+On the optional sensor, use the [RHEL package setup and offline service check](SURICATA.md#package-installation) after approving the EPEL and OISF sources. On an existing analysis workstation, use the [worked case's analysis setup](OFFLINE_HTTP_WALKTHROUGH.md#1-set-up-an-analysis-workspace).
 
 ### Step 17 — Validate the Suricata configuration and rules
 
 ~~~bash
-sudo suricata -T -c /etc/suricata/suricata.yaml
-sudo suricata-update
-sudo suricata -T -c /etc/suricata/suricata.yaml
+suricata -T -c /etc/suricata/suricata.yaml \
+  -S "$PWD/configs/network-defense/suricata/local.rules" \
+  -l "$HOME/network-lab/suricata-out"
 ~~~
 
-**Command overview:** `-T` tests the current YAML/rules; `suricata-update` updates the configured IDS signature set with network access. Review its sources, licensing, download/update effects and **rule counts**. Do not enable IPS/NFQUEUE, blocking or auto-drop actions.
+**Command overview:** `-T` tests the YAML and `-S` selects the repository's single fixture rule. Run from the repository root and verify that one rule loads. Use [Suricata rule updates](SURICATA.md#configuration-and-existing-rule-sources) separately for an approved operational ruleset.
 
 ### Step 18 — Analyze the same synthetic PCAP with passive Suricata
 
 ~~~bash
 suricata -r "$HOME/network-lab/private-pcaps/lab-dns.pcap" \
   -c /etc/suricata/suricata.yaml \
+  -S "$PWD/configs/network-defense/suricata/local.rules" \
+  --set unix-command.enabled=no \
   -l "$HOME/network-lab/suricata-out"
 ~~~
 
@@ -203,7 +211,7 @@ python3 scripts/network-defense/summarize_network_logs.py \
   "$HOME/network-lab/suricata-out/eve.json" --type suricata
 ~~~
 
-Review [Suricata runbook](SURICATA.md) and [local example rule](../../configs/network-defense/suricata/local.rules). The synthetic DNS marker detection is **not** assumed installed or enabled until appended in a controlled rule set and `suricata -T` confirms validity. Correlate `event_type`, `alert.signature_id`, source/destination, protocol and timestamps. **An alert is a lead, not proof of exploitation.**
+The offline replay should emit one alert with SID `1000001`. Check the actual EVE output for `event_type`, `alert.signature_id`, source and destination, protocol, and timestamps. Repeat in a fresh output directory to avoid mixing runs. Use the [worked case](OFFLINE_HTTP_WALKTHROUGH.md#5-test-and-tune-the-suricata-rule) for a positive and negative control and a comparison of broad and narrow rules.
 
 ### Step 20 — Compare Zeek metadata with Suricata observations
 
@@ -220,7 +228,7 @@ sudo dnf info yara || true
 command -v yara || true
 ~~~
 
-If an approved package exists, install it using the approved repository: `sudo dnf install -y yara`. Otherwise on **Ubuntu WSL**, use a Python virtual environment with `yara-python` and the repository's optional example wrapper. Record engine version and source. Do not download malware or scan arbitrary processes.
+If an approved package exists, install it with `sudo dnf install -y yara`. Otherwise use the YARA CLI package on **Ubuntu WSL** as shown in the [analysis setup](OFFLINE_HTTP_WALKTHROUGH.md#1-set-up-an-analysis-workspace). Record the engine version and package source.
 
 ### Step 22 — Test a harmless YARA marker rule
 
@@ -251,11 +259,11 @@ python3 -m venv "$HOME/.venvs/sigma-lab"
 
 ~~~bash
 "$HOME/.venvs/sigma-lab/bin/sigma" convert \
-  -t splunk \
+  -t splunk --without-pipeline \
   rules/sigma/lab_network_dns_marker.yml
 ~~~
 
-**Command overview:** Translates sample Sigma detection logic to Splunk SPL. Review the actual backend's output, index, sourcetype, pipeline and field mapping. **Never assume converted SPL works without actual field/event tests.** For Windows Sysmon Sigma rules, a suitable `-p sysmon` pipeline may be required; inspect `sigma list`.
+**Command overview:** Converts the fixture rule against Zeek's native JSON `query` field. In Splunk, scope the result to the expected Zeek source and capture window. See [Sigma mapping and validation](YARA_AND_SIGMA.md) and the [Windows process control](OFFLINE_HTTP_WALKTHROUGH.md#7-convert-a-separate-sysmon-sigma-control-to-spl) for distinct mappings.
 
 ## Phase 6 — Splunk ingestion, baseline and investigations
 

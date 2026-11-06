@@ -19,4 +19,17 @@
 | NET-13 | CMMC Level 2 sample mapping | Documentation only | No assessment |
 | NET-14 | Existing Splunk, Windows and IdM regression | Pending | TBD |
 
-Do not mark a live control Pass solely because GitHub Actions passed. Keep real PCAPs and raw customer logs outside the public repository.
+## Observed synthetic replay
+
+These checks ran on a separate Linux validation host on November 5, 2026 (Hawaii time). They cover the repository fixtures. The VM milestones above track your own environment.
+
+| Check | Observed result |
+| --- | --- |
+| TShark 4.4.18 and dpkt 1.9.8 | The DNS fixture decoded as one query. The HTTP fixtures had 33 baseline and 22 investigation packets. The candidate HTTP request appeared in frame 17. Fixed timestamps reproduced identical capture hashes. |
+| Zeek 9.0.1 | The baseline produced 6 connection, 3 DNS and 3 HTTP rows. The investigation produced 4 connection, 2 DNS and 2 HTTP rows. The candidate connection's Community ID and tuple matched the Suricata alert. |
+| Suricata 7.0.10 | The DNS fixture fired SID `1000001` once. HTTP SID `1001001` fired zero times on baseline and once on investigation. A private path-only rule fired once on baseline and twice on investigation, including the two approved-host requests. |
+| YARA 4.5.2 | The HTTP candidate matched both inert markers. The one-marker control did not match. |
+| Sigma CLI 4.0.0 and Splunk backend 3.0.0 | The DNS rule produced a native Zeek `query` filter. The Windows rule produced a process-creation filter using `EventCode`, `Image` and `CommandLine`. |
+| Splunk upload preparation | The local preparation commands produced 16 normalized fixture rows and one candidate correlation by run, tuple, Community ID and time. Splunk indexing and Windows event verification remain Pending. |
+
+Reproduce the HTTP replay with the [worked case](../../docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md). Store generated evidence privately. Record live results against the corresponding milestone after testing in the actual lab.

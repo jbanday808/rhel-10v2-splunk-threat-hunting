@@ -2,28 +2,26 @@
 
 **Mode:** Offline and future passive IDS only; **no inline IPS or blocking**.
 
-## Package installation (requires security/repository approval)
+## Package installation
 
-The [official OISF RPM guide](https://docs.suricata.io/en/suricata-8.0.6/install/rpm.html) documents the RHEL 10 COPR channel:
+On a registered, optional RHEL 10.2 sensor, verify approval for EPEL 10, CodeReady Builder and the OISF COPR. Follow the Fedora EPEL signing-key instructions and review the proposed package transaction. [Fedora EPEL 10](https://communityblog.fedoraproject.org/epel-10-is-now-available/) · [OISF RPM guide](https://docs.suricata.io/en/latest/install/rpm.html)
 
 ~~~bash
-sudo dnf install -y epel-release dnf-plugins-core
+sudo subscription-manager repos --enable "codeready-builder-for-rhel-10-$(arch)-rpms"
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
+sudo dnf install dnf-plugins-core
 sudo dnf copr enable @oisf/suricata-8.0
-sudo dnf install -y suricata
+sudo systemctl mask suricata.service
+sudo dnf install suricata
+systemctl is-active suricata.service
 suricata --build-info
 ~~~
 
-**Command overview:** Adds approved EPEL/OISF package sources and Suricata; prints the build details. If those repos are not approved or available, stop and select a vetted alternative. Never silently install untrusted RPMs.
+**Command overview:** The first four commands enable and install the approved sources. `mask` prevents a service start while you install the offline analyzer. Expect `inactive` from `is-active` and record the `--build-info` output. If a repository or package is unavailable, use the approved workstation setup in the [worked case](OFFLINE_HTTP_WALKTHROUGH.md#1-set-up-an-analysis-workspace).
 
 ## Configuration and existing rule sources
 
-~~~bash
-sudo suricata -T -c /etc/suricata/suricata.yaml
-sudo suricata-update
-sudo suricata -T -c /etc/suricata/suricata.yaml
-~~~
-
-**Command overview:** Tests YAML/rules, retrieves configured signature updates and re-tests. Record exact rule update source and count. Don't add \`drop\` rules, NFQUEUE, netfilter hooks, or AF_PACKET copy-mode. Test with a private synthetic PCAP.
+The offline exercise loads one project-owned rule with `-S`. For an approved operational ruleset on the dedicated sensor, verify `suricata-update` is installed from the approved source, review the enabled feeds, then run `sudo suricata-update` followed by `sudo suricata -T -c /etc/suricata/suricata.yaml`. Record the rule source, version and count. Keep the sensor in alert-only IDS mode. [OISF rule management](https://docs.suricata.io/en/latest/rule-management/suricata-update.html)
 
 ## Local lab detection (optional)
 

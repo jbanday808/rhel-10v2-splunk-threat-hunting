@@ -46,19 +46,21 @@ This writes `conn.log`, `dns.log` and any supported additional protocol logs in 
 | DNS | Queries, responses, SERVFAIL/NXDOMAIN, new domain volume | Encrypted DNS may obscure queries |
 | HTTP | Methods, hosts, user agents, cleartext requests | Captures can contain credentials; do not upload |
 | TLS | Version, certificate details, SNI when present, negotiated suites | TLS 1.3 and encrypted payload reduce visibility |
-| SMB | Dialect negotiation and connection patterns | Session content often encrypted/signature-protected |
+| SMB | Dialect negotiation, server responses and connection patterns | SMB encryption can hide payloads. Signing authenticates messages and can coexist with visible payloads. |
 | RDP | Transport and connection attempts | Encryption limits user/session detail |
 
 **TShark examples (run only on an authorized file):**
 
 ~~~bash
-tshark -r /path/to/approved.pcap -q -z io,phs
-tshark -r /path/to/approved.pcap -Y 'tcp.flags.syn==1 && tcp.flags.ack==0'
-tshark -r /path/to/approved.pcap -Y 'tls.handshake.type==1'
-tshark -r /path/to/approved.pcap -Y 'dns.flags.rcode != 0'
+tshark -n -r /path/to/approved.pcap -q -z io,phs
+tshark -n -r /path/to/approved.pcap -Y 'tcp.flags.syn==1 && tcp.flags.ack==0'
+tshark -n -r /path/to/approved.pcap -Y 'tls.handshake.type==2'
+tshark -n -r /path/to/approved.pcap -Y 'dns.flags.response==1 && dns.flags.rcode != 0'
+tshark -n -r /path/to/approved.pcap -Y 'smb2.cmd == 0'
+tshark -n -r /path/to/approved.pcap -Y 'tcp.port == 3389'
 ~~~
 
-**Command overview:** Lists protocol hierarchy, TCP SYNs, TLS ClientHello messages and DNS errors. Empty results mean those events were not decoded—not that a system is secure.
+**Command overview:** These searches show the protocol mix, TCP connection attempts, TLS ServerHello messages, DNS error replies, SMB negotiation and common RDP-port traffic. For TLS 1.3, inspect the negotiated version in the Supported Versions extension. For SMB, check the server's selected dialect and signing flags in negotiation. A connection to TCP 3389 establishes an observed port, so use endpoint events and policy to verify RDP and authentication. Record empty or incomplete views as visibility limits.
 
 ## Live visibility prerequisites
 

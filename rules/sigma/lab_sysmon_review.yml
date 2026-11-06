@@ -1,0 +1,16 @@
+title: Lab Review Marker In Windows Cmd Process
+id: ab67f619-77a9-4765-924f-33af1d8600d0
+status: test
+description: Detects an inert process creation marker on the Windows hunting VM.
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        EventID: 1
+        Image|endswith: '\cmd.exe'
+        CommandLine|contains: 'LAB_SIGMA_REVIEW_MARKER'
+    condition: selection
+falsepositives:
+    - An intentional lab marker or another process with the same command line.
+level: low

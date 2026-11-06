@@ -28,6 +28,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [All 52 numbered steps](docs/steps/README.md)
 - [Detailed appendices](docs/appendices/README.md)
 - [Complete Zeek, Wireshark, Suricata, YARA, Sigma and CMMC Network Defense Guide](docs/network-defense/IMPLEMENTATION_GUIDE.md)
+- [Worked passive HTTP investigation with Splunk](docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md)
 - [Deployment order](docs/deployment-order.md)
 - [Zero Trust architecture — installation, configuration, deployment, RMF/STIG and testing](docs/zero-trust/README.md)
 - [RHEL 10.2 DISA STIG V1R1 — Complete Installation, Assessment and Safe Hardening Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)

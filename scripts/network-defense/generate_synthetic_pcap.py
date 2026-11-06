@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 QUERY = "lab-marker.example.test"
 SRC = "192.0.2.10"
 DST = "198.51.100.53"
+DEFAULT_TIMESTAMP = 1700000000
 
 
 def checksum(raw: bytes) -> int:
@@ -36,16 +37,20 @@ def create_packet() -> bytes:
     return ethernet + ip + udp
 
 
-def generate_pcap() -> bytes:
+def generate_pcap(timestamp: int = DEFAULT_TIMESTAMP) -> bytes:
+    if not 0 <= timestamp <= 0xFFFFFFFF:
+        raise ValueError("Timestamp must fit the PCAP seconds field")
     packet = create_packet()
     global_header = struct.pack("<IHHIIII", 0xA1B2C3D4, 2, 4, 0, 0, 65535, 1)
-    packet_header = struct.pack("<IIII", 1700000000, 0, len(packet), len(packet))
+    packet_header = struct.pack("<IIII", timestamp, 0, len(packet), len(packet))
     return global_header + packet_header + packet
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--timestamp", type=int, default=DEFAULT_TIMESTAMP,
+                        help="Capture time in UTC epoch seconds. Default is fixed for regression tests.")
     args = parser.parse_args()
     try:
         dst = args.output.expanduser().resolve()
@@ -54,13 +59,13 @@ def main() -> int:
         if dst.suffix.lower() != ".pcap":
             raise ValueError("Expected .pcap output file")
         dst.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-        data = generate_pcap()
+        data = generate_pcap(args.timestamp)
         dst.write_bytes(data)
         dst.chmod(0o600)
         print("PRIVATE synthetic PCAP:", dst)
         print("Query:", QUERY, "source:", SRC, "destination:", DST)
         print("SHA-256:", hashlib.sha256(data).hexdigest())
-        print("Synthetic timestamp: 2023-11-14; use earliest=0 in Splunk replay searches.")
+        print("Synthetic timestamp (UTC epoch seconds):", args.timestamp)
         print("No network calls or live captures occurred.")
         return 0
     except (OSError, ValueError) as exc:

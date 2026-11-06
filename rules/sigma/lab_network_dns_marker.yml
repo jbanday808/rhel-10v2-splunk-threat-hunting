@@ -11,7 +11,7 @@ logsource:
   service: dns
 detection:
   selection:
-    query|contains: 'lab-marker.example.test'
+    query: 'lab-marker.example.test'
   condition: selection
 falsepositives:
   - Approved synthetic test activity

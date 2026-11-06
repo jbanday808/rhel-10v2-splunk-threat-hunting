@@ -2,7 +2,9 @@
 
 **Scope notice:** This is a **synthetic education lab with no controlled unclassified information (CUI)**. It is not a CMMC Organization Seeking Assessment (OSA), is not certified, and has no official assessment result. These examples do not implement or evaluate all **110** requirements.
 
-**As of the documented 2026 CMMC model**, Level 2 uses **NIST SP 800-171 Revision 2** requirements. Do not substitute SP 800-171 Revision 3 without official program rule changes. The DoD describes Level 2 **self assessments and third-party C3PAO assessments** depending on contract requirements; required assessment type and schedule derive from the applicable contract/DFARS/CMMC program, not from a homelab. See [DoD CMMC Program About](https://dodcio.defense.gov/CMMC/About/) and [Level 2 Assessment Guide](https://dodcio.defense.gov/Portals/0/Documents/CMMC/AssessmentGuideL2v2.pdf).
+**Program status checked November 5, 2026.** The department announced on July 13, 2026 that it was suspending Phase II, which was scheduled to begin November 10, 2026. Phase I self-assessment requirements remain in place. Check the current policy, applicable contract clauses and contracting officer for the assessment and affirmation requirements that apply. [CMMC Policy](https://dodcio.defense.gov/CMMC/Policy/) · [32 CFR Part 170](https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-G/part-170) · [DFARS 252.204-7021](https://www.acquisition.gov/dfars/252.204-7021-contractor-compliance-cybersecurity-maturity-model-certification-level-requirements.)
+
+The CMMC Level 2 assessment guide uses the 110 requirements in **NIST SP 800-171 Revision 2**. NIST superseded its general publication with Revision 3. For this crosswalk, use the revision and objectives specified by the CMMC program and confirm contract-specific applicability separately. [Level 2 Assessment Guide](https://dodcio.defense.gov/Portals/0/Documents/CMMC/AssessmentGuideL2v2.pdf) · [NIST SP 800-171 Rev. 2 publication record](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final)
 
 ## Applicability and scope first
 
@@ -23,10 +25,12 @@
 | `3.6.1` | Establish operational incident-handling capability | CONOPS triage and escalation flow | Organization IR plan and capability not evaluated |
 | `3.6.2` | Track, document and report incidents | Sanitized case/evidence templates | Not an official incident-reporting process |
 | `3.11.1` | Periodically assess risk to operations and information | Passive baseline risk register and findings | Not a formal risk assessment |
-| `3.11.2` | Scan for vulnerabilities at defined intervals and with new findings | **Passive analysis can supplement** vulnerability analysis | Passive monitoring **alone does not satisfy** vulnerability-scanning requirement |
+| `RA.L2-3.11.2` | Scan systems and applications on a defined schedule and when new relevant vulnerabilities are identified | Passive observations can prioritize validation | The fixture provides no evidence of scan coverage, frequency, or new-vulnerability scans |
 | `3.12.1` | Periodically assess implemented security controls | Validation matrix, policy-change test plan | Not an actual assessment of CUI controls |
 | `3.13.1` | Monitor, control and protect communications at boundaries | Sensor architecture and approved flow matrix | TAP/SPAN visibility and enforcement not installed |
 | `3.13.8` | Use cryptographic mechanisms to prevent unauthorized disclosure in transit | Splunk TLS/LDAPS and test plans | Live end-to-end control evidence Pending |
+| `SI.L2-3.14.6` | Monitor systems and inbound and outbound communications for attacks or indicators of attacks | The [worked case](OFFLINE_HTTP_WALKTHROUGH.md) shows a known alert, evidence pivot and analyst triage | In-scope system and boundary coverage, ongoing operation and response still require evidence |
+| `SI.L2-3.14.7` | Identify unauthorized use | Baseline exception reviewed against an approved service inventory | The actual authorized-use policy and alert dispositions are needed |
 
 **Caution:** Mapping a tool to a requirement is not the same as satisfying **all assessment objectives**. Determine coverage from the **current CMMC Assessment Guide**, not a portfolio summary.
 
@@ -43,6 +47,10 @@
 | Finding status | Met / Not Met / Not Applicable only when properly assessed |
 | POA&M and corrective action | Approved owner, due date, re-test |
 | Assessor/decision authority | Actual qualified authority, not GitHub workflow |
+
+### Example evidence handoff
+
+For `SI.L2-3.14.6`, **examine** the approved boundary diagram, monitoring policy, source inventory and a sanitized alert timeline. **Interview** the analyst and network owner about visibility, dropped traffic and escalation. **Test** an approved positive and negative case and verify collection, triage and disposition. Record the exact objective from the guide, evidence ID, UTC date, tool and rule versions, reviewer, and coverage gap. Add an owner, due date and retest to the internal corrective-action log. Apply formal POA&M and SPRS rules only within the applicable authorized assessment.
 
 ## CMMC vs RMF vs DISA STIG
 
