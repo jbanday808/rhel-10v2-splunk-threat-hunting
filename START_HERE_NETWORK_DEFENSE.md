@@ -4,6 +4,8 @@
 
 **[OPEN FULL 30-STEP INSTALLATION, CONFIGURATION, DEPLOYMENT & VALIDATION GUIDE](docs/network-defense/IMPLEMENTATION_GUIDE.md)**
 
+**[Run the worked HTTP investigation](docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md)** using synthetic captures on an analysis workstation. The Splunk portion uses the existing `lab` index. Use the 30-step guide when planning an optional dedicated sensor.
+
 ## Purpose
 
 Extend the existing three-VM VMware lab with an **optional, isolated passive network analysis sensor** and a documented end-to-end workflow. Cover protocol analysis, network baselining, low-impact vulnerability discovery, Suricata IDS alert triage, Zeek telemetry, Splunk investigations, YARA file classification, Sigma-to-SPL detection engineering, incident reporting and **CMMC Level 2 evidence mapping**. The documentation is project-focused and contains no company/job advertisement.

@@ -21,7 +21,7 @@ yara rules/yara/lab_marker.yar "$HOME/network-lab/yara-test/harmless.txt"
 
 **Expected:** The harmless marker rule matches the synthetic text file. Create a separate clean text file lacking the marker and verify no match.
 
-If unavailable in approved RHEL packages, use an isolated Python \`yara-python\` environment on WSL for a scripted equivalent; do not assume the Python package provides a standalone \`yara\` binary.
+If no approved RHEL package is available, use the [Ubuntu WSL YARA CLI setup](OFFLINE_HTTP_WALKTHROUGH.md#1-set-up-an-analysis-workspace). The [worked artifact exercise](OFFLINE_HTTP_WALKTHROUGH.md#6-pivot-and-validate-the-exported-file-with-yara) includes a matching file and a near-match control.
 
 **Data protection:** Never publish malware samples or extracted documents. YARA matching is a classification aid; a match against a generic byte string is not proof of malicious intent. Do not scan the whole OS or an arbitrary live process.
 
@@ -41,11 +41,11 @@ python3 -m venv "$HOME/.venvs/sigma-lab"
 Convert the [sample Sigma DNS test rule](../../rules/sigma/lab_network_dns_marker.yml):
 
 ~~~bash
-"$HOME/.venvs/sigma-lab/bin/sigma" convert -t splunk \
+"$HOME/.venvs/sigma-lab/bin/sigma" convert -t splunk --without-pipeline \
   rules/sigma/lab_network_dns_marker.yml
 ~~~
 
-**Important:** The conversion backend may require a matching processing pipeline and actual field mapping for your local \`net_zeek\` JSON sourcetype. The example rule's \`dns.query\` field is a **design field**, not guaranteed to be extracted exactly as named in Splunk. Test conversion, adjust the search fields to actual data and document the resulting SPL and test outcome. For Windows Sysmon, inspect the supported \`-p sysmon\` pipeline.
+**Command overview:** `--without-pipeline` keeps the custom rule's field as `query`, the field in the native Zeek DNS JSON. Expect `query="lab-marker.example.test"`. If using the optional forwarded source, scope it to `index=net_zeek sourcetype="zeek:json"` and the known capture window. Confirm the field and match in Splunk before enabling any alert. For Windows process creation use the [separate Sysmon example](OFFLINE_HTTP_WALKTHROUGH.md#7-convert-a-separate-sysmon-sigma-control-to-spl) and the Windows pipeline.
 
 ## Quality gates
 

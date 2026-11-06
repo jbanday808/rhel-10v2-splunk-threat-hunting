@@ -10,6 +10,8 @@ For the **VS Code + WSL on Windows 11** workflow, see [START_HERE_WSL.md](START_
 
 **Optional RHEL STIG workstream:** [START_HERE_RHEL10v2_STIG.md](START_HERE_RHEL10v2_STIG.md) and the [complete V1R1 OpenSCAP hardening guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md). Assessment-only until you run scans on each VM; do not auto-remediate IdM or Splunk.
 
+**Optional passive network defense workstream:** [Start here](START_HERE_NETWORK_DEFENSE.md) for the tool setup, offline network investigations and CMMC evidence guide.
+
 
 ## 1. Know where to run each task
 

@@ -41,6 +41,15 @@ class NetworkDefenseTests(unittest.TestCase):
         header = pcap.create_packet()[14:34]
         self.assertEqual(pcap.checksum(header), 0)
 
+    def test_replay_timestamp_changes_only_packet_time(self):
+        original = pcap.generate_pcap()
+        replay = pcap.generate_pcap(1760000000)
+        self.assertEqual(struct.unpack_from("<I", replay, 24)[0], 1760000000)
+        self.assertEqual(replay[:24] + replay[28:], original[:24] + original[28:])
+        for invalid in (-1, 2**32):
+            with self.assertRaises(ValueError):
+                pcap.generate_pcap(invalid)
+
     def test_aggregate_suricata_events_without_raw_data(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "eve.json"

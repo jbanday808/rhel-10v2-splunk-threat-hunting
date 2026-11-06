@@ -4,6 +4,8 @@
 
 Existing Splunk: `RHEL-SPLUNK01`, HTTPS `8000`, TLS receiver `9997`. Original lab indexes (`win_security`, `win_system`, `powershell`, `sysmon`, `linux`, `lab`) and source apps are **not replaced**. New network indexes and sensor forwarding are **proposed**.
 
+Start with the [one-time upload walkthrough](OFFLINE_HTTP_WALKTHROUGH.md#8-upload-a-small-fixture-to-the-existing-splunk-index) to practice source validation, event time and correlation in `lab`. Use the forwarding procedure below for an approved dedicated sensor deployment.
+
 ## Step A — Create or merge new indexes (RHEL-SPLUNK01)
 
 Review [configs/network-defense/splunk/indexes.conf.example](../../configs/network-defense/splunk/indexes.conf.example). Create optional indexes `net_zeek`, `net_suricata`, `net_yara` in an approved Splunk \`local/indexes.conf\` location. Confirm volume location, ownership, retention, disk budget and RBAC. Do not copy `.example` files into active app directories without review or change approval.
@@ -21,7 +23,7 @@ sudo -u splunk /opt/splunk/bin/splunk btool authorize list role_lab_hunter --deb
 
 Sensor can run **Splunk Universal Forwarder** from a verified vendor package and send approved JSON metadata to `splunk01.lab.test:9997`, requiring server CA and hostname verification. The current Splunk firewalld source rules may only permit Windows `.20`: the new sensor `.40` must get a separately approved source-limited rule, not a broad all-host allow.
 
-The source [apps/SENSOR_UF/local/inputs.conf](../../apps/SENSOR_UF/local/inputs.conf) is a **proposed template**; paths are **not** automatically created. No secrets, UF installer, private CA or live remote endpoints are committed.
+Review the disabled [sensor input template](../../apps/SENSOR_UF/local/inputs.conf). Stage only approved metadata in the example directories. Enable individual inputs on the sensor after confirming the dedicated service account can read the staged files and the verified TLS receiver, destination indexes and parsers are ready.
 
 Read effective UF settings only after installation:
 
@@ -34,7 +36,7 @@ If installed elsewhere or service identity differs, use the actual path/identity
 
 ## Step C — JSON indexing and timestamp caveat
 
-Zeek JSON has an epoch-seconds `ts` (possibly fractional), while Suricata EVE has an ISO8601 `timestamp`. Default index-time `_time` may be ingestion time rather than event time if you import an **old offline PCAP**. Before promoting sources, verify timestamp extraction for **both** formats on a sanitized test event, and adjust props on the parsing tier **only after testing**. Never misrepresent a replayed event as live detection.
+Zeek JSON has an epoch-seconds `ts`, while Suricata EVE has an ISO 8601 `timestamp`. Confirm each source's `_time` matches the event time on a sanitized test. Older events can age out immediately in short-retention indexes. For the DNS fixture, supply a recent `--timestamp` to the generator before regenerating the offline logs and keep the replay labeled as synthetic.
 
 Proposed inputs use `sourcetype=zeek:json` and `sourcetype=suricata:eve`; matching parsing configuration must be reviewed for the actual ingestion mechanism and installed Splunk version. Parsing is not guaranteed by this source template. Set explicit line-breaking for newline JSON and proper timezone if necessary, and account for forwarding/rotation behavior. \`INDEXED_EXTRACTIONS=json\` is not prescribed blindly.
 

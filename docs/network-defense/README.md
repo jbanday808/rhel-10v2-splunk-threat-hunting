@@ -9,6 +9,7 @@ Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcp
 | Resource | Focus |
 | --- | --- |
 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 30-step planning, installation, configuration, PCAP lab, Splunk integration, baseline, triage and operations |
+| [OFFLINE_HTTP_WALKTHROUGH.md](OFFLINE_HTTP_WALKTHROUGH.md) | Positive and negative fixture replay, alert tuning, file analysis, and correlation in the existing `lab` index |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | VM roles, offline vs live sensing, trust and privacy boundaries |
 | [CONOPS.md](CONOPS.md) | Mission, authorization, operation, analyst workflow, metrics, retention and escalation |
 | [ZEEK_AND_WIRESHARK.md](ZEEK_AND_WIRESHARK.md) | Verified Zeek offline approach, TShark and PCAP analysis |
@@ -33,4 +34,4 @@ Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcp
 
 **Installation caveat:** Zeek does **not** currently guarantee official native binary packages for RHEL 10. Use a verified official container image or an independently tested source build; see [Zeek platform support](https://github.com/zeek/zeek/wiki/Zeek-Operating-System-Support-Matrix). Suricata's own instructions describe RHEL 10 packages through OISF COPR, subject to owner approval. No repository script installs third-party sources unattended.
 
-**Every result is Pending until exercised on the VMs and confirmed by an analyst.**
+See the [validation worksheet](../../evidence/sanitized/network-defense-validation.md) for observed offline checks and pending VM checks.

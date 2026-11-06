@@ -1,0 +1,1 @@
+alert http 192.0.2.0/24 any -> 192.0.2.0/24 80 (msg:"LAB HTTP review download on unapproved host"; flow:established,to_server; http.host; content:"review.example.test"; startswith; endswith; http.uri; content:"/downloads/review.txt"; startswith; endswith; sid:1001001; rev:1;)
