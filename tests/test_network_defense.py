@@ -3,8 +3,12 @@ import importlib.util
 import json
 from pathlib import Path
 import struct
+import subprocess
+import sys
 import tempfile
 import unittest
+
+import dpkt
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,9 +23,80 @@ def load(name, relative):
 
 pcap = load("synthetic_pcap", "scripts/network-defense/generate_synthetic_pcap.py")
 summary = load("aggregate_network", "scripts/network-defense/summarize_network_logs.py")
+http_fixtures = load("http_fixtures", "scripts/network-defense/generate_http_fixtures.py")
 
 
 class NetworkDefenseTests(unittest.TestCase):
+    def test_http_fixtures_are_reproducible_with_expected_packets_and_markers(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            captures = []
+            for name in ("first", "second"):
+                output = root / name
+                result = subprocess.run(
+                    [sys.executable, str(ROOT / "scripts/network-defense/generate_http_fixtures.py"),
+                     str(output), "--start-epoch", "1760000000"],
+                    capture_output=True, text=True, check=True,
+                )
+                self.assertIn("Wrote two synthetic captures", result.stdout)
+                captures.append(output)
+
+            for filename, expected_count in (("baseline.pcap", 33), ("investigation.pcap", 22)):
+                first = (captures[0] / filename).read_bytes()
+                second = (captures[1] / filename).read_bytes()
+                self.assertEqual(first, second)
+                with (captures[0] / filename).open("rb") as capture:
+                    packets = list(dpkt.pcap.Reader(capture))
+                self.assertEqual(len(packets), expected_count)
+
+            with (captures[0] / "investigation.pcap").open("rb") as capture:
+                investigation = list(dpkt.pcap.Reader(capture))
+            self.assertEqual(investigation[0][0], 1760000300)
+            candidate_frame = 17
+            candidate_request = dpkt.ethernet.Ethernet(investigation[candidate_frame - 1][1])
+            self.assertEqual(candidate_request.data.data.sport, 51005)
+            self.assertIn(b"GET /downloads/review.txt HTTP/1.1", candidate_request.data.data.data)
+            self.assertIn(b"Host: review.example.test", candidate_request.data.data.data)
+            candidate_response = dpkt.ethernet.Ethernet(investigation[candidate_frame][1])
+            self.assertIn(b"LAB_REVIEW_MARKER", candidate_response.data.data.data)
+            self.assertIn(b"LAB_SYNTHETIC_HTTP_ARTIFACT", candidate_response.data.data.data)
+            routine_response = dpkt.ethernet.Ethernet(investigation[6][1])
+            self.assertIn(b"LAB_REVIEW_MARKER", routine_response.data.data.data)
+            self.assertIn(b"Routine lab status.", routine_response.data.data.data)
+
+    def test_http_fixture_timestamp_and_output_path_guards(self):
+        script = ROOT / "scripts/network-defense/generate_http_fixtures.py"
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            last_supported_epoch = (2**32 - 1) - http_fixtures.INVESTIGATION_OFFSET - 20
+            valid_output = root / "last-supported"
+            valid = subprocess.run(
+                [sys.executable, str(script), str(valid_output), "--start-epoch",
+                 str(last_supported_epoch)],
+                capture_output=True, text=True,
+            )
+            self.assertEqual(valid.returncode, 0, valid.stderr)
+            self.assertTrue((valid_output / "investigation.pcap").is_file())
+
+            for invalid_epoch in ("0", str(last_supported_epoch + 1)):
+                output = root / f"invalid-{invalid_epoch}"
+                result = subprocess.run(
+                    [sys.executable, str(script), str(output), "--start-epoch", invalid_epoch],
+                    capture_output=True, text=True,
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("--start-epoch is outside the supported PCAP range", result.stderr)
+                self.assertFalse(output.exists())
+
+            output_in_repo = ROOT / "http-fixture-test-output"
+            result = subprocess.run(
+                [sys.executable, str(script), str(output_in_repo), "--start-epoch", "1760000000"],
+                capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("Keep capture files outside the repository", result.stderr)
+            self.assertFalse(output_in_repo.exists())
+
     def test_packet_is_deterministic_and_ethernet_ipv4_udp_dns(self):
         data = pcap.generate_pcap()
         self.assertEqual(data, pcap.generate_pcap())

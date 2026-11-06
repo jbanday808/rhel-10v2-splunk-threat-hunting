@@ -15,8 +15,12 @@ jobs:
           persist-credentials: false
       - name: Validate source files
         run: python3 scripts/validate_project.py
+      - name: Install pinned HTTP fixture test dependency
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install dpkt==1.9.8
       - name: Test redaction and configuration merging
-        run: python3 -B -m unittest discover -s tests -p 'test_*.py' -v
+        run: .venv/bin/python -B -m unittest discover -s tests -p 'test_*.py' -v
   windows:
     runs-on: windows-2025
     timeout-minutes: 10
