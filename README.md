@@ -12,6 +12,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 
 **New optional workstream — DoD-aligned Zero Trust Architecture (WIP):** [START_HERE_ZERO_TRUST.md](START_HERE_ZERO_TRUST.md) · [Complete installation/configuration/deployment guide](docs/zero-trust/IMPLEMENTATION_GUIDE.md) · [Seven DoD Zero Trust pillars and role mapping](docs/zero-trust/02-dod-seven-pillars.md). These files document proposed controls and testing; they do **not** deploy a central ZTNA/PDP or certify DoD Target Level.
 
+**New passive network defense workstream (WIP):** [START_HERE_NETWORK_DEFENSE.md](START_HERE_NETWORK_DEFENSE.md) · [Complete 30-Step Deployment Guide](docs/network-defense/IMPLEMENTATION_GUIDE.md) · [CONOPS](docs/network-defense/CONOPS.md) · [Zeek/Wireshark/TShark](docs/network-defense/ZEEK_AND_WIRESHARK.md) · [Suricata](docs/network-defense/SURICATA.md) · [YARA/Sigma](docs/network-defense/YARA_AND_SIGMA.md) · [CMMC Level 2 evidence planning](docs/network-defense/CMMC_LEVEL2.md). **Offline synthetic PCAPs first; no live sensor or CMMC certification claimed.**
+
 **MITRE ATT&CK threat hunting:** [Start here](docs/mitre-attack/README.md) · [Technique and telemetry mapping](docs/mitre-attack/coverage.md) · [Navigator layer](docs/mitre-attack/navigator-layer.json) · [Hunt playbook](docs/mitre-attack/hunt-playbook.md). Candidate searches, context-only signals, and telemetry gaps are distinguished; no detection is claimed as validated until tested.
 
 **Information Assurance Vulnerability Management (IAVM):** [IAVM home](docs/iavm/README.md) · [Splunk Enterprise notice 2026-A-1195](docs/iavm/notices/2026-A-1195.md). The user-provided notice and vendor advisory differences are documented; lab applicability and remediation are unverified.
@@ -25,6 +27,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [Complete text guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md)
 - [All 52 numbered steps](docs/steps/README.md)
 - [Detailed appendices](docs/appendices/README.md)
+- [Complete Zeek, Wireshark, Suricata, YARA, Sigma and CMMC Network Defense Guide](docs/network-defense/IMPLEMENTATION_GUIDE.md)
 - [Deployment order](docs/deployment-order.md)
 - [Zero Trust architecture — installation, configuration, deployment, RMF/STIG and testing](docs/zero-trust/README.md)
 - [RHEL 10.2 DISA STIG V1R1 — Complete Installation, Assessment and Safe Hardening Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)
@@ -37,6 +40,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | RHEL-SPLUNK01 | 172.25.250.10 | Indexing, searches, TLS receiver, local NGINX test |
 | WINHUNT01 | 172.25.250.20 | Windows logs, Sysmon, Universal Forwarder |
 | RHEL-IDM01 | 172.25.250.30 | IdM directory, DNS, LDAPS |
+| RHEL-SENSOR01 (optional, not installed) | 172.25.250.40 | Proposed passive PCAP/Zeek/Suricata processing on a separate VM |
 | VMnet8 gateway | 172.25.250.2 | NAT outbound access |
 
 ## Included source
@@ -56,6 +60,9 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |
 | docs/zero-trust, configs/zero-trust and scripts/zero-trust | DoD-aligned Zero Trust design, source-limited policy examples, offline checks and evidence templates (optional WIP) |
 | docs/stig-rhel10 and scripts/stig | User-provided V1R1 benchmark documentation, offline rule inventory, private read-only assessment and result summarizer (WIP) |
+| docs/network-defense, scripts/network-defense | Passive network analysis CONOPS, 30-step guide, synthetic PCAP and aggregate JSON tools |
+| rules/yara, rules/sigma, hunts/network-defense | Benign YARA/Sigma test rules and proposed network SPL hunts |
+| configs/network-defense, apps/SENSOR_UF | Proposed Suricata IDS rule and Splunk indexes/UF overlays, not deployed |
 | docs | Full guide, WSL publishing guide, steps, appendices, architecture, and sanitized LDAP examples |
 | evidence/sanitized | Validation and investigation records |
 | .github/workflows | Linux/Windows source checks and two manual Azure OIDC workflows |
