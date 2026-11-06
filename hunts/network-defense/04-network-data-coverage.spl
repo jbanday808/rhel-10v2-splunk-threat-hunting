@@ -1,0 +1,4 @@
+(index=net_zeek OR index=net_suricata OR index=net_yara) earliest=0
+| stats count latest(_time) as last_seen by index host sourcetype
+| eval last_seen_utc=strftime(last_seen,"%Y-%m-%dT%H:%M:%SZ")
+| table index host sourcetype count last_seen_utc

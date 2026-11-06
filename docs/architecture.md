@@ -17,3 +17,7 @@ The splunk-hunters group maps only to lab_hunter.
 The splunk-admins group maps to admin.
 The native Splunk admin remains available for recovery.
 WSL and VS Code are used only for the final GitHub upload.
+
+## Optional Passive Network Sensor (NOT DEPLOYED)
+
+A **proposed** fourth VM, RHEL-SENSOR01 at 172.25.250.40, may analyze synthetic offline PCAPs with Zeek, Suricata and TShark, then send approved sanitized JSON via verified TLS to the existing Splunk server. **VMnet8 NAT does not automatically mirror other VM traffic.** Live sensing requires approved TAP/SPAN or verified virtual port mirroring. See [Passive Network Defense Architecture](network-defense/ARCHITECTURE.md) and [30-Step Guide](network-defense/IMPLEMENTATION_GUIDE.md). This preserves the original three-VM topology and sources.

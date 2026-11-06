@@ -1,0 +1,18 @@
+title: Lab Synthetic DNS Query Marker
+id: a71f335e-01cc-4d4b-a7b9-1672ec93ea8c
+status: experimental
+description: Benign Zeek DNS marker for Sigma/Splunk conversion exercises, not a threat indicator.
+references:
+  - https://sigmahq.io/docs/guide/getting-started.html
+author: Network Defense Lab
+date: 2026-11-05
+logsource:
+  product: zeek
+  service: dns
+detection:
+  selection:
+    query|contains: 'lab-marker.example.test'
+  condition: selection
+falsepositives:
+  - Approved synthetic test activity
+level: informational

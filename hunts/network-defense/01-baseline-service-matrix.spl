@@ -1,0 +1,4 @@
+index=net_zeek sourcetype=zeek:json earliest=0
+| spath
+| stats count as events by service proto
+| sort -events

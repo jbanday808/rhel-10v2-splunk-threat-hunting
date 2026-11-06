@@ -73,3 +73,12 @@ stig-private/
 stig-reports/
 stig-results/
 *.arf.xml
+
+# Passive network defense: do not publish raw packet captures or sensitive sensor logs
+*.pcap
+*.pcapng
+*.cap
+network-lab/
+private-pcaps/
+network-captures/
+*.yarac

@@ -1,0 +1,2 @@
+# Synthetic DNS test rule. Review with suricata -T; do not deploy to production.
+alert dns any any -> any any (msg:"LAB benign DNS test marker"; dns.query; content:"lab-marker.example.test"; nocase; sid:1000001; rev:1;)
