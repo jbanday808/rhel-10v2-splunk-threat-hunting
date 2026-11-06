@@ -1,0 +1,7 @@
+index=net_suricata sourcetype=suricata:eve earliest=0
+| spath path=event_type output=kind
+| where kind="alert"
+| spath path=alert.signature_id output=sid
+| spath path=alert.signature output=signature
+| stats count as events by sid signature src_ip dest_ip
+| sort -events
