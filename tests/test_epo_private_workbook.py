@@ -3,6 +3,9 @@
 import importlib.util
 import os
 from pathlib import Path
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -34,6 +37,28 @@ def fixture(release="8"):
 
 
 class PrivateWorkbookTests(unittest.TestCase):
+    def test_publication_preflight_detects_arbitrary_workbook_filename(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            tools = root / "tools"
+            tools.mkdir()
+            shutil.copyfile(ROOT / "tools/publication_preflight.py",
+                            tools / "publication_preflight.py")
+            output = root / "assessment.txt"
+            output.write_text("Synthetic assessment notes.\n", encoding="utf-8")
+            command = [sys.executable, str(tools / "publication_preflight.py")]
+            clean = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(clean.returncode, 0, clean.stdout + clean.stderr)
+
+            output.write_text(
+                "ESS ePO 5.x STIG Version 3 Release 8 - Private rule workbook\n",
+                encoding="utf-8",
+            )
+            flagged = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertNotEqual(flagged.returncode, 0)
+            self.assertIn("Private ePO workbook included: assessment.txt", flagged.stdout)
+
     def test_writes_synthetic_rule_and_starts_unreviewed(self):
         with tempfile.TemporaryDirectory() as tmp:
             source = Path(tmp) / "source.xml"
