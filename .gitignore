@@ -82,3 +82,10 @@ network-lab/
 private-pcaps/
 network-captures/
 *.yarac
+
+# Controlled ePO STIG source and private assessment checklists
+CUI_ESS_ePO_5-x_STIG_V3R8_Manual-xccdf.xml
+STIG_cui.xsl
+epo-v3r8-private-workbook*.txt
+*.ckl
+*.cklb
