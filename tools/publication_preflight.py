@@ -21,7 +21,7 @@ for rel in files:
         continue
     posix = rel.as_posix()
     forbidden_dirs = {'private', 'backups', 'downloads', 'secrets', 'local-private'}
-    forbidden_suffixes = {'.key', '.pem', '.pfx', '.p12', '.keytab', '.iso', '.vmdk', '.evtx', '.pcap', '.pcapng', '.kdbx', '.zip', '.tgz', '.ckl', '.cklb'}
+    forbidden_suffixes = {'.key', '.pem', '.pfx', '.p12', '.keytab', '.iso', '.vmdk', '.evtx', '.pcap', '.pcapng', '.kdbx', '.zip', '.tgz', '.ckl', '.cklb', '.wfw'}
     if any(part in forbidden_dirs for part in rel.parts) or posix.startswith('evidence/raw/'):
         errors.append(f'Private directory included: {posix}')
     if path.suffix.lower() in forbidden_suffixes:
