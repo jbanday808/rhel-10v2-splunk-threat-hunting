@@ -89,3 +89,6 @@ STIG_cui.xsl
 epo-v3r8-private-workbook*.txt
 *.ckl
 *.cklb
+
+# Windows Firewall policy exports contain environment details
+*.wfw

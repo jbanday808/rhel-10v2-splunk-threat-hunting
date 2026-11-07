@@ -10,6 +10,10 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 
 **New RHEL 10.2 STIG hardening and SCAP assessment (V1R1):** [START_HERE_RHEL10v2_STIG.md](START_HERE_RHEL10v2_STIG.md) · [Full 26-Step STIG Implementation Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md) · [Uploaded Benchmark Metadata](docs/stig-rhel10/BENCHMARK_METADATA.md). Includes 396-rule inventory tooling, controlled non-remediating OpenSCAP scans, risk-aware remediation, POA&M and sanitized evidence. **No live systems are scanned or modified by GitHub files.**
 
+**Optional Windows 11 STIG V2R11 workstream (WIP):** [Start here](START_HERE_WINDOWS11_STIG.md) · [34-step guide](docs/stig-windows11/IMPLEMENTATION_GUIDE.md) · [257-rule reference](docs/stig-windows11/RULE_INDEX.md). Covers WINHUNT01 assessment, careful remediation, recovery, and monitoring validation.
+
+**Optional Windows Defender Firewall STIG V2R2 workstream (WIP):** [Start here](START_HERE_WINDOWS_FIREWALL_STIG.md) · [32-step guide](docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md) · [21-rule reference](docs/stig-windows-firewall/rules/all.md). Confirm applicability, preserve required connections, and keep assessment results private.
+
 **Optional ESS ePO 5.x STIG V3R8 workstream:** [Start here](START_HERE_EPO_STIG.md) · [Complete assessment and hardening guide](docs/stig-epo/IMPLEMENTATION_GUIDE.md). Includes a private rule-by-rule workbook generator and CUI handling guidance. The supplied overview identifies server scope through ePO 5.9x; confirm applicability for other versions.
 
 **New optional workstream — DoD-aligned Zero Trust Architecture (WIP):** [START_HERE_ZERO_TRUST.md](START_HERE_ZERO_TRUST.md) · [Complete installation/configuration/deployment guide](docs/zero-trust/IMPLEMENTATION_GUIDE.md) · [Seven DoD Zero Trust pillars and role mapping](docs/zero-trust/02-dod-seven-pillars.md). These files document proposed controls and testing; they do **not** deploy a central ZTNA/PDP or certify DoD Target Level.
@@ -34,6 +38,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [Deployment order](docs/deployment-order.md)
 - [Zero Trust architecture — installation, configuration, deployment, RMF/STIG and testing](docs/zero-trust/README.md)
 - [RHEL 10.2 DISA STIG V1R1 — Complete Installation, Assessment and Safe Hardening Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)
+- [Windows 11 STIG V2R11 — Complete Assessment and Hardening Guide](docs/stig-windows11/IMPLEMENTATION_GUIDE.md)
+- [Windows Defender Firewall STIG V2R2 — Complete Assessment and Hardening Guide](docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md)
 - [ESS ePO 5.x STIG V3R8 — Complete Assessment and Hardening Guide](docs/stig-epo/IMPLEMENTATION_GUIDE.md)
 - [Vendor software and generated files](docs/downloads.md)
 
@@ -64,6 +70,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |
 | docs/zero-trust, configs/zero-trust and scripts/zero-trust | DoD-aligned Zero Trust design, source-limited policy examples, offline checks and evidence templates (optional WIP) |
 | docs/stig-rhel10 and scripts/stig | User-provided V1R1 benchmark documentation, offline rule inventory, private read-only assessment and result summarizer (WIP) |
+| docs/stig-windows11 | Windows 11 V2R11 manual assessment guide and complete 257-rule reference (WIP) |
+| docs/stig-windows-firewall | Firewall V2R2 manual assessment guide and complete 21-rule reference (WIP) |
 | docs/stig-epo and scripts/stig-epo | Optional ePO V3R8 assessment workflow and private rule workbook generator |
 | docs/network-defense, scripts/network-defense | Passive network analysis CONOPS, 30-step guide, synthetic PCAP and aggregate JSON tools |
 | rules/yara, rules/sigma, hunts/network-defense | Benign YARA/Sigma test rules and proposed network SPL hunts |
