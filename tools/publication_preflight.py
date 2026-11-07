@@ -36,6 +36,10 @@ for rel in files:
         body=path.read_text(encoding='utf-8')
     except UnicodeError:
         continue
+    if (path.suffix.lower() == '.txt'
+            and 'ESS ePO 5.x STIG Version 3 Release 8 - Private rule workbook' in body
+            and not path.name.casefold().startswith('epo-v3r8-private-workbook')):
+        errors.append(f'Private ePO workbook included: {posix}')
     if re.search(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----', body):
         errors.append(f'Private key block included: {posix}')
     if re.search(r'(?i)github_pat_[a-zA-Z0-9_]{35,}|gh[pousr]_[a-zA-Z0-9]{36,}', body):
