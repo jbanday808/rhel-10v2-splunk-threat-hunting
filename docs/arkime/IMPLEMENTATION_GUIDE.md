@@ -82,9 +82,11 @@ sudo blkid /dev/REPLACE_WITH_VERIFIED_EMPTY_PCAP_DISK
 
 ### Step 6 — Mount by UUID
 
-Edit the file:
+Create a private backup before editing, then edit the file:
 
 ```bash
+sudo install -o root -g root -m 0600 /etc/fstab \
+  "/root/fstab.before-arkime-$(date +%Y%m%d%H%M%S)"
 sudoedit /etc/fstab
 ```
 
@@ -95,7 +97,7 @@ UUID=REPLACE_WITH_OPENSEARCH_UUID /srv/arkime-opensearch xfs defaults 0 0
 UUID=REPLACE_WITH_PCAP_UUID /srv/arkime-pcap xfs defaults 0 0
 ```
 
-Save, then validate and mount only the new entries:
+Save, compare the complete edited file with the backup, and review all merged entries before validating and mounting only the new entries:
 
 ```bash
 sudo findmnt --verify
@@ -438,6 +440,8 @@ viewPort=8005
 authMode=digest
 ```
 
+In the `[default]` section, comment out any active `rirFile` and `ouiFile` entries inherited from the vendor sample. The synthetic exercise does not provision those lookup files; leaving either setting active can prevent capture imports from starting.
+
 Use a unique, random `passwordSecret`, independent of the database password, and keep it stable: changing it can invalidate existing Arkime user passwords. The sample `elasticsearchBasicAuth` stores a plaintext service credential, so protect the file and never paste it into GitHub, chat or screenshots. The lab uses the demo database administrator for simplicity; use a reviewed, least-privilege service identity in any operational design. `interface=lo` is a placeholder for offline setup: **do not start the capture service yet**. The example rotates packet files at 1 GB and starts expiring packet files when free space is below 20%; it is not a guaranteed retention period. The Viewer must be running for packet-file expiration. Packet and session retention are different.
 
 ```bash
@@ -458,7 +462,7 @@ sudo env no_proxy=arkime-db.lab.test,localhost,127.0.0.1 \
   /opt/arkime/db/db.pl --esuser admin https://arkime-db.lab.test:9200 init --ism
 ```
 
-Enter the OpenSearch administrator password when prompted and respond to the tool's confirmation only after reviewing its target. Then create an example **one-day rollover / seven-day metadata retention** policy:
+Enter the OpenSearch administrator password when prompted and respond to the tool's confirmation only after reviewing its target. Then set the example force-merge age to one day and session-index deletion age to seven days. This does not set index rollover or guarantee that all Arkime metadata is retained for seven days:
 
 ```bash
 sudo env no_proxy=arkime-db.lab.test,localhost,127.0.0.1 \
@@ -466,7 +470,7 @@ sudo env no_proxy=arkime-db.lab.test,localhost,127.0.0.1 \
   /opt/arkime/db/db.pl --esuser admin https://arkime-db.lab.test:9200 ism 1d 7d
 ```
 
-**Command overview:** `db.pl init --ism` creates Arkime's database structures using OpenSearch Index State Management; `ism 1d 7d` defines the example lifecycle. Confirm the resulting policy and index state in OpenSearch; a policy is not proof that timed deletion has occurred. Retention and rollover timing depend on index state and policy execution. Change the example only with an approved retention plan. The CA was installed in Step 14 so `db.pl` can verify the named endpoint without bypass flags.
+**Command overview:** `db.pl init --ism` creates Arkime's database structures using OpenSearch Index State Management. In `ism 1d 7d`, the first age is when an index transitions to force merge, and the second is the session-index deletion age. Arkime's `rotateIndex` setting controls index rotation; history indexes have a separate policy. Confirm the resulting ISM policy, rotation setting and index state in OpenSearch; a policy is not proof that timed deletion has occurred. Change these examples only with an approved retention plan. The CA was installed in Step 14 so `db.pl` can verify the named endpoint without bypass flags.
 
 ### Step 24 — Create a local Arkime administrator
 
