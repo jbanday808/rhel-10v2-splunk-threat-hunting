@@ -38,6 +38,6 @@ index=sysmon EventCode=1 earliest=-30m
 - `table` selects columns.
 - `head` limits displayed rows.
 
-If records arrive but useful fields are blank, verify the add-ons and actual sourcetype.
+If records arrive but useful fields are blank, verify the add-ons and actual sourcetype. For missing Windows events or TLS handshake errors, follow the [forwarder TLS and KV service troubleshooting guide](../troubleshooting/splunk-forwarder-tls-and-kv-service.md) and compare a recent local event with its indexed copy.
 
 ---

@@ -90,6 +90,6 @@ Get-Content "$UfHome\var\log\splunk\splunkd.log" -Tail 50
 | `Test-NetConnection`   | Checks the receiver’s port.             |
 | `Get-Content -Tail`    | Displays recent messages.               |
 
-A successful port check does not prove certificate validation. Confirm actual event delivery next.
+A successful port check does not prove certificate validation. Confirm actual event delivery next. If the receiver reports `wrong version number`, follow the [step-by-step TLS and KV service troubleshooting guide](../troubleshooting/splunk-forwarder-tls-and-kv-service.md). Check the effective output and its source with `btool` before changing anything: a `system/local` setting can override the lab app's settings.
 
 ---

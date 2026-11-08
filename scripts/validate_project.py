@@ -93,8 +93,13 @@ def validate(root: Path, verify_manifest: bool = False) -> list[str]:
         if nginx.get(stanza, 'disabled') not in ('0', 'false'):
             errors.append('NGINX access input is disabled.')
         outputs = parse_conf(root / 'apps/LAB_UF_WINDOWS/local/outputs.conf')
-        if outputs.get('tcpout:lab_tls', 'sslVerifyServerCert').lower() != 'true':
-            errors.append('Windows forwarding must verify the receiving certificate.')
+        for setting, message in (
+            ('useSSL', 'Windows lab forwarding must explicitly enable TLS.'),
+            ('sslVerifyServerCert', 'Windows forwarding must verify the receiving certificate.'),
+            ('sslVerifyServerName', 'Windows forwarding must verify the receiving hostname.'),
+        ):
+            if outputs.get('tcpout:lab_tls', setting, fallback='').strip().lower() != 'true':
+                errors.append(message)
         props = parse_conf(root / 'apps/LAB_SIEM/local/props.conf')
         transforms = parse_conf(root / 'apps/LAB_SIEM/local/transforms.conf')
         if props.get('siem:lab', 'REPORT-lab-fields') != 'lab_fields' or not transforms.has_section('lab_fields'):
