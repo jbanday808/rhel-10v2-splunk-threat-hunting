@@ -1,0 +1,11 @@
+<!-- Fragment only: review and merge under the existing <EventFiltering> element.
+     Retain existing rules and schema. Existing exclusions may override these includes.
+     The SIEMLabControl prefix is included so the negative control is also collected. -->
+<RuleGroup name="SIEMLab named-pipe validation" groupRelation="or">
+  <PipeEvent onmatch="include">
+    <PipeName condition="begin with">\postex_</PipeName>
+    <PipeName condition="begin with">\msagent_</PipeName>
+    <PipeName condition="begin with">\MSSE-</PipeName>
+    <PipeName condition="begin with">\SIEMLabControl_</PipeName>
+  </PipeEvent>
+</RuleGroup>
