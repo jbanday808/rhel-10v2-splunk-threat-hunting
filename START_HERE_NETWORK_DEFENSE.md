@@ -6,6 +6,8 @@
 
 **[Run the worked HTTP investigation](docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md)** using synthetic captures on an analysis workstation. The Splunk portion uses the existing `lab` index. Use the 30-step guide when planning an optional dedicated sensor.
 
+**[Explore the optional Arkime guide](START_HERE_ARKIME.md)** for a separate sensor, offline packet import, Viewer investigation and explicit live-capture readiness checks. Arkime does not automatically forward its sessions to Splunk.
+
 ## Purpose
 
 Extend the existing three-VM VMware lab with an **optional, isolated passive network analysis sensor** and a documented end-to-end workflow. Cover protocol analysis, network baselining, low-impact vulnerability discovery, Suricata IDS alert triage, Zeek telemetry, Splunk investigations, YARA file classification, Sigma-to-SPL detection engineering, incident reporting and **CMMC Level 2 evidence mapping**. The documentation is project-focused and contains no company/job advertisement.
