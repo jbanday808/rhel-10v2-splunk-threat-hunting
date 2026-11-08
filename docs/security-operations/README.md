@@ -14,7 +14,7 @@ This optional workstream adds repeatable processes for handling threats and vuln
 | Brief leaders and technical teams | [Hunt and stakeholder briefing](templates/hunt-briefing.md) | Six-slide briefing outline and decision log |
 | Document investigation results | [Detailed hunt report](templates/threat-hunt-report.md) | Evidence-linked findings, limitations and follow-up |
 | Review forensic findings with AI | [AI-assisted forensics](AI_ASSISTED_FORENSICS.md) | [Forensic review record](templates/forensic-review.md) |
-| Explain the Trellix portfolio | [Product overview and consultant checks](TRELLIX_PRODUCT_OVERVIEW.md) | Short customer explanations and discovery questions |
+| Explain the Trellix portfolio | [Trellix product overview](TRELLIX_PRODUCT_OVERVIEW.md) | Plain-language customer explanations and discovery questions |
 | Deliver an engagement and handover | [Engagement workflow](ENGAGEMENT_DELIVERY.md) | [Closeout report](templates/engagement-closeout.md) |
 | Practice all workflows | [Synthetic tabletop](TABLETOP_EXERCISE.md) | [Validation template](../../evidence/sanitized/security-operations-validation.md) |
 
