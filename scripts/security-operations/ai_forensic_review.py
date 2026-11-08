@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 import json
 import os
@@ -76,7 +76,9 @@ def validate_case(case):
         if timestamp is not None:
             if not isinstance(timestamp, str) or not timestamp.endswith('Z'):
                 raise ValueError('Synthetic timestamps must be UTC strings ending in Z or null')
-            datetime.fromisoformat(timestamp[:-1] + '+00:00')
+            parsed_timestamp = datetime.fromisoformat(timestamp[:-1] + '+00:00')
+            if parsed_timestamp.tzinfo is None or parsed_timestamp.utcoffset() != timedelta(0):
+                raise ValueError('Synthetic timestamps must include a UTC time and zero UTC offset')
         text_value(record['summary'], 'Evidence summary')
         text_list(record['limitations'], 'Evidence limitations', minimum=1)
 
@@ -156,7 +158,7 @@ def prepare(case_path: Path, output: Path):
         'response_contract': {
             'case_id': case['case_id'],
             'findings': [{'finding_id': 'F001', 'type': 'observation or hypothesis',
-                          'text': 'Evidence-limited statement', 'evidence_ids': ['E001'],
+                          'text': 'Evidence-limited statement', 'evidence_ids': [case['evidence'][0]['id']],
                           'confidence': 'low, medium or high', 'limitations': ['Known limitation']}],
             'unknowns': ['Unresolved question'],
             'recommended_next_steps': ['Manual review recommendation for an authorized human'],
