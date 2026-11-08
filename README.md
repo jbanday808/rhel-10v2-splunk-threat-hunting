@@ -8,6 +8,8 @@ For RHEL 10.2 lab installation, configuration, and validation, see **[START_HERE
 
 For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
 
+**Troubleshooting Windows forwarding:** [TLS handshake and KV service step-by-step guide](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) covers the reported TCP 9997 error, effective UF settings, certificate checks, event delivery, and separate KV startup warnings. The cause and live resolution remain unverified.
+
 **New RHEL 10.2 STIG hardening and SCAP assessment (V1R1):** [START_HERE_RHEL10v2_STIG.md](START_HERE_RHEL10v2_STIG.md) · [Full 26-Step STIG Implementation Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md) · [Uploaded Benchmark Metadata](docs/stig-rhel10/BENCHMARK_METADATA.md). Includes 396-rule inventory tooling, controlled non-remediating OpenSCAP scans, risk-aware remediation, POA&M and sanitized evidence. **No live systems are scanned or modified by GitHub files.**
 
 **Optional Windows 11 STIG V2R11 workstream (WIP):** [Start here](START_HERE_WINDOWS11_STIG.md) · [34-step guide](docs/stig-windows11/IMPLEMENTATION_GUIDE.md) · [257-rule reference](docs/stig-windows11/RULE_INDEX.md). Covers WINHUNT01 assessment, careful remediation, recovery, and monitoring validation.
