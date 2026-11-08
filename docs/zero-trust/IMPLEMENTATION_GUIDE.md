@@ -23,7 +23,7 @@ If the Zero Trust changes remain in GitHub review, use `git fetch origin` and `g
 
 **Command overview:** `git status` checks uncommitted work; `remote -v` identifies GitHub; `switch` selects `main`; `pull --ff-only` updates from GitHub without creating a merge; `code .` opens the folder in VS Code WSL.
 
-**Check:** `README.md`, `START_HERE_RHEL10v2.md` and `docs/steps/README.md` are still present, with original 52 steps intact.
+**Check:** `README.md`, `start-here/START_HERE_RHEL10v2.md` and `docs/steps/README.md` are still present, with original 52 steps intact.
 
 ### Step 02 — Establish public sources and project scope (WSL)
 

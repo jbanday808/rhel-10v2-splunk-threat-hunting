@@ -24,7 +24,7 @@ code .
 
 **Command overview:** `cd` enters the existing project, `git status` shows local edits, `git switch main` selects the approved branch, `git pull --ff-only` safely retrieves merged updates, and `code .` opens VS Code. **If the workstream is still under review**, open its feature branch instead. Save any uncommitted edits before switching.
 
-**Verify:** `START_HERE_RHEL10v2_STIG.md` and `docs/stig-rhel10/` appear after merge; original 52 steps remain unchanged.
+**Verify:** `start-here/START_HERE_RHEL10v2_STIG.md` and `docs/stig-rhel10/` appear after merge; original 52 steps remain unchanged.
 
 ### Step 02 — Review scope, system owners and applicability
 
@@ -390,4 +390,4 @@ Review any GitHub pull request and GitHub Actions source tests before merging. P
 | Rescan and evidence | Actual pass/fail/N/A trends + private report | Pending |
 | Formal system compliance / ATO | Appropriate organizational assessment and authorization | **Not claimed** |
 
-**References:** [Official resources](06-official-references.md) · [Benchmark metadata](BENCHMARK_METADATA.md) · [RHEL 10.2 STIG quick start](../../START_HERE_RHEL10v2_STIG.md).
+**References:** [Official resources](06-official-references.md) · [Benchmark metadata](BENCHMARK_METADATA.md) · [RHEL 10.2 STIG quick start](../../start-here/START_HERE_RHEL10v2_STIG.md).

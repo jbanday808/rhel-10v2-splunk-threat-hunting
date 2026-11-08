@@ -45,7 +45,7 @@ class ZeroTrustPolicyTests(unittest.TestCase):
         for path in [
             "docs/steps/README.md",
             "apps/LAB_SIEM/local/authorize.conf",
-            "START_HERE_RHEL10v2.md",
+            "start-here/START_HERE_RHEL10v2.md",
             "docs/zero-trust/IMPLEMENTATION_GUIDE.md",
         ]:
             self.assertTrue((ROOT / path).exists(), path)

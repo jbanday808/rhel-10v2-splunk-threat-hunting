@@ -1,5 +1,5 @@
 ---
-applyTo: "docs/zero-trust/**,configs/zero-trust/**,scripts/zero-trust/**,hunts/zero-trust/**,examples/zero-trust/**,tests/test_zero_trust_*.py,evidence/sanitized/zero-trust-validation.md,START_HERE_ZERO_TRUST.md"
+applyTo: "docs/zero-trust/**,configs/zero-trust/**,scripts/zero-trust/**,hunts/zero-trust/**,examples/zero-trust/**,tests/test_zero_trust_*.py,evidence/sanitized/zero-trust-validation.md,start-here/START_HERE_ZERO_TRUST.md"
 ---
 
 # Copilot — DoD-aligned Zero Trust Lab Workstream

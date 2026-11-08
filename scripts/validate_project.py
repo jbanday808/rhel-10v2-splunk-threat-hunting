@@ -14,7 +14,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 REQUIRED = (
-    'README.md', 'START_HERE_WINDOWS.md', '.gitignore', '.gitattributes',
+    'README.md', 'start-here/START_HERE_WINDOWS.md', '.gitignore', '.gitattributes',
     'apps/LAB_SIEM/local/indexes.conf',
     'apps/LAB_SIEM/local/inputs.conf',
     'apps/LAB_SIEM/local/props.conf',

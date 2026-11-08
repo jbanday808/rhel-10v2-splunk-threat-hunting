@@ -6,9 +6,9 @@
 
 ## Read the complete implementation guide
 
-**[Full Installation, Configuration, STIG Assessment, Remediation, Rescan and Maintenance Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)**
+**[Full Installation, Configuration, STIG Assessment, Remediation, Rescan and Maintenance Guide](../docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)**
 
-Start with [benchmark metadata and exact source fingerprint](docs/stig-rhel10/BENCHMARK_METADATA.md), then follow the implementation guide in order.
+Start with [benchmark metadata and exact source fingerprint](../docs/stig-rhel10/BENCHMARK_METADATA.md), then follow the implementation guide in order.
 
 ## Scope and important warnings
 
@@ -43,21 +43,21 @@ sudo oscap info /root/stig-rhel10/v1r1/U_RHEL_10_V1R1_STIG_SCAP_1-3_Benchmark.xm
 
 **Command overview:** Shows installed RHEL version, installs trusted RHEL scanner packages, checks OpenSCAP, and lists profiles in your privately installed uploaded DISA benchmark. The last command requires following the **private transfer** steps first.
 
-Run only a **read-only scan** with the reviewed [assessment wrapper](scripts/stig/scan-rhel10-readonly.sh), using an **explicitly selected** full-assessment profile. Raw reports remain under private root-only storage, not GitHub.
+Run only a **read-only scan** with the reviewed [assessment wrapper](../scripts/stig/scan-rhel10-readonly.sh), using an **explicitly selected** full-assessment profile. Raw reports remain under private root-only storage, not GitHub.
 
 ## Documentation and source navigation
 
-- [STIG workstream README](docs/stig-rhel10/README.md)
-- [Benchmark provenance and all profiles](docs/stig-rhel10/BENCHMARK_METADATA.md)
-- [Splunk and IdM change-risk checklist](docs/stig-rhel10/01-risk-and-impact.md)
-- [How to review OpenSCAP results](docs/stig-rhel10/02-assessment-triage.md)
-- [Controlled remediation and exceptions](docs/stig-rhel10/03-remediation-and-exceptions.md)
-- [Evidence and POA&M plan](docs/stig-rhel10/04-evidence-and-poam.md)
-- [Operations and baseline updates](docs/stig-rhel10/05-operations-and-updates.md)
-- [Official DISA and Red Hat references](docs/stig-rhel10/06-official-references.md)
-- [Sanitized validation log](evidence/sanitized/rhel10-stig-validation.md)
-- [Local benchmark metadata inventory tool](scripts/stig/inspect_benchmark.py)
-- [Offline result summarizer](scripts/stig/summarize_results.py)
-- [Private full assessment wrapper](scripts/stig/scan-rhel10-readonly.sh)
+- [STIG workstream README](../docs/stig-rhel10/README.md)
+- [Benchmark provenance and all profiles](../docs/stig-rhel10/BENCHMARK_METADATA.md)
+- [Splunk and IdM change-risk checklist](../docs/stig-rhel10/01-risk-and-impact.md)
+- [How to review OpenSCAP results](../docs/stig-rhel10/02-assessment-triage.md)
+- [Controlled remediation and exceptions](../docs/stig-rhel10/03-remediation-and-exceptions.md)
+- [Evidence and POA&M plan](../docs/stig-rhel10/04-evidence-and-poam.md)
+- [Operations and baseline updates](../docs/stig-rhel10/05-operations-and-updates.md)
+- [Official DISA and Red Hat references](../docs/stig-rhel10/06-official-references.md)
+- [Sanitized validation log](../evidence/sanitized/rhel10-stig-validation.md)
+- [Local benchmark metadata inventory tool](../scripts/stig/inspect_benchmark.py)
+- [Offline result summarizer](../scripts/stig/summarize_results.py)
+- [Private full assessment wrapper](../scripts/stig/scan-rhel10-readonly.sh)
 
 **Only sanitized findings and project-owned scripts/templates belong in this public repository.**

@@ -1,5 +1,5 @@
 ---
-applyTo: "START_HERE_NETWORK_DEFENSE.md,docs/network-defense/**,scripts/network-defense/**,configs/network-defense/**,apps/SENSOR_UF/**,rules/yara/**,rules/sigma/**,hunts/network-defense/**,evidence/sanitized/network-defense-validation.md,tests/test_network_defense.py"
+applyTo: "start-here/START_HERE_NETWORK_DEFENSE.md,docs/network-defense/**,scripts/network-defense/**,configs/network-defense/**,apps/SENSOR_UF/**,rules/yara/**,rules/sigma/**,hunts/network-defense/**,evidence/sanitized/network-defense-validation.md,tests/test_network_defense.py"
 ---
 
 # Copilot — Passive Network Defense Lab Extension

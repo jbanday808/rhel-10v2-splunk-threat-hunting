@@ -1,6 +1,6 @@
 # Passive Network Defense Workstream (WIP)
 
-**[START HERE](../../START_HERE_NETWORK_DEFENSE.md)** · **[COMPLETE 30-STEP GUIDE](IMPLEMENTATION_GUIDE.md)**
+**[START HERE](../../start-here/START_HERE_NETWORK_DEFENSE.md)** · **[COMPLETE 30-STEP GUIDE](IMPLEMENTATION_GUIDE.md)**
 
 Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcpdump, Suricata, YARA, Sigma, Splunk, and CMMC Level 2 risk/evidence planning. This is an **optional extension**; the original 52 Splunk steps, IdM, Windows forwarder and RHEL STIG/Zero Trust plans remain intact.
 

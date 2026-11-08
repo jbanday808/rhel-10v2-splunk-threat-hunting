@@ -1,5 +1,5 @@
 ---
-applyTo: "docs/stig-rhel10/**,scripts/stig/**,tests/test_stig_rhel10_tools.py,examples/stig-rhel10/**,evidence/sanitized/rhel10-stig-validation.md,START_HERE_RHEL10v2_STIG.md"
+applyTo: "docs/stig-rhel10/**,scripts/stig/**,tests/test_stig_rhel10_tools.py,examples/stig-rhel10/**,evidence/sanitized/rhel10-stig-validation.md,start-here/START_HERE_RHEL10v2_STIG.md"
 ---
 
 # GitHub Copilot guidance — RHEL 10 STIG SCAP V1R1

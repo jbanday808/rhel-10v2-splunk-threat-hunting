@@ -4,7 +4,7 @@ This is the preferred guide for the owner of the existing public repository:
 
 **https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting**
 
-1. Read [the complete VS Code + WSL upload guide](docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md).
+1. Read [the complete VS Code + WSL upload guide](../docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md).
 2. Install/check Ubuntu WSL, VS Code Remote - WSL, `git`, `gh`, `unzip`, `rsync`, and `python3`.
 3. Clone the **existing** GitHub repository into `~/projects` (do not use `git init`).
 4. Extract the complete project ZIP into a separate staging folder.

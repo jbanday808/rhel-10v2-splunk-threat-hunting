@@ -168,7 +168,8 @@ rhel-10v2-splunk-threat-hunting/
 ├── tests/
 ├── tools/publication_preflight.py
 ├── README.md
-├── START_HERE_WSL.md
+├── start-here/
+│   └── START_HERE_WSL.md        # Full start guides are grouped here
 ├── SECURITY.md
 ├── CONTRIBUTING.md
 ├── AGENTS.md

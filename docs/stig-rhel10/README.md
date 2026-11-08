@@ -1,6 +1,6 @@
 # RHEL 10.2 STIG SCAP V1R1 — Workstream
 
-**[START HERE](../../START_HERE_RHEL10v2_STIG.md)** · **[Complete 26-Step Guide](IMPLEMENTATION_GUIDE.md)**
+**[START HERE](../../start-here/START_HERE_RHEL10v2_STIG.md)** · **[Complete 26-Step Guide](IMPLEMENTATION_GUIDE.md)**
 
 | File | Contents |
 | --- | --- |

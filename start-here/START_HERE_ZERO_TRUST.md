@@ -12,13 +12,13 @@ This guide extends the existing **RHEL 10.2 Splunk Threat Hunting Lab** with a d
 
 - [Original RHEL 10.2 lab startup](START_HERE_RHEL10v2.md) — existing Splunk, Windows, and IdM baseline.
 - [VS Code + WSL repository setup](START_HERE_WSL.md) — manage source files from Ubuntu WSL.
-- [Detailed Zero Trust reference guide](docs/zero-trust/IMPLEMENTATION_GUIDE.md) — companion full deployment runbook.
-- [Current versus target architecture](docs/zero-trust/01-target-architecture.md) — network and trust-boundary diagrams.
-- [Seven DoD Zero Trust pillars](docs/zero-trust/02-dod-seven-pillars.md) — illustrative mapping, not a maturity certification.
-- [Detailed network access procedure](docs/zero-trust/06-network-microsegmentation.md) — review, test, and recover firewall changes.
-- [NIST RMF / DISA STIG planning](docs/zero-trust/09-rmf-stig-ato.md) — controls, assessment, evidence, and authorization boundaries.
-- [Validation, screenshots and evidence](docs/zero-trust/10-verification-and-evidence.md) — positive and negative tests.
-- [Official public references](docs/zero-trust/12-official-references.md) — NIST, DoD, DISA, and vendor sources.
+- [Detailed Zero Trust reference guide](../docs/zero-trust/IMPLEMENTATION_GUIDE.md) — companion full deployment runbook.
+- [Current versus target architecture](../docs/zero-trust/01-target-architecture.md) — network and trust-boundary diagrams.
+- [Seven DoD Zero Trust pillars](../docs/zero-trust/02-dod-seven-pillars.md) — illustrative mapping, not a maturity certification.
+- [Detailed network access procedure](../docs/zero-trust/06-network-microsegmentation.md) — review, test, and recover firewall changes.
+- [NIST RMF / DISA STIG planning](../docs/zero-trust/09-rmf-stig-ato.md) — controls, assessment, evidence, and authorization boundaries.
+- [Validation, screenshots and evidence](../docs/zero-trust/10-verification-and-evidence.md) — positive and negative tests.
+- [Official public references](../docs/zero-trust/12-official-references.md) — NIST, DoD, DISA, and vendor sources.
 
 ## Lab environment and network
 
@@ -55,11 +55,11 @@ If the Zero Trust changes remain in GitHub review, use `git fetch origin` and `g
 
 **Command overview:** `git status` checks uncommitted work; `remote -v` identifies GitHub; `switch` selects `main`; `pull --ff-only` updates from GitHub without creating a merge; `code .` opens the folder in VS Code WSL.
 
-**Check:** `README.md`, `START_HERE_RHEL10v2.md` and `docs/steps/README.md` are still present, with original 52 steps intact.
+**Check:** `README.md`, `start-here/START_HERE_RHEL10v2.md` and `docs/steps/README.md` are still present, with original 52 steps intact.
 
 ### Step 02 — Establish public sources and project scope (WSL)
 
-Read [reference list](docs/zero-trust/12-official-references.md), [DoD pillar mapping](docs/zero-trust/02-dod-seven-pillars.md), [architecture](docs/zero-trust/01-target-architecture.md), and [roles and migration plan](docs/zero-trust/11-migration-and-operations.md). State who approves network changes, whose data is present, what is protected, and what must never be published.
+Read [reference list](../docs/zero-trust/12-official-references.md), [DoD pillar mapping](../docs/zero-trust/02-dod-seven-pillars.md), [architecture](../docs/zero-trust/01-target-architecture.md), and [roles and migration plan](../docs/zero-trust/11-migration-and-operations.md). State who approves network changes, whose data is present, what is protected, and what must never be published.
 
 **Exit:** Seven-pillar inventory and initial risk register contain **Proposed/Pending**, not invented pass grades.
 
@@ -85,7 +85,7 @@ sudo firewall-cmd --list-all
 
 ### Step 04 — Inventory assets and allowed traffic (WSL + VM consoles)
 
-Review [policy matrix](configs/zero-trust/allowed-flows.example.json) and [preflight](docs/zero-trust/03-preflight-and-inventory.md). Record the existing VMware NAT network `172.25.250.0/24` and lab hosts:
+Review [policy matrix](../configs/zero-trust/allowed-flows.example.json) and [preflight](../docs/zero-trust/03-preflight-and-inventory.md). Record the existing VMware NAT network `172.25.250.0/24` and lab hosts:
 
 | Source | Destination | Service | Port | Why |
 | --- | --- | --- | --- | --- |
@@ -103,7 +103,7 @@ Other protocols for IdM enrollment, updates and time synchronization must be exp
 
 ### Step 05 — Verify IdM accounts and directory groups (RHEL-IDM01)
 
-If IdM is already installed according to the lab [Steps 31–34](docs/steps/README.md), use the IdM VM console:
+If IdM is already installed according to the lab [Steps 31–34](../docs/steps/README.md), use the IdM VM console:
 
 ```bash
 hostnamectl
@@ -121,7 +121,7 @@ kdestroy
 
 ### Step 06 — Verify encrypted LDAP and least-privilege roles (RHEL-SPLUNK01)
 
-Use the existing [certificate trust procedure](docs/steps/35-configure-splunk-dns-and-trust-the-directory-certificate.md) and [LDAPS verification procedure](docs/steps/36-verify-ldaps-before-enabling-directory-sign-in.md). After installing only the **verified public CA**:
+Use the existing [certificate trust procedure](../docs/steps/35-configure-splunk-dns-and-trust-the-directory-certificate.md) and [LDAPS verification procedure](../docs/steps/36-verify-ldaps-before-enabling-directory-sign-in.md). After installing only the **verified public CA**:
 
 ```bash
 getent hosts idm01.lab.test
@@ -181,19 +181,19 @@ sudo firewall-cmd --zone=siem-lab --list-rich-rules
 sudo ss -lntp
 ```
 
-**Command overview:** Shows the active zone, rich rules and listeners. If `siem-lab` is not attached to the VM's connection, stop and reconcile with [original Step 18](docs/steps/18-configure-the-rhel-firewall.md).
+**Command overview:** Shows the active zone, rich rules and listeners. If `siem-lab` is not attached to the VM's connection, stop and reconcile with [original Step 18](../docs/steps/18-configure-the-rhel-firewall.md).
 
 **Exit:** Network policy change checklist and management console access are confirmed.
 
 ### Step 10 — Narrow network flows, one service at a time
 
-Follow [06-network-microsegmentation.md](docs/zero-trust/06-network-microsegmentation.md) exactly. Use **runtime-only** source-limited rich rules first; perform positive and negative tests; review broad open services/ports; only then make reviewed changes permanent. Preserve the current SSH management path and allow RHEL-SPLUNK01 outbound DNS/LDAPS; do not assume host firewalls replace microsegmentation across VLANs.
+Follow [06-network-microsegmentation.md](../docs/zero-trust/06-network-microsegmentation.md) exactly. Use **runtime-only** source-limited rich rules first; perform positive and negative tests; review broad open services/ports; only then make reviewed changes permanent. Preserve the current SSH management path and allow RHEL-SPLUNK01 outbound DNS/LDAPS; do not assume host firewalls replace microsegmentation across VLANs.
 
 **Exit:** WINHUNT01 can reach 9997, approved browser can reach 8000, approved LDAPS works, non-authorized paths are denied. Record packet-level evidence and firewall logs where safe.
 
 ### Step 11 — Enforce protected application and data access
 
-In **Splunk Web** confirm `splunk-hunters → lab_hunter`, `splunk-admins → admin`, no broad implicit mapping. On the server, inspect **effective** `authorize.conf`, TLS settings, index permissions and log retention. Keep the admin role for only explicitly approved administrators. See [07-app-data-security.md](docs/zero-trust/07-app-data-security.md).
+In **Splunk Web** confirm `splunk-hunters → lab_hunter`, `splunk-admins → admin`, no broad implicit mapping. On the server, inspect **effective** `authorize.conf`, TLS settings, index permissions and log retention. Keep the admin role for only explicitly approved administrators. See [07-app-data-security.md](../docs/zero-trust/07-app-data-security.md).
 
 **Exit:** Positive hunter access, negative unmapped user test, unauthorized index denied; observations recorded.
 
@@ -214,19 +214,19 @@ In Splunk Search (authorized lab, **not WSL**):
 
 ### Step 13 — Deploy **read-only SPL hunts** and record incident workflow
 
-Read [08-siem-and-automation.md](docs/zero-trust/08-siem-and-automation.md) and [example hunts](hunts/zero-trust/README.md). Test failed sign-ins, audit gaps, least privilege violations and Windows telemetry with **authorized synthetic** activity. Keep automatic containment and IdM changes **disabled**.
+Read [08-siem-and-automation.md](../docs/zero-trust/08-siem-and-automation.md) and [example hunts](../hunts/zero-trust/README.md). Test failed sign-ins, audit gaps, least privilege violations and Windows telemetry with **authorized synthetic** activity. Keep automatic containment and IdM changes **disabled**.
 
 **Exit:** Evidence-based search results and analyst-review workflow tested; no unobserved success claims.
 
 ### Step 14 — Apply RMF and STIG assessment planning
 
-Follow [09-rmf-stig-ato.md](docs/zero-trust/09-rmf-stig-ato.md): PREPARE → CATEGORIZE → SELECT → IMPLEMENT → ASSESS → AUTHORIZE → MONITOR. Select the actual applicable STIG/SRG version and benchmark from DISA; verify any OpenSCAP content exists for installed RHEL 10.2. Do **not** apply auto-remediation blindly to Splunk/IdM. These documents are **not** a federal ATO or DoD Target Level certificate.
+Follow [09-rmf-stig-ato.md](../docs/zero-trust/09-rmf-stig-ato.md): PREPARE → CATEGORIZE → SELECT → IMPLEMENT → ASSESS → AUTHORIZE → MONITOR. Select the actual applicable STIG/SRG version and benchmark from DISA; verify any OpenSCAP content exists for installed RHEL 10.2. Do **not** apply auto-remediation blindly to Splunk/IdM. These documents are **not** a federal ATO or DoD Target Level certificate.
 
 **Exit:** Draft SSP, control allocation, scan records, POA&M and formal decision status clearly labeled.
 
 ### Step 15 — Create a system-migration plan
 
-Map perimeter-based rules to resource-based access: identify one protected resource at a time, deploy parallel policy, observe, test and only then remove broad access. See [11-migration-and-operations.md](docs/zero-trust/11-migration-and-operations.md). Document vendors as **reference options**, not installed platforms.
+Map perimeter-based rules to resource-based access: identify one protected resource at a time, deploy parallel policy, observe, test and only then remove broad access. See [11-migration-and-operations.md](../docs/zero-trust/11-migration-and-operations.md). Document vendors as **reference options**, not installed platforms.
 
 ### Step 16 — Document automation with change review
 
@@ -243,7 +243,7 @@ python3 tools/publication_preflight.py
 
 ### Step 17 — Conduct verification with both allow and deny tests
 
-Use [10-verification-and-evidence.md](docs/zero-trust/10-verification-and-evidence.md) to capture evidence for identity/role authorization, transport encryption, connectivity, endpoint health, audit visibility and recovery. For each test, record observed outcome, timestamp, tester, test host, expected behavior, actual behavior and sanitized screenshot.
+Use [10-verification-and-evidence.md](../docs/zero-trust/10-verification-and-evidence.md) to capture evidence for identity/role authorization, transport encryption, connectivity, endpoint health, audit visibility and recovery. For each test, record observed outcome, timestamp, tester, test host, expected behavior, actual behavior and sanitized screenshot.
 
 **Exit:** Results are **Pass / Fail / Pending / Not Applicable** based on actual observations.
 
@@ -253,7 +253,7 @@ Practice authorized rollback of one **runtime-only** network rule from the VM co
 
 ### Step 19 — Review portfolio evidence and scope claims
 
-Before publication, strip credentials, SSH fingerprints, internal IDs beyond approved lab examples, raw security logs and private key material. All capability claims must distinguish **Configured**, **Tested**, **Planned** and **Not implemented**. See [10-verification-and-evidence.md](docs/zero-trust/10-verification-and-evidence.md).
+Before publication, strip credentials, SSH fingerprints, internal IDs beyond approved lab examples, raw security logs and private key material. All capability claims must distinguish **Configured**, **Tested**, **Planned** and **Not implemented**. See [10-verification-and-evidence.md](../docs/zero-trust/10-verification-and-evidence.md).
 
 ### Step 20 — Review and merge your GitHub changes
 
@@ -290,4 +290,4 @@ git pull --ff-only origin main
 
 ## References and boundary notice
 
-Read [official source links](docs/zero-trust/12-official-references.md). This project uses public sources only; no classified material, real DoD networks or contractor proprietary architectures should be added. Static allowlists, directory group mapping and log collection provide useful foundations but are **not equal to fully implemented DoD Target-Level Zero Trust**.
+Read [official source links](../docs/zero-trust/12-official-references.md). This project uses public sources only; no classified material, real DoD networks or contractor proprietary architectures should be added. Static allowlists, directory group mapping and log collection provide useful foundations but are **not equal to fully implemented DoD Target-Level Zero Trust**.

@@ -85,13 +85,13 @@ class NetworkDefenseTests(unittest.TestCase):
 
     def test_documents_and_original_source_are_present(self):
         for path in (
-            "START_HERE_NETWORK_DEFENSE.md",
+            "start-here/START_HERE_NETWORK_DEFENSE.md",
             "docs/network-defense/IMPLEMENTATION_GUIDE.md",
             "docs/network-defense/CMMC_LEVEL2.md",
             "docs/steps/README.md",
             "apps/LAB_SIEM/local/inputs.conf",
-            "START_HERE_ZERO_TRUST.md",
-            "START_HERE_RHEL10v2_STIG.md",
+            "start-here/START_HERE_ZERO_TRUST.md",
+            "start-here/START_HERE_RHEL10v2_STIG.md",
         ):
             self.assertTrue((ROOT / path).is_file(), path)
 

@@ -92,8 +92,8 @@ class StigRhel10ToolsTests(unittest.TestCase):
     def test_preserves_lab_and_new_stig_docs(self):
         for path in (
             "README.md",
-            "START_HERE_RHEL10v2.md",
-            "START_HERE_RHEL10v2_STIG.md",
+            "start-here/START_HERE_RHEL10v2.md",
+            "start-here/START_HERE_RHEL10v2_STIG.md",
             "docs/zero-trust/09-rmf-stig-ato.md",
             "docs/stig-rhel10/IMPLEMENTATION_GUIDE.md",
             "apps/LAB_SIEM/local/authorize.conf",

@@ -2,10 +2,10 @@
 
 This optional workstream explains how to assess and harden an authorized Trellix ePolicy Orchestrator (ePO) server with the supplied DISA ESS ePO 5.x manual STIG. Start with the complete guide and keep the assessment checklist and evidence in an approved private environment.
 
-- [Complete step-by-step implementation guide](docs/stig-epo/IMPLEMENTATION_GUIDE.md)
-- [Official and supporting references](docs/stig-epo/REFERENCES.md)
-- [Private rule workbook generator](scripts/stig-epo/build_private_workbook.py)
-- [Sanitized validation worksheet](evidence/sanitized/epo-stig-validation.md)
+- [Complete step-by-step implementation guide](../docs/stig-epo/IMPLEMENTATION_GUIDE.md)
+- [Official and supporting references](../docs/stig-epo/REFERENCES.md)
+- [Private rule workbook generator](../scripts/stig-epo/build_private_workbook.py)
+- [Sanitized validation worksheet](../evidence/sanitized/epo-stig-validation.md)
 
 ## Decide where the work runs
 
