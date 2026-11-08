@@ -4,7 +4,7 @@ This file describes the **user-supplied archive**, not a downloaded or evaluated
 
 | Field | Observed value |
 | --- | --- |
-| Package name | `U_RHEL_10_V1R1_STIG_SCAP_1-3_Benchmark(1).zip` |
+| Package name | `U_RHEL_10_V1R1_STIG_SCAP_1-3_Benchmark.zip` |
 | Embedded XML | `U_RHEL_10_V1R1_STIG_SCAP_1-3_Benchmark.xml` |
 | Benchmark title | Red Hat Enterprise Linux 10 STIG SCAP Benchmark |
 | XML XCCDF benchmark id | `xccdf_mil.disa.stig_benchmark_RHEL_10_STIG` |
