@@ -22,7 +22,7 @@ Copy a template into approved private case storage before filling it in. Do not 
 
 ## Relationship to the existing lab
 
-- [Cobalt Strike–associated pipe hunt](../splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md): Validate a named-pipe hypothesis with an upstream Atomic test and separate matching/nonmatching controls. Do not attribute a pipe hit to a tool or a PenTest team without corroboration.
+- [Cobalt Strike–associated pipe hunt](../../hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md): Validate a named-pipe hypothesis with an upstream Atomic test and separate matching/nonmatching controls. Do not attribute a pipe hit to a tool or a PenTest team without corroboration.
 - [Worked passive HTTP case](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md): Compare the baseline and candidate, review packet evidence and correlate synthetic Zeek/Suricata/Splunk data.
 - [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md): Establish network baselines and investigate protocol and traffic candidates within actual visibility limits.
 - [STIG and IAVM guidance](../iavm/README.md): Feed verified applicability, exposure and remediation results into the vulnerability process.

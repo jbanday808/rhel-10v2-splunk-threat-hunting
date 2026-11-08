@@ -1,7 +1,8 @@
 | makeresults count=12
 | streamstats count as test_case
-| eval pipe_name=case(test_case=1,urldecode("%5Cpostex_a1b2c3d4"),test_case=2,urldecode("%5C%5C.%5Cpipe%5Cmsagent_aabbccdd"),test_case=3,"POSTEX_ABCD1234",test_case=4,urldecode("%5Cpostex_ssh_1234abcd"),test_case=5,urldecode("%5CMSSE-1234-server"),test_case=6,urldecode("%5CSIEMLabControl_20261107"),test_case=7,"postex_not_hex",test_case=8,"mypostex_a1b2c3d4",test_case=9,"postex_a1b2.exe",test_case=10,"msagent_",test_case=11,"MSSE-abc-server",test_case=12,"")
-| eval expected_match=if(test_case<=5,1,0), pipe_leaf=lower(mvindex(split(pipe_name,urldecode("%5C")),-1))
-| eval actual_match=if(match(pipe_leaf,"^(msagent_[0-9a-f]+|postex_[0-9a-f]+|postex_ssh_[0-9a-f]+|msse-[0-9]+-server)$"),1,0)
+| eval sample=split("%5Cpostex_a1b2c3d4|%5C%5C.%5Cpipe%5Cmsagent_aabbccdd|POSTEX_ABCD1234|%5Cpostex_ssh_1234abcd|%5CMSSE-1234-server|%5CSIEMLabControl_20261107|postex_not_hex|mypostex_a1b2c3d4|postex_a1b2.exe|msagent_|MSSE-abc-server|%20","|")
+| eval pipe_name=trim(urldecode(mvindex(sample,test_case-1))), expected_match=if(test_case<=5,1,0)
+| eval pipe_leaf=lower(mvindex(split(pipe_name,urldecode("%5C")),-1))
+| eval actual_match=if(match(pipe_leaf,"^(?:msagent_[0-9a-f]+|postex_(?:ssh_)?[0-9a-f]+|msse-[0-9]+-server)$"),1,0)
 | eval result=if(actual_match=expected_match,"PASS","FAIL")
 | table test_case pipe_name pipe_leaf expected_match actual_match result

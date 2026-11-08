@@ -1,6 +1,6 @@
 # Splunk — Cobalt Strike–Associated Pipe Hunt and Atomic Red Team Validation
 
-Add this optional exercise after [Step 27: verify event collection](../steps/27-verify-event-collection.md) and [Step 29: hunting searches](../steps/29-create-the-hunting-search-files.md). It uses the existing `sysmon` index and owned **WINHUNT01** endpoint.
+Add this optional exercise after [Step 27: verify event collection](../../docs/steps/27-verify-event-collection.md) and [Step 29: hunting searches](../../docs/steps/29-create-the-hunting-search-files.md). It uses the existing `sysmon` index and owned **WINHUNT01** endpoint.
 
 **Objective:** hunt for a small set of default-style named-pipe patterns associated with Cobalt Strike and review their process context against an authorized penetration-test scope. Validate the search with a harmless upstream Atomic Red Team test that creates a local named pipe. No PenTest team events or indicators were supplied; actual team attribution must be confirmed with the exercise owner.
 
@@ -10,7 +10,7 @@ Add this optional exercise after [Step 27: verify event collection](../steps/27-
 
 | Component | Location |
 | --- | --- |
-| Four paste-ready SPL searches | [Hunt files](../../hunts/cobalt-strike/README.md) |
+| Four paste-ready SPL searches | [Hunt files](README.md) |
 | Sysmon collection fragment | [PipeEvent XML example](../../configs/sysmon/pipe-events.xml.example) |
 | Validation record | [Sanitized template](../../evidence/sanitized/cobalt-strike-atomic-validation.md) |
 
@@ -33,7 +33,7 @@ $env:COMPUTERNAME
 Get-Service -Name Sysmon64,Sysmon -ErrorAction SilentlyContinue
 ```
 
-**Command overview:** Check the shell version, process architecture, computer and existing Sysmon service. Expect the intended Windows host, a 64-bit shell and an installed running Sysmon service. Use [Step 27](../steps/27-verify-event-collection.md) to resolve missing Sysmon or forwarding first. These are PowerShell commands, not Command Prompt commands.
+**Command overview:** Check the shell version, process architecture, computer and existing Sysmon service. Expect the intended Windows host, a 64-bit shell and an installed running Sysmon service. Use [Step 27](../../docs/steps/27-verify-event-collection.md) to resolve missing Sysmon or forwarding first. These are PowerShell commands, not Command Prompt commands.
 
 Create a new private run directory outside the Git checkout:
 
@@ -162,13 +162,13 @@ Get-Service -Name Sysmon64,Sysmon -ErrorAction SilentlyContinue
 
 ## Step 9 — Check the searchable telemetry
 
-In **Splunk Web → Search & Reporting**, run [00-pipe-telemetry-health.spl](../../hunts/cobalt-strike/00-pipe-telemetry-health.spl). Confirm the current host and the availability of extracted `EventCode`/`EventID`, `PipeName`/`pipe_name`, `Image` and `ProcessGuid` fields. A zero pipe count before the controls is possible; a positive total Sysmon count alone does not establish pipe-event coverage.
+In **Splunk Web → Search & Reporting**, select **Last 24 hours** for a current run, or the approved UTC test window for older events. Run [00-pipe-telemetry-health.spl](00-pipe-telemetry-health.spl). Confirm the current host and the availability of extracted `EventCode`/`EventID`, `PipeName`/`pipe_name`, `Image` and `ProcessGuid` fields. A zero pipe count before the controls is possible; a positive total Sysmon count alone does not establish pipe-event coverage. The searches below use the time picker instead of fixed inline bounds.
 
-The existing forwarder input already reads the Sysmon Operational channel into `sysmon`. No new Splunk index is required. If the local events are absent in Splunk, use [Step 27](../steps/27-verify-event-collection.md) and the [forwarder troubleshooting guide](../troubleshooting/splunk-forwarder-tls-and-kv-service.md). Keep the actual logs private.
+The existing forwarder input already reads the Sysmon Operational channel into `sysmon`. No new Splunk index is required. If the local events are absent in Splunk, use [Step 27](../../docs/steps/27-verify-event-collection.md) and the [forwarder troubleshooting guide](../../docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md). Keep the actual logs private.
 
 ## Step 10 — Test the pattern in Splunk without endpoint activity
 
-Run [03-synthetic-pattern-self-test.spl](../../hunts/cobalt-strike/03-synthetic-pattern-self-test.spl). It creates twelve search-time rows covering expected names, path prefixes, case differences and near-misses.
+Run [03-synthetic-pattern-self-test.spl](03-synthetic-pattern-self-test.spl). It creates twelve search-time rows covering expected names, path prefixes, case differences and near-misses.
 
 **Expected:** all twelve rows show `PASS`. No test data is indexed. This checks expression behavior in the local Splunk engine; it does not validate Sysmon or forwarding. Stop and resolve any failing case before interpreting endpoint results. Python unit tests in this repository check the same pattern boundaries separately, not the Splunk engine.
 
@@ -214,8 +214,7 @@ In Splunk Web, use the same UTC window and verify that both names were indexed. 
 ```spl
 index=sysmon host=WINHUNT01 (EventCode=17 OR EventID=17)
 | eval pipe_name=coalesce(PipeName,pipe_name)
-| eval pipe_leaf=lower(mvindex(split(pipe_name,urldecode("%5C")),-1))
-| where pipe_leaf="postex_a1b2c3d4" OR pipe_leaf="siemlabcontrol_20261107"
+| where in(lower(mvindex(split(pipe_name,urldecode("%5C")),-1)),"postex_a1b2c3d4","siemlabcontrol_20261107")
 | table _time host EventCode EventID pipe_name Image ProcessGuid
 ```
 
@@ -223,35 +222,33 @@ index=sysmon host=WINHUNT01 (EventCode=17 OR EventID=17)
 
 ## Step 14 — Run the Cobalt Strike–associated candidate hunt
 
-Paste [01-default-pipe-candidates.spl](../../hunts/cobalt-strike/01-default-pipe-candidates.spl), or this identical query:
+Paste [01-default-pipe-candidates.spl](01-default-pipe-candidates.spl), or this identical query:
 
 ```spl
-index=sysmon host=WINHUNT01 earliest=-24h latest=now (EventCode=17 OR EventCode=18 OR EventID=17 OR EventID=18)
-| eval event_code=tonumber(coalesce(EventCode,EventID)), pipe_name=coalesce(PipeName,pipe_name), process_guid=coalesce(ProcessGuid,ProcessGUID,process_guid), process_path=coalesce(Image,process_path), account=coalesce(User,user)
+index=sysmon host=WINHUNT01 (EventCode=17 OR EventCode=18 OR EventID=17 OR EventID=18)
+| eval code=tonumber(coalesce(EventCode,EventID)), pipe_name=coalesce(PipeName,pipe_name), process_guid=coalesce(ProcessGuid,ProcessGUID,process_guid), image=coalesce(Image,process_path), account=coalesce(User,user)
 | eval pipe_leaf=lower(mvindex(split(pipe_name,urldecode("%5C")),-1))
-| where match(pipe_leaf,"^(msagent_[0-9a-f]+|postex_[0-9a-f]+|postex_ssh_[0-9a-f]+|msse-[0-9]+-server)$")
-| eval assessment="Named-pipe candidate; verify process context and authorized test scope"
-| sort 0 _time
-| table _time host event_code pipe_name pipe_leaf process_path process_guid account assessment
+| where match(pipe_leaf,"^(?:msagent_[0-9a-f]+|postex_(?:ssh_)?[0-9a-f]+|msse-[0-9]+-server)$")
+| table _time host code pipe_name pipe_leaf image process_guid account
 ```
 
 | Query part | Explanation |
 | --- | --- |
 | `index=sysmon host=WINHUNT01` | Limits the example to the existing endpoint/index. Adapt only to approved scope. |
-| `earliest=-24h latest=now` | Searches the last day; these inline bounds override the corresponding time-picker bounds. |
+| Time picker | Sets the approved search window without overriding it in the SPL. |
 | Event IDs 17 and 18 | Selects pipe creation and connection records. |
 | `coalesce` | Uses whichever of the documented field aliases is available. It does not create missing telemetry. |
 | `split`, `mvindex`, `lower` | Extracts and normalizes the final pipe-name component. `%5C` represents a backslash. |
 | `match` with `^...$` | Checks the complete name against this limited pattern set. |
 | `table` | Presents the event and process details for review. |
 
-**Expected control result:** positive name returned; negative name absent **after confirming both were collected**. Repeated runs may create extra hits. Adjust the inline window for older tests, and verify field extraction if expected values are blank. These limited default-style patterns miss custom names; a hit is not product attribution.
+**Expected control result:** positive name returned; negative name absent **after confirming both were collected**. Repeated runs may create extra hits. Select the correct window in the time picker for older tests, and verify field extraction if expected values are blank. These limited default-style patterns miss custom names; a hit is not product attribution.
 
 ## Step 15 — Pivot to process context
 
-Run [02-process-context.spl](../../hunts/cobalt-strike/02-process-context.spl). It selects matching pipes and correlates available process events using **host plus ProcessGuid**. Review the image, parent, command line and account, then compare the actual start and pipe times.
+Run [02-process-context.spl](02-process-context.spl). It selects matching pipes and correlates available process events using **host plus ProcessGuid**. Review the image, parent, command line and account, then compare the actual start and pipe times.
 
-A missing process-creation record can mean the process started before the search window or was not collected. Missing GUIDs exclude rows from this correlation but not the base hunt. If one process used several pipes, its context can include other pipe names as well; only the base hunt classifies matching names. `eventstats` resource limits may also affect large searches; use a narrow approved scope and review job messages. Do not substitute a PID-only join, which can combine unrelated processes.
+A missing process-creation record can mean the process started before the search window or was not collected. Missing GUIDs exclude rows from this correlation but not the base hunt. The single `stats` pass lists only matching pipe names in `matching_pipes`; images, commands and accounts can also reflect other events for the same process. Keep the approved window narrow and review search job messages. Do not substitute a PID-only join, which can combine unrelated processes.
 
 ## Step 16 — Validate PenTest attribution and tune carefully
 
@@ -301,3 +298,5 @@ Get-Service -Name Sysmon64,Sysmon -ErrorAction SilentlyContinue
 - [Splunk Windows Suspicious C2 Named Pipe](https://research.splunk.com/endpoint/90599d85-dc2a-4d4c-8c59-9485c3665828/): Current broader named-pipe analytic for comparison. This repository's lab query is independent and uses no ES macros.
 - [Retired Cobalt Strike Named Pipes analytic](https://research.splunk.com/removed/5876d429-0240-4709-8b93-ea8330b411b5/): Historical context; Splunk replaced this standalone analytic with the broader detection.
 - [Splunk evaluation functions](https://help.splunk.com/en/splunk-enterprise/spl-search-reference/10.6/evaluation-functions/evaluation-functions): Function behavior used by the lab searches.
+- [Splunk time modifiers and the time picker](https://help.splunk.com/en/splunk-enterprise/search/search-manual/10.0/specify-time-ranges/specify-time-modifiers-in-your-search): Inline time bounds override the time picker.
+- [Splunk statistics with eval](https://help.splunk.com/en/splunk-enterprise/search/search-manual/10.2/calculate-statistics/use-stats-with-eval-expressions-and-functions): Conditional aggregation used for the process pivot.

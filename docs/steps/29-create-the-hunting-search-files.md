@@ -114,6 +114,6 @@ Run each search in Splunk.
 
 A match identifies activity to investigate; it does not prove an attack.
 
-**Optional Splunk exercise:** [Cobalt Strike–associated named-pipe hunt and Atomic Red Team validation](../splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md) adds separate SPL files, a reviewed Sysmon pipe-event fragment, positive/negative controls and process-context review for WINHUNT01. Run it separately after event collection is verified; it is not part of the initial searches above.
+**Optional Splunk exercise:** [Cobalt Strike–associated named-pipe hunt and Atomic Red Team validation](../../hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md) adds separate SPL files, a reviewed Sysmon pipe-event fragment, positive/negative controls and process-context review for WINHUNT01. Run it separately after event collection is verified; it is not part of the initial searches above.
 
 ---

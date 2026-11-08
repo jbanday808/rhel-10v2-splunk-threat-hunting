@@ -2,6 +2,7 @@
 from pathlib import Path
 import re
 import unittest
+from urllib.parse import unquote
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,6 +50,17 @@ class CobaltPipePatternTests(unittest.TestCase):
                 self.assertEqual(pattern_from(name), expected)
                 self.assertIn('split(pipe_name,urldecode("%5C"))', (HUNTS / name).read_text())
 
+    def test_synthetic_cases_preserve_positive_and_negative_controls(self):
+        search = (HUNTS / '03-synthetic-pattern-self-test.spl').read_text()
+        encoded = re.search(r'\| eval sample=split\("([^"]+)","\|"\)', search)
+        self.assertIsNotNone(encoded)
+        samples = encoded.group(1).split('|')
+        self.assertEqual(len(samples), 12)
+        for number, sample in enumerate(samples, 1):
+            name = unquote(sample).strip().rsplit('\\', 1)[-1].lower()
+            with self.subTest(test_case=number, name=name):
+                self.assertEqual(bool(self.pattern.fullmatch(name)), number <= 5)
+
     def test_telemetry_fragment_collects_both_controls(self):
         fragment = ET.parse(ROOT / 'configs/sysmon/pipe-events.xml.example').getroot()
         self.assertEqual(fragment.tag, 'RuleGroup')
@@ -60,7 +72,7 @@ class CobaltPipePatternTests(unittest.TestCase):
             self.assertTrue(any(name.lower().startswith(prefix) for prefix in prefixes))
 
     def test_documented_main_query_matches_search_file(self):
-        guide = (ROOT / 'docs/splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md').read_text()
+        guide = (HUNTS / 'COBALT_STRIKE_ATOMIC_VALIDATION.md').read_text()
         blocks = re.findall(r'```spl\n(.*?)```', guide, re.S)
         candidate = (HUNTS / '01-default-pipe-candidates.spl').read_text()
         self.assertIn(candidate, blocks)
@@ -70,8 +82,18 @@ class CobaltPipePatternTests(unittest.TestCase):
         candidate = (HUNTS / '01-default-pipe-candidates.spl').read_text()
         self.assertIn('by host process_guid', context)
         self.assertIn('isnotnull(process_guid)', context)
+        self.assertIn('values(eval(if(hit=1,pipe_name,null()))) as matching_pipes', context)
         self.assertNotIn('isnotnull(process_guid)', candidate)
+        self.assertNotIn('eventstats', context)
         self.assertNotIn('by ProcessId', context)
+
+    def test_time_picker_controls_live_searches(self):
+        for name in ('00-pipe-telemetry-health.spl', '01-default-pipe-candidates.spl',
+                     '02-process-context.spl'):
+            with self.subTest(name=name):
+                search = (HUNTS / name).read_text()
+                self.assertNotIn('earliest=', search)
+                self.assertNotIn('latest=', search)
 
 
 if __name__ == '__main__':

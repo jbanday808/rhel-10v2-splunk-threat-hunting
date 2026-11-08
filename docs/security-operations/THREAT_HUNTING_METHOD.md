@@ -72,7 +72,7 @@ An empty result set generally needs coverage review before it supports any negat
 | --- | --- | --- |
 | Question | Are selected default-style pipe names observable and reviewable? | Did the client request an unexpected HTTP host? |
 | Source | Sysmon process/pipe events in the existing `sysmon` index | Same synthetic PCAP through Zeek/Suricata and optional Arkime; approved synthetic Splunk upload |
-| Procedure | [Atomic and SPL guide](../splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md) | [Worked HTTP investigation](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md) |
+| Procedure | [Atomic and SPL guide](../../hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md) | [Worked HTTP investigation](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md) |
 | Controls | Matching `postex_` name; collected nonmatching lab name | Routine hostname; candidate hostname and inert body marker |
 | Critical gap | Baseline Sysmon lacks PipeEvent until a reviewed merge; custom names can evade the narrow hunt | Small generated dataset, no real mirror/traffic coverage, encrypted content not visible by default |
 | Supported conclusion | Pattern behavior and collection only if actually observed; not product attribution | A scoped synthetic outlier, not evidence of compromise or root cause |

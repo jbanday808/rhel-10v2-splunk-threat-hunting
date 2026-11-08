@@ -12,7 +12,7 @@ Expected output: a bounded exercise with named role responsibilities, evidence c
 
 Fictional input: an analyst sees a pipe name resembling `postex_a1b2c3d4` in a constructed event summary. No original event or supporting process history is supplied.
 
-Open a case, record the source and uncertainty, and decide what telemetry must be checked before declaring an incident. Explain why the name alone does not identify a Cobalt Strike Beacon or prove compromise. Use the [named-pipe guide](../splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md) to identify required events, fields and controls; run that separate lab only if it is approved and ready.
+Open a case, record the source and uncertainty, and decide what telemetry must be checked before declaring an incident. Explain why the name alone does not identify a Cobalt Strike Beacon or prove compromise. Use the [named-pipe guide](../../hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md) to identify required events, fields and controls; run that separate lab only if it is approved and ready.
 
 Expected output: a hypothesis, evidence gap, initial disposition, owner and next action. Priority must follow the chosen exercise policy and business impact, not a product label.
 

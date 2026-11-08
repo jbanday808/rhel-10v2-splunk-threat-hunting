@@ -1,7 +1,5 @@
-index=sysmon host=WINHUNT01 earliest=-24h latest=now (EventCode=17 OR EventCode=18 OR EventID=17 OR EventID=18)
-| eval event_code=tonumber(coalesce(EventCode,EventID)), pipe_name=coalesce(PipeName,pipe_name), process_guid=coalesce(ProcessGuid,ProcessGUID,process_guid), process_path=coalesce(Image,process_path), account=coalesce(User,user)
+index=sysmon host=WINHUNT01 (EventCode=17 OR EventCode=18 OR EventID=17 OR EventID=18)
+| eval code=tonumber(coalesce(EventCode,EventID)), pipe_name=coalesce(PipeName,pipe_name), process_guid=coalesce(ProcessGuid,ProcessGUID,process_guid), image=coalesce(Image,process_path), account=coalesce(User,user)
 | eval pipe_leaf=lower(mvindex(split(pipe_name,urldecode("%5C")),-1))
-| where match(pipe_leaf,"^(msagent_[0-9a-f]+|postex_[0-9a-f]+|postex_ssh_[0-9a-f]+|msse-[0-9]+-server)$")
-| eval assessment="Named-pipe candidate; verify process context and authorized test scope"
-| sort 0 _time
-| table _time host event_code pipe_name pipe_leaf process_path process_guid account assessment
+| where match(pipe_leaf,"^(?:msagent_[0-9a-f]+|postex_(?:ssh_)?[0-9a-f]+|msse-[0-9]+-server)$")
+| table _time host code pipe_name pipe_leaf image process_guid account

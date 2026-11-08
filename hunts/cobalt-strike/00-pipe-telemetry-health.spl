@@ -1,3 +1,6 @@
-index=sysmon host=WINHUNT01 earliest=-24h latest=now
-| eval event_code=tonumber(coalesce(EventCode,EventID)), pipe_name=coalesce(PipeName,pipe_name)
-| stats count as searchable_events count(eval(event_code=1)) as process_creation_events count(eval(event_code=17)) as pipe_created_events count(eval(event_code=18)) as pipe_connected_events count(eval((event_code=17 OR event_code=18) AND isnotnull(pipe_name) AND pipe_name!="")) as pipe_events_with_name max(_time) as latest_event
+index=sysmon host=WINHUNT01
+| eval code=tonumber(coalesce(EventCode,EventID)), pipe=coalesce(PipeName,pipe_name)
+| stats count as events count(eval(code=1)) as process_created
+    count(eval(code=17)) as pipe_created count(eval(code=18)) as pipe_connected
+    count(eval((code=17 OR code=18) AND isnotnull(pipe) AND pipe!="")) as named_pipe_events
+    max(_time) as latest_event
