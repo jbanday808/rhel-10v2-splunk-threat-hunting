@@ -93,3 +93,5 @@ After a representative baseline is established and collection is authorized, use
 | Unusual data transfer | Bytes sent and received, destination, peer role and maintenance window | Backups, updates, file transfer, or possible unauthorized transfer |
 
 These are investigation hypotheses, not universal signatures or thresholds. Validate visibility, loss, context and the service owner's explanation before drawing a conclusion. Follow your incident-response process when evidence warrants escalation.
+
+Continue with the [17-step anomaly analysis playbook](HUNTING_PLAYBOOK.md) for concrete protocol queries, baseline comparisons, graphs and saved-packet Hunt instructions. To verify a live interface with generated traffic first, use the [bounded local HTTP test](CONTROLLED_LIVE_TEST.md).

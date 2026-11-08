@@ -4,6 +4,18 @@ This optional, step-by-step lab adds Arkime to the Splunk threat-hunting project
 
 **Status:** planned documentation. These commands have not been run on WINHUNT01, RHEL-SPLUNK01, RHEL-IDM01 or a live sensor. Record your own results; a successful connection or a published guide is not evidence that packet collection works.
 
+## Follow the complete workflow
+
+| Stage | Procedure | Expected checkpoint |
+| --- | --- | --- |
+| Prepare the sensor | [Steps 1–8](#phase-1--plan-and-prepare) | Verified VM, architecture, clock and two different data filesystems |
+| Download and install | [Steps 9–21](#phase-2--download-verify-and-install-opensearch) | Verified vendor packages and local authenticated search service |
+| Configure Arkime | [Steps 22–26](#step-22--create-a-private-arkime-configuration) | Restricted configuration, initialized lab database and Viewer over SSH |
+| Analyze saved packets | [Steps 27–31](#phase-4--generate-and-import-safe-test-traffic) and [worked case](INVESTIGATION.md) | Synthetic routine and candidate traffic can be inspected |
+| Test a live interface locally | [Optional loopback test](CONTROLLED_LIVE_TEST.md) | Known local HTTP requests become retrievable sessions and packets |
+| Hunt for anomalies | [Analyst playbook](HUNTING_PLAYBOOK.md) | Baselines, protocol queries, graphs and bounded packet-content Hunt |
+| Deploy to an approved segment | [Steps 32–38](#phase-5--authorized-live-deployment-and-operations) | Security prerequisites, capture source, collection quality and operations reviewed |
+
 > **Scope and security:** The detailed path below is a disposable, single-user lab with synthetic data. OpenSearch's installer creates a **demo security configuration**, including publicly known demo users and transport certificates. Binding its services to loopback and replacing its HTTP certificate limits exposure but does not make the demo configuration suitable for real or controlled traffic. Before using any real traffic, replace the demo security configuration and credentials, implement approved least-privilege service accounts and TLS, apply your organization's retention and access controls, and obtain capture authorization. This guide does not certify compliance with a STIG, CMMC or an operational CONOPS.
 
 ## Architecture and prerequisites
@@ -112,7 +124,7 @@ findmnt -no SOURCE,UUID,FSTYPE,TARGET /srv/arkime-pcap
 ### Step 7 — Install basic tools and check capacity
 
 ```bash
-sudo dnf install -y curl gnupg2 openssl git python3 python3-pip ca-certificates policycoreutils
+sudo dnf install -y curl gnupg2 openssl git python3 python3-pip ca-certificates policycoreutils coreutils procps-ng iproute
 rpm -q curl openssl python3
 df -hT / /srv/arkime-opensearch /srv/arkime-pcap
 ```
@@ -133,7 +145,7 @@ cd "$HOME/arkime-lab/downloads"
 
 ### Step 9 — Download the pinned OpenSearch package
 
-This example was documented on 2026-11-08 with **OpenSearch 3.9.0** and **Arkime 6.9.1**. The Arkime compatibility matrix lists OpenSearch 3.x for Arkime 6. Before installation, review the vendor security advisories, compatibility matrix and current approved versions. Change package URLs and verification values together when you deliberately update versions.
+Package examples reviewed on **November 7, 2026 (Hawaii)** use **OpenSearch 3.9.0** and **Arkime 6.9.1**. The Arkime compatibility matrix lists OpenSearch 3.x for Arkime 6. Before installation, review the vendor security advisories, compatibility matrix and current approved versions. Change package URLs and verification values together when you deliberately update versions.
 
 ```bash
 curl -fSLO https://artifacts.opensearch.org/releases/bundle/opensearch/3.9.0/opensearch-3.9.0-linux-x64.rpm
@@ -622,6 +634,12 @@ In a multi-Viewer design, enable periodic-query processing on only one designate
 
 The configured rule identifies the known exercise host; it is not a general anomaly detector. Arkime can use an approved notifier for matching sessions, but notification delivery, recipients, secrets and frequency need a separately approved configuration and a successful end-to-end test. A match counter alone is not evidence that an alert was delivered. See the [Arkime periodic-query API reference](https://arkime.com/apiv3#cron-api) and the Viewer's built-in Help.
 
+### Step 31.2 — Optionally verify live capture using generated local traffic
+
+Follow the [controlled local live test](CONTROLLED_LIVE_TEST.md) to capture three harmless HTTP requests on the sensor's loopback interface. The test uses a narrow BPF filter, a two-minute timeout and a separate tag, then checks the resulting sessions and reconstructed packets. It requires no mirror and does not prove visibility into another VM. Stop the foreground test before starting any capture service.
+
+Use the [anomaly analysis playbook](HUNTING_PLAYBOOK.md) to continue with representative baselines, DNS/HTTP/TLS and service-port queries, SPIGraph/Connections review, a saved-packet Hunt and reporting. The provided synthetic dataset contains HTTP and DNS only; other protocol hunts need their own approved test data.
+
 ## Phase 5 — Authorized live deployment and operations
 
 ### Step 32 — Review the live capture gate
@@ -669,7 +687,7 @@ sudo tail -n 60 /opt/arkime/logs/capture.log
 
 ### Step 36 — Review baseline and investigate
 
-Use the [worked case](INVESTIGATION.md) for a repeatable baseline, HTTP outlier and cautious conclusions. For real traffic, establish a representative baseline by segment, role, time of day and business activity; investigate new destinations, unexpected protocols, repeated connections and unusual data movement against authorized context. Record collection coverage, packet loss and what encryption prevents you from seeing. An outlier is a lead, not proof of an attack.
+Use the [worked case](INVESTIGATION.md) for the repeatable HTTP baseline and the [17-step anomaly playbook](HUNTING_PLAYBOOK.md) for protocol queries, graphs, packet-content searching and analyst reporting. For real traffic, establish a representative baseline by segment, role, time of day and business activity; investigate new destinations, unexpected protocols, repeated connections and unusual data movement against authorized context. Record collection coverage, packet loss and what encryption prevents you from seeing. An outlier is a lead, not proof of an attack.
 
 ### Step 37 — Operate, protect and retain data
 
