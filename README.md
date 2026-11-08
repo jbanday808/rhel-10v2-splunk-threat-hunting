@@ -43,9 +43,9 @@ The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`
 | --- | --- |
 | [start-here](start-here/README.md) | Ten quick-start and workstream guides |
 | [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
-| apps and configs | Splunk apps and reviewed configuration examples |
-| hunts, rules, and scripts | Searches, detection examples, and lab helpers |
-| evidence/sanitized and screenshots | Pending result templates and author-supplied images that require review |
+| [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
+| [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |
+| [evidence/sanitized](evidence/sanitized/) and [screenshots](screenshots/) | Pending result templates and author-supplied images that require review |
 
 ## Validate and publish
 
@@ -57,4 +57,4 @@ python3 -B -m unittest discover -s tests -v
 python3 tools/publication_preflight.py
 ```
 
-These are source checks. Record live results in [sanitized validation templates](evidence/sanitized/validation.md) only after observing them. The historical `FILE_MANIFEST.json` describes the original ZIP, so its `--verify-manifest` mode applies to that unchanged package, not the reorganized checkout. Review [public repository safety](docs/security-and-sanitization.md) and [SECURITY.md](SECURITY.md) before publishing credentials, screenshots, or evidence.
+These are source checks. Record live results in [sanitized validation templates](evidence/sanitized/validation.md) only after observing them. The historical `FILE_MANIFEST.json` describes the original ZIP, so its `--verify-manifest` mode applies to that unchanged package, not the reorganized checkout. Review [public repository safety](docs/security-and-sanitization.md) and [SECURITY.md](SECURITY.md) before publishing screenshots or evidence. Never publish secrets.
