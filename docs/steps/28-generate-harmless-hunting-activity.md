@@ -2,6 +2,8 @@
 
 Run only inside **WINHUNT01**, in a new administrator PowerShell window.
 
+If `SIEMLabUser` already exists or you need help with `Get-Credential` and a `Start-Process` command entered in Command Prompt, see [PowerShell, Command Prompt, and lab credentials troubleshooting](../troubleshooting/windows-powershell-cmd-credentials.md). Review the existing account before continuing; the exercise deliberately stops if the account exists.
+
 Create the disposable account:
 
 ```
