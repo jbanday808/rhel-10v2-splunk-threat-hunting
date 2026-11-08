@@ -50,6 +50,10 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [ESS ePO 5.x STIG V3R8 — Complete Assessment and Hardening Guide](docs/stig-epo/IMPLEMENTATION_GUIDE.md)
 - [Vendor software and generated files](docs/downloads.md)
 
+## Incident management, hunt delivery and AI-assisted forensics
+
+[Security operations workstream](docs/security-operations/README.md) provides incident and vulnerability workflows, detailed hunt plans, stakeholder briefings, reports, forensic-review records and consultant handover templates. It includes an [AI-assisted forensic workflow](docs/security-operations/AI_ASSISTED_FORENSICS.md) with a synthetic-only offline review helper, a [Trellix product overview](docs/security-operations/TRELLIX_PRODUCT_OVERVIEW.md), and a [tabletop exercise](docs/security-operations/TABLETOP_EXERCISE.md). These are proposed lab procedures; no organizational approval, customer engagement, Trellix deployment or live AI integration is claimed.
+
 ## Splunk threat hunting
 
 **Cobalt Strike–associated named-pipe review and Atomic Red Team validation (optional WIP):** [Complete step-by-step guide](docs/splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md) · [Four SPL searches](hunts/cobalt-strike/README.md) · [Sysmon collection fragment](configs/sysmon/pipe-events.xml.example) · [Validation record](evidence/sanitized/cobalt-strike-atomic-validation.md). Uses an upstream server-only named-pipe Atomic with positive and negative controls on WINHUNT01. It creates no Beacon or C2 channel; Windows execution and live Splunk results remain unvalidated. Actual PenTest attribution requires the team's approved scope and evidence.
@@ -77,6 +81,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | hunts | Hunting, redaction, HEC, and data-health searches |
 | hunts/mitre-attack | Hypothesis-driven SPL and an optional Defender XDR KQL example |
 | hunts/cobalt-strike, docs/splunk | Optional named-pipe SPL hunt, process context, synthetic pattern check and Atomic validation procedure |
+| docs/security-operations | Incident/vulnerability processes, hunt plans, briefings, reports, Trellix overview and consulting handover |
+| scripts/security-operations, examples/security-operations | Offline synthetic AI review-packet preparation, response-structure checks and illustrative cases |
 | docs/mitre-attack | ATT&CK mapping, Navigator layer, hunt methodology, and visibility gaps |
 | docs/iavm | User-provided vulnerability notice, vendor references, and assessment guidance |
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |

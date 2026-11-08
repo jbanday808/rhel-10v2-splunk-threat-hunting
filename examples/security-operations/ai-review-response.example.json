@@ -1,0 +1,24 @@
+{
+  "case_id": "LAB-FORENSICS-001",
+  "findings": [
+    {
+      "finding_id": "F001",
+      "type": "observation",
+      "text": "The constructed scenario describes a pipe name matching the lab's selected postex-style pattern. It does not establish actual Cobalt Strike execution.",
+      "evidence_ids": ["E001", "E002"],
+      "confidence": "high",
+      "limitations": ["This statement is limited to the explicitly synthetic scenario; no native event was examined."]
+    },
+    {
+      "finding_id": "F002",
+      "type": "hypothesis",
+      "text": "An authorized named-pipe exercise could explain such a pattern, but actual execution and authorization require independent confirmation.",
+      "evidence_ids": ["E002", "E003"],
+      "confidence": "low",
+      "limitations": ["No operator confirmation or acquired endpoint history is available."]
+    }
+  ],
+  "unknowns": ["Whether any real host created the pipe, which process did so, and whether activity was authorized."],
+  "recommended_next_steps": ["Have the authorized investigator verify original source events, telemetry coverage and operator scope before reaching an operational conclusion."],
+  "human_review_status": "pending"
+}
