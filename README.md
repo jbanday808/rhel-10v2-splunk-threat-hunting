@@ -50,6 +50,10 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [ESS ePO 5.x STIG V3R8 — Complete Assessment and Hardening Guide](docs/stig-epo/IMPLEMENTATION_GUIDE.md)
 - [Vendor software and generated files](docs/downloads.md)
 
+## Splunk threat hunting
+
+**Cobalt Strike–associated named-pipe review and Atomic Red Team validation (optional WIP):** [Complete step-by-step guide](docs/splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md) · [Four SPL searches](hunts/cobalt-strike/README.md) · [Sysmon collection fragment](configs/sysmon/pipe-events.xml.example) · [Validation record](evidence/sanitized/cobalt-strike-atomic-validation.md). Uses an upstream server-only named-pipe Atomic with positive and negative controls on WINHUNT01. It creates no Beacon or C2 channel; Windows execution and live Splunk results remain unvalidated. Actual PenTest attribution requires the team's approved scope and evidence.
+
 ## Lab systems
 
 | System | Address | Purpose |
@@ -72,6 +76,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | sysmon | Lab XML rules |
 | hunts | Hunting, redaction, HEC, and data-health searches |
 | hunts/mitre-attack | Hypothesis-driven SPL and an optional Defender XDR KQL example |
+| hunts/cobalt-strike, docs/splunk | Optional named-pipe SPL hunt, process context, synthetic pattern check and Atomic validation procedure |
 | docs/mitre-attack | ATT&CK mapping, Navigator layer, hunt methodology, and visibility gaps |
 | docs/iavm | User-provided vulnerability notice, vendor references, and assessment guidance |
 | tests | Offline dummy redaction, safe merge, and HEC sender checks |
