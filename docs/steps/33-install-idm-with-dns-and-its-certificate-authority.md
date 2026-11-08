@@ -130,7 +130,7 @@ Enter separate strong passwords for the **Directory Manager** and **IdM `admin`*
 | CA | `CN=Certificate Authority,O=LAB.TEST`; self-signed root |
 | Continue to configure the system with these values? `[no]` | Type `yes` to begin installation |
 
-**Important status note:** The captured session reached the **final “Continue to configure” confirmation prompt**. The actual installation completion and running services were **not yet shown**; verify the next section before describing IdM as operational.
+**Verified installation update (8 November 2026):** The installer later reported `Setup complete` and `The ipa-server-install command was successful`. All nine listed IdM services were reported running. Integrated DNS returned `172.25.250.30` for `idm01.lab.test`, the LDAP SRV record advertised port `389`, and the administrator's Kerberos authentication was eventually restored as documented in §33.8.
 
 If the installer fails, inspect the installation log instead of repeatedly rerunning it:
 
@@ -227,7 +227,83 @@ The IdM server should use its own integrated DNS service at `172.25.250.30` afte
 | No installer wizard after `sudo -i` | Ensure the command is run at the `root@idm01` prompt, not merely displayed or pasted as part of the shell transition. |
 | NTP prompt answered `No` | Fine **only if** an existing Chrony source provides synchronized time. Verify with `chronyc tracking` and `chronyc sources -v`. |
 
-**Summary:** This step prepares the IdM server, its restricted lab firewall zone, the integrated DNS and CA installation, and DNS records for Splunk and Windows 11. **Deployment remains pending verification until `ipa-server-install` completes and the checks above pass.**
+### 33.8 — Reset the FreeIPA administrator password through LDAP (verified recovery)
+
+**Purpose:** Recover the IdM `admin@LAB.TEST` account when Kerberos authentication fails. This changes the **IPA admin account password** using an authenticated LDAP connection; it does **not** reset the Directory Manager password.
+
+**Observed failed Kerberos attempt:**
+
+```bash
+kinit admin@LAB.TEST
+klist
+ipa ping
+ipa dnszone-find
+```
+
+```text
+Password for admin@LAB.TEST:
+kinit: Password read interrupted while getting initial credentials
+klist: Credentials cache 'KCM:0' not found
+ipa: ERROR: did not receive Kerberos credentials
+ipa: ERROR: did not receive Kerberos credentials
+```
+
+The password prompt was interrupted, so no Kerberos ticket was obtained. If still at the password prompt, press **Ctrl+C** before running recovery commands. Earlier attempts also reported an incorrect IPA admin password.
+
+**Reset the IPA admin password:** Run as `root` on `idm01.lab.test`. You must know the **Directory Manager** password established when IdM was installed:
+
+```bash
+export LDAPTLS_CACERT=/etc/ipa/ca.crt
+
+ldappasswd -x \
+  -H ldaps://idm01.lab.test \
+  -D "cn=Directory Manager" \
+  -W -S \
+  "uid=admin,cn=users,cn=accounts,dc=lab,dc=test"
+```
+
+The command prompts interactively:
+
+```text
+New password:
+Re-enter new password:
+Enter LDAP Password:
+```
+
+- **New password / Re-enter new password:** Enter and confirm the new password for `admin@LAB.TEST`.
+- **Enter LDAP Password:** Enter the **Directory Manager password** (not the new IPA admin password and not the Linux root password).
+- The passwords are hidden while typing. **Never copy passwords into GitHub, documentation, shell arguments, or screenshots.**
+
+**Observed error and resolution:** The first two attempts returned:
+
+```text
+ldap_bind: Invalid credentials (49)
+```
+
+This means the **Directory Manager LDAP bind** failed, usually because the password supplied to `-W` was wrong. Re-check the Directory Manager password and retry deliberately; do not change the LDAP bind DN or disable TLS to work around a credentials error. Later attempts returned to the shell prompt **without an error**, followed by successful Kerberos authentication. `ldappasswd` commonly produces no success message.
+
+**Verify the restored admin account:**
+
+```bash
+kinit admin@LAB.TEST
+klist
+ipa ping
+ipa dnszone-find
+```
+
+**Verified results from 8 November 2026:**
+
+- `kinit admin@LAB.TEST` accepted the new password.
+- `klist` showed `Default principal: admin@LAB.TEST` and a valid `krbtgt/LAB.TEST@LAB.TEST` ticket.
+- `ipa ping` returned `IPA server version 4.13.4. API version 2.257`.
+- `ipa dnszone-find` returned **two active DNS zones**: `lab.test.` and `250.25.172.in-addr.arpa.`, both naming `idm01.lab.test.` as the authoritative server.
+- The FreeIPA services, integrated DNS, and Chrony synchronization were also verified earlier; `chronyc tracking` reported `Leap status: Normal`, and `timedatectl` reported `System clock synchronized: yes`.
+
+**Command overview:** `kinit` obtains an admin Kerberos ticket; `klist` shows it; `LDAPTLS_CACERT` selects the trusted CA file; `ldappasswd` changes the IPA admin password over secure LDAP; `-x` uses simple LDAP authentication; `-H` selects the LDAPS server; `-D` names the Directory Manager bind account; `-W` prompts for its password; `-S` prompts for the user's new password; `ipa ping` and `ipa dnszone-find` verify that administrator access works.
+
+**Summary:** IPA admin password recovery **succeeded**, and the `LAB.TEST` administrator can authenticate and access both DNS zones. Continue with Step 34 after confirming that any required Splunk and Windows A/PTR records from `33.5` exist; those records were not proven by this password-reset output.
+
+**Summary:** FreeIPA installation, core services, integrated DNS, CA, synchronized time, and IPA administrator authentication have been verified on `idm01.lab.test`. Check the Splunk and Windows A/PTR records before continuing to Step 34.
 
 References:
 
