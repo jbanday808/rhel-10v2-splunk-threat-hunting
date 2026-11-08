@@ -41,6 +41,8 @@ containment.
 
 ## Approved workflow
 
+For case routing, response authority and closure, use the proposed [incident-management workflow](../security-operations/INCIDENT_MANAGEMENT.md) and [vulnerability workflow](../security-operations/VULNERABILITY_MANAGEMENT.md) after organizational adoption. The [hunt method and deliverables](../security-operations/THREAT_HUNTING_METHOD.md) provide detailed plans, briefings and reports for this CONOPS; these links do not grant operational authorization.
+
 1. Review scope, system inventory and expected protocol/service map.
 2. Collect **synthetic offline PCAPs** first; record SHA-256, source, UTC capture period, test case ID and authorization.
 3. Decode with TShark/Wireshark, Zeek, Suricata; compare protocol output and known ground truth.

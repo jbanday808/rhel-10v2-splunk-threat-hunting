@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "handling": "SYNTHETIC_PUBLIC_LAB",
+  "case_id": "LAB-FORENSICS-001",
+  "question": "What can and cannot be concluded from these constructed statements, and what should an investigator verify next? No actual endpoint acquisition or Atomic execution occurred for this example.",
+  "evidence": [
+    {
+      "id": "E001",
+      "source_type": "synthetic_event_summary",
+      "observed_at_utc": "2026-01-01T00:00:00Z",
+      "summary": "Constructed example: a Sysmon pipe-created record is represented with pipe name postex_a1b2c3d4 and a PowerShell process. This is scenario text, not an acquired event.",
+      "limitations": ["No native EVTX, process GUID or acquisition record was provided.", "The timestamp is invented for this explicitly synthetic scenario."]
+    },
+    {
+      "id": "E002",
+      "source_type": "test_definition",
+      "observed_at_utc": null,
+      "summary": "The repository's Atomic procedure selects a server-only named-pipe test. Its expected creation of a postex-style name is a control for a pattern hunt, not execution of a Cobalt Strike Beacon.",
+      "limitations": ["A test definition does not establish that the test ran or that telemetry was collected."]
+    },
+    {
+      "id": "E003",
+      "source_type": "collection_note",
+      "observed_at_utc": null,
+      "summary": "No original endpoint events, Splunk search job results, network captures or operator confirmation have been acquired for this synthetic case.",
+      "limitations": ["Actual host activity, authorization, scope and cause remain unverified."]
+    }
+  ]
+}
