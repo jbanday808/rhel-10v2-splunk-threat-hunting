@@ -48,7 +48,7 @@ Get-LocalUser -Name 'SIEMLabUser' | Select-Object Name, Enabled
 
 **Command overview:** `Get-LocalUser` finds the named local account. `Select-Object` displays its name and whether it is enabled. **Expected result:** The intended account appears and `Enabled` is `True`. If it is absent or disabled, review the authorized account setup with the lab owner before proceeding.
 
-If `New-LocalUser` reports that the user already exists, Step 28 and the lab script intentionally stop for review. Do not automatically recreate, delete, enable, or reset an existing account. Confirm it is the disposable lab account and use the authorized account-management procedure. `Get-LocalUser` is not available in 32-bit PowerShell on a 64-bit Windows system; use an approved 64-bit Windows PowerShell session.
+If `New-LocalUser` reports that the user already exists, the Step 28 new-account check and the lab helper intentionally stop for review. The updated [Step 28](../steps/28-generate-harmless-hunting-activity.md) provides a separate manual password-reset path for the verified, authorized disposable local lab account. Do not automatically recreate, delete, enable, or reset an unverified account. `Get-LocalUser` is not available in 32-bit PowerShell on a 64-bit Windows system; use an approved 64-bit Windows PowerShell session.
 
 ## Step 4 — Create or reuse the credential object
 
@@ -127,8 +127,8 @@ If you want to run PowerShell commands inside the test window, you may first run
 | --- | --- |
 | `Start-Process` is not recognized | Verify that the prompt begins with `PS`; return to PowerShell and use the credential in that session. |
 | The credential object check returns `False` | The prompt was cancelled, the variable was not set, or this is a different PowerShell session. Run Step 4 again. |
-| The user name or password is rejected | Confirm the local account and its current password through the authorized process. Avoid repeated attempts that could trigger a lockout. Do not assume `Get-Credential` validated it. |
-| The account already exists | Confirm it is the disposable lab account. Do not create or reset it automatically; use the existing account only when authorized. |
+| The user name or password is rejected | Confirm the local account and its current password through the authorized process. For the verified disposable account, [Step 28](../steps/28-generate-harmless-hunting-activity.md) documents a manual reset and a correct-password test. Avoid repeated attempts that could trigger a lockout. |
+| The account already exists | Confirm it is the authorized disposable local lab account. The new-account block and helper stop rather than changing it automatically; use the separate manual path in Step 28 if a reset is needed. |
 | A logon-right or policy error appears | Review local security policy and account restrictions with the responsible administrator. Do not weaken STIG or domain policy just to force the test to work. |
 | No window is visible | Check for an error in the original PowerShell window and look for the new window in the taskbar. Do not claim success until `whoami` confirms the intended identity. |
 | An error specifically identifies the Secondary Logon service | Inspect the service with the command below, and follow the approved service-management procedure if a change is required. |

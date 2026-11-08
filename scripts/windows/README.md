@@ -10,7 +10,7 @@ The endpoint-changing scripts require administrator PowerShell and refuse to run
 | `03-Install-SysmonStandalone.ps1` | Step 24 fresh standalone installation only. Existing/built-in Sysmon uses the guide's update procedure. |
 | `07-Install-UniversalForwarder.ps1` | Step 25 MSI installation. Supply the downloaded file and its vendor-published SHA-256. Follow the wizard settings in the guide. |
 | `04-Deploy-Forwarder.ps1` | Step 26. Requires the forwarder and verified public CA at `C:\SIEMLab\Public\ca.pem`. |
-| `05-Generate-HuntActivity.ps1` | Step 28. Creates only the named disposable lab account, task, and marker activity. Read the script first. |
+| `05-Generate-HuntActivity.ps1` | Step 28. Creates the named disposable lab account, task, and marker activity. It stops if the account exists; the [manual existing-account path](../../docs/steps/28-generate-harmless-hunting-activity.md) is separate. Read the script first. |
 | `06-Cleanup-TestObjects.ps1` | Step 46. Removes those named test objects and preserves the event logs. |
 
 Example in WINHUNT01: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\02-Enable-Auditing.ps1`.
