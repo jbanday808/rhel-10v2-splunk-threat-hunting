@@ -15,7 +15,7 @@ For documentation, create a **sanitized example**, rather than copying live auth
 
 ```bash
 cd "$HOME/rhel-splunk-threat-hunting"
-cat > docs/ldap-authentication.conf.example <<'EOF'
+cat > docs/reference/ldap-authentication.conf.example <<'EOF'
 # Documentation only. Enter the real bind password through Splunk Web.
 [authentication]
 authType = LDAP
@@ -46,7 +46,7 @@ lab_hunter = splunk-hunters
 admin = splunk-admins
 EOF
 
-cat > docs/ldap-client.conf.example <<'EOF'
+cat > docs/reference/ldap-client.conf.example <<'EOF'
 # Documentation only: /opt/splunk/etc/openldap/ldap.conf
 TLS_REQCERT demand
 TLS_CACERT /opt/splunk/etc/auth/ldap/idm-ca.pem

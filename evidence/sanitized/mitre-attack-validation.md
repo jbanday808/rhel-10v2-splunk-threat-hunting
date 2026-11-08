@@ -3,7 +3,7 @@
 Record only observed results and sanitized references. `Not run` is not a pass.
 Use UTC and keep raw events, account names, addresses, tokens, and investigation
 exports in approved private storage. Use the
-[hunt report template](../../docs/hunt-report-template.md) for individual cases.
+[hunt report template](../../docs/reference/hunt-report-template.md) for individual cases.
 
 | Check | Actual result | Observed at UTC | Sanitized evidence reference |
 | --- | --- | --- | --- |

@@ -1,6 +1,6 @@
 # Complete file/folder creation matrix (VS Code + WSL)
 
-Use this matrix alongside `WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md`. **All content files listed here already exist in the completed ZIP.** Do not create empty placeholders over working source files.
+Use this historical ZIP matrix alongside `WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md`. Its paths describe the original package; the listed top-level documentation files now live in [`docs/reference/`](README.md). Do not create empty placeholders over working source files.
 
 | Folder / file | Function | How created |
 | --- | --- | --- |

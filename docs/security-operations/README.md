@@ -26,7 +26,7 @@ Copy a template into approved private case storage before filling it in. Do not 
 - [Worked passive HTTP case](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md): Compare the baseline and candidate, review packet evidence and correlate synthetic Zeek/Suricata/Splunk data.
 - [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md): Establish network baselines and investigate protocol and traffic candidates within actual visibility limits.
 - [STIG and IAVM guidance](../iavm/README.md): Feed verified applicability, exposure and remediation results into the vulnerability process.
-- [Existing short hunt report](../hunt-report-template.md): Use for a compact lab record; use the detailed template here for an engagement report.
+- [Existing short hunt report](../reference/hunt-report-template.md): Use for a compact lab record; use the detailed template here for an engagement report.
 
 The six existing Splunk indexes and three core VM roles remain the lab baseline. Optional sensors, licensed Trellix products, cloud AI services, SOAR actions and customer integrations require separate design and validation.
 

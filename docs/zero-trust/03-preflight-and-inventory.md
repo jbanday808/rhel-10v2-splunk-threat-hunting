@@ -21,7 +21,7 @@
 | Virtual network | VMnet8 172.25.250.0/24 | NAT transit | Lab owner | Verify |
 | GitHub | `jbanday808/rhel-10v2-splunk-threat-hunting` | Public source documents | Lab owner | Verified repository; **not** evidence of live deployment |
 
-Record installed versions using [docs/versions.md](../versions.md).
+Record installed versions using [docs/reference/versions.md](../reference/versions.md).
 
 ## Read-only diagnostic commands
 

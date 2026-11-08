@@ -1,6 +1,6 @@
 # Hunt report
 
-For detailed plans, briefings and engagement reports, see the [security operations templates](security-operations/README.md). Keep completed private case records outside the public repository.
+For detailed plans, briefings and engagement reports, see the [security operations templates](../security-operations/README.md). Keep completed private case records outside the public repository.
 
 Date and time zone:
 

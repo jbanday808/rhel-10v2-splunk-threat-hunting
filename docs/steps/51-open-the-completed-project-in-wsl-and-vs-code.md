@@ -2,7 +2,7 @@
 
 **Location:** Windows 11, Ubuntu WSL terminal, then VS Code (WSL window).
 
-The latest repository name is `rhel-10v2-splunk-threat-hunting`. If you use the complete ZIP, follow [the current full WSL guide](../WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) to clone the repository, extract the ZIP into a separate staging folder and review its contents.
+The latest repository name is `rhel-10v2-splunk-threat-hunting`. If you use the complete ZIP, follow [the current full WSL guide](../reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) to clone the repository, extract the ZIP into a separate staging folder and review its contents.
 
 ```bash
 sudo apt update

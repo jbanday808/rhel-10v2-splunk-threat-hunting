@@ -45,14 +45,14 @@ server for verified LDAPS sign-in and group-based access.
 - scripts/: storage and backup scripts.
 - sysmon/: Windows activity logging rules.
 - hunts/: threat-hunting searches.
-- docs/: architecture and installed versions.
+- docs/reference/: architecture and installed versions.
 - evidence/sanitized/: reviewed validation results.
 
 ## Validation
 
 See evidence/sanitized/validation.md and
 evidence/sanitized/ldap-validation.md for actual results.
-See docs/ldap-authentication.conf.example and docs/ldap-client.conf.example
+See docs/reference/ldap-authentication.conf.example and docs/reference/ldap-client.conf.example
 for sanitized directory configuration examples. Pending entries are not passes.
 
 ## Scope
@@ -65,7 +65,7 @@ EOF
 Create the architecture record:
 
 ```
-cat > docs/architecture.md <<'EOF'
+cat > docs/reference/architecture.md <<'EOF'
 # Architecture
 
 | System | Address | Purpose |
@@ -91,7 +91,7 @@ EOF
 Create the version record:
 
 ```
-cat > docs/versions.md <<'EOF'
+cat > docs/reference/versions.md <<'EOF'
 # Installed versions
 
 Record the exact builds used on both RHEL servers; include the IdM
@@ -148,7 +148,7 @@ EOF
 Create a hunt-report template:
 
 ```
-cat > docs/hunt-report-template.md <<'EOF'
+cat > docs/reference/hunt-report-template.md <<'EOF'
 # Hunt report
 
 Date and time zone:

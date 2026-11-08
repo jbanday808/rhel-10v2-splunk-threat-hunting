@@ -6,7 +6,7 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 
 | Goal | Guide |
 | --- | --- |
-| Work in VS Code and WSL | [WSL quick start](start-here/START_HERE_WSL.md) · [Publishing guide](docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) |
+| Work in VS Code and WSL | [WSL quick start](start-here/START_HERE_WSL.md) · [Publishing guide](docs/reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) |
 | Build the core lab | [RHEL and Splunk](start-here/START_HERE_RHEL10v2.md) · [Windows alternative](start-here/START_HERE_WINDOWS.md) |
 | Assess RHEL 10.2 | [RHEL STIG V1R1](start-here/START_HERE_RHEL10v2_STIG.md) |
 | Assess Windows 11 | [Windows 11 STIG V2R11](start-here/START_HERE_WINDOWS11_STIG.md) |
@@ -19,8 +19,8 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 
 ## Project documentation
 
-- [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
-- [Optional appendices](docs/appendices/README.md) · [Software downloads](docs/downloads.md) · [Deployment order](docs/deployment-order.md)
+- [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
+- [Optional appendices](docs/appendices/README.md) · [Reference files](docs/reference/README.md) · [Software downloads](docs/reference/downloads.md) · [Deployment order](docs/reference/deployment-order.md)
 - [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](docs/splunk/COBALT_STRIKE_ATOMIC_VALIDATION.md)
 - [Network defense](docs/network-defense/README.md) · [Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
 - [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md) · [Trellix product overview](docs/security-operations/TRELLIX_PRODUCT_OVERVIEW.md)
@@ -43,6 +43,7 @@ The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`
 | --- | --- |
 | [start-here](start-here/README.md) | Ten quick-start and workstream guides |
 | [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
+| [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
 | [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
 | [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |
 | [evidence/sanitized](evidence/sanitized/) and [screenshots](screenshots/) | Pending result templates and author-supplied images that require review |
@@ -57,4 +58,4 @@ python3 -B -m unittest discover -s tests -v
 python3 tools/publication_preflight.py
 ```
 
-These are source checks. Record live results in [sanitized validation templates](evidence/sanitized/validation.md) only after observing them. The historical `FILE_MANIFEST.json` describes the original ZIP, so its `--verify-manifest` mode applies to that unchanged package, not the reorganized checkout. Review [public repository safety](docs/security-and-sanitization.md) and [SECURITY.md](SECURITY.md) before publishing screenshots or evidence. Never publish secrets.
+These are source checks. Record live results in [sanitized validation templates](evidence/sanitized/validation.md) only after observing them. The historical `FILE_MANIFEST.json` describes the original ZIP, so its `--verify-manifest` mode applies to that unchanged package, not the reorganized checkout. Review [public repository safety](docs/reference/security-and-sanitization.md) and [SECURITY.md](SECURITY.md) before publishing screenshots or evidence. Never publish secrets.

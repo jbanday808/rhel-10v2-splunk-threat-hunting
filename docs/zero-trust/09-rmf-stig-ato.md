@@ -22,7 +22,7 @@
 | **AC-3** Access Enforcement | Splunk authorized index access | `lab_hunter` role allow/deny | Proposed |
 | **AC-6** Least Privilege | Minimal analyst privilege | `authorize.conf` review | Proposed |
 | **IA-2** Identification & Authentication | Protected human identity entry | LDAP/SSO/MFA review | Partial design, MFA absent |
-| **CM-2** Baseline Configuration | Version and drift inventory | Git commits, docs/versions.md | Documentation |
+| **CM-2** Baseline Configuration | Version and drift inventory | Git commits, docs/reference/versions.md | Documentation |
 | **CM-6** Configuration Settings | Secure configuration design | Firewall/LDAP policy | Proposed |
 | **AU-2** Event Logging | Relevant auth/network events | Splunk collection matrix | Pending test |
 | **AU-12** Audit Record Generation | Actual event recording | Synthetic test event/search | Pending test |

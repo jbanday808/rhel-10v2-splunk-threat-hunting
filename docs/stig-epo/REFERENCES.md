@@ -32,4 +32,4 @@ These product documents describe current on-premises functionality. Confirm the 
 
 - [RHEL 10 STIG guide](../stig-rhel10/IMPLEMENTATION_GUIDE.md) covers the RHEL operating-system workstream.
 - [Zero Trust and RMF guidance](../zero-trust/09-rmf-stig-ato.md) provides a separate risk and evidence workflow.
-- [Public repository sanitization checklist](../security-and-sanitization.md) covers review before publication.
+- [Public repository sanitization checklist](../reference/security-and-sanitization.md) covers review before publication.

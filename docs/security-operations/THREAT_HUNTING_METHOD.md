@@ -78,4 +78,4 @@ An empty result set generally needs coverage review before it supports any negat
 | Supported conclusion | Pattern behavior and collection only if actually observed; not product attribution | A scoped synthetic outlier, not evidence of compromise or root cause |
 | Escalation | Validate actual PenTest scope or unexplained activity with owner | Validate alias/service/encryption policy with owner |
 
-Record actual execution and findings only after testing. For broader network questions use the [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md) and [network CONOPS](../network-defense/CONOPS.md). The existing [short hunt report](../hunt-report-template.md) remains useful for a compact record.
+Record actual execution and findings only after testing. For broader network questions use the [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md) and [network CONOPS](../network-defense/CONOPS.md). The existing [short hunt report](../reference/hunt-report-template.md) remains useful for a compact record.

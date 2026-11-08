@@ -48,12 +48,12 @@ documents; they do not establish that a system is affected or remediated.
 - [Splunk advisory SVD-2026-1008](https://advisory.splunk.com/advisories/SVD-2026-1008)
 - [Related Splunk advisory SVD-2026-1007](https://advisory.splunk.com/advisories/SVD-2026-1007)
 - [Splunk Enterprise downloads](https://www.splunk.com/en_us/download.html)
-- [Repository security and sanitization guidance](../security-and-sanitization.md)
+- [Repository security and sanitization guidance](../reference/security-and-sanitization.md)
 
 ## Help
 
 Start with the notice's lab workflow and the existing
-[installed-version inventory](../versions.md). The documented Splunk Enterprise
+[installed-version inventory](../reference/versions.md). The documented Splunk Enterprise
 system is `RHEL-SPLUNK01`; the Windows endpoint uses a separate Universal
 Forwarder. Do not assume the Enterprise advisory automatically applies to the
 forwarder or any other product. Ask the appropriate product owner and

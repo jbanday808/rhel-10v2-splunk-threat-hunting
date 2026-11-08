@@ -16,13 +16,14 @@ mkdir -p \
   scripts/windows \
   sysmon \
   hunts \
+  docs/reference \
   docs/images \
   evidence/sanitized \
   evidence/raw
 
 mkdir -p "$HOME/siem-downloads"
 
-touch README.md docs/versions.md
+touch README.md docs/reference/versions.md
 ```
 
 **Command overview:**

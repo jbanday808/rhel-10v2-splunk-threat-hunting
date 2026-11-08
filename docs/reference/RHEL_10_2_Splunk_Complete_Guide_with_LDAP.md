@@ -340,13 +340,14 @@ mkdir -p \
   scripts/windows \
   sysmon \
   hunts \
+  docs/reference \
   docs/images \
   evidence/sanitized \
   evidence/raw
 
 mkdir -p "$HOME/siem-downloads"
 
-touch README.md docs/versions.md
+touch README.md docs/reference/versions.md
 ```
 
 **Command overview:**
@@ -1979,7 +1980,7 @@ index=sysmon
 
 **Query overview:** `table` displays the event metadata, possible event-ID fields, and original message; `head 20` limits the output. **Expected result:** Inspect `_raw` for an event ID of 1 and compare it with the extracted fields. A blank `EventCode` may require an appropriate add-on or field extraction; a nonzero count alone does not prove Event ID 1 exists. The first 20 results may not include every event type. Keep raw events private.
 
-For missing Windows events or TLS handshake errors, follow the [forwarder TLS and KV service troubleshooting guide](troubleshooting/splunk-forwarder-tls-and-kv-service.md) and compare a recent local event with its indexed copy.
+For missing Windows events or TLS handshake errors, follow the [forwarder TLS and KV service troubleshooting guide](../troubleshooting/splunk-forwarder-tls-and-kv-service.md) and compare a recent local event with its indexed copy.
 
 ## Reference
 
@@ -1996,7 +1997,7 @@ This exercise has two account paths:
 - **New account:** Complete Steps 28.2–28.3, skip Steps 28.4–28.5, then continue at Step 28.6 using the password entered in Step 28.2.
 - **Existing disposable account:** Verify it in Step 28.1, skip Steps 28.2–28.3, and follow Steps 28.4–28.7 to reset and test its password. Use this path only after confirming that the existing account is the authorized disposable local lab account.
 
-The optional `05-Generate-HuntActivity.ps1` helper still stops if `SIEMLabUser` exists; it does not perform the manual password reset. For shell or credential errors, see [PowerShell, Command Prompt, and lab credentials troubleshooting](troubleshooting/windows-powershell-cmd-credentials.md).
+The optional `05-Generate-HuntActivity.ps1` helper still stops if `SIEMLabUser` exists; it does not perform the manual password reset. For shell or credential errors, see [PowerShell, Command Prompt, and lab credentials troubleshooting](../troubleshooting/windows-powershell-cmd-credentials.md).
 
 ## Step 28.1 — Confirm the guest and account
 
@@ -2084,7 +2085,7 @@ Start-Process -FilePath "$env:SystemRoot\System32\cmd.exe" -ArgumentList '/k who
 
 **Command overview:** `Start-Process` opens Command Prompt using the test credentials. `/k whoami` displays the account name and keeps the new window open. **Expected result:** A new window displays the local computer name and test account, for example `winhunt01\siemlabuser`. Capitalization may differ. Confirm the actual output before continuing.
 
-If Windows reports an incorrect user name or password, a disabled/locked account, or a logon-right problem, stop and investigate with the [credential troubleshooting guide](troubleshooting/windows-powershell-cmd-credentials.md). Do not repeatedly guess passwords or weaken policy. The successful creation of `$LabCredential` alone does not prove authentication succeeded.
+If Windows reports an incorrect user name or password, a disabled/locked account, or a logon-right problem, stop and investigate with the [credential troubleshooting guide](../troubleshooting/windows-powershell-cmd-credentials.md). Do not repeatedly guess passwords or weaken policy. The successful creation of `$LabCredential` alone does not prove authentication succeeded.
 
 ## Step 28.8 — Close the test window
 
@@ -2160,7 +2161,7 @@ runas.exe /user:.\SIEMLabUser cmd.exe
 
 If logon auditing is enabled and the event is collected, Windows can generate Security event `4625`. Account creation (`4720`), group change (`4732`), process activity (`4688`), and scheduled task creation (`4698`) likewise depend on the actions performed and the relevant audit settings. An existing-account path does not create a new `4720` event merely by resetting its password.
 
-Review the actual events in Splunk after forwarding is validated. [Step 46](steps/46-remove-the-test-objects.md) and its cleanup helper remove the named account and other test objects; review what they will delete before running them, especially if reusing an existing disposable account. They do not restore a previous password.
+Review the actual events in Splunk after forwarding is validated. [Step 46](../steps/46-remove-the-test-objects.md) and its cleanup helper remove the named account and other test objects; review what they will delete before running them, especially if reusing an existing disposable account. They do not restore a previous password.
 
 ## References
 
@@ -2861,7 +2862,7 @@ For documentation, create a **sanitized example**, rather than copying live auth
 
 ```bash
 cd "$HOME/rhel-splunk-threat-hunting"
-cat > docs/ldap-authentication.conf.example <<'EOF'
+cat > docs/reference/ldap-authentication.conf.example <<'EOF'
 # Documentation only. Enter the real bind password through Splunk Web.
 [authentication]
 authType = LDAP
@@ -2892,7 +2893,7 @@ lab_hunter = splunk-hunters
 admin = splunk-admins
 EOF
 
-cat > docs/ldap-client.conf.example <<'EOF'
+cat > docs/reference/ldap-client.conf.example <<'EOF'
 # Documentation only: /opt/splunk/etc/openldap/ldap.conf
 TLS_REQCERT demand
 TLS_CACERT /opt/splunk/etc/auth/ldap/idm-ca.pem
@@ -3343,14 +3344,14 @@ server for verified LDAPS sign-in and group-based access.
 - scripts/: storage and backup scripts.
 - sysmon/: Windows activity logging rules.
 - hunts/: threat-hunting searches.
-- docs/: architecture and installed versions.
+- docs/reference/: architecture and installed versions.
 - evidence/sanitized/: reviewed validation results.
 
 ## Validation
 
 See evidence/sanitized/validation.md and
 evidence/sanitized/ldap-validation.md for actual results.
-See docs/ldap-authentication.conf.example and docs/ldap-client.conf.example
+See docs/reference/ldap-authentication.conf.example and docs/reference/ldap-client.conf.example
 for sanitized directory configuration examples. Pending entries are not passes.
 
 ## Scope
@@ -3363,7 +3364,7 @@ EOF
 Create the architecture record:
 
 ```
-cat > docs/architecture.md <<'EOF'
+cat > docs/reference/architecture.md <<'EOF'
 # Architecture
 
 | System | Address | Purpose |
@@ -3389,7 +3390,7 @@ EOF
 Create the version record:
 
 ```
-cat > docs/versions.md <<'EOF'
+cat > docs/reference/versions.md <<'EOF'
 # Installed versions
 
 Record the exact builds used on both RHEL servers; include the IdM
@@ -3446,7 +3447,7 @@ EOF
 Create a hunt-report template:
 
 ```
-cat > docs/hunt-report-template.md <<'EOF'
+cat > docs/reference/hunt-report-template.md <<'EOF'
 # Hunt report
 
 Date and time zone:
@@ -4459,7 +4460,7 @@ If a Git push is rejected because your GitHub CLI authentication lacks workflow 
 | A job is skipped. | Confirm the selected branch and exact repository name match its guard. |
 | The workflow cannot connect to the private Splunk VM. | GitHub-hosted networking does not reach VMnet8 directly. Plan a separate private connectivity and runner design before adding VM deployment. |
 
-Record the GitHub run URL, commit, observed subject, Azure client ID, role scope, and actual result in `docs/versions.md` or sanitized evidence. Do not record OIDC tokens, Azure access tokens, or session credentials.
+Record the GitHub run URL, commit, observed subject, Azure client ID, role scope, and actual result in `docs/reference/versions.md` or sanitized evidence. Do not record OIDC tokens, Azure access tokens, or session credentials.
 
 ### OIDC step 11 Disable access when the lab no longer needs it
 
@@ -4516,7 +4517,7 @@ sudo systemctl status Splunkd --no-pager
 
 **Command overview:** `dnf install` installs NGINX, access-control tools, and curl; `rpm -q` shows the installed NGINX version; `systemctl status` checks Splunk.
 
-Download a compatible **Splunk Add-on for NGINX** from its official Splunk page. In Splunk Web, use **Apps → Manage Apps → Install app from file**, install the vendor package, and restart if requested. Record the exact version in `docs/versions.md`.
+Download a compatible **Splunk Add-on for NGINX** from its official Splunk page. In Splunk Web, use **Apps → Manage Apps → Install app from file**, install the vendor package, and restart if requested. Record the exact version in `docs/reference/versions.md`.
 
 Confirm the installed app folder:
 

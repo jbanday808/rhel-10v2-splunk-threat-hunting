@@ -20,7 +20,7 @@ integration, or cloud-log collection is claimed as observed or validated.
    results, and document false positives and missing data.
 5. Record a sanitized observation in
    [MITRE hunt validation](../../evidence/sanitized/mitre-attack-validation.md)
-   and use the [hunt report template](../hunt-report-template.md).
+   and use the [hunt report template](../reference/hunt-report-template.md).
 
 ## Visualize the mapping
 

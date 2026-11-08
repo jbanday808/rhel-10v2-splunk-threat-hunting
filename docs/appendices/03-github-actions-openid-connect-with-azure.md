@@ -346,7 +346,7 @@ If a Git push is rejected because your GitHub CLI authentication lacks workflow 
 | A job is skipped. | Confirm the selected branch and exact repository name match its guard. |
 | The workflow cannot connect to the private Splunk VM. | GitHub-hosted networking does not reach VMnet8 directly. Plan a separate private connectivity and runner design before adding VM deployment. |
 
-Record the GitHub run URL, commit, observed subject, Azure client ID, role scope, and actual result in `docs/versions.md` or sanitized evidence. Do not record OIDC tokens, Azure access tokens, or session credentials.
+Record the GitHub run URL, commit, observed subject, Azure client ID, role scope, and actual result in `docs/reference/versions.md` or sanitized evidence. Do not record OIDC tokens, Azure access tokens, or session credentials.
 
 ### OIDC step 11 Disable access when the lab no longer needs it
 

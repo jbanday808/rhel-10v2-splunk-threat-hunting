@@ -1,6 +1,6 @@
 # Included project files (complete ZIP)
 
-Each path below is included in the expanded ZIP; the remote `LICENSE` is preserved separately from the original GitHub checkout.
+This is the original expanded ZIP inventory, so paths below reflect that package rather than the current checkout. The former top-level documentation files are now under [`docs/reference/`](README.md); the remote `LICENSE` was preserved separately from the original GitHub checkout.
 
 - `.editorconfig`
 - `.gitattributes`

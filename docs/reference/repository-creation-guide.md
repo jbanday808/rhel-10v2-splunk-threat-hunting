@@ -10,7 +10,7 @@
 1. Open `https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting`.
 2. Confirm the repository owner is `jbanday808`, branch is `main`, visibility is **Public**, and `LICENSE` already exists. Preserve the existing license and Git history.
 3. Decide whether to publish the project as a public lab portfolio. Since the supplied SOP contains example passwords, **never upload the original document without redacting and rotating credentials as appropriate**.
-4. Read the expected topology under `docs/architecture.md` and `docs/network-plan.md`. Do not change operational VM addresses merely to make docs match.
+4. Read the expected topology under `docs/reference/architecture.md` and `docs/reference/network-plan.md`. Do not change operational VM addresses merely to make docs match.
 
 ## Phase 2 — Install local development tools
 
@@ -106,7 +106,7 @@ Review the complete list in `FILE_MANIFEST.json` and the folder map below. Git d
 
 ## Phase 6 — Review public-repository safety
 
-1. Read `SECURITY.md`, `docs/security-and-sanitization.md` and `.gitignore`.
+1. Read `SECURITY.md`, `docs/reference/security-and-sanitization.md` and `.gitignore`.
 2. Confirm the source package contains no real password, HEC token, LDAP bind password, SSH key, CA private key, Splunk secret, private log or backup.
 3. Confirm raw outputs stay **outside Git**: `evidence/raw/`, `private/`, `backups/`, `downloads/` and any original SOP with credentials.
 4. If any actual password shown in the source SOP was used, rotate it before publication.
@@ -145,7 +145,7 @@ If Git requires authentication, use Git Credential Manager or the browser-based 
 2. Choose **File → Open Folder** and select the cloned `rhel-10v2-splunk-threat-hunting` folder.
 3. Sign in to the GitHub Copilot extension with the eligible GitHub account.
 4. Confirm `.github/copilot-instructions.md` appears in the Explorer.
-5. Open Copilot Chat and ask it to read `README.md`, `docs/deployment.md`, `docs/architecture.md`, and `.github/copilot-instructions.md` before suggesting changes.
+5. Open Copilot Chat and ask it to read `README.md`, `docs/reference/deployment-order.md`, `docs/reference/architecture.md`, and `.github/copilot-instructions.md` before suggesting changes.
 6. Use the reusable prompts in `.github/prompts/` when available in your VS Code version.
 7. Check Copilot Chat references to confirm that `.github/copilot-instructions.md` was used. Copilot cannot assume the live lab passed validation from repository text alone.
 
@@ -162,7 +162,7 @@ If Git requires authentication, use Git Credential Manager or the browser-based 
 3. On WINHUNT01, validate the forwarder service, trusted certificate, Sysmon and Windows event channels.
 4. Run `hunts/*.spl` in Splunk Search and capture exact sanitized observations.
 5. For IdM, test verified LDAPS, mapped roles, denied access and local administrator recovery.
-6. Save redacted screenshots under `docs/images/` using `docs/screenshot-naming.md`; use single-sentence figure captions.
+6. Save redacted screenshots under `docs/images/` using `docs/reference/screenshot-naming.md`; use single-sentence figure captions.
 7. Change an evidence result from **Pending** only after actual observation, then commit updated records.
 
 ## Phase 10 — Keep GitHub and local Copilot work in sync
@@ -186,11 +186,11 @@ git push origin main
 
 | SOP phase | File groups |
 | --- | --- |
-| Steps 1–9 | `README.md`, `docs/network-plan.md`, `docs/deployment.md`, `.gitignore` |
+| Steps 1–9 | `README.md`, `docs/reference/network-plan.md`, `docs/deployment.md`, `.gitignore` |
 | Steps 10–20 | `apps/LAB_SIEM/`, `configs/rsyslog/`, `configs/logrotate/`, `scripts/rhel/` |
 | Steps 21–30 | `apps/LAB_UF_WINDOWS/`, `sysmon/`, `hunts/00`–`hunts/08`, dashboard XML |
 | Steps 31–44 | `docs/ldap-integration.md`, `docs/ldap-*.example`, `evidence/sanitized/ldap-validation.md` |
-| Steps 45–52 | Optional alert, backup helper, `docs/versions.md`, `evidence/sanitized/validation.md` |
+| Steps 45–52 | Optional alert, backup helper, `docs/reference/versions.md`, `evidence/sanitized/validation.md` |
 | Appendices A–G | `docs/optional/`, `configs/nginx/`, `configs/redaction/`, `hunts/09`–`hunts/12` |
 
 ### Reference

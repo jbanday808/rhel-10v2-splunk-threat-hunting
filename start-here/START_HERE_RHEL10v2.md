@@ -139,7 +139,7 @@ Follow [Steps 31–44](../docs/steps/README.md) to configure IdM DNS, create the
 - Preserve the native Splunk administrator account for recovery.
 - Test permitted access, denied access, and group removal; record actual results.
 
-Safe source examples: [`docs/ldap-authentication.conf.example`](../docs/ldap-authentication.conf.example) and [`docs/ldap-client.conf.example`](../docs/ldap-client.conf.example). **Never upload the live `authentication.conf` or its bind password.**
+Safe source examples: [`docs/reference/ldap-authentication.conf.example`](../docs/reference/ldap-authentication.conf.example) and [`docs/reference/ldap-client.conf.example`](../docs/reference/ldap-client.conf.example). **Never upload the live `authentication.conf` or its bind password.**
 
 ## 8. Alerts, backup, final checks, and optional labs
 
@@ -152,8 +152,8 @@ Optional exercises are linked in [the seven appendices](../docs/appendices/READM
 ## 9. Record results and publish updates
 
 - Record observed outcomes in [`evidence/sanitized/validation.md`](../evidence/sanitized/validation.md) and [`evidence/sanitized/ldap-validation.md`](../evidence/sanitized/ldap-validation.md). Leave untested checks **Pending**.
-- Update [`docs/versions.md`](../docs/versions.md) with the exact installed builds.
-- Add reviewed screenshots using [the screenshot guidance](../docs/screenshot-naming.md); the existing [screenshots](../screenshots/) are source evidence, not automatic validation.
+- Update [`docs/reference/versions.md`](../docs/reference/versions.md) with the exact installed builds.
+- Add reviewed screenshots using [the screenshot guidance](../docs/reference/screenshot-naming.md); the existing [screenshots](../screenshots/) are source evidence, not automatic validation.
 - Review [SECURITY.md](../SECURITY.md) before committing anything to this **public** repository.
 
 **Run on:** VS Code WSL terminal, from the repository root:
@@ -167,15 +167,15 @@ git status
 
 **Command overview:** The validator checks project structure; `unittest` executes offline tests; the publication preflight checks for common public-repository risks; `git status` shows unpublished changes. None of these replaces live Splunk, Windows, or IdM testing.
 
-To publish *reviewed* changes, use [the WSL GitHub guide](../docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) and preserve the existing Git history and MIT `LICENSE`.
+To publish *reviewed* changes, use [the WSL GitHub guide](../docs/reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) and preserve the existing Git history and MIT `LICENSE`.
 
 ## 10. Full documentation
 
 - [Complete 52-step deployment index](../docs/steps/README.md)
-- [Deployment order](../docs/deployment-order.md)
-- [Complete lab guide (Markdown)](../docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md)
-- [Installed software and vendor download sources](../docs/downloads.md)
-- [Architecture](../docs/architecture.md)
+- [Deployment order](../docs/reference/deployment-order.md)
+- [Complete lab guide (Markdown)](../docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md)
+- [Installed software and vendor download sources](../docs/reference/downloads.md)
+- [Architecture](../docs/reference/architecture.md)
 - [VS Code + WSL start guide](START_HERE_WSL.md)
 
 **Optional Zero Trust extension:** [START_HERE_ZERO_TRUST.md](START_HERE_ZERO_TRUST.md) and [complete zero-trust implementation guide](../docs/zero-trust/IMPLEMENTATION_GUIDE.md) describe additional resource-level identity, network, telemetry and RMF controls. These are separate from the original lab deployment and are WIP.

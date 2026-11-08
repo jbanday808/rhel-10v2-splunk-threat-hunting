@@ -152,7 +152,7 @@ at a boundary; this fixture does not establish that the same password was used.
 
 ## 5. Document, escalate, and improve
 
-1. Use the [hunt report](../hunt-report-template.md) to record the hypothesis,
+1. Use the [hunt report](../reference/hunt-report-template.md) to record the hypothesis,
    ATT&CK version and rationale, scope, query revision, source health, UTC
    timeline, observations, alternatives, gaps, and confidence.
 2. Preserve original evidence in approved private storage. Follow the
