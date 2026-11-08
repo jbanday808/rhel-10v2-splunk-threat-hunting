@@ -24,6 +24,8 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 
 **New passive network defense workstream (WIP):** [START_HERE_NETWORK_DEFENSE.md](START_HERE_NETWORK_DEFENSE.md) · [Complete 30-Step Deployment Guide](docs/network-defense/IMPLEMENTATION_GUIDE.md) · [CONOPS](docs/network-defense/CONOPS.md) · [Zeek/Wireshark/TShark](docs/network-defense/ZEEK_AND_WIRESHARK.md) · [Suricata](docs/network-defense/SURICATA.md) · [YARA/Sigma](docs/network-defense/YARA_AND_SIGMA.md) · [CMMC Level 2 evidence planning](docs/network-defense/CMMC_LEVEL2.md). **Offline synthetic PCAPs first; no live sensor or CMMC certification claimed.**
 
+**Optional Arkime network analysis (WIP):** [Start here](START_HERE_ARKIME.md) · [38-step installation and deployment guide](docs/arkime/IMPLEMENTATION_GUIDE.md) · [Worked synthetic investigation](docs/arkime/INVESTIGATION.md) · [Sanitized validation template](evidence/sanitized/arkime-validation.md). Uses a separate planned sensor and an offline exercise; live capture and installation remain unvalidated.
+
 **MITRE ATT&CK threat hunting:** [Start here](docs/mitre-attack/README.md) · [Technique and telemetry mapping](docs/mitre-attack/coverage.md) · [Navigator layer](docs/mitre-attack/navigator-layer.json) · [Hunt playbook](docs/mitre-attack/hunt-playbook.md). Candidate searches, context-only signals, and telemetry gaps are distinguished; no detection is claimed as validated until tested.
 
 **Information Assurance Vulnerability Management (IAVM):** [IAVM home](docs/iavm/README.md) · [Splunk Enterprise notice 2026-A-1195](docs/iavm/notices/2026-A-1195.md). The user-provided notice and vendor advisory differences are documented; lab applicability and remediation are unverified.
@@ -39,6 +41,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 - [Detailed appendices](docs/appendices/README.md)
 - [Complete Zeek, Wireshark, Suricata, YARA, Sigma and CMMC Network Defense Guide](docs/network-defense/IMPLEMENTATION_GUIDE.md)
 - [Worked passive HTTP investigation with Splunk](docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md)
+- [Arkime network analysis — installation, deployment and investigation](START_HERE_ARKIME.md)
 - [Deployment order](docs/deployment-order.md)
 - [Zero Trust architecture — installation, configuration, deployment, RMF/STIG and testing](docs/zero-trust/README.md)
 - [RHEL 10.2 DISA STIG V1R1 — Complete Installation, Assessment and Safe Hardening Guide](docs/stig-rhel10/IMPLEMENTATION_GUIDE.md)
@@ -78,6 +81,7 @@ For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.m
 | docs/stig-windows-firewall | Firewall V2R2 manual assessment guide and complete 21-rule reference (WIP) |
 | docs/stig-epo and scripts/stig-epo | Optional ePO V3R8 assessment workflow and private rule workbook generator |
 | docs/network-defense, scripts/network-defense | Passive network analysis CONOPS, 30-step guide, synthetic PCAP and aggregate JSON tools |
+| docs/arkime | Optional Arkime/OpenSearch deployment and synthetic anomaly investigation |
 | rules/yara, rules/sigma, hunts/network-defense | Benign YARA/Sigma test rules and proposed network SPL hunts |
 | configs/network-defense, apps/SENSOR_UF | Proposed Suricata IDS rule and Splunk indexes/UF overlays, not deployed |
 | docs | Full guide, WSL publishing guide, steps, appendices, architecture, and sanitized LDAP examples |
