@@ -10,6 +10,7 @@
 | `Start-Process` is not recognized or a lab credential prompt is confusing | [PowerShell, Command Prompt, and lab credentials](../troubleshooting/windows-powershell-cmd-credentials.md): check the shell, session variable, account and new window |
 | Sysmon fields empty | Compatible Sysmon add-on, XML sourcetype, field mapping |
 | Custom lab fields missing | `props.conf`, `REPORT-lab-fields`, `transforms.conf` and sample format |
+| IdM commands missing, automatic package authorization fails, or DNS at `.30` refuses connections | [IdM setup and DNS troubleshooting](../troubleshooting/idm-installation-and-dns.md): finish the server packages and interactive installer before testing IdM services |
 | IdM login fails | IdM DNS, TCP 636, trusted CA, LDAP group mapping, local admin recovery |
 | Indexed data disappears | Age/size retention and event-log rollover |
 
