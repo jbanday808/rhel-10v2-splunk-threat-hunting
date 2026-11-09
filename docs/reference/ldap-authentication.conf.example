@@ -7,6 +7,8 @@ authSettings = LAB_IDM_LDAPS
 host = idm01.lab.test
 port = 636
 SSLEnabled = 1
+sslVerifyServerCert = true
+sslRootCAPath = /opt/splunk/etc/auth/ldap/idm-ca.pem
 bindDN = uid=splunk-bind,cn=sysaccounts,cn=etc,dc=lab,dc=test
 bindDNpassword = REPLACE_THROUGH_SPLUNK_WEB
 userBaseDN = cn=users,cn=accounts,dc=lab,dc=test
