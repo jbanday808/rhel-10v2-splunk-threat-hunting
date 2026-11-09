@@ -3564,7 +3564,46 @@ index=sysmon EventCode=1
 | stats count AS process_events
 ```
 
-If `process_events` is zero, confirm that Sysmon Event ID `1` is collected and that this build extracts the field as `EventCode`. An empty index or missing process events cannot validate the alert.
+If `process_events` is zero, do not save the alert yet. Use the checks below to find where the process events stopped.
+
+#### If `process_events` is zero
+
+First select **Last 7 days** and repeat the `sysmon_events` count above. This removes a short time window as a possible cause.
+
+- If `sysmon_events` is **greater than zero**, find the event ID field and values actually present:
+
+  ```spl
+  index=sysmon
+  | eval event_id=coalesce(EventCode,EventID,"not extracted")
+  | stats count by event_id
+  | sort - count
+  ```
+
+  If ID `1` appears, rerun the `EventCode=1` check with **Last 7 days**. If it still returns zero, the ID may be extracted under `EventID` instead; inspect the raw event and field extraction with [Step 27](27-verify-event-collection.md). If ID `1` is absent, check whether WINHUNT01 generated it locally.
+
+- If `sysmon_events` is **zero**, check whether Sysmon events reached a different index:
+
+  ```spl
+  index=* source=*Sysmon*
+  | stats count by index source sourcetype
+  ```
+
+  Keep **Last 7 days** selected and run this as the Splunk administrator. If events appear in another index, review the Windows forwarder's effective input mapping. If none appear, inspect the Windows event log and forwarding path.
+
+On **WINHUNT01**, open **Administrator PowerShell** and check the service and local process events:
+
+```powershell
+Get-Service -Name Sysmon,Sysmon64 -ErrorAction SilentlyContinue |
+    Select-Object Name,Status
+
+Get-WinEvent -FilterHashtable @{
+    LogName = 'Microsoft-Windows-Sysmon/Operational'
+    Id = 1
+    StartTime = (Get-Date).AddDays(-7)
+} -MaxEvents 5 | Select-Object TimeCreated,Id
+```
+
+If Windows has no recent Event ID `1`, run the harmless marker in Section 4 and repeat this check. If Windows has Event ID `1` but Splunk does not, check the effective Sysmon input, `index = sysmon`, forwarder output, and receiver TLS in [Steps 26](26-deploy-the-forwarder-configuration.md) and [27](27-verify-event-collection.md). Do not change the hunt SPL to hide a collection failure.
 
 ### 2. Run the hunt as a normal search
 
@@ -3629,7 +3668,7 @@ If the new process is missing, check the forwarder, Sysmon Event ID `1` collecti
 
 Review the alert in **Settings → Searches, Reports, and Alerts**. A Splunk Web alert can be stored under the owner's user directory or an app directory, depending on its sharing and ownership; do not assume it was written to `/opt/splunk/etc/apps/LAB_SIEM/local/savedsearches.conf`. Do not copy an entire live `savedsearches.conf` or `metadata/local.meta` into this public repository. If you need a reproducible example, record only the reviewed alert stanza and its required permissions in a sanitized example after removing tokens, addresses, and other private values.
 
-**Command overview:** `stats count` checks whether Sysmon and process events are searchable. In PowerShell, `$Payload` defines a harmless marker, `ToBase64String` encodes it as PowerShell expects, and `-EncodedCommand` runs it. The cron expression schedules the search every five minutes.
+**Command overview:** `stats count` checks searchable Sysmon events; `coalesce` compares extracted event ID fields; `Get-Service` checks Sysmon; `Get-WinEvent` checks Event ID `1` on Windows. `$Payload` defines a harmless marker, `ToBase64String` encodes it, and `-EncodedCommand` runs it. The cron expression schedules the search every five minutes.
 
 **Summary:** A successful test has a new Sysmon process event, a matching search result, and a triggered alert record for that event. Keep the observed result and UTC test time in sanitized lab evidence.
 
@@ -3638,6 +3677,7 @@ References:
 - [Splunk Create Scheduled Alerts](https://help.splunk.com/en/splunk-enterprise/alert-and-respond/alerting-manual/10.6/create-alerts/create-scheduled-alerts): This guide explains the schedule, search window, trigger, and alert action settings.
 - [Splunk Throttle Alerts](https://help.splunk.com/en/splunk-enterprise/alert-and-respond/alerting-manual/10.6/manage-alert-trigger-conditions-and-throttling/throttle-alerts): This guide explains field-based suppression for per-result alerts.
 - [Splunk Monitor Triggered Alerts](https://help.splunk.com/en/splunk-enterprise/alert-and-respond/alerting-manual/10.6/configure-alert-actions/monitor-triggered-alerts): This guide explains how to review triggered alert records.
+- [Microsoft Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon): This guide identifies Event ID `1` as process creation and shows the Sysmon Operational event log.
 
 ---
 
