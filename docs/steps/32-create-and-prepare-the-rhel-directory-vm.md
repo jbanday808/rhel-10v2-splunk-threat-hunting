@@ -4,6 +4,8 @@ In VMware Workstation Pro, create a **new** VM named `RHEL-IDM01` with RHEL 10.2
 
 On the **new VM console**, identify the active Ethernet profile:
 
+At the prompt, enter the profile shown in the `NAME` column (for this VM, `ens160`). Do not type `IDM_PROFILE`, which is only the shell variable name. Changing the connection can briefly interrupt remote access.
+
 ```bash
 cat /etc/redhat-release
 nmcli -f NAME,DEVICE,TYPE connection show --active
@@ -28,13 +30,23 @@ Preserve the localhost lines. Add the following entry once, and remove any confl
 172.25.250.30 idm01.lab.test idm01
 ```
 
-If registration is needed, run `sudo subscription-manager register`. Follow the release-selection checks in Step 7 on this VM, then install its updates and tools:
+Before registering, confirm the VM has `.30`, a route through `.2`, and can resolve the Red Hat subscription host. If registration reports `Name or service not known`, fix upstream DNS before retrying:
+
+```bash
+ip -4 address show dev ens160
+ip -4 route show default
+nmcli -f IP4.DNS device show ens160
+getent ahostsv4 subscription.rhsm.redhat.com
+```
+
+If registration is needed, run `sudo subscription-manager register`. Follow the release-selection checks in [Step 7](07-register-update-and-prepare-rhel.md) on this VM. Confirm `BaseOS` and `AppStream` are available, then run the following commands **one at a time**; stop if an update or installation fails:
 
 ```bash
 sudo dnf upgrade --refresh -y
-sudo dnf install -y ipa-server ipa-server-dns openldap-clients \
+sudo dnf install -y ipa-server ipa-server-dns krb5-workstation openldap-clients \
   bind-utils chrony firewalld openssl openssh-server open-vm-tools
 
+rpm -q ipa-server ipa-server-dns krb5-workstation bind-utils
 sudo systemctl enable --now chronyd firewalld sshd vmtoolsd
 sudo timedatectl set-timezone UTC
 getent hosts idm01.lab.test
@@ -44,7 +56,7 @@ getenforce
 sudo reboot
 ```
 
-Continue only when the hostname resolves to `.30`, the upstream DNS query works, time is synchronized, and SELinux reports `Enforcing`. Leave IPv6 enabled for IdM, even though this lab uses IPv4 addresses.
+Continue only when all required packages report installed, the hostname resolves to `.30`, upstream DNS works, time is synchronized, and SELinux reports `Enforcing`. DNS at `.30` is expected **after** Step 33 installs IdM; use `.2` until then. Leave IPv6 enabled for IdM, even though this lab uses IPv4 addresses. For the reported profile, registration, package, and DNS errors, see [IdM setup troubleshooting](../troubleshooting/idm-installation-and-dns.md).
 
 **Command overview:** `nmcli` applies the static network settings; `hostnamectl` sets the directory hostname; `sudoedit` edits the hosts file; `dnf` installs IdM and its tools; `chronyc` checks time; `dig` tests DNS; `getenforce` checks SELinux.
 

@@ -216,6 +216,8 @@ The IdM server should use its own integrated DNS service at `172.25.250.30` afte
 
 ### 33.7 — Troubleshooting observed during initial setup
 
+For the earlier missing `ipactl`/`kinit`/`ipa` commands, failed automatic package authorization, and pre-installation DNS refusal, see [IdM setup troubleshooting](../troubleshooting/idm-installation-and-dns.md). Those checks distinguish missing packages from an installed but unconfigured server.
+
 | Error or observation | Cause / corrective action |
 | --- | --- |
 | `IPA is not configured` from `ipactl status` | Packages are installed, but the IPA server installation has not completed. Run and finish `ipa-server-install`, then check `ipactl status`. |
