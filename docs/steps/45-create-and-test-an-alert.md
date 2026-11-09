@@ -2,6 +2,8 @@
 
 This lab alert looks for a Sysmon process-creation event when `powershell.exe` starts with `-EncodedCommand`. A match is activity to investigate, not proof of malicious activity. Complete the test on **WINHUNT01** only. The alert depends on searchable Sysmon Event ID `1` data and an active Splunk license that permits scheduled alerts.
 
+Ordinary Windows activity can already produce Sysmon Event ID `1`. The encoded-PowerShell test in Section 4 is a separate step; first make sure Splunk can search the existing process events.
+
 ### 1. Confirm the Windows process data is arriving
 
 In Splunk Web, sign in as the local Splunk administrator and open **Search** in the **Threat Hunting Lab** app. If your release opens **Search & Reporting** as a separate app, note that app context and review the alert's sharing after saving. Set the time picker to **Last 24 hours** and run:
@@ -38,7 +40,7 @@ First select **Last 7 days** and repeat the `sysmon_events` count above. This wi
 - If `sysmon_events` is **zero**, check whether Sysmon events reached a different index:
 
   ```spl
-  index=* source=*Sysmon*
+  index=* (source=*Sysmon* OR sourcetype=*Sysmon*)
   | stats count by index source sourcetype
   ```
 
@@ -57,7 +59,22 @@ Get-WinEvent -FilterHashtable @{
 } -MaxEvents 5 | Select-Object TimeCreated,Id
 ```
 
-If Windows has no recent Event ID `1`, run the harmless marker in Section 4 and repeat this check. If Windows has Event ID `1` but Splunk does not, check the effective Sysmon input, `index = sysmon`, forwarder output, and receiver TLS in [Steps 26](../steps/26-deploy-the-forwarder-configuration.md) and [27](../steps/27-verify-event-collection.md). Do not change the hunt SPL to hide a collection failure.
+If Windows has no recent Event ID `1`, run the harmless marker in Section 4 and repeat this check. If Windows has Event ID `1` but Splunk has no Sysmon events, check the forwarding path before testing the alert. In **Administrator PowerShell** on WINHUNT01:
+
+```powershell
+$UfHome = 'C:\Program Files\SplunkUniversalForwarder'
+Get-Service SplunkForwarder | Select-Object Name,Status
+& "$UfHome\bin\splunk.exe" btool inputs list --debug |
+    Select-String 'WinEventLog://Microsoft-Windows-Sysmon/Operational' -Context 0,9
+& "$UfHome\bin\splunk.exe" btool outputs list --debug |
+    Select-String 'defaultGroup|lab_tls|server\s*=|useSSL\s*='
+Test-NetConnection splunk01.lab.test -Port 9997
+Get-Content "$UfHome\var\log\splunk\splunkd.log" -Tail 200 |
+    Select-String 'TcpOutputProc|WinEventLog|SSL|TLS|certificate|ERROR|WARN' |
+    Select-Object -Last 20
+```
+
+The Sysmon input should be enabled (`disabled = 0`) and assigned to `index = sysmon`; the output should target `splunk01.lab.test:9997` with TLS enabled. `btool --debug` shows which configuration file supplies each setting, but a recently edited setting may not be loaded by the running service. A successful TCP port test does not prove that the TLS connection or event delivery succeeded. If these values differ or the recent forwarder log shows errors, use the [Windows forwarding and TLS troubleshooting guide](../troubleshooting/splunk-forwarder-tls-and-kv-service.md) to check the current receiver and correct the identified cause. Keep raw logs and any sensitive configuration output private. Do not change the hunt SPL to hide a collection failure.
 
 ### 2. Run the hunt as a normal search
 
@@ -122,7 +139,7 @@ If the new process is missing, check the forwarder, Sysmon Event ID `1` collecti
 
 Review the alert in **Settings → Searches, Reports, and Alerts**. A Splunk Web alert can be stored under the owner's user directory or an app directory, depending on its sharing and ownership; do not assume it was written to `/opt/splunk/etc/apps/LAB_SIEM/local/savedsearches.conf`. Do not copy an entire live `savedsearches.conf` or `metadata/local.meta` into this public repository. If you need a reproducible example, record only the reviewed alert stanza and its required permissions in a sanitized example after removing tokens, addresses, and other private values.
 
-**Command overview:** `stats count` checks searchable Sysmon events; `coalesce` compares extracted event ID fields; `Get-Service` checks Sysmon; `Get-WinEvent` checks Event ID `1` on Windows. `$Payload` defines a harmless marker, `ToBase64String` encodes it, and `-EncodedCommand` runs it. The cron expression schedules the search every five minutes.
+**Command overview:** `stats count` checks searchable Sysmon events; `coalesce` compares extracted event ID fields; `Get-Service` checks Windows services; `Get-WinEvent` checks Event ID `1` locally. `btool` shows effective input and output settings; `Test-NetConnection` checks TCP reachability; `Get-Content` shows recent forwarder messages. `$Payload` defines a harmless marker, `ToBase64String` encodes it, and `-EncodedCommand` runs it. The cron expression schedules the search every five minutes.
 
 **Summary:** A successful test has a new Sysmon process event, a matching search result, and a triggered alert record for that event. Keep the observed result and UTC test time in sanitized lab evidence.
 
