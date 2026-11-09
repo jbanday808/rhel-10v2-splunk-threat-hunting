@@ -71,11 +71,71 @@ Expand **Advanced settings**:
 | Search request time limit | `15` seconds |
 | Network socket timeout | `20` seconds |
 
-Before saving, confirm that **SSL enabled** and **Verify LDAP server TLS certificate** are both checked, the CA path is correct, and the group filter is complete. Click **Save**. If your Splunk version presents a separate action to enable the LDAP strategy, complete it after saving. Confirm that `LAB_IDM_LDAPS` appears in the strategy list. Splunk checks the connection when you create a strategy; if saving fails, review the IdM host and port, CA trust, bind DN and password, and search fields before trying again. Do not turn off certificate verification to make a failed connection pass.
+Before saving, confirm that **SSL enabled** and **Verify LDAP server TLS certificate** are both checked, the CA path is correct, and the group filter is complete. Re-enter the `splunk-bind` password in **Bind DN Password** and **Confirm password**, then click **Save**. A masked password field does not show whether the value is correct. If your Splunk version presents a separate action to enable the strategy, complete it after saving. Confirm that `LAB_IDM_LDAPS` appears in the strategy list with host `idm01.lab.test`, port `636`, and status **Enabled**.
 
-**Keep credentials private:** Enter the lookup password only in Splunk Web. Do not commit the live `authentication.conf`, encrypted password values, `splunk.secret`, or screenshots showing password fields.
+Splunk checks the connection when it creates a strategy. If Save fails, follow the checks below before changing IdM or disabling certificate verification.
 
-**Summary:** The expected result is a saved `LAB_IDM_LDAPS` strategy. Continue to Step 39 to map groups to roles; creating the strategy alone does not confirm that a directory user can sign in.
+### 7. If Splunk Web will not save the strategy
+
+The banner **“Please check your LDAP configuration or consult splunkd.log for LDAP errors”** is general. The message `Error binding to LDAP. reason="Can't contact LDAP server"` does not, by itself, prove that IdM is down or that the password must be reset. Check each part of the connection before changing it.
+
+**First, check the form:** Keep port `636`; confirm both SSL and certificate verification are selected; enter the CA path and the complete static group filter from the tables above. Then type the **same `splunk-bind` password that works in the terminal** into both password fields. The terminal's password prompt and Splunk Web's password fields are separate entries.
+
+**If Save still fails, run these checks separately on RHEL-SPLUNK01:**
+
+```bash
+sudo -u splunk test -r /opt/splunk/etc/auth/ldap/idm-ca.pem && echo 'CA file readable'
+```
+
+Expected: `CA file readable`. This confirms that the Splunk service account can read the public IdM CA certificate.
+
+```bash
+sudo -u splunk timeout 10 openssl s_client \
+  -connect idm01.lab.test:636 \
+  -servername idm01.lab.test \
+  -CAfile /opt/splunk/etc/auth/ldap/idm-ca.pem \
+  -verify_hostname idm01.lab.test \
+  -verify_return_error -brief </dev/null
+```
+
+Expected: `Connecting to 172.25.250.30`, `CONNECTION ESTABLISHED`, `Verification: OK`, and `Verified peername: idm01.lab.test`. This checks the connection and certificate, **not** the bind password.
+
+```bash
+sudo -u splunk env LDAPCONF=/opt/splunk/etc/openldap/ldap.conf \
+  ldapwhoami -x -H ldaps://idm01.lab.test:636 \
+  -D 'uid=splunk-bind,cn=sysaccounts,cn=etc,dc=lab,dc=test' -W
+```
+
+At the prompt, enter the `splunk-bind` password. Expected:
+
+```text
+dn: uid=splunk-bind,cn=sysaccounts,cn=etc,dc=lab,dc=test
+```
+
+**Command overview:** `sudo -u splunk` runs the tests as Splunk; `test -r` checks CA file access; `openssl s_client` checks LDAPS and the server certificate; `LDAPCONF` points the LDAP tool to Splunk's client policy; `ldapwhoami` checks the bind account; `-W` prompts for the password without placing it in the command; `timeout 10` stops a stalled TLS test after ten seconds.
+
+| Result | Next action |
+| --- | --- |
+| CA file is unreadable | Check that the path exists on RHEL-SPLUNK01 and that `splunk` can read the public CA file. |
+| TLS test cannot connect or verify the server | Check IdM DNS, TCP `636`, the CA file, and the server certificate name. Keep certificate verification enabled. |
+| TLS passes but `ldapwhoami` fails | Check the exact `splunk-bind` password and account state. Do not assume a working TLS handshake also validates the password. |
+| All three tests pass but Save fails | Re-enter that tested password in **both** Splunk Web fields and review the checkboxes, CA path, and group filter. Do not reset a password that already works in `ldapwhoami`. |
+
+**Observed resolution in this lab:** All three command-line checks passed, including the bind DN response. Splunk Web still failed to save because a different password had been entered in its form. Entering the correct `splunk-bind` password there saved the strategy. The resulting LDAP strategies page showed `LAB_IDM_LDAPS`, `idm01.lab.test`, port `636`, connection order `1`, and **Enabled**. This confirms that the strategy was created; Step 39 still needs role mapping, and a directory user sign-in remains a separate check.
+
+For a new failed Save, inspect recent **LDAP-specific** messages rather than unrelated forwarder errors:
+
+```bash
+sudo tail -n 250 /opt/splunk/var/log/splunk/splunkd.log |
+  grep -E 'ScopedLDAPConnection|AdminHandler:AuthenticationHandler' |
+  tail -n 20
+```
+
+**Command overview:** `tail` reads recent Splunk log lines; `grep` keeps the LDAP connection and authentication messages. The `TcpInputProc ... SSL routines::wrong version number` messages from the Windows forwarder are a separate forwarding issue, not evidence of an LDAP failure. Share only redacted error lines; do not publish raw logs or credentials.
+
+**Keep credentials private:** Enter the lookup password only at the Splunk Web or `ldapwhoami -W` prompt. Do not put it in a command, commit the live `authentication.conf`, encrypted password values, `splunk.secret`, or screenshots showing password fields.
+
+**Summary:** `LAB_IDM_LDAPS` is saved and enabled based on the supplied Splunk Web result. Continue to Step 39 to map the groups to roles; creating the strategy alone does not prove that a directory user can sign in.
 
 References:
 
