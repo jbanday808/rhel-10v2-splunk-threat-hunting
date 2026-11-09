@@ -25,6 +25,8 @@ authSettings = LAB_IDM_LDAPS
 host = idm01.lab.test
 port = 636
 SSLEnabled = 1
+sslVerifyServerCert = true
+sslRootCAPath = /opt/splunk/etc/auth/ldap/idm-ca.pem
 bindDN = uid=splunk-bind,cn=sysaccounts,cn=etc,dc=lab,dc=test
 bindDNpassword = REPLACE_THROUGH_SPLUNK_WEB
 userBaseDN = cn=users,cn=accounts,dc=lab,dc=test
@@ -53,7 +55,7 @@ TLS_CACERT /opt/splunk/etc/auth/ldap/idm-ca.pem
 EOF
 ```
 
-These examples do not enable sign-in on their own. Do not deploy the placeholder password. Record any additional LDAP certificate settings supported and enabled on your installed Splunk build in the sanitized example.
+These examples do not enable sign-in on their own. Do not deploy the placeholder password. The Step 38 Splunk Web form in this lab exposes the LDAP certificate verification and CA path fields shown above; confirm the saved values locally on the installed build without publishing live authentication output.
 
 **Command overview:** `btool check` checks Splunk configuration; `journalctl` shows startup messages; `cat > ... <<'EOF'` creates examples while preserving their text.
 
