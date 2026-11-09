@@ -3,7 +3,7 @@
 As a **Splunk administrator**, search recent authentication audit activity:
 
 ```spl
-index=_audit action=login earliest=-30m
+index=_audit action="login attempt"
 | table _time user action info host
 | sort - _time
 ```
