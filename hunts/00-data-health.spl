@@ -1,4 +1,4 @@
-index IN (win_security, win_system, powershell, sysmon, linux, lab) earliest=-24h
-| stats count latest(_time) AS last_event max(_indextime) AS last_received perc95(eval(_indextime-_time)) AS p95_delay_seconds BY index host sourcetype
-| eval seconds_since_receipt=now()-last_received
+index IN(win_security,win_system,powershell,sysmon,linux,lab) earliest=-24h
+| stats count latest(_time) as last_event max(_indextime) as last_received perc95(eval(_indextime-_time)) as p95_delay by index host sourcetype
+| eval age=now()-last_received
 | convert ctime(last_event) ctime(last_received)
