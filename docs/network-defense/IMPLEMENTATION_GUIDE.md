@@ -134,6 +134,8 @@ sudo timeout --signal=INT 20 tcpdump -nn -i "$CAPTURE_IFACE" -s 128 -c 50 -w - \
 
 ### Step 12 — Select a supported Zeek installation method
 
+For a complete Zeek-specific procedure, use the [28-step installation and deployment guide](ZEEK_DEPLOYMENT.md). It expands these offline steps with reviewed configuration templates, gated live capture, a Podman Quadlet service, Splunk integration, and rollback.
+
 **Important:** Zeek does not guarantee native RHEL 10 binary RPM support. Review [Zeek official install](https://docs.zeek.org/en/current/install.html), [OS support](https://github.com/zeek/zeek/wiki/Zeek-Operating-System-Support-Matrix), the installed RHEL kernel and container policy. Prefer an approved, **version-pinned official container** or a tested Zeek source build; never use random unofficial RPMs.
 
 After confirming the exact image tag exists in the vendor registry and approving the digest, an example is:

@@ -1,0 +1,32 @@
+[Unit]
+Description=Optional Zeek passive lab sensor
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Container]
+Image=docker.io/zeek/zeek@sha256:REPLACE_WITH_APPROVED_DIGEST
+ContainerName=zeek-lab
+Pull=never
+Network=host
+User=0
+DropCapability=all
+AddCapability=CAP_NET_RAW
+NoNewPrivileges=true
+ReadOnly=true
+ReadOnlyTmpfs=true
+PodmanArgs=--umask=0077
+Volume=/etc/zeek-lab:/policy:ro,Z
+Volume=/var/lib/zeek-lab/logs:/logs:Z
+WorkingDir=/logs
+Exec=/bin/sh /policy/run-live.sh REPLACE_WITH_CAPTURE_INTERFACE "net 172.25.250.0/24"
+StopSignal=SIGTERM
+LogDriver=journald
+
+[Service]
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=90
+TimeoutStopSec=45
+UMask=0077

@@ -6,6 +6,8 @@
 | [Zeek installation](https://docs.zeek.org/en/current/install.html) | Supported vendor installation and container methods |
 | [Zeek operating-system support](https://github.com/zeek/zeek/wiki/Zeek-Operating-System-Support-Matrix) | RHEL native binary availability limitations |
 | [Zeek quick start](https://docs.zeek.org/en/current/quickstart.html) | `zeek -r file.pcap LogAscii::use_json=T` |
+| [Zeek official image source, 9.0.1](https://github.com/zeek/zeek/tree/v9.0.1/docker) | Official registry, runtime command, and `/usr/local/zeek` installation path |
+| [Podman Quadlet reference](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html) | Declarative container services, capture capability controls, and `[Install]` startup semantics |
 | [TShark manual](https://www.wireshark.org/docs/man-pages/tshark.html) | Safe offline protocol decoding `-r -Y -T fields` |
 | [RHEL 10 package manifest](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/package_manifest/) | `wireshark-cli` package naming and availability |
 | [OISF Suricata RPM installation](https://docs.suricata.io/en/suricata-8.0.6/install/rpm.html) | Approved Suricata 8 COPR route for RHEL 10 |

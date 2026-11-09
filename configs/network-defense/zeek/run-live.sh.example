@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+umask 077
+
+if [ "$#" -ne 2 ]; then
+    printf 'Usage: run-live.sh CAPTURE_INTERFACE CAPTURE_FILTER\n' >&2
+    exit 2
+fi
+
+# Preserve earlier logs across service restarts.
+run_dir=$(mktemp -d /logs/run-XXXXXXXX)
+cd "$run_dir"
+printf 'Writing private Zeek logs to %s\n' "$run_dir" >&2
+
+exec /usr/local/zeek/bin/zeek -i "$1" -f "$2" /policy/local.zeek

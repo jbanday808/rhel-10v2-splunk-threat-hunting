@@ -1,0 +1,9 @@
+# Optional custom sourcetype; review existing add-ons and the installed Splunk version.
+# Parsing settings belong on the first full parsing tier; KV_MODE belongs on the search tier.
+[zeek:json]
+SHOULD_LINEMERGE = false
+LINE_BREAKER = ([\r\n]+)
+TIME_PREFIX = "ts"\s*:\s*
+TIME_FORMAT = %s.%6N
+MAX_TIMESTAMP_LOOKAHEAD = 32
+KV_MODE = json

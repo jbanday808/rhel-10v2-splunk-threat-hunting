@@ -6,6 +6,8 @@ Existing Splunk: `RHEL-SPLUNK01`, HTTPS `8000`, TLS receiver `9997`. Original la
 
 Start with the [one-time upload walkthrough](OFFLINE_HTTP_WALKTHROUGH.md#8-upload-a-small-fixture-to-the-existing-splunk-index) to practice source validation, event time and correlation in `lab`. Use the forwarding procedure below for an approved dedicated sensor deployment.
 
+For Zeek specifically, [Steps 18-23 of the complete deployment guide](ZEEK_DEPLOYMENT.md#phase-4-optional-splunk-integration) cover reviewed parser examples, a synthetic DNS upload, Linux UF installation, verified TLS, restricted staging, and acceptance checks.
+
 ## Step A — Create or merge new indexes (RHEL-SPLUNK01)
 
 Review [configs/network-defense/splunk/indexes.conf.example](../../configs/network-defense/splunk/indexes.conf.example). Create optional indexes `net_zeek`, `net_suricata`, `net_yara` in an approved Splunk \`local/indexes.conf\` location. Confirm volume location, ownership, retention, disk budget and RBAC. Do not copy `.example` files into active app directories without review or change approval.

@@ -9,10 +9,11 @@ Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcp
 | Resource | Focus |
 | --- | --- |
 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 30-step planning, installation, configuration, PCAP lab, Splunk integration, baseline, triage and operations |
+| [ZEEK_DEPLOYMENT.md](ZEEK_DEPLOYMENT.md) | Complete 28-step Zeek installation, policy, offline validation, optional live service, Splunk integration, operations, and rollback |
 | [OFFLINE_HTTP_WALKTHROUGH.md](OFFLINE_HTTP_WALKTHROUGH.md) | Positive and negative fixture replay, alert tuning, file analysis, and correlation in the existing `lab` index |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | VM roles, offline vs live sensing, trust and privacy boundaries |
 | [CONOPS.md](CONOPS.md) | Mission, authorization, operation, analyst workflow, metrics, retention and escalation |
-| [ZEEK_AND_WIRESHARK.md](ZEEK_AND_WIRESHARK.md) | Verified Zeek offline approach, TShark and PCAP analysis |
+| [ZEEK_AND_WIRESHARK.md](ZEEK_AND_WIRESHARK.md) | Zeek offline overview, TShark and PCAP analysis |
 | [SURICATA.md](SURICATA.md) | RHEL 10 package checks, offline IDS, rules and EVE logging |
 | [YARA_AND_SIGMA.md](YARA_AND_SIGMA.md) | Local file-matching and Sigma conversion to reviewed SPL |
 | [SPLUNK_INTEGRATION.md](SPLUNK_INTEGRATION.md) | Proposed indexes, verified TLS forwarding, timestamp and parser tests |

@@ -4,6 +4,8 @@
 
 **[OPEN FULL 30-STEP INSTALLATION, CONFIGURATION, DEPLOYMENT & VALIDATION GUIDE](../docs/network-defense/IMPLEMENTATION_GUIDE.md)**
 
+**[Open the complete 28-step Zeek installation and deployment guide](../docs/network-defense/ZEEK_DEPLOYMENT.md)** for pinned containers, policy configuration, offline testing, optional live sensing, Splunk forwarding, and rollback.
+
 **[Run the worked HTTP investigation](../docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md)** using synthetic captures on an analysis workstation. The Splunk portion uses the existing `lab` index. Use the 30-step guide when planning an optional dedicated sensor.
 
 **[Explore the optional Arkime guide](START_HERE_ARKIME.md)** for a separate sensor, offline packet import, Viewer investigation and explicit live-capture readiness checks. Arkime does not automatically forward its sessions to Splunk.
