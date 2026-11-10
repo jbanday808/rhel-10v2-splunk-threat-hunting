@@ -2,6 +2,8 @@
 
 **Current state:** Instructions only. No packet capture or tool installation verified.
 
+For the complete RHEL 10.2 installation, configuration, optional live service, Splunk integration, and rollback procedure, follow the [28-step Zeek deployment guide](ZEEK_DEPLOYMENT.md). This page remains the short packet-analysis companion.
+
 ## Installation and version inventory
 
 On **RHEL-SENSOR01** (optional, owner-approved RHEL 10.2 system):

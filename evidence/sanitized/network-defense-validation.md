@@ -19,6 +19,20 @@
 | NET-13 | CMMC Level 2 sample mapping | Documentation only | No assessment |
 | NET-14 | Existing Splunk, Windows and IdM regression | Pending | TBD |
 
+## Zeek deployment acceptance
+
+Follow [Step 28 of the Zeek deployment guide](../../docs/network-defense/ZEEK_DEPLOYMENT.md#step-28-record-acceptance-evidence) for the observation required at each milestone. The new guide and configuration examples do not change the deployment statuses above.
+
+| Zeek-specific check | Current status | Actual evidence |
+| --- | --- | --- |
+| Approved image digest, actual version, and policy parse | Pending | TBD |
+| Sensor offline DNS fixture and missing-file negative test | Pending | TBD |
+| Authorized mirror, interface/filter, and bidirectional visibility | Pending | TBD |
+| Quadlet start/stop, preserved run directories, and approved boot behavior | Pending | TBD |
+| Synthetic Splunk event count, timestamp accuracy, and JSON fields | Pending | TBD |
+| Optional UF service identity, staging, verified TLS, and RBAC negative test | Pending | TBD |
+| Retention/loss monitoring, rollback, and core-lab regression | Pending | TBD |
+
 ## Observed synthetic replay
 
 These checks ran on a separate Linux validation host on November 5, 2026 (Hawaii time). They cover the repository fixtures. The VM milestones above track your own environment.

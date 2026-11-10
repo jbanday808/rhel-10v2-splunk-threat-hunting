@@ -22,7 +22,7 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 - [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
 - [Optional appendices](docs/appendices/README.md) · [Reference files](docs/reference/README.md) · [Software downloads](docs/reference/downloads.md) · [Deployment order](docs/reference/deployment-order.md)
 - [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md)
-- [Network defense](docs/network-defense/README.md) · [Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
+- [Network defense](docs/network-defense/README.md) · [Complete Zeek installation and deployment](docs/network-defense/ZEEK_DEPLOYMENT.md) · [Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
 - [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md) · [Trellix product overview](docs/security-operations/TRELLIX_PRODUCT_OVERVIEW.md)
 - [IAVM guidance](docs/iavm/README.md) · [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
 
