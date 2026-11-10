@@ -47,3 +47,17 @@ These checks ran on a separate Linux validation host on November 5, 2026 (Hawaii
 | Splunk upload preparation | The local preparation commands produced 16 normalized fixture rows and one candidate correlation by run, tuple, Community ID and time. Splunk indexing and Windows event verification remain Pending. |
 
 Reproduce the HTTP replay with the [worked case](../../docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md). Store generated evidence privately. Record live results against the corresponding milestone after testing in the actual lab.
+
+## Custom Suricata rule pack: offline replay
+
+Observed on a separate Linux analysis host on **2026-11-10 UTC**, using Python **3.12.3** and Suricata **7.0.3 RELEASE** extracted from distribution packages without installing or starting a sensor service. These are synthetic source/replay results, not RHEL 10, Suricata 8, live network, Splunk ingestion, or operational acceptance results. The engine version records the observation; it is not a deployment recommendation.
+
+| Check | Observed result |
+| --- | --- |
+| Isolated configuration and rules | `-T` accepted `passive-offline.yaml.example` and all 12 rules in `passive-review.rules`, SIDs `1002001`-`1002012`. |
+| Positive and negative protocol controls | All 35 independent captures matched the expected alert SID/count map, protocol identification, and flow packet totals. Every new SID had a positive control. |
+| Boundary and false-positive controls | Four/five DNS queries, 49/50/63-character labels, time spacing, source isolation, DNS over UDP/TCP, HTTP header boundaries/empty values, modern TLS, rejected legacy offers, SMB negotiation, RDP negotiation failure/CredSSP, segmented RDP response, and internal/external peers passed. |
+| Fixture safety and reproducibility | Fixed inputs produced identical capture bytes and manifest hashes. Repository/symlink destinations, existing directories, and invalid start times were rejected; existing files were preserved. |
+| Live sensor and owner acceptance | **Pending**; no live capture, active probe, inline action, host configuration change, or Splunk upload was performed. |
+
+Reproduce with the [custom-rule guide](../../docs/network-defense/SURICATA_CUSTOM_RULES.md). The engine replay is explicitly skipped when Suricata is unavailable; a source-only run does not reproduce the observed alert results. Keep generated captures, manifests, and EVE files private and record the actual engine version on each retest.

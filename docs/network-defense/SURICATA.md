@@ -32,6 +32,10 @@ The repo includes a **harmless-only** DNS detection at [configs/network-defense/
 3. Run `suricata -r /private/path/lab-dns.pcap -c /etc/suricata/suricata.yaml -S /private/path/local.rules -l /private/output`; review whether the SID appears in `eve.json`.
 4. If no match, inspect DNS decoding, rule syntax, Suricata version, timestamps and \`fast.log\` without inventing a hit. If the rule keyword form changes, use current OISF rule syntax documentation.
 
+## Additional custom passive rules
+
+The optional [custom-rule guide](SURICATA_CUSTOM_RULES.md) covers 12 additional rules for DNS policy/bursts, cleartext HTTP authentication, obsolete TLS negotiation, SMB, and RDP. It includes a separate offline configuration, synthetic positive/negative controls, exact alert-count replay, tuning limits, and owner-validation steps. The existing marker and HTTP rules remain unchanged; no live sensor configuration is installed.
+
 ## EVE JSON
 
 Under approved package settings, \`/var/log/suricata/eve.json\` is a newline JSON stream with multiple \`event_type\` values such as \`alert\`, \`dns\`, \`http\`, \`tls\`, \`flow\`. A missing `alert` is not equivalent to no threat: the rule must be enabled, the packet captured, and the protocol decoded.

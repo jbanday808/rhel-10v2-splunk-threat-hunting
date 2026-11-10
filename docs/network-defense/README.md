@@ -15,6 +15,7 @@ Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcp
 | [CONOPS.md](CONOPS.md) | Mission, authorization, operation, analyst workflow, metrics, retention and escalation |
 | [ZEEK_AND_WIRESHARK.md](ZEEK_AND_WIRESHARK.md) | Zeek offline overview, TShark and PCAP analysis |
 | [SURICATA.md](SURICATA.md) | RHEL 10 package checks, offline IDS, rules and EVE logging |
+| [SURICATA_CUSTOM_RULES.md](SURICATA_CUSTOM_RULES.md) | 12 custom passive-review rules, reproducible protocol controls, tuning, and senior-analyst triage |
 | [YARA_AND_SIGMA.md](YARA_AND_SIGMA.md) | Local file-matching and Sigma conversion to reviewed SPL |
 | [SPLUNK_INTEGRATION.md](SPLUNK_INTEGRATION.md) | Proposed indexes, verified TLS forwarding, timestamp and parser tests |
 | [CMMC_LEVEL2.md](CMMC_LEVEL2.md) | Illustrative 800-171 Rev 2 requirement/evidence links and scoping cautions |

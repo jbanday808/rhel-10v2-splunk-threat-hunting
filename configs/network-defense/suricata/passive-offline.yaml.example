@@ -1,0 +1,42 @@
+%YAML 1.1
+---
+# Offline fixtures only: use -r and -S passive-review.rules, never a live interface.
+vars:
+  address-groups:
+    HOME_NET: "[192.0.2.0/24]"
+    EXTERNAL_NET: "!$HOME_NET"
+    DNS_SERVERS: "[192.0.2.30]"
+default-log-dir: .
+unix-command:
+  enabled: no
+stats:
+  enabled: no
+stream:
+  checksum-validation: yes
+app-layer:
+  protocols:
+    dns:
+      enabled: yes
+    http:
+      enabled: yes
+    tls:
+      enabled: yes
+    smb:
+      enabled: yes
+    rdp:
+      enabled: yes
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      community-id: true
+      community-id-seed: 0
+      types:
+        - alert
+        - dns
+        - http
+        - tls
+        - smb
+        - rdp
+        - flow

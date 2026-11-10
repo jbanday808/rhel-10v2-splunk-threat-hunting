@@ -1,10 +1,17 @@
 """Offline network-defense unit tests; no PCAP sniffing, package installation or cloud access."""
+from collections import Counter
+import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
+import shutil
 import struct
+import subprocess
+import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,6 +26,10 @@ def load(name, relative):
 
 pcap = load("synthetic_pcap", "scripts/network-defense/generate_synthetic_pcap.py")
 summary = load("aggregate_network", "scripts/network-defense/summarize_network_logs.py")
+with patch.object(sys, "path", [str(ROOT / "scripts/network-defense"), *sys.path]):
+    passive = load("passive_fixtures", "scripts/network-defense/generate_passive_fixtures.py")
+
+SURICATA = os.environ.get("SURICATA_BIN") or shutil.which("suricata")
 
 
 class NetworkDefenseTests(unittest.TestCase):
@@ -94,6 +105,88 @@ class NetworkDefenseTests(unittest.TestCase):
             "start-here/START_HERE_RHEL10v2_STIG.md",
         ):
             self.assertTrue((ROOT / path).is_file(), path)
+
+
+class PassiveRuleTests(unittest.TestCase):
+    def test_fixture_files_match_manifest_and_are_reproducible(self):
+        with tempfile.TemporaryDirectory() as temp:
+            first, second = Path(temp) / "first", Path(temp) / "second"
+            manifest = passive.write_fixtures(first)
+            self.assertEqual(manifest, passive.write_fixtures(second))
+            stored = json.loads((first / "expected-alerts.json").read_text())
+            for name, entry in manifest.items():
+                with self.subTest(case=name):
+                    data = (first / f"{name}.pcap").read_bytes()
+                    self.assertEqual(data, (second / f"{name}.pcap").read_bytes())
+                    self.assertEqual(hashlib.sha256(data).hexdigest(), stored[name]["sha256"])
+                    position, frames = 24, 0
+                    while position < len(data):
+                        length = struct.unpack_from("<I", data, position + 8)[0]
+                        position += 16 + length
+                        frames += 1
+                    self.assertEqual(position, len(data))
+                    self.assertEqual(frames, entry["packets"])
+
+    def test_fixture_writer_rejects_repo_paths_and_preserves_existing_directory(self):
+        with self.assertRaisesRegex(ValueError, "outside the repository"):
+            passive.write_fixtures(ROOT / "private-pcaps")
+        with tempfile.TemporaryDirectory() as temp:
+            existing = Path(temp) / "existing"
+            existing.mkdir()
+            marker = existing / "keep.txt"
+            marker.write_text("keep")
+            with self.assertRaises(FileExistsError):
+                passive.write_fixtures(existing)
+            self.assertEqual(marker.read_text(), "keep")
+            self.assertEqual(list(existing.iterdir()), [marker])
+            link = Path(temp) / "repository-link"
+            link.symlink_to(ROOT, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "outside the repository"):
+                passive.write_fixtures(link / "private-pcaps")
+
+    def test_invalid_timestamp_does_not_create_output(self):
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / "captures"
+            for timestamp in (-1, 0, 2**32):
+                with self.subTest(timestamp=timestamp), self.assertRaises(ValueError):
+                    passive.write_fixtures(output, timestamp)
+                self.assertFalse(output.exists())
+
+    @unittest.skipUnless(SURICATA, "Offline engine replay requires Suricata or SURICATA_BIN")
+    def test_passive_rule_replay_matrix(self):
+        assert SURICATA is not None
+        config = ROOT / "configs/network-defense/suricata/passive-offline.yaml.example"
+        rules = ROOT / "configs/network-defense/suricata/passive-review.rules"
+        with tempfile.TemporaryDirectory() as temp:
+            work = Path(temp)
+            manifest = passive.write_fixtures(work / "captures")
+            check = work / "check"
+            check.mkdir()
+            common = [SURICATA, "-c", str(config), "-S", str(rules)]
+            result = subprocess.run(common + ["-T", "-l", str(check)],
+                                    capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            for name, expected in manifest.items():
+                with self.subTest(case=name):
+                    output = work / name
+                    output.mkdir()
+                    result = subprocess.run(
+                        common + ["--runmode", "single", "-r", str(work / "captures" / f"{name}.pcap"),
+                                  "-l", str(output)],
+                        capture_output=True, text=True, timeout=30,
+                    )
+                    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                    events = [json.loads(line) for line in (output / "eve.json").read_text().splitlines()]
+                    actual = Counter(event["alert"]["signature_id"] for event in events
+                                     if event["event_type"] == "alert")
+                    self.assertEqual(dict(actual), expected["alerts"])
+                    flows = [event for event in events if event["event_type"] == "flow"]
+                    self.assertTrue(flows, "No flow evidence: a zero-alert replay is not a valid control")
+                    protocol = "smb" if name.startswith("smb") else name.split("-", 1)[0]
+                    self.assertEqual({flow.get("app_proto") for flow in flows}, {protocol})
+                    processed = sum(flow["flow"]["pkts_toserver"] + flow["flow"]["pkts_toclient"]
+                                    for flow in flows)
+                    self.assertEqual(processed, expected["packets"])
 
 
 if __name__ == "__main__":
