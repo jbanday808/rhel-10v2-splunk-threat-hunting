@@ -39,6 +39,27 @@ class AiForensicReviewTests(unittest.TestCase):
             if os.name == 'posix':
                 self.assertEqual(output.stat().st_mode & 0o777, 0o600)
 
+    def test_prepare_contract_cites_first_record_when_ids_do_not_include_e001(self):
+        case = copy.deepcopy(CASE)
+        for index, record in enumerate(case['evidence'], start=101):
+            record['id'] = f'E{index:03}'
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / 'case.json'
+            source.write_text(json.dumps(case), encoding='utf-8')
+            output = Path(tmp) / 'packet.json'
+            review.prepare(source, output)
+            contract = json.loads(output.read_text())['response_contract']
+            self.assertEqual(contract['findings'][0]['evidence_ids'], ['E101'])
+            contract['findings'][0]['type'] = 'observation'
+            contract['findings'][0]['confidence'] = 'low'
+            review.validate_response(case, contract)
+
+    def test_date_only_timestamp_is_refused(self):
+        case = copy.deepcopy(CASE)
+        case['evidence'][0]['observed_at_utc'] = '2026-01-01Z'
+        with self.assertRaisesRegex(ValueError, 'UTC time and zero UTC offset'):
+            review.validate_case(case)
+
     def test_non_synthetic_handling_is_refused(self):
         case = copy.deepcopy(CASE)
         case['handling'] = 'PRIVATE_CASE'
