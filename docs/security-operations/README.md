@@ -14,7 +14,6 @@ This optional workstream adds repeatable processes for handling threats and vuln
 | Brief leaders and technical teams | [Hunt and stakeholder briefing](templates/hunt-briefing.md) | Six-slide briefing outline and decision log |
 | Document investigation results | [Detailed hunt report](templates/threat-hunt-report.md) | Evidence-linked findings, limitations and follow-up |
 | Review forensic findings with AI | [AI-assisted forensics](AI_ASSISTED_FORENSICS.md) | [Forensic review record](templates/forensic-review.md) |
-| Explain the Trellix portfolio | [Trellix product overview](TRELLIX_PRODUCT_OVERVIEW.md) | Plain-language customer explanations and discovery questions |
 | Deliver an engagement and handover | [Engagement workflow](ENGAGEMENT_DELIVERY.md) | [Closeout report](templates/engagement-closeout.md) |
 | Practice all workflows | [Synthetic tabletop](TABLETOP_EXERCISE.md) | [Validation template](../../evidence/sanitized/security-operations-validation.md) |
 
@@ -25,7 +24,7 @@ Copy a template into approved private case storage before filling it in. Do not 
 - [Cobalt Strike–associated pipe hunt](../../hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md): Validate a named-pipe hypothesis with an upstream Atomic test and separate matching/nonmatching controls. Do not attribute a pipe hit to a tool or a PenTest team without corroboration.
 - [Worked passive HTTP case](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md): Compare the baseline and candidate, review packet evidence and correlate synthetic Zeek/Suricata/Splunk data.
 - [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md): Establish network baselines and investigate protocol and traffic candidates within actual visibility limits.
-- [STIG and IAVM guidance](../iavm/README.md): Feed verified applicability, exposure and remediation results into the vulnerability process.
+- [Windows 11 STIG guidance](../stig-windows11/IMPLEMENTATION_GUIDE.md) and [Defender Firewall STIG guidance](../stig-windows-firewall/IMPLEMENTATION_GUIDE.md): Feed verified applicability and remediation results into the vulnerability process.
 - [Existing short hunt report](../reference/hunt-report-template.md): Use for a compact lab record; use the detailed template here for an engagement report.
 
 The six existing Splunk indexes and three core VM roles remain the lab baseline. Optional sensors, licensed Trellix products, cloud AI services, SOAR actions and customer integrations require separate design and validation.
@@ -39,7 +38,7 @@ The six existing Splunk indexes and three core VM roles remain the lab baseline.
 | Detailed hunting plans and reports | Hypotheses, scope, baseline, telemetry, searches, controls, briefings and end-of-engagement reports |
 | Forensic analysis | Evidence register, UTC timeline, chain-of-custody records and reviewed conclusions |
 | AI-assisted investigation | Synthetic review packet, referenced response format, structural validation and mandatory human review |
-| Product consulting | Plain-language Trellix overview, product-specific questions, change/rollback and knowledge-transfer planning |
+| Product consulting | Product-specific questions, change/rollback and knowledge-transfer planning in the engagement workflow |
 | Professional-services delivery | Scope, acceptance criteria, effort/cost tracking, risks, training, handover and billing reconciliation |
 
 ## References

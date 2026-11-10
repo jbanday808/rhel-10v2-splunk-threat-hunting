@@ -7,9 +7,9 @@
 4. Follow Steps 45 through 52 for alerts, cleanup, backups, documentation, and export.
 5. Follow [the appendices](../appendices/README.md) for phases, integrity, OIDC, NGINX, Windows ZIP upload, password redaction, and HEC.
 
-6. **Optional new Zero Trust workstream:** follow [the DoD-aligned RHEL 10.2 Zero Trust guide](../zero-trust/IMPLEMENTATION_GUIDE.md) for controlled IAM, device, segmentation and Splunk evidence tests; dynamic ZTNA/PDP and DoD Target Level are **not** implemented by this repo.
+6. **Optional Windows assessments:** follow the [Windows 11 STIG guide](../../start-here/START_HERE_WINDOWS11_STIG.md) or [Defender Firewall STIG guide](../../start-here/START_HERE_WINDOWS_FIREWALL_STIG.md) for the applicable assessment and validation procedure.
 
-7. **Optional DISA STIG V1R1 assessment/hardening:** [RHEL 10.2 STIG 26-Step Guide](../stig-rhel10/IMPLEMENTATION_GUIDE.md) for privately scanning each RHEL VM, reviewing service impact, documenting fixes and retesting; no automated mass-remediation.
+7. **Optional network analysis:** use the [network-defense guide](../../start-here/START_HERE_NETWORK_DEFENSE.md) or [Arkime guide](../../start-here/START_HERE_ARKIME.md) for synthetic offline exercises and separately validated sensor work.
 
 8. **Optional future AI extension:** Use [the NIST AI RMF integration guide](../ai-rmf/IMPLEMENTATION_GUIDE.md) only after separating the current SIEM lab from proposed AI functionality; AI is not deployed and all approvals remain Pending.
 

@@ -8,14 +8,11 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 | --- | --- |
 | Work in VS Code and WSL | [WSL quick start](start-here/START_HERE_WSL.md) · [Publishing guide](docs/reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) |
 | Build the core lab | [RHEL and Splunk](start-here/START_HERE_RHEL10v2.md) · [Windows alternative](start-here/START_HERE_WINDOWS.md) |
-| Assess RHEL 10.2 | [RHEL STIG V1R1](start-here/START_HERE_RHEL10v2_STIG.md) |
 | Assess Windows 11 | [Windows 11 STIG V2R11](start-here/START_HERE_WINDOWS11_STIG.md) |
 | Assess Windows Firewall | [Defender Firewall STIG V2R2](start-here/START_HERE_WINDOWS_FIREWALL_STIG.md) |
-| Assess an authorized ePO server | [ESS ePO 5.x STIG V3R8](start-here/START_HERE_EPO_STIG.md) |
-| Plan Zero Trust controls | [Zero Trust guide](start-here/START_HERE_ZERO_TRUST.md) |
 | Analyze network activity | [Kali workstation setup](docs/network-defense/KALI_DEPLOYMENT.md) · [Passive network defense](start-here/START_HERE_NETWORK_DEFENSE.md) · [Arkime sensor](start-here/START_HERE_ARKIME.md) |
 
-[Browse all ten start guides](start-here/README.md).
+[Browse the current start guides](start-here/README.md).
 
 ## Project documentation
 
@@ -23,8 +20,8 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 - [Optional appendices](docs/appendices/README.md) · [Reference files](docs/reference/README.md) · [Software downloads](docs/reference/downloads.md) · [Deployment order](docs/reference/deployment-order.md)
 - [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md)
 - [Kali Wireshark, Zeek, Suricata, Arkime, YARA and Sigma setup](docs/network-defense/KALI_DEPLOYMENT.md) · [Network defense](docs/network-defense/README.md) · [Complete RHEL Zeek deployment](docs/network-defense/ZEEK_DEPLOYMENT.md) · [RHEL Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
-- [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md) · [Trellix product overview](docs/security-operations/TRELLIX_PRODUCT_OVERVIEW.md)
-- [IAVM guidance](docs/iavm/README.md) · [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
+- [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md)
+- [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
 
 ## NIST AI RMF and security governance (proposed extension)
 
@@ -46,7 +43,7 @@ The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`
 
 | Folder | Contents |
 | --- | --- |
-| [start-here](start-here/README.md) | Ten quick-start and workstream guides |
+| [start-here](start-here/README.md) | Current quick-start and workstream guides |
 | [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
 | [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
 | [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
