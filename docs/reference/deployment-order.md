@@ -10,4 +10,6 @@
 
 7. **Optional DISA STIG V1R1 assessment/hardening:** [RHEL 10.2 STIG 26-Step Guide](../stig-rhel10/IMPLEMENTATION_GUIDE.md) for privately scanning each RHEL VM, reviewing service impact, documenting fixes and retesting; no automated mass-remediation.
 
+8. **Optional future AI extension:** Use [the NIST AI RMF integration guide](../ai-rmf/IMPLEMENTATION_GUIDE.md) only after separating the current SIEM lab from proposed AI functionality; AI is not deployed and all approvals remain Pending.
+
 The assembled files are already supplied. Review and deploy them at the applicable steps rather than recreating an older version over later additions. VM observations remain Pending until you actually test them.

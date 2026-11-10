@@ -26,6 +26,10 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 - [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md) · [Trellix product overview](docs/security-operations/TRELLIX_PRODUCT_OVERVIEW.md)
 - [IAVM guidance](docs/iavm/README.md) · [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
 
+## NIST AI RMF and security governance (proposed extension)
+
+The [NIST AI RMF implementation guide](docs/ai-rmf/IMPLEMENTATION_GUIDE.md) and [AI risk governance documentation](docs/ai-rmf/README.md) describe an **optional future, read-only, human-reviewed AI-assisted Splunk alert summarizer**. This is a **Work in Progress**: no model is deployed, no AI test outcomes are asserted, and no security categorization or Authorization to Operate is granted. The documentation connects AI RMF `GOVERN/MAP/MEASURE/MANAGE` with SP 800-37 `PREPARE/CATEGORIZE/SELECT/IMPLEMENT/ASSESS/AUTHORIZE/MONITOR` and illustrative SP 800-53 controls.
+
 ## Lab systems
 
 | System | Role |
