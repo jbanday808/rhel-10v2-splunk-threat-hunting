@@ -32,7 +32,11 @@ The repo includes a **harmless-only** DNS detection at [configs/network-defense/
 3. Run `suricata -r /private/path/lab-dns.pcap -c /etc/suricata/suricata.yaml -S /private/path/local.rules -l /private/output`; review whether the SID appears in `eve.json`.
 4. If no match, inspect DNS decoding, rule syntax, Suricata version, timestamps and \`fast.log\` without inventing a hit. If the rule keyword form changes, use current OISF rule syntax documentation.
 
-For a separate senior-analyst exercise, the [passive review rules and validation plan](../../configs/network-defense/suricata/README.md) add eight **optional** DNS, HTTP, TLS, SMB and RDP observations scoped to the lab's `172.25.250.0/24` network. The file is not loaded automatically, and a future sensor still needs a verified packet feed. Load it explicitly with `-S` in an isolated offline check, compare positive and negative synthetic captures, and confirm any candidate with a service owner before treating it as a vulnerability.
+## Additional custom passive rules
+
+The optional [custom-rule guide](SURICATA_CUSTOM_RULES.md) covers 12 additional rules for DNS policy/bursts, cleartext HTTP authentication, obsolete TLS negotiation, SMB, and RDP. It includes a separate offline configuration, synthetic positive/negative controls, exact alert-count replay, tuning limits, and owner-validation steps. The existing marker and HTTP rules remain unchanged; no live sensor configuration is installed.
+
+For a separate senior-analyst exercise, the [passive review rules and validation plan](../../configs/network-defense/suricata/README.md) add eight **optional** DNS, HTTP, TLS, SMB and RDP observations scoped to the owned VMnet8 lab's `172.25.250.0/24` network. The file is not loaded automatically, and a future sensor still needs a verified packet feed. Load it explicitly with `-S` in an isolated offline check, compare positive and negative synthetic captures, and confirm any candidate with a service owner before treating it as a vulnerability.
 
 ## EVE JSON
 

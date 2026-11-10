@@ -1,0 +1,21 @@
+# Optional passive IDS examples, not production policy. See docs/network-defense/SURICATA_CUSTOM_RULES.md.
+# HOME_NET, EXTERNAL_NET and DNS_SERVERS must match the approved observation boundary.
+
+alert dns $HOME_NET any -> !$DNS_SERVERS 53 (msg:"LAB POLICY DNS query to unapproved resolver"; flow:to_server; dns.opcode:0; threshold:type limit, track by_src, count 1, seconds 60; classtype:policy-violation; priority:2; sid:1002001; rev:1;)
+alert dns $HOME_NET any -> any 53 (msg:"LAB REVIEW Repeated DNS queries with long first label"; flow:to_server; dns.query; pcre:"/^[a-z0-9_-]{50,63}\./i"; threshold:type both, track by_src, count 5, seconds 60; classtype:misc-activity; priority:3; sid:1002002; rev:1;)
+
+alert http $HOME_NET any -> any any (msg:"LAB POLICY Cleartext HTTP Basic authorization"; flow:established,to_server; http.header; content:"Authorization|3a|"; nocase; pcre:"/(?:^|\r\n)Authorization\x3a[ \t]*Basic[ \t]+\S/i"; classtype:policy-violation; priority:2; sid:1002003; rev:1;)
+alert http $HOME_NET any -> any any (msg:"LAB POLICY Cleartext HTTP Basic proxy authorization"; flow:established,to_server; http.header; content:"Proxy-Authorization|3a|"; nocase; pcre:"/(?:^|\r\n)Proxy-Authorization\x3a[ \t]*Basic[ \t]+\S/i"; classtype:policy-violation; priority:2; sid:1002004; rev:1;)
+alert http $HOME_NET any -> any any (msg:"LAB REVIEW HTTP TRACE request observed"; flow:established,to_server; http.method; content:"TRACE"; startswith; endswith; classtype:protocol-command-decode; priority:3; sid:1002005; rev:1;)
+
+alert tls any any -> $HOME_NET any (msg:"LAB POLICY Server selected obsolete TLS 1.0"; flow:established,to_client; ssl_state:server_hello; tls.version:1.0; classtype:policy-violation; priority:2; sid:1002006; rev:1;)
+alert tls any any -> $HOME_NET any (msg:"LAB POLICY Server selected obsolete TLS 1.1"; flow:established,to_client; ssl_state:server_hello; tls.version:1.1; classtype:policy-violation; priority:2; sid:1002007; rev:1;)
+
+# NBSS-framed SMB on TCP/445. Exclude SMB_COM_NEGOTIATE (0x72), which can negotiate SMB2.
+alert tcp $HOME_NET any -> any 445 (msg:"LAB REVIEW SMBv1 non-negotiate request observed"; flow:established,to_server,only_stream; app-layer-protocol:smb; content:"|00|"; offset:0; depth:1; content:"|ff 53 4d 42|"; offset:4; depth:4; byte_test:1,!=,0x72,8; byte_test:1,!&,0x80,13; classtype:protocol-command-decode; priority:2; sid:1002008; rev:1;)
+alert smb $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB POLICY Decoded SMB to peer outside HOME_NET"; flow:established,to_server; threshold:type limit, track by_src, count 1, seconds 60; classtype:policy-violation; priority:2; sid:1002009; rev:1;)
+
+# Match the server's 19-byte TPKT/X.224 RDP Negotiation Response, not the client offer.
+alert tcp any 3389 -> $HOME_NET any (msg:"LAB POLICY RDP server selected Standard RDP Security"; flow:established,to_client,only_stream; content:"|03 00 00 13 0e d0|"; startswith; content:"|00 02|"; offset:10; depth:2; content:"|08 00 00 00 00 00|"; offset:13; depth:6; classtype:policy-violation; priority:2; sid:1002010; rev:1;)
+alert tcp any 3389 -> $HOME_NET any (msg:"LAB POLICY RDP server selected TLS without CredSSP"; flow:established,to_client,only_stream; content:"|03 00 00 13 0e d0|"; startswith; content:"|00 02|"; offset:10; depth:2; content:"|08 00 01 00 00 00|"; offset:13; depth:6; classtype:policy-violation; priority:2; sid:1002011; rev:1;)
+alert rdp $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB POLICY Decoded RDP to peer outside HOME_NET"; flow:established,to_server; threshold:type limit, track by_src, count 1, seconds 60; classtype:policy-violation; priority:2; sid:1002012; rev:1;)
