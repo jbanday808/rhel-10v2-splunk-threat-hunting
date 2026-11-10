@@ -8,6 +8,7 @@ Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcp
 
 | Resource | Focus |
 | --- | --- |
+| [KALI_DEPLOYMENT.md](KALI_DEPLOYMENT.md) | Kali workstation: six tools, in-scope synthetic PCAP controls, offline Arkime/OpenSearch, optional verified live capture |
 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 30-step planning, installation, configuration, PCAP lab, Splunk integration, baseline, triage and operations |
 | [ZEEK_DEPLOYMENT.md](ZEEK_DEPLOYMENT.md) | Complete 28-step Zeek installation, policy, offline validation, optional live service, Splunk integration, operations, and rollback |
 | [OFFLINE_HTTP_WALKTHROUGH.md](OFFLINE_HTTP_WALKTHROUGH.md) | Positive and negative fixture replay, alert tuning, file analysis, and correlation in the existing `lab` index |

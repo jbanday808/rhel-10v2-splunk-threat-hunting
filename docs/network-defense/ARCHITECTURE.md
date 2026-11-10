@@ -2,6 +2,8 @@
 
 ## Existing three-VM lab + optional fourth VM
 
+The [Kali workstation guide](KALI_DEPLOYMENT.md) is an **alternative offline analysis path** for Wireshark, Zeek, Suricata, Arkime, YARA and Sigma. It does not make Kali a mirrored sensor, replace the proposed RHEL-SENSOR01, or change the three existing VMs.
+
 ~~~mermaid
 flowchart TD
     H["Windows 11 host / VS Code + WSL\n172.25.250.1"]
