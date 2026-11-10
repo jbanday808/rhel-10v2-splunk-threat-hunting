@@ -1,0 +1,6 @@
+index=net_zeek sourcetype=zeek:json earliest=0
+| spath path=query output=dns_name
+| where isnotnull(dns_name)
+| stats count as requests dc(host) as hosts by dns_name
+| sort requests
+| head 30

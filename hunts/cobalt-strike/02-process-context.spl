@@ -1,0 +1,11 @@
+index=sysmon host=WINHUNT01 (EventCode=1 OR EventCode=17 OR EventCode=18 OR EventID=1 OR EventID=17 OR EventID=18)
+| eval code=tonumber(coalesce(EventCode,EventID)), pipe_name=coalesce(PipeName,pipe_name), process_guid=coalesce(ProcessGuid,ProcessGUID,process_guid), image=coalesce(Image,process_path), account=coalesce(User,user)
+| where isnotnull(process_guid) AND process_guid!=""
+| eval pipe_leaf=lower(mvindex(split(pipe_name,urldecode("%5C")),-1))
+| eval hit=if((code=17 OR code=18) AND match(pipe_leaf,"^(?:msagent_[0-9a-f]+|postex_(?:ssh_)?[0-9a-f]+|msse-[0-9]+-server)$"),1,0)
+| stats max(hit) as hit min(_time) as first_seen max(_time) as last_seen
+    values(eval(if(hit=1,pipe_name,null()))) as matching_pipes
+    values(image) as images values(ParentImage) as parents
+    values(CommandLine) as commands values(account) as accounts by host process_guid
+| where hit=1
+| fields - hit

@@ -19,7 +19,7 @@ sudo systemctl status Splunkd --no-pager
 
 **Command overview:** `dnf install` installs NGINX, access-control tools, and curl; `rpm -q` shows the installed NGINX version; `systemctl status` checks Splunk.
 
-Download a compatible **Splunk Add-on for NGINX** from its official Splunk page. In Splunk Web, use **Apps → Manage Apps → Install app from file**, install the vendor package, and restart if requested. Record the exact version in `docs/versions.md`.
+Download a compatible **Splunk Add-on for NGINX** from its official Splunk page. In Splunk Web, use **Apps → Manage Apps → Install app from file**, install the vendor package, and restart if requested. Record the exact version in `docs/reference/versions.md`.
 
 Confirm the installed app folder:
 

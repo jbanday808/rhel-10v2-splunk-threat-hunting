@@ -1,0 +1,22 @@
+# PROPOSED ONLY: merge after owner reviews retention, storage, RBAC and rollback.
+# These do NOT overwrite original six lab indexes.
+[net_zeek]
+homePath = $SPLUNK_DB/net_zeek/db
+coldPath = $SPLUNK_DB/net_zeek/colddb
+thawedPath = $SPLUNK_DB/net_zeek/thaweddb
+frozenTimePeriodInSecs = 604800
+maxTotalDataSizeMB = 1024
+
+[net_suricata]
+homePath = $SPLUNK_DB/net_suricata/db
+coldPath = $SPLUNK_DB/net_suricata/colddb
+thawedPath = $SPLUNK_DB/net_suricata/thaweddb
+frozenTimePeriodInSecs = 604800
+maxTotalDataSizeMB = 1024
+
+[net_yara]
+homePath = $SPLUNK_DB/net_yara/db
+coldPath = $SPLUNK_DB/net_yara/colddb
+thawedPath = $SPLUNK_DB/net_yara/thaweddb
+frozenTimePeriodInSecs = 604800
+maxTotalDataSizeMB = 256

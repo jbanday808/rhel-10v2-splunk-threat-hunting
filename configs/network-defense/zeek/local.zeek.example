@@ -1,0 +1,7 @@
+@load tuning/json-logs
+@load misc/stats
+@load misc/capture-loss
+
+redef LogAscii::json_timestamps = JSON::TS_EPOCH;
+redef Log::default_rotation_interval = 1hr;
+redef Site::local_nets += { 172.25.250.0/24 };

@@ -1,23 +1,30 @@
-# RHEL 10.2 Splunk threat hunting lab with LDAP NGINX redaction HEC and Azure OIDC
+# RHEL 10.2 Splunk Threat Hunting Lab
 
-Build a VMware learning lab with RHEL Splunk Enterprise, a Windows 11 hunting endpoint, and a RHEL IdM directory. The source package includes the complete procedures and assembled custom files.
+This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, and Red Hat IdM for security monitoring and threat-hunting exercises. The repository contains procedures and configuration examples. Optional network sensors, STIG assessments, and other extensions remain work in progress; published files do not prove a live deployment or completed assessment.
 
-**Start with VS Code + WSL on Windows 11:** [START_HERE_WSL.md](START_HERE_WSL.md) and the [complete WSL publishing guide](docs/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md).
+## Start here
 
-For RHEL 10.2 lab installation, configuration, and validation, see **[START_HERE_RHEL10v2.md](START_HERE_RHEL10v2.md)**.
+| Goal | Guide |
+| --- | --- |
+| Work in VS Code and WSL | [WSL quick start](start-here/START_HERE_WSL.md) · [Publishing guide](docs/reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) |
+| Build the core lab | [RHEL and Splunk](start-here/START_HERE_RHEL10v2.md) · [Windows alternative](start-here/START_HERE_WINDOWS.md) |
+| Assess RHEL 10.2 | [RHEL STIG V1R1](start-here/START_HERE_RHEL10v2_STIG.md) |
+| Assess Windows 11 | [Windows 11 STIG V2R11](start-here/START_HERE_WINDOWS11_STIG.md) |
+| Assess Windows Firewall | [Defender Firewall STIG V2R2](start-here/START_HERE_WINDOWS_FIREWALL_STIG.md) |
+| Assess an authorized ePO server | [ESS ePO 5.x STIG V3R8](start-here/START_HERE_EPO_STIG.md) |
+| Plan Zero Trust controls | [Zero Trust guide](start-here/START_HERE_ZERO_TRUST.md) |
+| Analyze network activity | [Passive network defense](start-here/START_HERE_NETWORK_DEFENSE.md) · [Arkime](start-here/START_HERE_ARKIME.md) |
 
-For a Windows-only alternative, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
+[Browse all ten start guides](start-here/README.md).
 
-**Existing GitHub repository:** [jbanday808/rhel-10v2-splunk-threat-hunting](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting). Do **not** create a duplicate repository. The provided ZIP omits `LICENSE` so the MIT license in GitHub is preserved.
+## Project documentation
 
-## Guides
-
-- [Complete Word guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
-- [Complete text guide](docs/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md)
-- [All 52 numbered steps](docs/steps/README.md)
-- [Detailed appendices](docs/appendices/README.md)
-- [Deployment order](docs/deployment-order.md)
-- [Vendor software and generated files](docs/downloads.md)
+- [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
+- [Optional appendices](docs/appendices/README.md) · [Reference files](docs/reference/README.md) · [Software downloads](docs/reference/downloads.md) · [Deployment order](docs/reference/deployment-order.md)
+- [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md)
+- [Network defense](docs/network-defense/README.md) · [Complete Zeek installation and deployment](docs/network-defense/ZEEK_DEPLOYMENT.md) · [Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
+- [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md) · [Trellix product overview](docs/security-operations/TRELLIX_PRODUCT_OVERVIEW.md)
+- [IAVM guidance](docs/iavm/README.md) · [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
 
 ## NIST AI RMF and security governance (proposed extension)
 
@@ -25,51 +32,34 @@ The [NIST AI RMF implementation guide](docs/ai-rmf/IMPLEMENTATION_GUIDE.md) and 
 
 ## Lab systems
 
-| System | Address | Purpose |
-| --- | --- | --- |
-| RHEL-SPLUNK01 | 172.25.250.10 | Indexing, searches, TLS receiver, local NGINX test |
-| WINHUNT01 | 172.25.250.20 | Windows logs, Sysmon, Universal Forwarder |
-| RHEL-IDM01 | 172.25.250.30 | IdM directory, DNS, LDAPS |
-| VMnet8 gateway | 172.25.250.2 | NAT outbound access |
+| System | Role |
+| --- | --- |
+| RHEL-SPLUNK01 | Splunk Enterprise, security searches, and TLS receiver |
+| WINHUNT01 | Windows event collection, Sysmon, and Universal Forwarder |
+| RHEL-IDM01 | IdM directory, DNS, and LDAPS |
+| RHEL-SENSOR01 (optional; not installed) | Proposed passive network sensor and Arkime exercises |
 
-## Included source
+The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, and `lab`. The optional sensor does not automatically send Arkime sessions to Splunk.
+
+## Repository layout
 
 | Folder | Contents |
 | --- | --- |
-| apps | Server and forwarder apps plus NGINX local input overlay |
-| configs | Linux logging, NGINX, redaction, HEC, systemd, and PKI examples |
-| scripts/rhel | Storage, logging, backup, verification, NGINX, redaction, and HEC helpers |
-| scripts/windows | Endpoint setup and read-only source validation |
-| scripts/azure | Cloud Shell OIDC identity setup |
-| sysmon | Lab XML rules |
-| hunts | Hunting, redaction, HEC, and data-health searches |
-| tests | Offline dummy redaction, safe merge, and HEC sender checks |
-| docs | Full guide, WSL publishing guide, steps, appendices, architecture, and sanitized LDAP examples |
-| evidence/sanitized | Validation and investigation records |
-| .github/workflows | Linux/Windows source checks and two manual Azure OIDC workflows |
-| .github/instructions and .github/prompts | VS Code / GitHub Copilot project rules and prompt templates |
-| tools | Publication preflight and repository support checks |
-| screenshots | 22 user-supplied lab screenshots; review before public use |
+| [start-here](start-here/README.md) | Ten quick-start and workstream guides |
+| [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
+| [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
+| [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
+| [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |
+| [evidence/sanitized](evidence/sanitized/) and [screenshots](screenshots/) | Pending result templates and author-supplied images that require review |
 
-## Source validation
+## Validate and publish
 
-On RHEL or WSL: `python3 scripts/validate_project.py`. Add `--verify-manifest` before editing the downloaded release to verify initial file hashes.
+From the repository root on RHEL or WSL, run:
 
-On Windows: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\Test-Project.ps1`. Add `-VerifyManifest` for the initial release.
+```bash
+python3 scripts/validate_project.py
+python3 -B -m unittest discover -s tests -v
+python3 tools/publication_preflight.py
+```
 
-Run `python3 -B -m unittest discover -s tests -v` on RHEL or WSL for the offline behavior checks.
-
-The source-check workflow runs on push and pull request. The OIDC workflows are manual and need the separate Azure trust setup. No workflow deploys directly into private VMnet8.
-
-## Results
-
-[Validation templates](evidence/sanitized/validation.md) start at Pending. Record actual observed results and sanitized screenshots after each live test. The sample NGINX record is example data.
-
-## Local settings
-
-The official NGINX add-on is installed separately. Apply `apps/Splunk_TA_nginx/local/inputs.conf` after installation. The packaged lab index enables data integrity for new data. The LAB_SIEM app includes the dedicated identity redaction source; follow that appendix to prepare its source file and verify stored events. The HEC settings are examples to merge separately, with tokens created only on your server. LDAP passwords, TLS keys, Azure session tokens, installers, backups, and raw evidence stay outside the repository.
-
-## Repository publication
-
-To publish using VS Code + WSL, open [START_HERE_WSL.md](START_HERE_WSL.md).
-Actual VM results remain in the `Pending` status until observed and verified. The 22 screenshots were supplied by the project author; review them individually for private information before committing.
+These are source checks. Record live results in [sanitized validation templates](evidence/sanitized/validation.md) only after observing them. The historical `FILE_MANIFEST.json` describes the original ZIP, so its `--verify-manifest` mode applies to that unchanged package, not the reorganized checkout. Review [public repository safety](docs/reference/security-and-sanitization.md) and [SECURITY.md](SECURITY.md) before publishing screenshots or evidence. Never publish secrets.

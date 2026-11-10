@@ -1,0 +1,5 @@
+(index=win_security OR index=win_system OR index=sysmon OR index=powershell OR index=linux) earliest=-24h ```Question: What ordered endpoint, identity, network, and local SSH activity is available for a scoped investigation?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), account=coalesce(User,SubjectUserName,TargetUserName,user)
+| where (index="linux" AND match(_raw,"(?i)sshd")) OR (index="sysmon" AND in(event_code,1,3,12,13,14,22)) OR (index="powershell" AND event_code=4104) OR (index="win_security" AND in(event_code,1102,4624,4625,4698,4702,4720,4732)) OR (index="win_system" AND event_code=104)
+| table _time _indextime host index event_code account Image ParentImage CommandLine ProcessGuid IpAddress DestinationIp DestinationPort TaskName QueryName source
+| sort 0 _time

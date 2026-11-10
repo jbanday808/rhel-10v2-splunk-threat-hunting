@@ -1,0 +1,203 @@
+{
+  "name": "RHEL Splunk threat-hunting candidates and gaps",
+  "versions": {
+    "attack": "20",
+    "navigator": "5.3.2",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Unvalidated hunt candidates, context-only signals, and telemetry gaps. Uncolored techniques are unassessed. Colors do not represent verified detections.",
+  "layout": {
+    "layout": "side",
+    "showID": true,
+    "showName": true,
+    "expandedSubtechniques": "annotated"
+  },
+  "metadata": [
+    {
+      "name": "Reviewed source",
+      "value": "MITRE ATT&CK Enterprise STIX v20.1, reviewed 2026-11-05"
+    }
+  ],
+  "links": [
+    {
+      "label": "MITRE ATT&CK updates",
+      "url": "https://attack.mitre.org/resources/updates/"
+    }
+  ],
+  "techniques": [
+    {
+      "techniqueID": "T1059.001",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Sysmon process and PowerShell telemetry require live validation.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/01-process-network.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1136.001",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Confirm a Security 4720 account is local and creation is unauthorized.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/03-account-to-group.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1098.007",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Confirm the group SID, its privilege, and the actor's authorization.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/03-account-to-group.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1053.005",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Task creation or modification does not by itself prove execution or abuse.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/04-scheduled-task-changes.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1547.001",
+      "color": "#f6c65b",
+      "comment": "Candidate only for the specifically monitored SIEMLab Run-key pattern, not all Run keys or Startup folders.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/05-lab-run-key.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1685.005",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Verify the System 104 provider and investigate authorization and independently retained evidence.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/06-event-log-clear-candidates.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1110.001",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Repeated failures before success do not establish password guessing or compromise.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/02-failures-before-success.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1110.003",
+      "color": "#f6c65b",
+      "comment": "Candidate only. Multi-account failures do not establish that the same password was used.",
+      "metadata": [
+        {"name": "Status", "value": "Candidate"},
+        {"name": "Search", "value": "hunts/mitre-attack/07-multiple-account-failures.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1078",
+      "color": "#85bfe7",
+      "comment": "Context only. Authentication activity does not prove a valid account was used by an adversary.",
+      "metadata": [
+        {"name": "Status", "value": "Context only"},
+        {"name": "Search", "value": "hunts/mitre-attack/02-failures-before-success.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1071.001",
+      "color": "#85bfe7",
+      "comment": "Context only. A selected process connection is not protocol-level evidence of command and control.",
+      "metadata": [
+        {"name": "Status", "value": "Context only"},
+        {"name": "Search", "value": "hunts/mitre-attack/01-process-network.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1071.004",
+      "color": "#85bfe7",
+      "comment": "Context only. DNS is filtered to PowerShell, and a DNS query alone is not C2 evidence.",
+      "metadata": [
+        {"name": "Status", "value": "Context only"},
+        {"name": "Search", "value": "hunts/mitre-attack/08-powershell-dns-context.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1021.004",
+      "color": "#85bfe7",
+      "comment": "Context only. Local SSH authentication is not proof of adversarial lateral movement.",
+      "metadata": [
+        {"name": "Status", "value": "Context only"},
+        {"name": "Search", "value": "hunts/mitre-attack/09-linux-ssh-context.spl"}
+      ]
+    },
+    {
+      "techniqueID": "T1566.001",
+      "color": "#cbd0d5",
+      "comment": "Gap: mail and attachment delivery telemetry are not provided.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1136.003",
+      "color": "#cbd0d5",
+      "comment": "Gap: cloud account lifecycle and identity audit events are not collected.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1098.003",
+      "color": "#cbd0d5",
+      "comment": "Gap: cloud role-assignment audit data is not collected.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1003.001",
+      "color": "#cbd0d5",
+      "comment": "Gap: EDR memory access or Sysmon process-access telemetry is not configured.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1047",
+      "color": "#cbd0d5",
+      "comment": "Gap: remote WMI activity is not fully observable from process starts alone.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1021.002",
+      "color": "#cbd0d5",
+      "comment": "Gap: share auditing and correlated source/destination Windows telemetry are not configured.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1685.006",
+      "color": "#cbd0d5",
+      "comment": "Gap: local authentication syslog is insufficient to identify Linux log tampering.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1005",
+      "color": "#cbd0d5",
+      "comment": "Gap: general file-read evidence is not provided by the limited lab FileCreate rule.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1041",
+      "color": "#cbd0d5",
+      "comment": "Gap: complete egress and transfer context and a confirmed C2 channel are unavailable.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    },
+    {
+      "techniqueID": "T1486",
+      "color": "#cbd0d5",
+      "comment": "Gap: broad file-change, ransomware behavior, and backup-impact telemetry are not provided.",
+      "metadata": [{"name": "Status", "value": "Gap"}]
+    }
+  ],
+  "legendItems": [
+    {"label": "Candidate hunt; not validated", "color": "#f6c65b"},
+    {"label": "Context only; technique not established", "color": "#85bfe7"},
+    {"label": "Telemetry or hunt gap", "color": "#cbd0d5"}
+  ]
+}

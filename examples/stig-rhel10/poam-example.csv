@@ -1,0 +1,4 @@
+finding_id,target,rule_version,v_id,severity,observed_result,service_impact,planned_action,owner,due_date,exception_decision,retest_result,evidence_ref,status
+EXAMPLE-001,RHEL-SPLUNK01,RHEL-10-700970,V-280094,CAT_II,Pending,Review debug-shell status,Inspect then apply only an approved reversible fix,TBD,TBD,Not_Decided,Pending,Pending,Example_Not_Real_Finding
+EXAMPLE-002,RHEL-IDM01,RHEL-10-200030,V-280945,CAT_II,Pending,Potential IdM Kerberos dependency,Review gssproxy usage before any package changes,TBD,TBD,Not_Decided,Pending,Pending,Example_Not_Real_Finding
+EXAMPLE-003,RHEL-SPLUNK01,RHEL-10-000500,V-281009,CAT_I,Pending,FIPS and TLS compatibility,Plan an approved FIPS migration or replacement build,TBD,TBD,Not_Decided,Pending,Pending,Example_Not_Real_Finding

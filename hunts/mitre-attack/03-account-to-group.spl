@@ -1,0 +1,10 @@
+index=win_security earliest=-24h (EventCode=4720 OR EventCode=4732 OR EventID=4720 OR EventID=4732) ```Question: Was a newly created account added to a local security group within one hour?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), account_sid=if(event_code=4720,coalesce(TargetSid,Target_Sid),coalesce(MemberSid,Member_Sid))
+| where isnotnull(account_sid) AND account_sid!="" AND account_sid!="-"
+| eval created_time=if(event_code=4720,_time,null()), created_account=if(event_code=4720,coalesce(TargetUserName,Target_User_Name,"not_recorded"),null()), creation_actor=if(event_code=4720,coalesce(SubjectUserName,Subject_User_Name,"not_recorded"),null()), target_group=if(event_code=4732,coalesce(TargetUserName,Target_User_Name),null()), group_actor=coalesce(SubjectUserName,Subject_User_Name)
+| sort 0 _time
+| streamstats current=true last(created_time) as created_at last(created_account) as account last(creation_actor) as created_by by host account_sid
+| where event_code=4732 AND isnotnull(created_at) AND _time>=created_at AND _time-created_at<=3600
+| eval added_at=_time
+| table host account_sid account created_at created_by target_group group_actor added_at
+| sort 0 -added_at

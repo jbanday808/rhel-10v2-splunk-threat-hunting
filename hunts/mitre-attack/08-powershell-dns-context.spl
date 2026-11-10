@@ -1,0 +1,5 @@
+index=sysmon earliest=-24h (EventCode=22 OR EventID=22) ```Question: What DNS queries were observed for the PowerShell processes included by the Sysmon rules?```
+| eval query_name=coalesce(QueryName,query_name), image=coalesce(Image,process_path)
+| where isnotnull(query_name) AND query_name!="" AND match(image,"(?i)powershell[.]exe$")
+| stats count min(_time) as first_seen max(_time) as last_seen values(image) as images values(QueryResults) as query_results by host query_name
+| sort 0 -last_seen

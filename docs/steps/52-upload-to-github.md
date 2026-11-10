@@ -4,7 +4,7 @@
 
 **Location:** VS Code integrated WSL terminal, at the root of the **cloned** repository.
 
-Follow [the full upload walkthrough](../WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) to copy the updated ZIP into a clean clone without overwriting `.git` or `LICENSE`. The default branch is `main`.
+Follow [the full upload walkthrough](../reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) to copy the updated ZIP into a clean clone without overwriting `.git` or `LICENSE`. The default branch is `main`.
 
 ```bash
 git status --short

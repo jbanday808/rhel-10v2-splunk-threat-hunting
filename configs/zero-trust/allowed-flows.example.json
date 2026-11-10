@@ -1,0 +1,128 @@
+{
+  "$schema_note": "Illustrative flow design for the isolated VMware home lab, not a firewall apply recipe or a DoD ZT compliance attestation.",
+  "schema_version": "1.0.0",
+  "status": "proposed_not_deployed",
+  "subnet": "172.25.250.0/24",
+  "assets": {
+    "management_host": {
+      "address": "172.25.250.1",
+      "role": "Windows 11 physical host / approved management browser"
+    },
+    "splunk": {
+      "address": "172.25.250.10",
+      "role": "RHEL-SPLUNK01 / Splunk Enterprise"
+    },
+    "windows": {
+      "address": "172.25.250.20",
+      "role": "WINHUNT01 / Universal Forwarder"
+    },
+    "idm": {
+      "address": "172.25.250.30",
+      "role": "RHEL-IDM01 / IdM DNS LDAPS"
+    }
+  },
+  "allowed_flows": [
+    {
+      "id": "ZT-FLOW-001",
+      "source": "management_host",
+      "destination": "splunk",
+      "protocol": "tcp",
+      "port": 8000,
+      "service": "splunk-web-https",
+      "purpose": "Approved Splunk Web management; TLS must verify certificate",
+      "status": "proposed"
+    },
+    {
+      "id": "ZT-FLOW-002",
+      "source": "windows",
+      "destination": "splunk",
+      "protocol": "tcp",
+      "port": 9997,
+      "service": "splunk-forwarder-tls",
+      "purpose": "Windows/Sysmon/PowerShell event forwarding with certificate verification",
+      "status": "proposed"
+    },
+    {
+      "id": "ZT-FLOW-003",
+      "source": "splunk",
+      "destination": "idm",
+      "protocol": "tcp",
+      "port": 636,
+      "service": "ldaps",
+      "purpose": "Authenticated LDAP lookup over verified TLS",
+      "status": "proposed"
+    },
+    {
+      "id": "ZT-FLOW-004",
+      "source": "splunk",
+      "destination": "idm",
+      "protocol": "udp",
+      "port": 53,
+      "service": "dns",
+      "purpose": "Name resolution using IdM DNS",
+      "status": "proposed"
+    },
+    {
+      "id": "ZT-FLOW-005",
+      "source": "splunk",
+      "destination": "idm",
+      "protocol": "tcp",
+      "port": 53,
+      "service": "dns",
+      "purpose": "DNS fallback and large responses",
+      "status": "proposed"
+    },
+    {
+      "id": "ZT-FLOW-006",
+      "source": "management_host",
+      "destination": "splunk",
+      "protocol": "tcp",
+      "port": 22,
+      "service": "ssh",
+      "purpose": "Approved privileged maintenance; preserve recovery",
+      "status": "proposed"
+    },
+    {
+      "id": "ZT-FLOW-007",
+      "source": "management_host",
+      "destination": "idm",
+      "protocol": "tcp",
+      "port": 22,
+      "service": "ssh",
+      "purpose": "Approved directory maintenance; preserve recovery",
+      "status": "proposed"
+    }
+  ],
+  "denied_examples": [
+    {
+      "id": "ZT-DENY-001",
+      "source": "windows",
+      "destination": "splunk",
+      "protocol": "tcp",
+      "port": 8000,
+      "purpose": "Windows endpoint should not receive administrative Web access after planned cutover",
+      "status": "test_pending"
+    },
+    {
+      "id": "ZT-DENY-002",
+      "source": "windows",
+      "destination": "splunk",
+      "protocol": "tcp",
+      "port": 8089,
+      "purpose": "Remote management API is not exposed to Windows endpoint",
+      "status": "test_pending"
+    }
+  ],
+  "dependencies_outside_examples": [
+    "RHEL/IdM package updates and repository access",
+    "IdM/Kerberos/CA enrollment traffic as actually needed",
+    "DNS recursion and time synchronization",
+    "Windows patch-management and endpoint protection services"
+  ],
+  "notes": [
+    "Do not treat VMnet8 as a microsegmentation product.",
+    "Exact source and egress restrictions require direct firewall/IdM review.",
+    "These examples do not enforce device posture, identity-risk or a centralized PDP.",
+    "Do not automatically apply these proposed flows to live VM firewalls."
+  ]
+}

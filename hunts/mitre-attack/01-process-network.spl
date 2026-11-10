@@ -1,0 +1,6 @@
+index=sysmon earliest=-24h (EventCode=1 OR EventCode=3 OR EventID=1 OR EventID=3) ```Question: Which observed PowerShell or curl processes also made network connections?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), process_guid=coalesce(ProcessGuid,ProcessGUID), image=coalesce(Image,process_path)
+| where isnotnull(process_guid) AND process_guid!="" AND isnotnull(image) AND match(image,"(?i)(powershell|curl)[.]exe$")
+| stats min(_time) as first_seen max(_time) as last_seen count(eval(event_code=1)) as process_events count(eval(event_code=3)) as network_events values(image) as images values(ParentImage) as parent_images values(CommandLine) as commands values(User) as accounts values(DestinationIp) as destination_ips values(DestinationPort) as destination_ports by host process_guid
+| where process_events>0 AND network_events>0
+| sort 0 -last_seen

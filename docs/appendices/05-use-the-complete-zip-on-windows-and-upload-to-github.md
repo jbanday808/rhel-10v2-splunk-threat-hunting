@@ -24,14 +24,14 @@ Get-ChildItem -Force
 
 **Command overview:** `Join-Path` builds paths for your Windows account; `Test-Path` checks for an existing folder; `Expand-Archive` extracts the ZIP; `Set-Location` opens the project; `Get-ChildItem -Force` shows all entries, including `.github`.
 
-Open **START_HERE_WINDOWS.md** first. The `.zip` itself is a download package; GitHub receives the extracted project contents.
+Open **start-here/START_HERE_WINDOWS.md** first in the current GitHub layout. The `.zip` itself is a download package; GitHub receives the extracted project contents.
 
 ### Package step 2 Review the included folders
 
 | Folder or file | Contents |
 | --- | --- |
 | `README.md` | Project purpose, deployment order, and links. |
-| `START_HERE_WINDOWS.md` | Windows extraction, checks, and GitHub upload instructions. |
+| `start-here/START_HERE_WINDOWS.md` | Windows extraction, checks, and GitHub upload instructions. |
 | `apps/LAB_SIEM` | Splunk server settings, role, permissions, and dashboard. |
 | `apps/LAB_UF_WINDOWS` | Windows event inputs and verified TLS forwarding settings. |
 | `apps/Splunk_TA_nginx/local` | Custom NGINX inputs to apply after installing the vendor add-on. |

@@ -1,0 +1,5 @@
+(index=win_security OR index=win_system) earliest=-7d (EventCode=1102 OR EventCode=104 OR EventID=1102 OR EventID=104) ```Question: Are there candidate Windows log-clear records requiring provider and context verification?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), provider=coalesce(Provider_Name,ProviderName,SourceName,"unknown"), actor=coalesce(SubjectUserName,Subject_User_Name,user)
+| where (index="win_security" AND event_code=1102) OR (index="win_system" AND event_code=104)
+| table _time host index event_code provider actor source
+| sort 0 -_time

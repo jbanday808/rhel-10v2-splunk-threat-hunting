@@ -65,3 +65,30 @@ secrets/
 **/credentials.json
 **/azureProfile.json
 **/tokens.json
+
+# Prevent accidental publication of the user-supplied RHEL 10 STIG benchmark and scan artifacts
+U_RHEL_10_V1R1_STIG_SCAP_1-3_Benchmark.xml
+U_RHEL_10_V1R1_STIG_SCAP_1-3_Benchmark(1).zip
+stig-private/
+stig-reports/
+stig-results/
+*.arf.xml
+
+# Passive network defense: do not publish raw packet captures or sensitive sensor logs
+*.pcap
+*.pcapng
+*.cap
+network-lab/
+private-pcaps/
+network-captures/
+*.yarac
+
+# Controlled ePO STIG source and private assessment checklists
+CUI_ESS_ePO_5-x_STIG_V3R8_Manual-xccdf.xml
+STIG_cui.xsl
+epo-v3r8-private-workbook*.txt
+*.ckl
+*.cklb
+
+# Windows Firewall policy exports contain environment details
+*.wfw

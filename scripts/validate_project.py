@@ -14,7 +14,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 REQUIRED = (
-    'README.md', 'START_HERE_WINDOWS.md', '.gitignore', '.gitattributes',
+    'README.md', 'start-here/START_HERE_WINDOWS.md', '.gitignore', '.gitattributes',
     'apps/LAB_SIEM/local/indexes.conf',
     'apps/LAB_SIEM/local/inputs.conf',
     'apps/LAB_SIEM/local/props.conf',
@@ -25,8 +25,8 @@ REQUIRED = (
     'apps/LAB_UF_WINDOWS/local/outputs.conf',
     'apps/Splunk_TA_nginx/local/inputs.conf',
     'configs/nginx/nginx.conf', 'sysmon/sysmon.xml',
-    'docs/ldap-authentication.conf.example',
-    'docs/ldap-client.conf.example',
+    'docs/reference/ldap-authentication.conf.example',
+    'docs/reference/ldap-client.conf.example',
     'scripts/windows/Test-Project.ps1',
     '.github/workflows/validate-project.yml',
     '.github/workflows/oidc-claims.yml',
@@ -59,7 +59,7 @@ def validate(root: Path, verify_manifest: bool = False) -> list[str]:
              and '.git' not in p.relative_to(root).parts]
     for p in paths:
         rel = p.relative_to(root).as_posix()
-        if p.suffix in ('.py', '.sh', '.ps1', '.conf', '.md', '.yml', '.json', '.xml'):
+        if p.suffix in ('.py', '.sh', '.ps1', '.conf', '.md', '.yml', '.json', '.xml', '.spl', '.kql'):
             try:
                 text = p.read_text(encoding='utf-8-sig')
                 if ('/workspace' + '/scratch/') in text:
@@ -93,8 +93,13 @@ def validate(root: Path, verify_manifest: bool = False) -> list[str]:
         if nginx.get(stanza, 'disabled') not in ('0', 'false'):
             errors.append('NGINX access input is disabled.')
         outputs = parse_conf(root / 'apps/LAB_UF_WINDOWS/local/outputs.conf')
-        if outputs.get('tcpout:lab_tls', 'sslVerifyServerCert').lower() != 'true':
-            errors.append('Windows forwarding must verify the receiving certificate.')
+        for setting, message in (
+            ('useSSL', 'Windows lab forwarding must explicitly enable TLS.'),
+            ('sslVerifyServerCert', 'Windows forwarding must verify the receiving certificate.'),
+            ('sslVerifyServerName', 'Windows forwarding must verify the receiving hostname.'),
+        ):
+            if outputs.get('tcpout:lab_tls', setting, fallback='').strip().lower() != 'true':
+                errors.append(message)
         props = parse_conf(root / 'apps/LAB_SIEM/local/props.conf')
         transforms = parse_conf(root / 'apps/LAB_SIEM/local/transforms.conf')
         if props.get('siem:lab', 'REPORT-lab-fields') != 'lab_fields' or not transforms.has_section('lab_fields'):

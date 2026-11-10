@@ -1,0 +1,26 @@
+// Optional Defender XDR: Which encoded-command PowerShell processes also made network connections?
+// Requires separately deployed Defender for Endpoint; this repository does not collect these tables.
+let lookback = 24h;
+let processes = DeviceProcessEvents
+    | where Timestamp >= ago(lookback)
+    | where ActionType == "ProcessCreated"
+    | where FileName =~ "powershell.exe"
+    | where ProcessCommandLine contains "-enc"
+    | where isnotempty(DeviceId) and isnotnull(ProcessId) and isnotnull(ProcessCreationTime)
+    | project DeviceId, DeviceName, ProcessId, ProcessCreationTime,
+              ProcessEventTime = Timestamp, ProcessCommandLine,
+              ParentImage = InitiatingProcessFileName;
+let connections = DeviceNetworkEvents
+    | where Timestamp >= ago(lookback)
+    | where isnotempty(DeviceId) and isnotnull(InitiatingProcessId)
+      and isnotnull(InitiatingProcessCreationTime)
+    | project DeviceId, InitiatingProcessId, InitiatingProcessCreationTime,
+              NetworkEventTime = Timestamp, RemoteIP, RemotePort, RemoteUrl, ActionType;
+processes
+| join kind=inner connections on DeviceId,
+    $left.ProcessId == $right.InitiatingProcessId,
+    $left.ProcessCreationTime == $right.InitiatingProcessCreationTime
+| where NetworkEventTime between (ProcessCreationTime .. ProcessCreationTime + 1h)
+| project ProcessEventTime, NetworkEventTime, DeviceName, ParentImage,
+          ProcessCommandLine, RemoteIP, RemotePort, RemoteUrl, ActionType
+| order by NetworkEventTime desc

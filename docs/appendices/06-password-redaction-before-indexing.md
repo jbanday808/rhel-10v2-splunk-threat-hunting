@@ -1,7 +1,5 @@
 ## Appendix Password redaction before indexing
 
-**Question 151 answer: B.** Put `SEDCMD-redact_pw` in `props.conf` under the source type that receives the events. The following lab procedure uses `[identity]`. It changes the incoming raw event during parsing before storage. `REGEX-redact_pw` is not a valid substitute for this setting, and `SEDCMD` does not belong in `transforms.conf`.
-
 Run this exercise after `LAB_SIEM` and the `lab` index work. Configure RHEL-SPLUNK01, which parses this local text file. In a distributed deployment, configure and test the first full parsing tier before sending sensitive events. This exercise does not use structured indexed extractions.
 
 This example masks lowercase, unquoted `password=value` tokens whose values end at whitespace, a comma, or the end of the event. It supports slashes within the value. Quoted values containing spaces, JSON properties, and other field spellings need separate rules and tests. Use only the fake `LAB-DUMMY` values below until the live result is verified.

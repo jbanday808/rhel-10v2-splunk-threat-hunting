@@ -1,0 +1,5 @@
+index=win_security earliest=-7d (EventCode=4698 OR EventCode=4702 OR EventID=4698 OR EventID=4702) ```Question: Which scheduled tasks were created or updated, and by whom?```
+| eval event_code=tonumber(coalesce(EventCode,EventID)), task_name=coalesce(TaskName,Task_Name), actor=coalesce(SubjectUserName,Subject_User_Name)
+| where isnotnull(task_name) AND task_name!=""
+| stats count as changes min(_time) as first_seen max(_time) as last_seen values(event_code) as event_codes values(actor) as actors by host task_name
+| sort 0 -last_seen

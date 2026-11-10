@@ -8,7 +8,7 @@ You are editing a public security-engineering portfolio project based on a 52-st
 - Explain commands in simple language and state what expected **testable** result looks like.
 - Do not claim deployments, security scans, alerts, connections, or tests completed without observed evidence.
 - Never output or commit plaintext passwords, CA/private keys, Splunk tokens, LDAP binding secrets, GitHub secrets, raw logs, endpoint identifiers or unredacted screenshots.
-- Keep templates under `docs/*.example` or `configs/**/*.example` if they are not intended to be deployed as-is.
+- Keep documentation templates under `docs/reference/*.example` or configuration templates under `configs/**/*.example` if they are not intended to be deployed as-is.
 - Prefer least privilege, TLS verification, SELinux Enforcing, input/source validation, and private backups.
 - Never overwrite existing on-host configuration without backup and merge review. Never format a disk as a repair action.
 - Check `.gitignore`, `SECURITY.md`, and `python3 scripts/validate_project.py` before recommending a commit.

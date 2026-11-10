@@ -1,0 +1,8 @@
+index=win_security earliest=-24h (EventCode=4625 OR EventID=4625) ```Question: Did a source fail to authenticate to multiple accounts in a 15-minute window?```
+| eval account=lower(trim(coalesce(TargetUserName,Target_User_Name,user,""))), account_domain=lower(trim(coalesce(TargetDomainName,Target_Domain_Name,""))), source_ip=lower(trim(coalesce(IpAddress,Source_Network_Address,src_ip,"")))
+| where account!="" AND account!="-" AND source_ip!="" AND source_ip!="-" AND source_ip!="127.0.0.1" AND source_ip!="::1" AND source_ip!="0.0.0.0"
+| eval target_account=account_domain.":".account
+| bin _time span=15m
+| stats count as failures dc(target_account) as distinct_accounts dc(host) as distinct_hosts values(host) as hosts by source_ip _time
+| where distinct_accounts>=5
+| sort 0 -failures
