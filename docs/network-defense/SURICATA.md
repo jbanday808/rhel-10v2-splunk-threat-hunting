@@ -32,7 +32,7 @@ The repo includes a **harmless-only** DNS detection at [configs/network-defense/
 3. Run `suricata -r /private/path/lab-dns.pcap -c /etc/suricata/suricata.yaml -S /private/path/local.rules -l /private/output`; review whether the SID appears in `eve.json`.
 4. If no match, inspect DNS decoding, rule syntax, Suricata version, timestamps and \`fast.log\` without inventing a hit. If the rule keyword form changes, use current OISF rule syntax documentation.
 
-For a separate senior-analyst exercise, the [passive review rules and validation plan](../../configs/network-defense/suricata/README.md) add eight **optional** DNS, HTTP, TLS, SMB and RDP observations. Their headers contain documentation-only addresses; they are not live lab detections. Load the example file explicitly with `-S` in an isolated offline check, compare positive and negative synthetic captures, and confirm the result with a service owner before treating any alert as a vulnerability.
+For a separate senior-analyst exercise, the [passive review rules and validation plan](../../configs/network-defense/suricata/README.md) add eight **optional** DNS, HTTP, TLS, SMB and RDP observations scoped to the lab's `172.25.250.0/24` network. The file is not loaded automatically, and a future sensor still needs a verified packet feed. Load it explicitly with `-S` in an isolated offline check, compare positive and negative synthetic captures, and confirm any candidate with a service owner before treating it as a vulnerability.
 
 ## EVE JSON
 
