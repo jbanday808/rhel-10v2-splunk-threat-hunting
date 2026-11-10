@@ -50,6 +50,19 @@ class NetworkDefenseTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pcap.generate_pcap(invalid)
 
+    def test_lab_dns_controls_are_in_scope_and_distinct(self):
+        short = pcap.generate_pcap(lab_addresses=True)
+        long = pcap.generate_pcap(lab_addresses=True, long_label=True)
+        for sample in (short, long):
+            frame = sample[40:]
+            self.assertEqual(frame[26:30], bytes([172, 25, 250, 20]))
+            self.assertEqual(frame[30:34], bytes([172, 25, 250, 30]))
+            self.assertEqual(struct.unpack_from("!H", frame, 14 + 20 + 2)[0], 53)
+        self.assertIn(b"lab-marker", short)
+        self.assertNotIn(b"lab-marker", long)
+        self.assertIn(b"a" * 50, long)
+        self.assertNotEqual(short, long)
+
     def test_aggregate_suricata_events_without_raw_data(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "eve.json"
