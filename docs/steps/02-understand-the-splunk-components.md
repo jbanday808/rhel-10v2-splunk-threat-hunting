@@ -12,6 +12,6 @@
 
 A Universal Forwarder does not provide full indexing and searching. A Deployment Server distributes configuration; it does not carry the endpoint’s event traffic. [help.splunk.com](https://help.splunk.com/en/splunk-enterprise/forward-and-process-data/forwarding-and-receiving-data/10.4/introduction-to-forwarding/types-of-forwarders?utm_source=chatgpt.com)
 
-This updated guide builds **three VMs**: a RHEL Splunk server, a Windows hunting endpoint, and a separate RHEL IdM directory server. LDAP sign-in is configured on the Splunk search interface; additional Splunk Enterprise roles would also run on RHEL if you expand the lab.
+This guide builds **three core VMs**: a RHEL Splunk server, a Windows hunting endpoint, and a separate RHEL IdM directory server. LDAP sign-in is configured on the Splunk search interface; additional Splunk Enterprise roles would also run on RHEL if you expand the lab. An [optional Kali Linux VM](../network-defense/KALI_DEPLOYMENT.md) is an analysis workstation for saved packet captures and detection-rule exercises. It is not a Splunk component or an automatically connected forwarder.
 
 ---

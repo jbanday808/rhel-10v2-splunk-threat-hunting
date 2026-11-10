@@ -1,6 +1,6 @@
 **Step 28 — Generate harmless hunting activity**
 
-Run these commands only inside **WINHUNT01**, individually in the **same administrator Windows PowerShell window**. Its prompt begins with `PS`. The `$TestPassword` and `$LabCredential` variables are available only in that PowerShell session. Do not enter or share passwords in GitHub, screenshots, or chat. If a password prompt is cancelled or a command fails, stop; do not continue with values left from an earlier attempt.
+Run the commands in **Steps 28.1–28.15** only inside **WINHUNT01**, individually in the **same administrator Windows PowerShell window**. Its prompt begins with `PS`. The `$TestPassword` and `$LabCredential` variables are available only in that PowerShell session. Do not enter or share passwords in GitHub, screenshots, or chat. If a password prompt is cancelled or a command fails, stop; do not continue with values left from an earlier attempt. The optional Kali exercise in Step 28.16 runs separately in Kali Bash.
 
 This exercise has two account paths:
 
@@ -172,6 +172,20 @@ runas.exe /user:.\SIEMLabUser cmd.exe
 If logon auditing is enabled and the event is collected, Windows can generate Security event `4625`. Account creation (`4720`), group change (`4732`), process activity (`4688`), and scheduled task creation (`4698`) likewise depend on the actions performed and the relevant audit settings. An existing-account path does not create a new `4720` event merely by resetting its password.
 
 Review the actual events in Splunk after forwarding is validated. [Step 46](46-remove-the-test-objects.md) and its cleanup helper remove the named account and other test objects; review what they will delete before running them, especially if reusing an existing disposable account. They do not restore a previous password.
+
+## Step 28.16 — Optional Kali Linux analysis workstation
+
+This is a **separate offline exercise**; it does not depend on the disposable Windows account. After planning the optional VM in [Steps 1, 3, and 4](README.md), attach Kali's management adapter to VMnet8, install or import it from the verified image, and snapshot it. Use a unique DHCP lease; do not reuse `.10`, `.20`, `.30`, or the proposed sensor's `.40`. On **Kali Bash**, check the guest and route:
+
+```bash
+cat /etc/os-release
+ip -br address
+ip route get 172.25.250.10
+```
+
+**Command overview:** `cat` shows the installed OS; `ip -br address` shows Kali's actual address; `ip route get` shows the path to Splunk. **Summary:** Confirm Kali, a unique VMnet8 address, and the intended route before continuing. These checks do not prove packet visibility into other VMs.
+
+Follow the [Kali deployment guide](../network-defense/KALI_DEPLOYMENT.md) for the private workspace, packaged tools, harmless synthetic DNS PCAPs, and offline Wireshark/TShark, Zeek, Suricata, Arkime, YARA, and Sigma checks. Compare its positive and negative controls and record only **observed** results. Keep PCAPs, extracts, logs, and credentials out of Git. VMnet8 NAT does not mirror other VMs' unicast traffic; a live capture requires a verified, authorized mirror/TAP. The offline files do not flow into Splunk automatically, and the original six indexes remain unchanged.
 
 ## References
 

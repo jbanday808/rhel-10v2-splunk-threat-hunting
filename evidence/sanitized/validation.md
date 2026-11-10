@@ -23,3 +23,6 @@ Replace Pending only after observing the result.
 | Separate IdM backup created | Pending |
 | Test account and task removed | Pending |
 | Backup and recovery tested | Pending |
+| Optional Kali VM route and unique VMnet8 address checked | Pending |
+| Optional Kali synthetic PCAP and positive/negative controls checked | Pending |
+| Optional Kali Zeek, Suricata, Arkime, YARA, and Sigma results reviewed | Pending |

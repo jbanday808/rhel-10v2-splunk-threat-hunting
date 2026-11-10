@@ -16,6 +16,13 @@ package versions from rpm -q ipa-server ipa-server-dns.
 | Sysmon | Pending |
 | Windows add-on | Pending |
 | Sysmon add-on | Pending |
+| Kali Linux (optional VM) | Pending |
+| Kali Wireshark / TShark (optional) | Pending |
+| Kali Zeek (optional) | Pending |
+| Kali Suricata (optional) | Pending |
+| Kali Arkime / OpenSearch (optional) | Pending |
+| Kali YARA (optional) | Pending |
+| Kali Sigma CLI / Splunk backend (optional) | Pending |
 | NGINX package | Pending |
 | NGINX add-on | Pending |
 | Git and GitHub CLI | Pending |

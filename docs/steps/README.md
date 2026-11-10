@@ -1,5 +1,7 @@
 # The complete 52 steps
 
+The three core VMs are RHEL-SPLUNK01, WINHUNT01, and RHEL-IDM01. An **optional Kali Linux analysis VM** joins the same lab for offline packet and detection-rule exercises: plan it in Steps 1, 3, and 4, then follow the Kali path in [Step 28](28-generate-harmless-hunting-activity.md#step-2816--optional-kali-linux-analysis-workstation). It does not replace a core VM or add a Splunk data source automatically. Keep the 52 top-level steps in order.
+
 1. [Confirm the IP address plan](01-confirm-the-ip-address-plan.md)
 2. [Understand the Splunk components](02-understand-the-splunk-components.md)
 3. [Plan the VM resources](03-plan-the-vm-resources.md)

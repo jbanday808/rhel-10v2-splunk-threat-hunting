@@ -1,6 +1,6 @@
 # Architecture — Separate Passive Sensor and Splunk Monitoring
 
-## Existing three-VM lab + optional fourth VM
+## Existing three-VM lab + optional analysis VMs
 
 The [Kali workstation guide](KALI_DEPLOYMENT.md) is an **alternative offline analysis path** for Wireshark, Zeek, Suricata, Arkime, YARA and Sigma. It does not make Kali a mirrored sensor, replace the proposed RHEL-SENSOR01, or change the three existing VMs.
 
@@ -11,17 +11,19 @@ flowchart TD
     S["RHEL-SPLUNK01\n172.25.250.10\nSplunk Enterprise"]
     I["RHEL-IDM01\n172.25.250.30\nDNS / LDAPS"]
     N["RHEL-SENSOR01 (PROPOSED)\n172.25.250.40\nZeek / Suricata / TShark"]
+    K["Kali Linux VM (OPTIONAL)\nVMnet8 DHCP lease\nOffline analysis"]
     P["Authorized synthetic/offline PCAP\nPRIVATE location"]
     W -->|"Existing TLS forwarding TCP 9997"| S
     S -->|"Existing TLS LDAPS TCP 636"| I
     H -->|"Managed HTTPS TCP 8000"| S
     P -->|"Offline packet analysis"| N
+    P -->|"Offline packet and rule analysis"| K
     N -.->|"Optional reviewed UF TLS 9997"| S
     M["Dedicated TAP/SPAN/mirror (NOT PROVIDED BY VMnet8)\nFUTURE / requires verification"] -.->|"Future passive packet feed"| N
     N -->|"local private JSON files"| L["Zeek logs / Suricata EVE"]
 ~~~
 
-**Figure 1:** A separate optional network sensor analyzes synthetic PCAPs first, with live mirrored traffic and Splunk log forwarding shown as future, independently validated phases.
+**Figure 1:** The optional RHEL sensor or Kali workstation can analyze private synthetic PCAPs; live mirroring and Splunk forwarding require separate validation.
 
 ## Why not assume the network sensor sees all traffic?
 

@@ -41,6 +41,7 @@ sudo openssl x509 \
 | Custom fields are missing | `siem:lab`, the `REPORT` reference, and expected format.             |
 | Directory sign-in fails | IdM DNS, TCP 636, CA trust, final user password, and role mapping. |
 | Data disappears early     | Index limits and Windows event-log rollover.                         |
+| Optional Kali cannot reach the lab | Verify its unique VMnet8 lease, route, DNS, and host/guest firewall. |
 
 For SELinux denials:
 
@@ -96,5 +97,9 @@ Confirm the intended path if prompted. Stop Splunk before running `btprobe`; the
 **Summary:** This resets one file's reading checkpoint so an active file monitor can read it again. Existing indexed events remain; rereading can create duplicate events and increase ingestion-license use.
 
 **Reference:** [Splunk Command Line Tools Guide](https://help.splunk.com/en/splunk-enterprise/administer/troubleshoot/10.6/contact-splunk-support/command-line-tools-for-use-with-support): This guide explains `btprobe` options and resetting a specific file's fishbucket checkpoint.
+
+### Optional Kali workstation acceptance
+
+If you ran [Step 28.16](28-generate-harmless-hunting-activity.md#step-2816--optional-kali-linux-analysis-workstation), use the [Kali guide's acceptance record](../network-defense/KALI_DEPLOYMENT.md#10-acceptance-record-and-troubleshooting) to check the **observed** VM route and each offline tool result. Confirm the short/long DNS PCAP comparison, rule positive and negative controls, and private output location before marking anything complete. Check live visibility only if a separate authorized mirror/TAP was actually verified. An empty Splunk search is expected for Kali's offline files unless a separately configured, validated feed was added. Leave untested items Pending in the [sanitized validation record](../../evidence/sanitized/validation.md).
 
 ---

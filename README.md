@@ -37,9 +37,10 @@ The [NIST AI RMF implementation guide](docs/ai-rmf/IMPLEMENTATION_GUIDE.md) and 
 | RHEL-SPLUNK01 | Splunk Enterprise, security searches, and TLS receiver |
 | WINHUNT01 | Windows event collection, Sysmon, and Universal Forwarder |
 | RHEL-IDM01 | IdM directory, DNS, and LDAPS |
+| Kali Linux analysis VM (optional) | Offline Wireshark, Zeek, Suricata, Arkime, YARA, and Sigma exercises; unique VMnet8 DHCP lease |
 | RHEL-SENSOR01 (optional; not installed) | Proposed passive network sensor and Arkime exercises |
 
-The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, and `lab`. The optional sensor does not automatically send Arkime sessions to Splunk.
+The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, and `lab`. Kali's offline outputs and the optional sensor do not automatically send Arkime sessions or network logs to Splunk. [Step 28.16](docs/steps/28-generate-harmless-hunting-activity.md#step-2816--optional-kali-linux-analysis-workstation) joins the Kali procedure to the 52-step path.
 
 ## Repository layout
 

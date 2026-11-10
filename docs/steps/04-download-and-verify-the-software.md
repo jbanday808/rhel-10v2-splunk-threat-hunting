@@ -8,6 +8,7 @@ Download:
 4. Compatible Windows x64 Universal Forwarder `.msi`.
 5. Splunk Add-on for Microsoft Windows.
 6. Splunk Add-on for Sysmon.
+7. For the optional analysis VM, Kali Linux installer ISO or official VMware image (choose one).
 
 Official pages:
 
@@ -17,6 +18,7 @@ Official pages:
 - [Universal Forwarder](https://www.splunk.com/en_us/download/universal-forwarder.html)
 - [Microsoft Windows add-on](https://splunkbase.splunk.com/app/742?utm_source=chatgpt.com)
 - [Sysmon add-on](https://splunkbase.splunk.com/app/5709?utm_source=chatgpt.com)
+- [Kali Linux official downloads](https://www.kali.org/get-kali/)
 
 Choose add-on releases that explicitly support your selected Splunk version. [splunkbase.splunk.com](https://splunkbase.splunk.com/app/742?utm_source=chatgpt.com)
 
@@ -35,5 +37,7 @@ Get-FileHash -LiteralPath $Download -Algorithm SHA256
 - `SHA256` selects the fingerprint method.
 
 Compare the complete result with the vendor’s published checksum.
+
+For Kali, follow the official download page's integrity and authenticity instructions for the **specific image** you chose. Keep its exact release and checksum in your private installation notes. The [Kali workstation guide](../network-defense/KALI_DEPLOYMENT.md) covers the optional tool installation and offline validation; these tools do not change the six existing Splunk indexes.
 
 ---

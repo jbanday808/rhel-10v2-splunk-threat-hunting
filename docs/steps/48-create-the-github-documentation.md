@@ -1,5 +1,7 @@
 **Step 48 — Create the GitHub documentation**
 
+The current repository already includes these files. Review and merge changes into the existing versions; the `cat >` blocks below are initial-creation examples and would replace their contents if rerun. Keep the optional Kali path aligned with [Step 28.16](28-generate-harmless-hunting-activity.md#step-2816--optional-kali-linux-analysis-workstation) and the [full Kali guide](../network-defense/KALI_DEPLOYMENT.md).
+
 On **RHEL**:
 
 ```
@@ -15,6 +17,8 @@ server for verified LDAPS sign-in and group-based access.
 - RHEL-SPLUNK01: indexing, searches, dashboards, and Linux logging.
 - WINHUNT01: Windows logs, Sysmon, and Universal Forwarder.
 - RHEL-IDM01: IdM directory accounts, groups, DNS, and directory certificates.
+- Kali Linux (optional): offline packet analysis and detection-rule exercises;
+  no automatic Splunk forwarding or live traffic mirror.
 - Splunk signs users in over verified LDAPS on TCP 636.
 - VS Code with WSL: final review and GitHub upload.
 
@@ -25,6 +29,7 @@ server for verified LDAPS sign-in and group-based access.
 - Windows endpoint: 172.25.250.20
 - IdM directory and final Splunk DNS: 172.25.250.30
 - Gateway and external DNS forwarder: 172.25.250.2
+- Kali (optional): unique verified VMnet8 DHCP lease; no fixed address assumed.
 
 ## Configuration files
 
@@ -46,6 +51,7 @@ server for verified LDAPS sign-in and group-based access.
 - sysmon/: Windows activity logging rules.
 - hunts/: threat-hunting searches.
 - docs/reference/: architecture and installed versions.
+- docs/network-defense/KALI_DEPLOYMENT.md: optional Kali workstation procedure.
 - evidence/sanitized/: reviewed validation results.
 
 ## Validation
@@ -74,6 +80,7 @@ cat > docs/reference/architecture.md <<'EOF'
 | RHEL-SPLUNK01 | 172.25.250.10 | Splunk Enterprise |
 | WINHUNT01 | 172.25.250.20 | Windows monitoring and tests |
 | RHEL-IDM01 | 172.25.250.30 | IdM directory and lab DNS |
+| Kali Linux (optional) | Verify a unique VMnet8 DHCP lease | Offline analysis workstation |
 | NAT gateway | 172.25.250.2 | Outbound access |
 
 RHEL combines indexing and the search interface.
@@ -85,6 +92,8 @@ The splunk-hunters group maps only to lab_hunter.
 The splunk-admins group maps to admin.
 The native Splunk admin remains available for recovery.
 WSL and VS Code are used only for the final GitHub upload.
+Kali analyzes private synthetic PCAPs first; VMnet8 does not mirror peer traffic.
+No Kali network logs are forwarded to Splunk by this 52-step guide.
 EOF
 ```
 
@@ -110,6 +119,13 @@ package versions from rpm -q ipa-server ipa-server-dns.
 | Sysmon | Pending |
 | Windows add-on | Pending |
 | Sysmon add-on | Pending |
+| Kali Linux (optional) | Pending |
+| Kali Wireshark / TShark (optional) | Pending |
+| Kali Zeek (optional) | Pending |
+| Kali Suricata (optional) | Pending |
+| Kali Arkime / OpenSearch (optional) | Pending |
+| Kali YARA (optional) | Pending |
+| Kali Sigma CLI / Splunk backend (optional) | Pending |
 EOF
 ```
 
@@ -142,6 +158,9 @@ Replace Pending only after observing the result.
 | Separate IdM backup created | Pending |
 | Test account and task removed | Pending |
 | Backup and recovery tested | Pending |
+| Optional Kali VM route and unique VMnet8 address checked | Pending |
+| Optional Kali offline positive/negative controls checked | Pending |
+| Optional Kali Zeek, Suricata, Arkime, YARA, and Sigma results reviewed | Pending |
 EOF
 ```
 

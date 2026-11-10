@@ -22,6 +22,7 @@ For the **VS Code + WSL on Windows 11** workflow, see [START_HERE_WSL.md](START_
 | `RHEL-SPLUNK01` | RHEL 10.2 Splunk server | Storage, Splunk Enterprise, TLS, Linux logs, searches, dashboards |
 | `WINHUNT01` | Windows 11 hunting VM | Windows auditing, Sysmon, Universal Forwarder, harmless test events |
 | `RHEL-IDM01` | RHEL 10.2 directory VM | IdM DNS, directory users/groups, LDAP certificate authority |
+| Kali Linux (optional) | Analysis VM on VMnet8 | Offline packet and detection-rule exercises; no automatic Splunk feed |
 | Splunk Web | Web interface on Splunk VM | Search, add-ons, roles, LDAPS strategy, alerts |
 
 **Important:** WSL is the repository workspace. Do **not** install or initialize the RHEL Splunk server inside WSL, and do not run Windows endpoint-changing scripts on your physical PC.
@@ -125,6 +126,8 @@ Expected result: Actual event counts for the sources you have configured. A file
 ## 6. Run safe threat-hunting exercises
 
 Follow [Steps 28–30](../docs/steps/README.md): generate controlled lab activity, run SPL searches, then configure the lab dashboard and limited analyst role.
+
+For the optional Kali VM, follow [Step 28.16](../docs/steps/28-generate-harmless-hunting-activity.md#step-2816--optional-kali-linux-analysis-workstation) and the [full Kali workstation guide](../docs/network-defense/KALI_DEPLOYMENT.md) for private synthetic PCAP analysis. Record only results you actually observe; VMnet8 alone does not mirror other VMs' traffic.
 
 Start with [`hunts/00-data-health.spl`](../hunts/00-data-health.spl). Continue through the [hunting-search folder](../hunts/) for PowerShell, account changes, failed logons, tasks, process/network activity, Linux logging, and custom fields.
 
