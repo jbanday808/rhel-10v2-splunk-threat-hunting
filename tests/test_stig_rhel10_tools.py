@@ -1,5 +1,6 @@
 """Offline source tests. No RHEL host scan, STIG deployment or government compliance claim."""
 import importlib.util
+import re
 import tempfile
 import unittest
 import zipfile
@@ -99,6 +100,22 @@ class StigRhel10ToolsTests(unittest.TestCase):
             "apps/LAB_SIEM/local/authorize.conf",
         ):
             self.assertTrue((ROOT / path).is_file(), path)
+
+    def test_restored_stig_docs_relative_links_exist(self):
+        docs = [
+            ROOT / "docs/stig-rhel10/IMPLEMENTATION_GUIDE.md",
+            ROOT / "docs/zero-trust/09-rmf-stig-ato.md",
+            ROOT / "docs/zero-trust/06-network-microsegmentation.md",
+        ]
+        docs.extend((ROOT / "docs/stig-rhel10").glob("*.md"))
+        for doc in sorted(set(docs)):
+            text = doc.read_text(encoding="utf-8")
+            for link in re.findall(r"\[[^\]]+\]\(([^)]+)\)", text):
+                if link.startswith(("https://", "http://", "#", "mailto:")):
+                    continue
+                with self.subTest(document=doc.relative_to(ROOT), link=link):
+                    target = link.split("#", 1)[0]
+                    self.assertTrue((doc.parent / target).exists())
 
 
 if __name__ == "__main__":
