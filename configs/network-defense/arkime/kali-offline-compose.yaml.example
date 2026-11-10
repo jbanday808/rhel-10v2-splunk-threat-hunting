@@ -1,0 +1,31 @@
+# Synthetic, single-user Kali evaluation only. OpenSearch has no authentication
+# on this private Docker network; do not import real traffic or publish port 9200.
+# Copy this file outside the repository as docker-compose.yaml before use.
+services:
+  opensearch:
+    image: opensearchproject/opensearch:3.9.0
+    environment:
+      discovery.type: single-node
+      DISABLE_SECURITY_PLUGIN: "true"
+      OPENSEARCH_JAVA_OPTS: -Xms1g -Xmx1g
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    restart: "no"
+
+  viewer:
+    image: ghcr.io/arkime/arkime/arkime:v6.9.1
+    hostname: kaliarkime
+    command: /opt/arkime/bin/docker.sh viewer --wait-for-db http://opensearch:9200
+    depends_on:
+      - opensearch
+    ports:
+      - "127.0.0.1:8005:8005"
+    volumes:
+      - ./config.ini:/opt/arkime/etc/config.ini:ro
+      - arkime-pcap:/opt/arkime/raw
+      - ../pcaps:/input:ro
+    restart: "no"
+
+volumes:
+  opensearch-data:
+  arkime-pcap:

@@ -2,6 +2,8 @@
 
 This optional, step-by-step lab adds Arkime to the Splunk threat-hunting project. You will install Arkime and a single-node OpenSearch database on a **new sensor VM**, import two locally generated packet files, and investigate a known synthetic anomaly. The [companion case](INVESTIGATION.md) gives the analyst workflow and expected observations.
 
+For an **offline Kali workstation** instead of this RHEL sensor, use the [Kali cross-tool guide](../network-defense/KALI_DEPLOYMENT.md). Its container-based OpenSearch configuration is isolated for synthetic evaluation and is not a substitute for this guide's hardened sensor path.
+
 **Status:** planned documentation. These commands have not been run on WINHUNT01, RHEL-SPLUNK01, RHEL-IDM01 or a live sensor. Record your own results; a successful connection or a published guide is not evidence that packet collection works.
 
 ## Follow the complete workflow

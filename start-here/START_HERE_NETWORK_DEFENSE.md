@@ -4,6 +4,8 @@
 
 **[OPEN FULL 30-STEP INSTALLATION, CONFIGURATION, DEPLOYMENT & VALIDATION GUIDE](../docs/network-defense/IMPLEMENTATION_GUIDE.md)**
 
+**[Set up the Kali analysis workstation](../docs/network-defense/KALI_DEPLOYMENT.md)** for Wireshark, Zeek, Suricata, Arkime, YARA and Sigma. This optional route starts with synthetic files and does not require changing the three existing VMs.
+
 **[Open the complete 28-step Zeek installation and deployment guide](../docs/network-defense/ZEEK_DEPLOYMENT.md)** for pinned containers, policy configuration, offline testing, optional live sensing, Splunk forwarding, and rollback.
 
 **[Run the worked HTTP investigation](../docs/network-defense/OFFLINE_HTTP_WALKTHROUGH.md)** using synthetic captures on an analysis workstation. The Splunk portion uses the existing `lab` index. Use the 30-step guide when planning an optional dedicated sensor.
@@ -23,6 +25,7 @@ Extend the existing three-VM VMware lab with an **optional, isolated passive net
 | WINHUNT01 | 172.25.250.20 | Existing Windows 11 Sysmon + Universal Forwarder |
 | RHEL-IDM01 | 172.25.250.30 | Existing Red Hat IdM, DNS, LDAPS |
 | **RHEL-SENSOR01 (optional NEW VM)** | **172.25.250.40** | RHEL 10.2; optional Zeek/Suricata/TShark/tcpdump; forwarder after review |
+| **Kali (optional workstation)** | **Check availability before assigning** | Offline analysis and optional approved capture; do not reuse the proposed sensor IP |
 | VMnet8 NAT | 172.25.250.0/24 | Existing VMware NAT network; **not** a TAP/SPAN or guaranteed full traffic mirror |
 
 **Critical visibility rule:** A VMnet8 peer cannot assume visibility of unicast flows between other VMs. Promiscuous capture alone does not configure virtual-switch port mirroring. Start with a **synthetic offline PCAP**, then consider a dedicated TAP/SPAN or a pre-approved mirrored virtual switch/port group. Never place a passive sensor inline or enable IPS/drop mode.

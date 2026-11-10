@@ -1,5 +1,7 @@
 # Optional Suricata passive review rules
 
+For a Kali-specific installation, two in-scope DNS controls, and an offline cross-tool workflow, follow the [Kali deployment guide](../../../docs/network-defense/KALI_DEPLOYMENT.md).
+
 These are **alert-only, opt-in examples** for the optional network-defense workstream. They support baseline review and passive vulnerability *hypotheses*; they do not establish a finding, authorize capture, or install a sensor. The existing [`local.rules`](local.rules) DNS marker and [`http-review.rules`](http-review.rules) synthetic HTTP exercise remain separate.
 
 [`passive-review.rules.example`](passive-review.rules.example) now scopes all eight rule headers to the owned VMnet8 lab, `172.25.250.0/24`. DNS and HTTP requests must originate in that subnet; TLS flows must involve it; SMB and RDP-port candidates must have both endpoints in it. The file is **not loaded automatically**. A match still requires an enabled Suricata rule and a capture that actually contains the relevant packets. VMnet8 alone does not guarantee visibility into other VMs' unicast traffic; see the [capture architecture](../../../docs/network-defense/ARCHITECTURE.md). For approved use, copy the file to a **private** test location and verify the capture point, addresses, direction, Suricata version, and configuration. Keep captures, credentials, and EVE logs out of this repository.
