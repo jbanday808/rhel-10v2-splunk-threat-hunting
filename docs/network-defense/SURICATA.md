@@ -36,7 +36,7 @@ The repo includes a **harmless-only** DNS detection at [configs/network-defense/
 
 The optional [custom-rule guide](SURICATA_CUSTOM_RULES.md) covers 12 additional rules for DNS policy/bursts, cleartext HTTP authentication, obsolete TLS negotiation, SMB, and RDP. It includes a separate offline configuration, synthetic positive/negative controls, exact alert-count replay, tuning limits, and owner-validation steps. The existing marker and HTTP rules remain unchanged; no live sensor configuration is installed.
 
-For a separate senior-analyst exercise, the [passive review rules and validation plan](../../configs/network-defense/suricata/README.md) add eight **optional** DNS, HTTP, TLS, SMB and RDP observations. Their headers contain documentation-only addresses; they are not live lab detections. Load the example file explicitly with `-S` in an isolated offline check, compare positive and negative synthetic captures, and confirm the result with a service owner before treating any alert as a vulnerability.
+For a separate senior-analyst exercise, the [passive review rules and validation plan](../../configs/network-defense/suricata/README.md) add eight **optional** DNS, HTTP, TLS, SMB and RDP observations scoped to the owned VMnet8 lab's `172.25.250.0/24` network. The file is not loaded automatically, and a future sensor still needs a verified packet feed. Load it explicitly with `-S` in an isolated offline check, compare positive and negative synthetic captures, and confirm any candidate with a service owner before treating it as a vulnerability.
 
 ## EVE JSON
 

@@ -1,25 +1,25 @@
 # Optional passive review examples for Suricata 8.x. Load explicitly with -S.
-# The documentation-only IP ranges must be replaced in a private, approved copy.
+# Address scope: the owned VMnet8 lab 172.25.250.0/24. Not loaded automatically.
 # Alerts are leads for analyst review, not confirmed incidents or vulnerabilities.
 
 # Long first label in a DNS request. Legitimate CDN/tracking names can also match.
-alert dns 192.0.2.0/24 any -> any any (msg:"LAB DNS long first label review"; dns.query; bsize:>=47; pcre:"/^[A-Za-z0-9-]{45,63}[.]/"; threshold: type limit, track by_src, count 1, seconds 300; sid:1002001; rev:1;)
+alert dns 172.25.250.0/24 any -> any any (msg:"LAB DNS long first label review"; dns.query; bsize:>=47; pcre:"/^[A-Za-z0-9-]{45,63}[.]/"; threshold: type limit, track by_src, count 1, seconds 300; sid:1002001; rev:2;)
 
 # Basic authentication over visible HTTP. Do not log or publish credential values.
-alert http 192.0.2.0/24 any -> any any (msg:"LAB cleartext HTTP Basic authentication review"; flow:established,to_server; http.request_header; content:"Authorization|3a 20|Basic "; nocase; sid:1002002; rev:1;)
+alert http 172.25.250.0/24 any -> any any (msg:"LAB cleartext HTTP Basic authentication review"; flow:established,to_server; http.request_header; content:"Authorization|3a 20|Basic "; nocase; sid:1002002; rev:2;)
 
 # Negotiated version, not the legacy record version in a compatible ClientHello.
-alert tls 192.0.2.0/24 any <> any any (msg:"LAB negotiated TLS 1.0 review"; tls.version:1.0; sid:1002003; rev:1;)
-alert tls 192.0.2.0/24 any <> any any (msg:"LAB negotiated TLS 1.1 review"; tls.version:1.1; sid:1002004; rev:1;)
+alert tls 172.25.250.0/24 any <> any any (msg:"LAB negotiated TLS 1.0 review"; tls.version:1.0; sid:1002003; rev:2;)
+alert tls 172.25.250.0/24 any <> any any (msg:"LAB negotiated TLS 1.1 review"; tls.version:1.1; sid:1002004; rev:2;)
 
 # Certificate date check only; no trust-chain or hostname validation is implied.
-alert tls 192.0.2.0/24 any <> any any (msg:"LAB expired TLS certificate date review"; tls_cert_expired; sid:1002005; rev:1;)
+alert tls 172.25.250.0/24 any <> any any (msg:"LAB expired TLS certificate date review"; tls_cert_expired; sid:1002005; rev:2;)
 
 # Initial SMBv1 negotiation can later upgrade to SMBv2; confirm selected dialect.
-alert smb 192.0.2.0/24 any <> 198.51.100.0/24 445 (msg:"LAB SMBv1 transaction review"; smb.version:1; threshold: type limit, track by_both, count 1, seconds 300; sid:1002006; rev:1;)
+alert smb 172.25.250.0/24 any <> 172.25.250.0/24 445 (msg:"LAB SMBv1 transaction review"; smb.version:1; threshold: type limit, track by_both, count 1, seconds 300; sid:1002006; rev:2;)
 
-# Cross-segment SYN is an attempted connection, not proof RDP was established.
-alert tcp 192.0.2.0/24 any -> 198.51.100.0/24 3389 (msg:"LAB cross-segment RDP port SYN review"; flags:S; flow:stateless; threshold: type limit, track by_src, count 1, seconds 300; sid:1002007; rev:1;)
+# Same-subnet SYN is an attempted connection, not proof RDP was established.
+alert tcp 172.25.250.0/24 any -> 172.25.250.0/24 3389 (msg:"LAB intra-subnet RDP port SYN review"; flags:S; flow:stateless; threshold: type limit, track by_src, count 1, seconds 300; sid:1002007; rev:2;)
 
 # Both the HTTP request path and a 200 response must be observed in one transaction.
-alert http 192.0.2.0/24 any => any any (msg:"LAB HTTP git config path returned 200 review"; http.uri; content:"/.git/config"; startswith; http.stat_code; content:"200"; bsize:3; sid:1002008; rev:1;)
+alert http 172.25.250.0/24 any => any any (msg:"LAB HTTP git config path returned 200 review"; http.uri; content:"/.git/config"; startswith; http.stat_code; content:"200"; bsize:3; sid:1002008; rev:2;)
