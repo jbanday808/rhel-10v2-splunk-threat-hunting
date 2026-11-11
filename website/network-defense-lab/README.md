@@ -1,6 +1,8 @@
-# TraceVector | James Banday
+# TraceVector · Earlier network-defense workbench
 
-[Open the private hosted website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Guide and screenshots](../../docs/network-defense/INTERACTIVE_LAB.md)
+[Open the original private workbench](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Original screenshots](screenshots/) · [Current TraceVector guide](../../docs/network-defense/INTERACTIVE_LAB.md)
+
+This is the earlier architecture and network-defense reference. The latest [TraceVector Threat Hunting Lab](https://tracevector-lab.jamesbanday.chatgpt.site) adds guided hunts, evidence and documentation tracking, STIG guidance, detection drafts, progress, backup import/export, and a review queue; its published source is in [`website/tracevector-lab`](../tracevector-lab/). The two applications use separate browser storage and backup formats.
 
 This folder contains the buildless static source for the interactive lab reference website. The TraceVector design uses light green surfaces, larger black text, and crisp black details. Desktop body text is 18px; navigation, labels, and diagram cards are sized for easier reading.
 

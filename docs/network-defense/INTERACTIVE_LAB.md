@@ -1,70 +1,156 @@
-# TraceVector | James Banday
+# TraceVector · Threat Hunting Lab
 
-[Open the private website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Browse website source](../../website/network-defense-lab/) · [Kali deployment runbook](KALI_DEPLOYMENT.md)
+[Open the private TraceVector Site](https://tracevector-lab.jamesbanday.chatgpt.site) · [Start a guided hunt](https://tracevector-lab.jamesbanday.chatgpt.site/#scenarios) · [Browse current source](../../website/tracevector-lab/)
 
-TraceVector provides an interactive reference for the RHEL 10.2 Splunk lab. It uses light green surfaces and black typography, with 18px body text on desktop and larger navigation, labels, and architecture cards. Its content is based on repository commit `393ed725efadca0c863c409ae0324ed51f1b94b8`; the website's footer links to that snapshot.
+TraceVector brings guided Splunk hunts, MITRE ATT&CK context, evidence, documentation, STIG guidance, detection drafts, and progress into one personal workspace. This guide describes **Site version 1, published November 11, 2026**, with matching source and screenshots.
 
 ## Access and scope
 
-The hosted website is private to James Banday's account and requires ChatGPT sign-in. Publishing this documentation, source, and screenshot gallery does not grant access to the hosted website.
+The hosted Site is private to James Banday and requires his ChatGPT sign-in. Repository visitors can read the source and screenshots; these files do not grant access to the hosted workspace.
 
-The website does not connect to the lab VMs, collect packets, execute its example commands, or change GitHub. Checklist statuses and sanitized notes remain in the current browser; JSON export creates a local copy. Review progress is separate from evidence of successful validation. The screenshots contain no private notes, and all ten acceptance checks remain **Pending**.
+TraceVector saves progress, notes, attachments, drafts, and review decisions in the current browser. It does not run Splunk searches, connect to lab systems, apply remediation, or modify GitHub. Practice completion and tracked evidence remain separate from verified detections, live test results, and compliance findings.
 
-## Explore the lab
+## Explore the workspace
 
-| View | Use it to |
+| Section | What it provides |
 | --- | --- |
-| Architecture | Select systems and inspect roles, addresses, connections, and source documentation. |
-| Tool library | Search and filter Wireshark, Zeek, Suricata, Arkime, YARA, Sigma, and Splunk Enterprise; inspect installation, configuration, validation, and command references. Splunk commands identify the RHEL host or Splunk Web context. |
-| ATT&CK framework (in Tool library) | Select Candidate, Context only, or Gap examples to connect adversary behavior with hypotheses, telemetry requirements, candidate SPL, and coverage limitations. Open the mapping, playbook, Navigator layer, and validation template. |
-| Traffic explorer | Filter documented, offline, and proposed paths by traffic type and protocol; inspect source/destination and acceptance checks. |
-| Deployment | Expand eight phases covering the Kali runbook and separately track which phases you reviewed. |
-| Validation | Track ten checks as Pending, Passed, Blocked, or Failed; add sanitized observations and export the checklist. |
-| Screenshots | Browse refreshed captures of the five working views and open each image at full size. |
+| [Lab overview](https://tracevector-lab.jamesbanday.chatgpt.site/#overview) | Documented lab topology, progress totals, the next investigation, and recent activity. |
+| [Lab objectives](https://tracevector-lab.jamesbanday.chatgpt.site/#objectives) | Six learning objectives with source guides and personal completion checkboxes. |
+| [Scenario lab](https://tracevector-lab.jamesbanday.chatgpt.site/#scenarios) | Three guided hunts with synthetic records, SPL examples, questions, and immediate feedback. |
+| [Evidence & screenshots](https://tracevector-lab.jamesbanday.chatgpt.site/#evidence) | A catalogue of 27 existing repository images, local evidence attachments, notes, search, and update flags. |
+| [Remediation guidance](https://tracevector-lab.jamesbanday.chatgpt.site/#remediation) | An assess, propose, and validate workflow, plus 12 RHEL STIG evidence requirements. |
+| [Detection studio](https://tracevector-lab.jamesbanday.chatgpt.site/#detections) | Editable SPL drafts, ATT&CK context, validation notes, and fixed reference results. |
+| [Project documentation](https://tracevector-lab.jamesbanday.chatgpt.site/#docs) | Eighteen linked project guides with search, filters, notes, and proposed update tracking. |
+| [Progress tracking](https://tracevector-lab.jamesbanday.chatgpt.site/#progress) | Objective and scenario progress, an activity log, a lab journal, and backup export/import. |
+| [Review queue](https://tracevector-lab.jamesbanday.chatgpt.site/#review) | Documentation, screenshot, detection, and remediation proposals with local review decisions and Markdown export. |
 
-The architecture preserves Splunk `.10`, Windows `.20`, IdM `.30`, management `.1`, and NAT gateway `.2` on `172.25.250.0/24`. Kali must use a unique, verified DHCP lease rather than an assumed fixed address. VMnet8 does not automatically mirror peer traffic. The eight-rule lab example and separate 12-rule Suricata regression pack reuse SIDs for different detections and must be tested separately.
+The documentation and image catalogues are a curated snapshot, not an automatic GitHub sync. The nine interface captures below are separate from the Site's 27 existing image references.
 
-Splunk is the SIEM, indexing, SPL search, and investigation platform. MITRE ATT&CK is a hunting framework, separate from the seven software entries. The framework uses the repository's Enterprise STIX v20.1 mapping reviewed on 2026-11-05. Candidate, Context only, and Gap describe source coverage; none means a verified detection. Unlisted techniques are unassessed. The ten existing checklist items and browser-local state are unchanged.
+## Guided hunts
+
+Each hunt has three steps: inspect the synthetic records, reason through the search or behavior, and identify the evidence needed for validation.
+
+| Hunt | Focus | ATT&CK hypothesis | Estimated practice |
+| --- | --- | --- | --- |
+| A noisy SSH neighbor | Repeated SSH authentication failures | T1110.001 · Password Guessing | 15 minutes |
+| Privilege in the wrong hands | Unexpected use of sudo privileges | T1548.003 · Sudo and Sudo Caching | 20 minutes |
+| The job that came back | A recurring cron task | T1053.003 · Cron | 20 minutes |
+
+The examples use `index=tracevector_lab` and normalized training fields. This is a synthetic placeholder, not a seventh configured lab index. Before using a draft in Splunk, map it to the appropriate existing index: `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, or `lab`; confirm field extraction, choose a time window, and test expected and unexpected activity.
+
+**Preview fixture** shows a fixed result for the original scenario template. It does not execute edited SPL. ATT&CK labels describe hunting hypotheses that require supporting evidence.
+
+## Save and restore your work
+
+1. Use **Export workspace** on the overview or **Export backup** in Progress tracking to download `tracevector-workspace.json`.
+2. Keep this backup private: it includes notes, progress, detection drafts, proposals, and local evidence attachments.
+3. In Progress tracking, choose **Import backup**, select a compatible file, and review the confirmation before replacing the current browser's workspace.
+
+Work is stored separately for each browser and site address. Export a backup before clearing browser data or moving to another device. The older workbench's checklist export uses a different format and is not a TraceVector workspace backup.
+
+## Review proposed changes
+
+Create a proposal from documentation tracking, a saved detection, remediation guidance, or the Review queue. Record the intended repository path, proposed content, evidence, validation plan, and rollback.
+
+The available decisions are **Awaiting review**, **Reviewed — ready for manual application**, **Changes requested**, and **Deferred**. Saving a decision records it locally. **Export proposal** downloads `tracevector-proposal.md`; applying its contents to GitHub remains a separate reviewed action.
+
+## Lab and STIG context
+
+The documented network remains `172.25.250.0/24`: RHEL-SPLUNK01 at `.10`, WINHUNT01 at `.20`, RHEL-IDM01 at `.30`, and the NAT gateway at `.2`. Optional Kali analysis uses a verified unique DHCP lease. VMnet8 does not automatically mirror peer traffic, and optional sensor deployment and live acceptance remain subject to their project evidence records.
+
+The STIG section links the repository's RHEL 10 guidance and benchmark metadata. Its 12 evidence items start as **Pending** and can be tracked as **In progress** or **Captured locally**. These are evidence-tracking labels; a completed checklist does not establish compliance or prove a host was scanned.
 
 ## Screenshot gallery
 
-Figures 1 and 2 are refreshed local-preview captures of the updated source. Figures 3–5 retain the existing reference captures for the unchanged traffic, deployment, and validation workflows. A repository update does not redeploy the private hosted website. All five images are interface documentation, not evidence that a Kali workstation, sensor, forwarding path, or detection is operating.
+These captures show the current source in a local preview with an empty personal workspace. They document the interface; they do not establish live lab operation, detection coverage, or STIG compliance.
 
-### Figure 1 — Architecture
+### Figure 1 — Lab overview
 
-![TraceVector interactive architecture view](../../screenshots/network-defense-lab/01-architecture.jpg)
+![TraceVector lab overview with topology and workspace totals](../../screenshots/tracevector-lab/01-lab-overview.jpg)
 
-Figure 1: The architecture view shows the three core VMs, management host, NAT gateway, and optional Kali analysis path.
+Figure 1: The overview brings lab topology, learning objectives, evidence, guided hunts, and STIG tracking into one dashboard.
 
-### Figure 2 — Tool library
+### Figure 2 — Scenario lab
 
-![TraceVector software library and ATT&CK framework](../../screenshots/network-defense-lab/02-tool-library.jpg)
+![TraceVector guided SSH, sudo, and cron scenarios](../../screenshots/tracevector-lab/02-scenario-lab.jpg)
 
-Figure 2: The tool library organizes six analysis tools plus Splunk Enterprise. A separate ATT&CK panel connects hypotheses, telemetry, and coverage gaps.
+Figure 2: The scenario lab provides three guided hunts using synthetic records, Splunk examples, and MITRE ATT&CK hypotheses.
 
-### Figure 3 — Traffic explorer
+<details>
+<summary>View Figures 3–9: evidence, remediation, detection, documentation, progress, review, and objectives</summary>
 
-![TraceVector documented traffic paths and verification checks](../../screenshots/network-defense-lab/03-traffic-explorer.jpg)
+### Figure 3 — Evidence tracking
 
-Figure 3: The traffic explorer filters documented connections and explains what to verify for Windows-to-Splunk TLS forwarding.
+![TraceVector evidence and screenshot catalogue](../../screenshots/tracevector-lab/03-evidence-tracking.jpg)
 
-### Figure 4 — Deployment
+Figure 3: The evidence view organizes repository screenshots and local records with search, notes, and update flags.
 
-![TraceVector eight deployment phases with the first phase expanded](../../screenshots/network-defense-lab/04-deployment.jpg)
+### Figure 4 — Remediation guidance
 
-Figure 4: The deployment view presents eight phases with tasks, acceptance checks, source links, and separate review checkboxes.
+![TraceVector STIG guidance and pending evidence requirements](../../screenshots/tracevector-lab/04-remediation-guidance.jpg)
 
-### Figure 5 — Validation
+Figure 4: The remediation view links assessment guidance, proposed changes, and twelve RHEL STIG evidence requirements.
 
-![TraceVector validation checklist with all ten checks pending](../../screenshots/network-defense-lab/05-validation.jpg)
+### Figure 5 — Detection studio
 
-Figure 5: The validation view starts with ten pending checks and supports browser-local notes, status filters, and JSON export.
+![TraceVector detection draft editor and ATT&CK context](../../screenshots/tracevector-lab/05-detection-studio.jpg)
+
+Figure 5: The detection studio supports SPL drafts, ATT&CK context, and validation notes with fixed training previews.
+
+### Figure 6 — Project documentation
+
+![TraceVector searchable project documentation and update tracking](../../screenshots/tracevector-lab/06-project-documentation.jpg)
+
+Figure 6: The documentation view groups project guides and tracks proposed updates for review.
+
+### Figure 7 — Progress tracking
+
+![TraceVector progress tracking, journal, and backup controls](../../screenshots/tracevector-lab/07-progress-tracking.jpg)
+
+Figure 7: The progress view combines practice milestones, a lab journal, activity history, and backup export/import.
+
+### Figure 8 — Review queue
+
+![TraceVector review queue before any proposals are added](../../screenshots/tracevector-lab/08-review-queue.jpg)
+
+Figure 8: The review queue stores proposed changes and review decisions before separate application to GitHub.
+
+### Figure 9 — Lab objectives
+
+![TraceVector six lab learning objectives](../../screenshots/tracevector-lab/09-lab-objectives.jpg)
+
+Figure 9: The objectives view tracks six learning goals and links each goal to supporting project guidance.
+
+</details>
+
+## Source and validation record
+
+The five application files in [`website/tracevector-lab/`](../../website/tracevector-lab/) match published Site version 1 at source commit `69ab9c0e7cfe50e00e92a087c643f0356419e805`. They contain the interface and reference content, not personal browser data or hosting credentials.
+
+The original Site release handoff reported **84 interaction checks passed** and visual verification of the published dashboard. That is the reported release result; it is separate from the repository checks performed when synchronizing this source. Neither result establishes successful lab deployment or a completed security assessment.
+
+Repository synchronization checks on November 11, 2026:
+
+| Check | Observed result |
+| --- | --- |
+| Project source validation | Passed. |
+| Repository unit tests | 85 discovered: 84 passed; one offline Suricata replay skipped because the engine was unavailable. |
+| Publication preflight | Passed for 429 Git-visible paths. |
+| Application source | All five files match the published source byte for byte; all three JavaScript files passed syntax checks. |
+| Documentation links | All 110 local links in the five updated guides resolve. |
+| Browser views | All nine sections opened and were visually inspected; nine screenshots were captured with empty personal workspace data. |
+
+These checks did not rerun the original 84-interaction Site suite or test live Splunk searches, host remediation, or STIG compliance.
+
+## Earlier network-defense workbench
+
+The [original private workbench](https://banday-network-workbench.jamesbanday.chatgpt.site), [its source](../../website/network-defense-lab/), and [five reference captures](../../screenshots/network-defense-lab/) remain available for architecture, tool references, traffic paths, deployment phases, and the original ten-check validation workflow. Its checklist and browser storage are separate from the current TraceVector workspace.
 
 ## References
 
-- [Splunk installation](../steps/14-transfer-and-install-splunk-enterprise.md), [lab app configuration](../steps/17-deploy-the-splunk-app-and-automatic-startup.md), and [data-health SPL](../../hunts/00-data-health.spl): Source procedures and the read-only search shown in the Splunk entry.
-- [MITRE ATT&CK workstream](../mitre-attack/README.md): Reviewed technique mapping, hypothesis-driven playbook, Navigator layer, and evidence boundaries.
-
-- [Kali deployment guide](KALI_DEPLOYMENT.md): Provides the installation, configuration, replay, optional capture, acceptance, and rollback procedures summarized by the website.
-- [Lab architecture](../reference/architecture.md): Documents VM roles, network addresses, core data flows, and capture limitations.
-- [Network validation record](../../evidence/sanitized/network-defense-validation.md): Separates recorded synthetic replay results from pending checks in the actual lab.
+- [MITRE ATT&CK workstream](../mitre-attack/README.md): This guide connects hunting hypotheses, source coverage, and validation evidence.
+- [Splunk data-health search](../../hunts/00-data-health.spl): This search helps inspect data availability before adapting a detection draft.
+- [RHEL 10 STIG implementation guide](../stig-rhel10/IMPLEMENTATION_GUIDE.md): This guide explains assessment, controlled remediation, and evidence requirements.
+- [Kali deployment guide](KALI_DEPLOYMENT.md): This guide covers analysis tools, offline replay, optional capture, and acceptance checks.
+- [Lab architecture](../reference/architecture.md): This reference documents system roles, network addresses, and traffic visibility limits.
+- [Evidence sanitization](../reference/security-and-sanitization.md): This checklist explains how to review evidence before publishing it.

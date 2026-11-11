@@ -14,15 +14,19 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 
 [Browse the current start guides](start-here/README.md).
 
-## TraceVector | James Banday
+## TraceVector · Threat Hunting Lab
 
-[Open the private TraceVector website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Website guide and five screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Website source](website/network-defense-lab/)
+[Open the private TraceVector Site](https://tracevector-lab.jamesbanday.chatgpt.site) · [Start a guided hunt](https://tracevector-lab.jamesbanday.chatgpt.site/#scenarios) · [Guide and nine screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Current source](website/tracevector-lab/)
 
-Explore the `172.25.250.0/24` architecture, six analysis tools plus Splunk Enterprise, a separate MITRE ATT&CK hunting framework, documented traffic paths, deployment phases, and browser-local validation checklist in TraceVector, a light green workspace with larger black text. The hosted website requires the owner’s ChatGPT sign-in; repository visitors can view the source and screenshots here.
+TraceVector brings guided Splunk hunts and MITRE ATT&CK context together with evidence and documentation tracking, STIG guidance, detection drafts, progress tracking, and a review queue. Its nine sections include six learning objectives, three synthetic investigations, and twelve RHEL STIG evidence requirements. The hosted Site requires the owner’s ChatGPT sign-in; repository visitors can view the matching source and screenshots here.
 
-[![TraceVector architecture preview](screenshots/network-defense-lab/01-architecture.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
+Progress, notes, drafts, and evidence attachments save in the current browser, with backup export/import. Review decisions are local records; applying a proposal to GitHub is a separate reviewed action. Training results and checklist completion do not establish live detection coverage or STIG compliance.
 
-*Figure 1: The interactive architecture view shows the three core VMs and optional Kali analysis path; it does not demonstrate live deployment or traffic visibility.*
+[![TraceVector threat-hunting lab overview](screenshots/tracevector-lab/01-lab-overview.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
+
+*Figure 1: The TraceVector dashboard brings lab topology, guided hunts, evidence, and progress into one personal workspace.*
+
+The [earlier network-defense workbench](website/network-defense-lab/) remains available for architecture, analysis-tool references, traffic paths, deployment phases, and its original ten-check validation workflow.
 
 ## Project documentation
 
@@ -57,7 +61,8 @@ The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`
 | [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
 | [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
 | [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
-| [website/network-defense-lab](website/network-defense-lab/) | Static source for the private interactive lab website |
+| [website/tracevector-lab](website/tracevector-lab/) | Published source snapshot for the current private TraceVector workspace |
+| [website/network-defense-lab](website/network-defense-lab/) | Earlier network-defense reference workbench and its original screenshot gallery |
 | [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |
 | [evidence/sanitized](evidence/sanitized/) and [screenshots](screenshots/) | Pending result templates and author-supplied images that require review |
 

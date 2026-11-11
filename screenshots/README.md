@@ -27,8 +27,22 @@ These screenshots were supplied in the original ZIP. They may show configuration
 | 21 | [21_Splunk_Web_Connection_Reset.png](21_Splunk_Web_Connection_Reset.png) | Screenshot labeled 21 Splunk Web Connection Reset; inspect the actual image before drawing conclusions. |
 | 22 | [22_Splunk_Web_Login_Page.png](22_Splunk_Web_Login_Page.png) | Screenshot labeled 22 Splunk Web Login Page; inspect the actual image before drawing conclusions. |
 
-## Interactive website screenshots
+## Current TraceVector screenshots
 
-The [TraceVector website gallery](../docs/network-defense/INTERACTIVE_LAB.md) contains five refreshed browser screenshots of TraceVector, with light green surfaces and larger black text. These were captured from a local preview of the website source, with no private checklist notes and all ten validation checks pending. They show the website interface, not live sensor output or completed lab acceptance.
+The [current TraceVector gallery](../docs/network-defense/INTERACTIVE_LAB.md#screenshot-gallery) contains nine browser captures from a local preview of published Site version 1. They show the application with no personal progress, notes, drafts, proposals, or attachments. Existing public repository thumbnails remain visible in the evidence view. These captures document the interface, not live lab results or STIG compliance.
 
-[Browse the website screenshots](network-defense-lab/).
+| Figure | View |
+| --- | --- |
+| 1 | [Lab overview](tracevector-lab/01-lab-overview.jpg) |
+| 2 | [Scenario lab](tracevector-lab/02-scenario-lab.jpg) |
+| 3 | [Evidence tracking](tracevector-lab/03-evidence-tracking.jpg) |
+| 4 | [Remediation guidance](tracevector-lab/04-remediation-guidance.jpg) |
+| 5 | [Detection studio](tracevector-lab/05-detection-studio.jpg) |
+| 6 | [Project documentation](tracevector-lab/06-project-documentation.jpg) |
+| 7 | [Progress tracking](tracevector-lab/07-progress-tracking.jpg) |
+| 8 | [Review queue](tracevector-lab/08-review-queue.jpg) |
+| 9 | [Lab objectives](tracevector-lab/09-lab-objectives.jpg) |
+
+## Earlier network-defense workbench screenshots
+
+The [five earlier reference captures](network-defense-lab/) document architecture, the tool library, traffic, deployment, and the original validation checklist. They remain paired with the [earlier workbench source](../website/network-defense-lab/) and are distinct from the current TraceVector dashboard.

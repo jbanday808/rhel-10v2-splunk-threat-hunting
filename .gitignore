@@ -1,6 +1,8 @@
 downloads/
 private/
 backups/
+# TraceVector workspace backups include private notes and evidence attachments.
+tracevector-workspace*.json
 evidence/raw/
 .env
 *.key
