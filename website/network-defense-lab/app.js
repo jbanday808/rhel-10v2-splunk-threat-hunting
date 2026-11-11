@@ -93,7 +93,7 @@
 
   let toolFilter = "All tools", toolQuery = "";
   function renderTools() {
-    makeChips($('#tool-filters'), ['All tools','Packets','Metadata','Alerts','Sessions','Files','Queries'], toolFilter, value => { toolFilter = value; renderTools(); });
+    makeChips($('#tool-filters'), ['All tools','Packets','Metadata','Alerts','Sessions','Files','Queries','SIEM'], toolFilter, value => { toolFilter = value; renderTools(); });
     const list = LAB.tools.filter(t => (toolFilter === 'All tools' || t.category === toolFilter) && `${t.name} ${t.role} ${t.output} ${t.category} ${t.install.text} ${t.configure.text} ${t.validate.text}`.toLowerCase().includes(toolQuery));
     $('#tool-results').textContent = `${list.length} OF ${LAB.tools.length} TOOLS${toolQuery ? ' · FILTERED RESULTS' : ' · EXPLORE A PERSPECTIVE'}`;
     $('#tool-grid').innerHTML = list.length ? list.map(t => `<button class="tool-card" data-tool="${t.id}" aria-label="Open ${escape(t.name)} setup and validation"><span class="tool-card-top"><span class="tool-mark">${escape(t.mark)}</span><span class="tool-category">${escape(t.category.toUpperCase())}</span></span><h2>${escape(t.name)}</h2><p>${escape(t.role)}</p><span class="tool-output"><span>${escape(t.output)}</span><span aria-hidden="true">↗</span></span></button>`).join('') : '<div class="empty-state">No tools match this search.<br><button class="outline-button" id="clear-tools">Clear filters</button></div>';
@@ -110,7 +110,7 @@
   }
   function renderToolDialog() {
     const t = activeTool, stage = t[activeStage];
-    $('#tool-dialog-body').innerHTML = `<div class="dialog-tool-heading"><span class="tool-mark">${escape(t.mark)}</span><div><h2 id="tool-dialog-title">${escape(t.name)}</h2><p>${escape(t.output)}</p></div></div><p class="dialog-description">${escape(t.role)}</p><div class="dialog-tabs" aria-label="Tool reference sections">${[['install','Installation'],['configure','Configuration'],['validate','Validation']].map(([id,label]) => `<button class="dialog-tab${activeStage === id ? ' active' : ''}" data-stage="${id}" aria-pressed="${activeStage === id}">${label}</button>`).join('')}</div><div class="tool-stage"><h3>${escape(stage.title)}</h3><p>${escape(stage.text)}</p><div class="code-box"><button class="copy-button" id="copy-command">Copy command</button><pre><code>${escape(stage.code)}</code></pre></div><p>Run in a Kali Bash terminal. Commands using <code>$LAB</code> and <code>$REPO</code> depend on the private workspace defined in runbook Step 3.</p></div><div class="tool-limit">${escape(t.limit)}</div><div class="dialog-source"><a class="text-link" href="${source(t.source,guideAnchor(t.step))}" target="_blank" rel="noopener noreferrer">Read the complete procedure ↗</a><a class="text-link" href="#validation" id="dialog-validation">Go to checklist ↗</a></div>`;
+    $('#tool-dialog-body').innerHTML = `<div class="dialog-tool-heading"><span class="tool-mark">${escape(t.mark)}</span><div><h2 id="tool-dialog-title">${escape(t.name)}</h2><p>${escape(t.output)}</p></div></div><p class="dialog-description">${escape(t.role)}</p><div class="dialog-tabs" aria-label="Tool reference sections">${[['install','Installation'],['configure','Configuration'],['validate','Validation']].map(([id,label]) => `<button class="dialog-tab${activeStage === id ? ' active' : ''}" data-stage="${id}" aria-pressed="${activeStage === id}">${label}</button>`).join('')}</div><div class="tool-stage"><h3>${escape(stage.title)}</h3><p>${escape(stage.text)}</p><div class="code-box"><button class="copy-button" id="copy-command">${escape(stage.copyLabel || "Copy command")}</button><pre><code>${escape(stage.code)}</code></pre></div><p>${stage.context ? escape(stage.context) : 'Run in a Kali Bash terminal. Commands using <code>$LAB</code> and <code>$REPO</code> depend on the private workspace defined in runbook Step 3.'}</p></div><div class="tool-limit">${escape(t.limit)}</div><div class="dialog-source"><a class="text-link" href="${source(stage.source || t.source,stage.source ? "" : guideAnchor(t.step))}" target="_blank" rel="noopener noreferrer">Read the complete procedure ↗</a><a class="text-link" href="#validation" id="dialog-validation">Go to checklist ↗</a></div>`;
     $$('[data-stage]').forEach(b => b.addEventListener('click', () => { activeStage = b.dataset.stage; renderToolDialog(); $(`[data-stage="${activeStage}"]`).focus(); }));
     $('#copy-command').addEventListener('click', async e => {
       try { await navigator.clipboard.writeText(stage.code); e.target.textContent = 'Copied'; toast('Command copied. Review the source procedure before running.'); }
@@ -120,6 +120,15 @@
   }
   $('#close-dialog').addEventListener('click', () => $('#tool-dialog').close());
   $('#tool-dialog').addEventListener('click', e => { if (e.target === $('#tool-dialog')) { const r=e.target.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close(); } });
+
+
+  let attackStatus = 'Candidate';
+  function renderAttack() {
+    makeChips($('#attack-filters'), LAB.attack.examples.map(e => e.status), attackStatus, value => { attackStatus = value; renderAttack(); $(`#attack-filters [data-value="${attackStatus}"]`).focus(); });
+    const e = LAB.attack.examples.find(e => e.status === attackStatus);
+    $('#attack-example').innerHTML = `<div class="eyebrow">${escape(e.status.toUpperCase())} / SOURCE EXAMPLE</div><h3>${escape(e.name)}</h3><dl><dt>Hunt hypothesis</dt><dd>${escape(e.hypothesis)}</dd><dt>Required telemetry</dt><dd>${escape(e.telemetry)}</dd><dt>Coverage boundary</dt><dd>${escape(e.limit)}</dd></dl>${e.hunt ? `<a class="text-link" href="${source(e.hunt)}" target="_blank" rel="noopener noreferrer">Review the candidate SPL ↗</a>` : ''}`;
+    $$('[data-source]').forEach(a => { a.href = source(a.dataset.source); });
+  }
 
   let flowKind = 'All paths', flowProtocol = 'all', selectedFlow = 'forward';
   function renderFlows() {
@@ -177,5 +186,5 @@
   $('#evidence-link').href=source(LAB.evidence);
   $('#snapshot-link').href=`${LAB.repo}/commit/${LAB.commit}`;
   $('#deployment-source').href=source(LAB.guide);
-  hydrateIcons();showNode('splunk');renderTools();renderFlows();renderPhases();renderValidation();updateProgress();navigate();
+  hydrateIcons();showNode('splunk');renderTools();renderAttack();renderFlows();renderPhases();renderValidation();updateProgress();navigate();
 })();

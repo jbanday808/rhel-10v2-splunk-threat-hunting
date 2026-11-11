@@ -1,7 +1,7 @@
 "use strict";
 const LAB = {
   repo: "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting",
-  commit: "7858f891d9d2ea254d0758383951ba352cec7dc1",
+  commit: "393ed725efadca0c863c409ae0324ed51f1b94b8",
   guide: "docs/network-defense/KALI_DEPLOYMENT.md",
   evidence: "evidence/sanitized/network-defense-validation.md",
   nodes: {
@@ -36,8 +36,69 @@ const LAB = {
     {id:"sigma",name:"Sigma",mark:"Σ",category:"Queries",role:"Translate a detection rule into a query for the actual log platform.",output:"Reviewed Splunk SPL",limit:"Conversion does not deploy an alert. Verify the index, sourcetype, field mapping, and time range against actual Splunk data.",source:"docs/network-defense/KALI_DEPLOYMENT.md",step:21,
       install:{title:"Use an isolated Python environment",text:"Step 21 creates a venv and installs sigma-cli with pysigma-backend-splunk, separate from Kali's system Python. Record the resulting versions.",code:'"$LAB/sigma/venv/bin/sigma" version\n"$LAB/sigma/venv/bin/sigma" list targets'},
       configure:{title:"Convert the Zeek DNS marker",text:"This rule uses Zeek's query field. The output is a candidate expression without an ingestion pipeline; review it before adding a verified source scope.",code:'"$LAB/sigma/venv/bin/sigma" convert -t splunk --without-pipeline \\\n  "$REPO/rules/sigma/lab_network_dns_marker.yml"'},
-      validate:{title:"Check the output and the source data",text:'Confirm query="lab-marker.example.test" in the generated SPL. Separately check actual ingestion and field extraction. The six existing indexes do not include an automatic Zeek feed.',code:'cat "$LAB/sigma/lab-network-dns.spl"'}}
+      validate:{title:"Check the output and the source data",text:'Confirm query="lab-marker.example.test" in the generated SPL. Separately check actual ingestion and field extraction. The six existing indexes do not include an automatic Zeek feed.',code:'cat "$LAB/sigma/lab-network-dns.spl"'}},
+    {
+      "id": "splunk",
+      "name": "Splunk Enterprise",
+      "mark": ">_",
+      "category": "SIEM",
+      "role": "Index Windows and Linux telemetry, search with SPL, and investigate security activity in the lab SIEM.",
+      "output": "Indexed events / SPL investigations",
+      "limit": "Deployment and event collection remain in progress. A configuration check does not prove ingestion. Kali outputs, Arkime sessions, and IdM logs are not automatically forwarded; network-log ingestion is a separate proposed design.",
+      "source": "docs/steps/14-transfer-and-install-splunk-enterprise.md",
+      "install": {
+        "title": "Review the RHEL installation procedure",
+        "text": "Use the existing RHEL-SPLUNK01 procedure at 172.25.250.10. Verify the approved package and checksum and inspect an existing installation before changes. This command only reports the installed version.",
+        "code": "sudo -u splunk /opt/splunk/bin/splunk version",
+        "context": "Run this read-only version check on RHEL-SPLUNK01, not in Kali. The full installation procedure requires review of the existing host.",
+        "source": "docs/steps/14-transfer-and-install-splunk-enterprise.md"
+      },
+      "configure": {
+        "title": "Review the six-index lab app",
+        "text": "LAB_SIEM defines win_security, win_system, powershell, sysmon, linux, and lab. Review receiver TLS, source inputs, field extraction, retention, and role access separately. btool checks configuration without changing it.",
+        "code": "sudo -u splunk /opt/splunk/bin/splunk btool check",
+        "context": "Run this read-only configuration check on RHEL-SPLUNK01. A successful check does not establish event delivery or authentication.",
+        "source": "docs/steps/17-deploy-the-splunk-app-and-automatic-startup.md"
+      },
+      "validate": {
+        "title": "Establish data health before hunting",
+        "text": "Use the repository data-health search to inspect counts, event freshness, receive times, and indexing delay by index, host, and sourcetype. Compare expected sources and timestamps, then pivot to a scoped hunt. Missing rows require investigation.",
+        "code": "(index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h\n| stats count max(_time) as last_event max(_indextime) as last_recv perc95(eval(_indextime-_time)) as p95_s by index host sourcetype\n| eval idle_s=now()-last_recv\n| convert ctime(last_*)",
+        "context": "Paste this SPL into Splunk Web Search using the approved lab role. It is a search, not a Bash command. Review source fields and the time range before interpreting results.",
+        "copyLabel": "Copy SPL",
+        "source": "hunts/00-data-health.spl"
+      }
+    }
   ],
+  attack: {
+    source:"docs/mitre-attack/README.md",
+    examples:[
+      {
+        "status": "Candidate",
+        "name": "T1059.001 · PowerShell",
+        "hypothesis": "Unexpected PowerShell execution or script blocks may warrant investigation; legitimate administration is a benign alternative.",
+        "telemetry": "Sysmon 1 and PowerShell Operational; selected process/network correlation requires the configured source fields.",
+        "limit": "Source and hunts are available or planned. Ingestion, field extraction, and behavior remain unproven; encoded text alone is not malicious.",
+        "hunt": "hunts/mitre-attack/01-process-network.spl"
+      },
+      {
+        "status": "Context only",
+        "name": "T1071.004 · DNS",
+        "hypothesis": "PowerShell-related DNS activity can provide investigation context.",
+        "telemetry": "The configured Sysmon 22 collection is filtered to PowerShell; it is not enterprise-wide DNS visibility.",
+        "limit": "Related records support a pivot. A DNS query alone does not establish tunneling, C2, or adversarial intent.",
+        "hunt": "hunts/mitre-attack/08-powershell-dns-context.spl"
+      },
+      {
+        "status": "Gap",
+        "name": "T1003.001 · LSASS Memory",
+        "hypothesis": "Investigating possible LSASS memory access requires suitable process-access evidence.",
+        "telemetry": "Configured EDR memory-access or Sysmon process-access coverage is missing from the repository.",
+        "limit": "Required telemetry or a suitable hunt is missing. Process names alone do not prove credential dumping.",
+        "hunt": null
+      }
+    ]
+  },
   flows:[
     {id:"forward",title:"Windows → Splunk",kind:"Documented lab",protocol:"TLS",port:"TCP 9997",from:"172.25.250.20",to:"172.25.250.10",fromName:"WINHUNT01",toName:"RHEL-SPLUNK01",purpose:"The Universal Forwarder sends endpoint telemetry to Splunk's TLS receiver. Local Sysmon collection, network reachability, certificate verification, and indexed events are separate checks.",checks:["Confirm the effective output group and loaded service configuration.","Verify the CA chain and receiver hostname without disabling TLS checks.","Find fresh Windows/Sysmon events in the intended Splunk indexes."],limit:"A successful diagnostic handshake does not prove the forwarder's own event delivery.",source:"docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md"},
     {id:"web",title:"Management → Splunk Web",kind:"Documented lab",protocol:"TLS",port:"HTTPS 8000",from:"172.25.250.1",to:"172.25.250.10",fromName:"Management host",toName:"RHEL-SPLUNK01",purpose:"The management host opens the Splunk search interface over HTTPS. Access and authorization should match the role used for the exercise.",checks:["Confirm the intended host and valid HTTPS certificate.","Sign in using the approved lab role.","Verify the analyst can access permitted data and is denied unauthorized data."],limit:"Static firewall rules and directory groups alone do not establish a complete Zero Trust system.",source:"docs/reference/architecture.md"},

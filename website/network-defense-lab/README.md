@@ -8,10 +8,12 @@ This folder contains the buildless static source for the interactive lab referen
 | --- | --- |
 | `index.html` | Six-view interface, screenshot gallery, and dialogs |
 | `styles.css` | Responsive layout, light green palette, larger black text, and focus states |
-| `data.js` | Reviewed lab context and source links pinned to commit `7858f891d9d2ea254d0758383951ba352cec7dc1` |
+| `data.js` | Reviewed lab context and source links pinned to commit `393ed725efadca0c863c409ae0324ed51f1b94b8` |
 | `app.js` | Navigation, filtering, copy controls, browser-local checklist, and JSON export |
 | `icon.svg` | TraceVector TV monogram |
-| `screenshots/` | Refreshed browser captures of the five working views |
+| `screenshots/` | Five reference captures; architecture and Tool library refreshed |
+
+The Tool library contains seven software entries: the six existing analysis tools plus Splunk Enterprise for SIEM indexing, SPL search, and investigation. Splunk references specify RHEL-SPLUNK01 or Splunk Web instead of assuming Kali Bash. A separate MITRE ATT&CK panel uses selectable Candidate, Context only, and Gap examples linked to the reviewed mapping, hunt playbook, Navigator JSON, and validation template. These labels do not establish live detections. The architecture, ten checklist items, and browser storage key are preserved.
 
 There are no build dependencies, external scripts, analytics, runtime credentials, or live lab connections. Source files do not include checklist contents from anyone's browser. The repository's MIT license applies.
 
