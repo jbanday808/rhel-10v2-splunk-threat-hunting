@@ -14,6 +14,16 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 
 [Browse the current start guides](start-here/README.md).
 
+## Network Defense Lab | James Banday
+
+[Open the private interactive website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Website guide and five screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Website source](website/network-defense-lab/)
+
+Explore the `172.25.250.0/24` architecture, six analysis tools, documented traffic paths, deployment phases, and browser-local validation checklist in a light green and black workspace. The hosted website requires the owner’s ChatGPT sign-in; repository visitors can view the source and screenshots here.
+
+[![Network Defense Lab architecture preview](screenshots/network-defense-lab/01-architecture.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
+
+*Figure 1: The interactive architecture view shows the three core VMs and optional Kali analysis path; it does not demonstrate live deployment or traffic visibility.*
+
 ## Project documentation
 
 - [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
@@ -47,6 +57,7 @@ The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`
 | [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
 | [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
 | [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
+| [website/network-defense-lab](website/network-defense-lab/) | Static source for the private interactive lab website |
 | [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |
 | [evidence/sanitized](evidence/sanitized/) and [screenshots](screenshots/) | Pending result templates and author-supplied images that require review |
 

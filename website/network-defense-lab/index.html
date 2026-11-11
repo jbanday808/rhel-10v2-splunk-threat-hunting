@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#202225">
+  <meta name="description" content="A private workspace for exploring James Banday's RHEL, Splunk and Kali network defense lab.">
+  <title>Network Defense Lab | James Banday</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to workspace</a>
+  <aside class="sidebar" aria-label="Workspace navigation">
+    <a class="brand" href="#architecture" aria-label="Network Defense Lab home"><span class="brand-icon">N<span>•</span></span><span>NETWORK<br><strong>DEFENSE LAB</strong></span></a>
+    <div class="workspace-label">PERSONAL LAB / 01</div>
+    <nav id="navigation">
+      <a href="#architecture" data-view="architecture"><span class="nav-icon" data-icon="network"></span>Architecture<span class="nav-number">01</span></a>
+      <a href="#tools" data-view="tools"><span class="nav-icon" data-icon="layers"></span>Tool library<span class="nav-number">02</span></a>
+      <a href="#traffic" data-view="traffic"><span class="nav-icon" data-icon="flow"></span>Traffic explorer<span class="nav-number">03</span></a>
+      <a href="#deployment" data-view="deployment"><span class="nav-icon" data-icon="steps"></span>Deployment<span class="nav-number">04</span></a>
+      <a href="#validation" data-view="validation"><span class="nav-icon" data-icon="check"></span>Validation<span class="nav-number">05</span></a>
+    </nav>
+    <div class="sidebar-progress"><div class="eyebrow">YOUR VALIDATION</div><div class="progress-total"><strong id="sidebar-passed">0</strong><span>/ <span id="sidebar-total">10</span> passed</span></div><div class="progress-track"><div id="sidebar-bar"></div></div><p>Recorded by you.<br>Saved in this browser.</p><a href="#validation">Continue checklist <span aria-hidden="true">↗</span></a></div>
+    <div class="sidebar-bottom"><span class="avatar">JB</span><div><strong>James Banday</strong><span>Threat hunting lab</span></div><span class="lock-mini" data-icon="lock"></span></div>
+  </aside>
+
+  <div class="app-shell">
+    <header class="topbar"><div class="breadcrumbs">NETWORK DEFENSE LAB <span>/</span> <strong id="breadcrumb">Architecture</strong></div><div class="top-actions"><span class="private-badge"><span data-icon="lock"></span>Private workspace</span><a class="repo-link" id="top-repo" target="_blank" rel="noopener noreferrer">GitHub repository <span aria-hidden="true">↗</span></a></div></header>
+    <main id="main" tabindex="-1">
+      <section class="view" id="view-architecture" aria-labelledby="architecture-title">
+        <div class="page-heading"><div><div class="eyebrow">RHEL 10.2 / SPLUNK / KALI LINUX</div><h1 id="architecture-title">Know your lab.<br><span>Follow the evidence.</span></h1><p class="lead">Explore the systems, understand the connections, and work<br class="desktop-break"> through each validation with a clear picture of the lab.</p></div><a class="primary-button" href="#deployment">Start the deployment <span aria-hidden="true">↗</span></a></div>
+        <div class="overview-stats"><div><span class="stat-icon" data-icon="network"></span><div><strong>172.25.250.0/24</strong><span>VMnet8 · lab network</span></div></div><div><span class="stat-icon" data-icon="server"></span><div><strong>3 core VMs</strong><span>Splunk, Windows &amp; IdM</span></div></div><div><span class="stat-icon" data-icon="layers"></span><div><strong>6 analysis tools</strong><span>One connected workflow</span></div></div><div><span class="stat-icon" data-icon="flag"></span><div><strong>Work in progress</strong><span>Live checks remain pending</span></div></div></div>
+        <div class="section-title"><div><h2>Lab architecture</h2><p>Select a system to inspect its role and connections.</p></div><span class="subtle-tag">DOCUMENTED TOPOLOGY</span></div>
+        <div class="architecture-grid"><div class="map-panel"><div class="map-toolbar"><span><i class="dot sage"></i>VMWARE WORKSTATION</span><span class="mono">VMnet8 / NAT</span></div>
+          <div class="network-map" id="network-map">
+            <svg class="map-lines" viewBox="0 0 800 420" aria-hidden="true" preserveAspectRatio="none"><path class="line-base" d="M400 75V150H130V220 M400 150V220 M400 150H670V220 M130 290V355H400 M670 290V355H400"/><path class="line-main" d="M400 75V150H130V220 M400 150V220 M400 150H670V220"/><path class="line-optional" d="M400 355V395"/><circle cx="400" cy="150" r="5" fill="#d9dbdf"/><circle cx="130" cy="355" r="3" fill="#6e7582"/><circle cx="670" cy="355" r="3" fill="#6e7582"/></svg>
+            <button class="map-node host-node" data-node="host"><span class="node-icon" data-icon="monitor"></span><span><strong>Management host</strong><small>172.25.250.1 · Windows + WSL</small></span></button>
+            <span class="map-caption">CORE LAB · SHARED VIRTUAL NETWORK</span>
+            <button class="map-node windows-node" data-node="windows"><span class="node-icon" data-icon="window"></span><strong>WINHUNT01</strong><small>172.25.250.20</small><span class="node-role">Windows · Sysmon · UF</span></button>
+            <button class="map-node splunk-node selected" data-node="splunk"><span class="node-icon splunk-mark">&gt;_</span><strong>RHEL-SPLUNK01</strong><small>172.25.250.10</small><span class="node-role">SIEM · Search · TLS receiver</span></button>
+            <button class="map-node idm-node" data-node="idm"><span class="node-icon" data-icon="shield"></span><strong>RHEL-IDM01</strong><small>172.25.250.30</small><span class="node-role">Identity · DNS · LDAPS</span></button>
+            <div class="map-lower"><button class="kali-node" data-node="kali"><span data-icon="terminal"></span><strong>Kali analysis VM</strong><small>Optional · unique DHCP lease</small><span aria-hidden="true">↗</span></button><button class="gateway-node" data-node="gateway">NAT gateway <span class="mono">.2</span></button></div>
+          </div><div class="map-legend"><span><i class="legend-line"></i>Shared network membership</span><span><i class="legend-line dashed"></i>Optional analysis path</span><span>No automatic traffic mirroring</span></div>
+        </div><aside class="node-detail" id="node-detail" aria-live="polite"></aside></div>
+        <div class="visibility-note"><span class="note-icon" data-icon="eye"></span><div><strong>Visibility comes before detection.</strong><p>VMnet8 does not mirror traffic between other VMs. Start with synthetic captures or your own traffic. Verify an authorized mirror or TAP before claiming peer-to-peer visibility.</p></div><a href="#traffic">Explore traffic <span aria-hidden="true">↗</span></a></div>
+        <div class="lower-grid"><article class="workflow-card"><div class="eyebrow">ANALYSIS WORKFLOW</div><h2>One capture. Several perspectives.</h2><p>Inspect packets, compare protocol records, review alerts, then investigate the supporting files and queries.</p><div class="workflow-pills"><span>Wireshark</span><span>Zeek</span><span>Suricata</span><span>Arkime</span><span>YARA</span><span>Sigma</span></div><a href="#tools" class="text-link">Find the right tool <span aria-hidden="true">↗</span></a></article><article class="evidence-card"><div class="eyebrow">REPOSITORY EVIDENCE</div><h2>35 synthetic controls</h2><p>The repository records a 12-rule Suricata replay on a separate Linux host. Your Kali and live sensor acceptance checks remain pending.</p><a id="evidence-link" class="text-link" target="_blank" rel="noopener noreferrer">Read the recorded results <span aria-hidden="true">↗</span></a></article></div>
+      </section>
+
+      <section class="view" id="view-tools" hidden aria-labelledby="tools-title"><div class="page-heading compact"><div><div class="eyebrow">02 / TOOL LIBRARY</div><h1 id="tools-title">The right lens<br><span>for every question.</span></h1><p class="lead">Six tools, distinct jobs. Choose a tool for setup, configuration,<br class="desktop-break"> validation, and the limits of what its results can tell you.</p></div></div><div class="filter-bar"><div class="search-box"><span data-icon="search"></span><input id="tool-search" type="search" aria-label="Search tools" placeholder="Search tools, outputs, or questions…"></div><div class="chips" id="tool-filters" aria-label="Tool categories"></div></div><div class="results-label" id="tool-results" aria-live="polite"></div><div class="tool-grid" id="tool-grid"></div><div class="note light-note"><span data-icon="info"></span><p>YARA scans approved files. Sigma converts rules into queries. Neither tool captures network packets.</p></div></section>
+
+      <section class="view" id="view-traffic" hidden aria-labelledby="traffic-title"><div class="page-heading compact"><div><div class="eyebrow">03 / TRAFFIC EXPLORER</div><h1 id="traffic-title">Follow a connection.<br><span>Know what to verify.</span></h1><p class="lead">Inspect the documented paths and separate network traffic<br class="desktop-break"> from offline files and proposed integrations.</p></div></div><div class="traffic-filters"><div class="chips" id="traffic-kinds" aria-label="Traffic types"></div><label class="select-label">Protocol <select id="protocol-filter"><option value="all">All protocols</option><option value="TLS">TLS / LDAPS / HTTPS</option><option value="DNS">DNS</option><option value="Files">Local files</option><option value="Mirror">Mirror / TAP</option></select></label></div><div class="traffic-grid"><div class="flow-list" id="flow-list" aria-label="Connections"></div><article class="flow-detail" id="flow-detail" aria-live="polite"></article></div><div class="visibility-note"><span class="note-icon" data-icon="shield"></span><div><strong>A documented path is a test target.</strong><p>Configuration, an open port, and a TLS handshake each prove different things. Confirm actual indexed events before calling forwarding successful.</p></div></div></section>
+
+      <section class="view" id="view-deployment" hidden aria-labelledby="deployment-title"><div class="page-heading compact"><div><div class="eyebrow">04 / DEPLOYMENT SEQUENCE</div><h1 id="deployment-title">Build in order.<br><span>Check as you go.</span></h1><p class="lead">A practical route through the Kali guide. Expand a phase for<br class="desktop-break"> its tasks and acceptance checks, then open the exact source step.</p></div><a id="deployment-source" class="outline-button" target="_blank" rel="noopener noreferrer">Open full runbook ↗</a></div><div class="deployment-summary"><div><span class="mini-label">YOUR REVIEW</span><strong id="phase-progress">0 of 8 phases reviewed</strong></div><div class="progress-track"><div id="phase-bar"></div></div><span>Review progress is separate from validation.</span></div><div class="chips" id="phase-filters" aria-label="Deployment stages"></div><div id="phase-list" class="phase-list"></div></section>
+
+      <section class="view" id="view-validation" hidden aria-labelledby="validation-title"><div class="page-heading compact"><div><div class="eyebrow">05 / VALIDATION CHECKLIST</div><h1 id="validation-title">Evidence first.<br><span>Confidence follows.</span></h1><p class="lead">Record what you actually observed. These are your browser-local<br class="desktop-break"> notes, independent of the repository's published test results.</p></div><button class="primary-button" id="export-validation"><span data-icon="download"></span>Export checklist</button></div><div class="validation-stats" id="validation-stats"></div><div class="validation-toolbar"><div class="chips" id="validation-filters" aria-label="Checklist status"></div><button class="text-button" id="reset-validation">Reset checklist</button></div><div id="validation-list"></div><div class="note light-note"><span data-icon="lock"></span><p>Notes stay in this browser and do not change GitHub. Record sanitized observations only; keep packet captures, credentials, and raw logs in approved private storage.</p></div></section>
+      <footer><div>JAMES BANDAY <span> / </span> RHEL 10.2 THREAT HUNTING LAB</div><a id="snapshot-link" target="_blank" rel="noopener noreferrer">Repository snapshot · 7858f89 ↗</a><span>Reference workspace · not a live monitor</span></footer>
+    </main>
+  </div>
+
+  <dialog id="tool-dialog" aria-labelledby="tool-dialog-title"><div class="dialog-top"><span class="eyebrow">TOOL REFERENCE</span><button class="icon-button" id="close-dialog" aria-label="Close tool details">×</button></div><div id="tool-dialog-body"></div></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">Reset your validation notes?</h2><p>This clears the statuses and notes saved in this browser. Export your checklist first if you want to keep a copy.</p><div class="dialog-actions"><button class="outline-button" id="cancel-reset">Keep notes</button><button class="primary-button danger" id="confirm-reset">Reset checklist</button></div></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

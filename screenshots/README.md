@@ -26,3 +26,9 @@ These screenshots were supplied in the original ZIP. They may show configuration
 | 20 | [20_Splunk_Service_Running.png](20_Splunk_Service_Running.png) | Screenshot labeled 20 Splunk Service Running; inspect the actual image before drawing conclusions. |
 | 21 | [21_Splunk_Web_Connection_Reset.png](21_Splunk_Web_Connection_Reset.png) | Screenshot labeled 21 Splunk Web Connection Reset; inspect the actual image before drawing conclusions. |
 | 22 | [22_Splunk_Web_Login_Page.png](22_Splunk_Web_Login_Page.png) | Screenshot labeled 22 Splunk Web Login Page; inspect the actual image before drawing conclusions. |
+
+## Interactive website screenshots
+
+The [Network Defense Lab website gallery](../docs/network-defense/INTERACTIVE_LAB.md) contains five browser screenshots of the light green and black reference interface. These were captured from a local preview of the website source, with no private checklist notes and all ten validation checks pending. They show the website interface, not live sensor output or completed lab acceptance.
+
+[Browse the website screenshots](network-defense-lab/).
