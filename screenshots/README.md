@@ -29,6 +29,6 @@ These screenshots were supplied in the original ZIP. They may show configuration
 
 ## Interactive website screenshots
 
-The [Network Defense Lab website gallery](../docs/network-defense/INTERACTIVE_LAB.md) contains five browser screenshots of the light green and black reference interface. These were captured from a local preview of the website source, with no private checklist notes and all ten validation checks pending. They show the website interface, not live sensor output or completed lab acceptance.
+The [TraceVector website gallery](../docs/network-defense/INTERACTIVE_LAB.md) contains five refreshed browser screenshots of TraceVector, with light green surfaces and larger black text. These were captured from a local preview of the website source, with no private checklist notes and all ten validation checks pending. They show the website interface, not live sensor output or completed lab acceptance.
 
 [Browse the website screenshots](network-defense-lab/).

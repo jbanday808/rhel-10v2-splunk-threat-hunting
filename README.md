@@ -14,13 +14,13 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 
 [Browse the current start guides](start-here/README.md).
 
-## Network Defense Lab | James Banday
+## TraceVector | James Banday
 
-[Open the private interactive website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Website guide and five screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Website source](website/network-defense-lab/)
+[Open the private TraceVector website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Website guide and five screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Website source](website/network-defense-lab/)
 
-Explore the `172.25.250.0/24` architecture, six analysis tools, documented traffic paths, deployment phases, and browser-local validation checklist in a light green and black workspace. The hosted website requires the owner’s ChatGPT sign-in; repository visitors can view the source and screenshots here.
+Explore the `172.25.250.0/24` architecture, six analysis tools, documented traffic paths, deployment phases, and browser-local validation checklist in TraceVector, a light green workspace with larger black text. The hosted website requires the owner’s ChatGPT sign-in; repository visitors can view the source and screenshots here.
 
-[![Network Defense Lab architecture preview](screenshots/network-defense-lab/01-architecture.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
+[![TraceVector architecture preview](screenshots/network-defense-lab/01-architecture.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
 
 *Figure 1: The interactive architecture view shows the three core VMs and optional Kali analysis path; it does not demonstrate live deployment or traffic visibility.*
 

@@ -63,7 +63,7 @@
     $('#phase-bar').style.width = `${100 * reviewed / LAB.phases.length}%`;
     $('#validation-stats').innerHTML = statuses.map(s => `<div class="validation-stat"><span>${s}</span><strong>${c[s]}</strong></div>`).join("");
   }
-  const names = {architecture:"Architecture",tools:"Tool library",traffic:"Traffic explorer",deployment:"Deployment",validation:"Validation"};
+  const names = {architecture:"Architecture",tools:"Tool library",traffic:"Traffic explorer",deployment:"Deployment",validation:"Validation",screenshots:"Screenshots"};
   let currentView;
   function navigate() {
     const candidate = location.hash.slice(1);
@@ -74,7 +74,7 @@
       if (a.dataset.view === view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     $('#breadcrumb').textContent = names[view];
-    document.title = "Network Defense Lab | James Banday";
+    document.title = "TraceVector | James Banday";
     if (currentView && currentView !== view) { window.scrollTo({top:0,behavior:"instant"}); $('#main').focus({preventScroll:true}); }
     currentView = view;
   }
