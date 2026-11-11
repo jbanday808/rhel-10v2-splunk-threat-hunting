@@ -18,7 +18,7 @@ This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, 
 
 [Open the private TraceVector website](https://banday-network-workbench.jamesbanday.chatgpt.site) · [Website guide and five screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Website source](website/network-defense-lab/)
 
-Explore the `172.25.250.0/24` architecture, six analysis tools, documented traffic paths, deployment phases, and browser-local validation checklist in TraceVector, a light green workspace with larger black text. The hosted website requires the owner’s ChatGPT sign-in; repository visitors can view the source and screenshots here.
+Explore the `172.25.250.0/24` architecture, six analysis tools plus Splunk Enterprise, a separate MITRE ATT&CK hunting framework, documented traffic paths, deployment phases, and browser-local validation checklist in TraceVector, a light green workspace with larger black text. The hosted website requires the owner’s ChatGPT sign-in; repository visitors can view the source and screenshots here.
 
 [![TraceVector architecture preview](screenshots/network-defense-lab/01-architecture.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
 
