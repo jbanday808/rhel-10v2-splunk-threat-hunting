@@ -29,7 +29,7 @@ These screenshots were supplied in the original ZIP. They may show configuration
 
 ## Current TraceVector screenshots
 
-The [current TraceVector gallery](../docs/network-defense/INTERACTIVE_LAB.md#screenshot-gallery) contains nine browser captures from a local preview of published Site version 1. They show the application with no personal progress, notes, drafts, proposals, or attachments. Existing public repository thumbnails remain visible in the evidence view. These captures document the interface, not live lab results or STIG compliance.
+The [current TraceVector gallery](../docs/network-defense/INTERACTIVE_LAB.md#screenshot-gallery) contains nine browser captures refreshed on November 11, 2026, from a local preview of published **Site version 4**, source commit `c22ec3678aba804226942517a51297860f74ff85`. They show the larger Overview typography, ten guided investigations, and combined lab/STIG review navigation. These are desktop viewport captures; longer views continue below the captured area. The [current private Site](https://tracevector.jamesbanday.chatgpt.site) is separate from the version 1 source snapshot retained in `website/tracevector-lab/`. They show the application with no personal progress, notes, drafts, proposals, or attachments. Existing public repository thumbnails remain visible in the evidence view. These captures document the interface, not live lab results or STIG compliance.
 
 | Figure | View |
 | --- | --- |
@@ -40,7 +40,7 @@ The [current TraceVector gallery](../docs/network-defense/INTERACTIVE_LAB.md#scr
 | 5 | [Detection studio](tracevector-lab/05-detection-studio.jpg) |
 | 6 | [Project documentation](tracevector-lab/06-project-documentation.jpg) |
 | 7 | [Progress tracking](tracevector-lab/07-progress-tracking.jpg) |
-| 8 | [Review queue](tracevector-lab/08-review-queue.jpg) |
+| 8 | [Lab proposals and STIG review link](tracevector-lab/08-review-queue.jpg) |
 | 9 | [Lab objectives](tracevector-lab/09-lab-objectives.jpg) |
 
 ## Earlier network-defense workbench screenshots

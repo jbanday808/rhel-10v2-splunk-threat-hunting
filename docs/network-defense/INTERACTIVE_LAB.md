@@ -2,7 +2,7 @@
 
 [Open the private TraceVector Site](https://tracevector-lab.jamesbanday.chatgpt.site) · [Start a guided hunt](https://tracevector-lab.jamesbanday.chatgpt.site/#scenarios) · [Browse current source](../../website/tracevector-lab/)
 
-TraceVector brings guided Splunk hunts, MITRE ATT&CK context, evidence, documentation, STIG guidance, detection drafts, and progress into one personal workspace. This guide describes **Site version 1, published November 11, 2026**, with matching source and screenshots.
+TraceVector brings guided Splunk hunts, MITRE ATT&CK context, evidence, documentation, STIG guidance, detection drafts, and progress into one personal workspace. The workflow reference and repository application source below describe **Site version 1, published November 11, 2026**. The [screenshot gallery](#screenshot-gallery) was refreshed from **Site version 4** and includes the newer Overview typography and combined lab/STIG navigation.
 
 ## Access and scope
 
@@ -62,19 +62,19 @@ The STIG section links the repository's RHEL 10 guidance and benchmark metadata.
 
 ## Screenshot gallery
 
-These captures show the current source in a local preview with an empty personal workspace. They document the interface; they do not establish live lab operation, detection coverage, or STIG compliance.
+These nine desktop viewport captures were refreshed on **November 11, 2026**, from a local preview of **published Site version 4**, source commit `c22ec3678aba804226942517a51297860f74ff85`. [Open the current private TraceVector Site](https://tracevector.jamesbanday.chatgpt.site). They show an empty personal workspace, larger Overview typography, ten guided investigations, and combined lab/STIG review navigation. Longer pages continue below the captured area. The version 1 application source retained in this repository is an earlier snapshot and does not reproduce every change shown here. These captures document the interface; they do not establish live lab operation, detection coverage, or STIG compliance.
 
 ### Figure 1 — Lab overview
 
 ![TraceVector lab overview with topology and workspace totals](../../screenshots/tracevector-lab/01-lab-overview.jpg)
 
-Figure 1: The overview brings lab topology, learning objectives, evidence, guided hunts, and STIG tracking into one dashboard.
+Figure 1: The overview uses larger text to present lab topology, workspace totals, and the STIG documentation review entry point.
 
 ### Figure 2 — Scenario lab
 
-![TraceVector guided SSH, sudo, and cron scenarios](../../screenshots/tracevector-lab/02-scenario-lab.jpg)
+![TraceVector scenario lab with ten guided investigations](../../screenshots/tracevector-lab/02-scenario-lab.jpg)
 
-Figure 2: The scenario lab provides three guided hunts using synthetic records, Splunk examples, and MITRE ATT&CK hypotheses.
+Figure 2: The scenario lab now offers ten guided investigations using synthetic records, Splunk examples, and MITRE ATT&CK hypotheses.
 
 <details>
 <summary>View Figures 3–9: evidence, remediation, detection, documentation, progress, review, and objectives</summary>
@@ -89,7 +89,7 @@ Figure 3: The evidence view organizes repository screenshots and local records w
 
 ![TraceVector STIG guidance and pending evidence requirements](../../screenshots/tracevector-lab/04-remediation-guidance.jpg)
 
-Figure 4: The remediation view links assessment guidance, proposed changes, and twelve RHEL STIG evidence requirements.
+Figure 4: The remediation view links the FIPS documentation review, assessment guidance, and twelve pending RHEL STIG evidence requirements.
 
 ### Figure 5 — Detection studio
 
@@ -105,15 +105,15 @@ Figure 6: The documentation view groups project guides and tracks proposed updat
 
 ### Figure 7 — Progress tracking
 
-![TraceVector progress tracking, journal, and backup controls](../../screenshots/tracevector-lab/07-progress-tracking.jpg)
+![TraceVector progress totals, practice milestones, and activity log](../../screenshots/tracevector-lab/07-progress-tracking.jpg)
 
-Figure 7: The progress view combines practice milestones, a lab journal, activity history, and backup export/import.
+Figure 7: The progress view tracks ten practice hunts and workspace activity, with journal and backup tools further down the page.
 
-### Figure 8 — Review queue
+### Figure 8 — Lab proposals
 
-![TraceVector review queue before any proposals are added](../../screenshots/tracevector-lab/08-review-queue.jpg)
+![TraceVector lab proposals with the STIG change review entry point](../../screenshots/tracevector-lab/08-review-queue.jpg)
 
-Figure 8: The review queue stores proposed changes and review decisions before separate application to GitHub.
+Figure 8: Lab proposals now includes a separate STIG change review entry point above the empty proposal list.
 
 ### Figure 9 — Lab objectives
 
