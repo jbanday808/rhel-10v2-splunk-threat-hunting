@@ -12,6 +12,7 @@ This optional workstream adds repeatable processes for handling threats and vuln
 | Handle a suspected incident | [Incident management](INCIDENT_MANAGEMENT.md) | [Incident record](templates/incident-record.md) |
 | Review account-security alerts | [Google account-alert triage findings](GOOGLE_ACCOUNT_ALERT_TRIAGE.md) | Synthetic evidence distinctions, verification, mitigations, and prevention |
 | Manage a vulnerability or misconfiguration | [Vulnerability workflow](VULNERABILITY_MANAGEMENT.md) | [Vulnerability record](templates/vulnerability-record.md) |
+| Preview and apply approved OS security updates | [Ansible patching runbook](../../automation/ansible/README.md) | [Pending live acceptance](../../evidence/sanitized/ansible-patching-validation.md) |
 | Design and execute a hunt | [Threat-hunting method](THREAT_HUNTING_METHOD.md) | [Detailed plan](templates/threat-hunt-plan.md) |
 | Brief leaders and technical teams | [Hunt and stakeholder briefing](templates/hunt-briefing.md) | Six-slide briefing outline and decision log |
 | Document investigation results | [Detailed hunt report](templates/threat-hunt-report.md) | Evidence-linked findings, limitations and follow-up |

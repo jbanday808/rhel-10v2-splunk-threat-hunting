@@ -1,0 +1,17 @@
+---
+- name: Read required Windows service state without changing services
+  ansible.windows.win_service_info:
+    name: "{{ item }}"
+  loop: "{{ patch_required_services | default([]) }}"
+  register: patch_windows_service_state
+
+- name: Check the reviewed Windows services exist and are started
+  ansible.builtin.assert:
+    that:
+      - item.exists
+      - item.services | length == 1
+      - item.services[0].state == 'started'
+    fail_msg: "A required Windows service is absent or stopped; stop and investigate."
+  loop: "{{ patch_windows_service_state.results }}"
+  loop_control:
+    label: "{{ item.item }}"

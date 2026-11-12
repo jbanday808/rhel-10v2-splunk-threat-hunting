@@ -1,0 +1,39 @@
+---
+- name: Validate the patch policy before contacting a target
+  ansible.builtin.assert:
+    that:
+      - patch_mode in ['assess', 'apply']
+      - patch_approved is boolean
+      - patch_recovery_ready is boolean
+      - patch_allow_reboot is boolean
+      - (patch_required_services | default([])) is sequence
+      - (patch_required_services | default([])) is not string
+      - inventory_hostname is match('^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$')
+      - not (ansible_host | default(inventory_hostname)).startswith('REPLACE_')
+      - patch_report_dir is string
+      - patch_report_dir is abs
+      - (patch_report_dir | realpath) != (patch_repository_root | realpath)
+      - not (patch_report_dir | realpath).startswith((patch_repository_root | realpath) + '/')
+    fail_msg: Invalid patch policy, placeholder target, or report path inside the repository.
+  tags: always
+
+- name: Require an approved single-host change for installation
+  ansible.builtin.assert:
+    that:
+      - patch_approved
+      - patch_change_id is string
+      - patch_change_id | trim | length > 0
+      - patch_recovery_ready
+      - ansible_limit | default('') | length > 0
+      - ansible_play_hosts_all | length == 1
+      - patch_required_services | default([]) | length > 0
+    fail_msg: >-
+      Installation needs an approved change ID, confirmed recovery, verified service
+      names and an explicit --limit selecting exactly one host. Use assess to preview.
+  when: patch_installing
+  tags: always
+
+- name: Assign a unique private report name
+  ansible.builtin.set_fact:
+    patch_run_id: "{{ now(utc=true, fmt='%Y%m%dT%H%M%S%fZ') }}"
+  tags: always

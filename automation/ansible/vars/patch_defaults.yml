@@ -1,0 +1,16 @@
+---
+# Assessment never installs updates or reboots. --check also prevents installation.
+patch_mode: assess
+patch_approved: false
+patch_change_id: ""
+patch_recovery_ready: false
+patch_allow_reboot: false
+patch_rhel_packages:
+  - "*"
+patch_rhel_extra_excludes: []
+patch_windows_categories:
+  - SecurityUpdates
+  - CriticalUpdates
+patch_windows_accept_list: []
+patch_windows_reject_list: []
+patch_report_dir: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/state/tracevector/patching"

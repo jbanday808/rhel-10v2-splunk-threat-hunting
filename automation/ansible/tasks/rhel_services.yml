@@ -1,0 +1,11 @@
+---
+- name: Read systemd service state without changing services
+  ansible.builtin.service_facts:
+
+- name: Check the reviewed RHEL service names and running state
+  ansible.builtin.assert:
+    that:
+      - item in ansible_facts.services
+      - ansible_facts.services[item].state == 'running'
+    fail_msg: "Required service {{ item }} is absent or not running; stop and investigate."
+  loop: "{{ patch_required_services | default([]) }}"

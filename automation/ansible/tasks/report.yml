@@ -1,0 +1,28 @@
+---
+- name: Create private controller report directory
+  ansible.builtin.file:
+    path: "{{ patch_report_dir }}"
+    state: directory
+    mode: "0700"
+  delegate_to: localhost
+  become: false
+  when: not ansible_check_mode
+
+- name: Save the private patch record outside Git
+  ansible.builtin.copy:
+    content: "{{ patch_report | to_nice_json }}\n"
+    dest: "{{ patch_report_dir }}/{{ inventory_hostname }}-{{ patch_run_id }}.json"
+    mode: "0600"
+    force: false
+  delegate_to: localhost
+  become: false
+  no_log: true
+  when: not ansible_check_mode
+
+- name: State the result without claiming vulnerability closure
+  ansible.builtin.debug:
+    msg:
+      mode: "{{ 'apply' if patch_installing else 'assess' }}"
+      reboot_required: "{{ patch_report.reboot_required }}"
+      report: "{{ 'Not written in --check mode' if ansible_check_mode else patch_report_dir + '/' + inventory_hostname + '-' + patch_run_id + '.json' }}"
+      verification: Service checks are limited; independent vulnerability and telemetry retests remain required.

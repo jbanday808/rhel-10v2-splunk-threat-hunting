@@ -1,0 +1,76 @@
+---
+- name: Search or install Windows security and critical updates on one approved host
+  hosts: windows_patch_targets
+  gather_facts: false
+  serial: 1
+  any_errors_fatal: true
+  vars_files:
+    - ../vars/patch_defaults.yml
+  vars:
+    patch_repository_root: "{{ playbook_dir }}/../../.."
+    patch_installing: "{{ patch_mode == 'apply' and not ansible_check_mode }}"
+  pre_tasks:
+    - name: Enforce controller-side policy before remote facts or changes
+      ansible.builtin.import_tasks: ../tasks/guard.yml
+    - name: Require verified WinRM HTTPS and bounded update categories
+      ansible.builtin.assert:
+        that:
+          - ansible_connection == 'winrm'
+          - ansible_winrm_scheme == 'https'
+          - ansible_port | int == 5986
+          - ansible_winrm_server_cert_validation == 'validate'
+          - patch_windows_categories is sequence and patch_windows_categories is not string
+          - patch_windows_categories | length > 0
+          - patch_windows_categories | difference(['SecurityUpdates', 'CriticalUpdates', 'DefinitionUpdates']) | length == 0
+          - patch_windows_accept_list is sequence and patch_windows_accept_list is not string
+          - patch_windows_reject_list is sequence and patch_windows_reject_list is not string
+        fail_msg: Use certificate-verified WinRM HTTPS and reviewed security/critical/definition update categories.
+    - name: Gather Windows facts after policy validation
+      ansible.windows.setup:
+        gather_subset:
+          - min
+    - name: Require a Windows target
+      ansible.builtin.assert:
+        that: ansible_facts.os_family == 'Windows'
+    - name: Check required services before searching or installing
+      ansible.builtin.import_tasks: ../tasks/windows_services.yml
+  tasks:
+    - name: Search by default and install only for an approved apply run
+      ansible.windows.win_updates:
+        category_names: "{{ patch_windows_categories }}"
+        accept_list: "{{ patch_windows_accept_list }}"
+        reject_list: "{{ patch_windows_reject_list }}"
+        skip_optional: true
+        server_selection: default
+        state: "{{ 'installed' if patch_installing else 'searched' }}"
+        reboot: "{{ patch_installing and patch_allow_reboot }}"
+        reboot_timeout: 1800
+      become: true
+      become_method: runas
+      become_user: SYSTEM
+      register: patch_windows_transaction
+
+    - name: Check required services after searching or installing
+      ansible.builtin.import_tasks: ../tasks/windows_services.yml
+    - name: Build the private Windows patch record
+      ansible.builtin.set_fact:
+        patch_report:
+          schema_version: 1
+          target_alias: "{{ inventory_hostname }}"
+          run_id: "{{ patch_run_id }}"
+          platform: Windows
+          mode: "{{ 'apply' if patch_installing else 'assess' }}"
+          change_id: "{{ patch_change_id }}"
+          reboot_required: "{{ patch_windows_transaction.reboot_required | default(false) }}"
+          transaction: "{{ patch_windows_transaction }}"
+          required_services: "{{ patch_required_services | default([]) }}"
+          vulnerability_retest: Pending independent validation
+    - name: Save and summarize the patch record
+      ansible.builtin.import_tasks: ../tasks/report.yml
+    - name: Stop on failed updates or an outstanding reboot
+      ansible.builtin.assert:
+        that:
+          - patch_windows_transaction.failed_update_count | default(0) | int == 0
+          - not (patch_windows_transaction.reboot_required | default(false))
+        fail_msg: The update operation is incomplete; retain the private record and investigate before closing the finding.
+      when: patch_installing

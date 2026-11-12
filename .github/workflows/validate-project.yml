@@ -27,3 +27,24 @@ jobs:
       - name: Parse and check Windows files
         shell: pwsh
         run: ./scripts/windows/Test-Project.ps1
+  ansible:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned controller dependencies and Windows collection
+        run: |
+          python3 -m venv "$RUNNER_TEMP/patching-venv"
+          "$RUNNER_TEMP/patching-venv/bin/python" -m pip install -r automation/ansible/requirements.txt
+          "$RUNNER_TEMP/patching-venv/bin/ansible-galaxy" collection install -r automation/ansible/requirements.yml
+      - name: Check playbook syntax without connecting to targets
+        working-directory: automation/ansible
+        run: |
+          cp inventory/hosts.yml.example "$RUNNER_TEMP/patching-example.yml"
+          "$RUNNER_TEMP/patching-venv/bin/ansible-playbook" -i "$RUNNER_TEMP/patching-example.yml" --syntax-check playbooks/patch_rhel.yml
+          "$RUNNER_TEMP/patching-venv/bin/ansible-playbook" -i "$RUNNER_TEMP/patching-example.yml" --syntax-check playbooks/patch_windows.yml
+      - name: Test patch guards offline without a lab inventory or secrets
+        run: |
+          "$RUNNER_TEMP/patching-venv/bin/python" -B -m unittest discover -s tests -p test_ansible_patching.py -v

@@ -1,0 +1,4 @@
+# Controller dependencies validated together; review updates before changing pins.
+ansible-core==2.20.11
+pywinrm==0.5.0
+PyYAML==6.0.3

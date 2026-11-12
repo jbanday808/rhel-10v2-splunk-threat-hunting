@@ -94,3 +94,11 @@ epo-v3r8-private-workbook*.txt
 
 # Windows Firewall policy exports contain environment details
 *.wfw
+
+# Ansible local inventory, approval records, dependencies, and private patch output.
+automation/ansible/inventory/*.local.yml
+automation/ansible/inventory/*.local.yaml
+automation/ansible/vars/*.local.yml
+automation/ansible/vars/*.local.yaml
+automation/ansible/.venv/
+patch-reports/

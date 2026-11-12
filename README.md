@@ -30,6 +30,8 @@ The [earlier network-defense workbench](website/network-defense-lab/) remains av
 
 ## Project documentation
 
+- [Ansible security patching](automation/ansible/README.md): Preview RHEL and Windows updates, apply one approved host change at a time, and retain private evidence. Reboots are off by default; live acceptance remains pending.
+
 - [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
 - [Optional appendices](docs/appendices/README.md) · [Reference files](docs/reference/README.md) · [Software downloads](docs/reference/downloads.md) · [Deployment order](docs/reference/deployment-order.md)
 - [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md)
@@ -63,6 +65,7 @@ The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`
 | [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
 | [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
 | [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
+| [automation/ansible](automation/ansible/README.md) | Assessment-first RHEL and Windows security patching, optional approved reboots, and offline policy tests |
 | [website/tracevector-lab](website/tracevector-lab/) | Published source snapshot for the current private TraceVector workspace |
 | [website/network-defense-lab](website/network-defense-lab/) | Earlier network-defense reference workbench and its original screenshot gallery |
 | [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |

@@ -1,0 +1,10 @@
+---
+# Keep the completed copy outside Git. Approval covers a single --limit host.
+patch_mode: apply
+patch_approved: false  # Set true only after the owner authorizes this change.
+patch_change_id: ""  # Reference the real approved finding/change record.
+patch_recovery_ready: false  # Confirm a verified backup and usable recovery route.
+patch_allow_reboot: false  # A separate explicit choice; reboots can interrupt service.
+# Optional reviewed scope, rather than every security update:
+# patch_rhel_packages: [openssl-libs]
+# patch_windows_accept_list: [KB1234567]  # Illustrative placeholder, not a real fix.

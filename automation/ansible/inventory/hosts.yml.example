@@ -1,0 +1,35 @@
+---
+# Copy to hosts.local.yml and verify every address, account, unit and certificate.
+# The documented core subnet is 172.25.250.0/24; these placeholders cannot connect.
+all:
+  children:
+    rhel_patch_targets:
+      vars:
+        ansible_user: REPLACE_WITH_AUTHORIZED_SSH_ACCOUNT
+      hosts:
+        rhel_splunk01:
+          ansible_host: REPLACE_WITH_RHEL_SPLUNK_FQDN
+          # RHEL-SPLUNK01 (.10). Confirm the actual systemd unit before use.
+          patch_required_services:
+            - Splunkd.service
+        rhel_idm01:
+          ansible_host: REPLACE_WITH_RHEL_IDM_FQDN
+          # RHEL-IDM01 (.30). Confirm the actual systemd unit before use.
+          patch_required_services:
+            - ipa.service
+    windows_patch_targets:
+      vars:
+        ansible_connection: winrm
+        ansible_port: 5986
+        ansible_winrm_scheme: https
+        ansible_winrm_transport: ntlm
+        ansible_winrm_server_cert_validation: validate
+        ansible_winrm_ca_trust_path: REPLACE_WITH_PRIVATE_CA_PEM_PATH
+        ansible_user: REPLACE_WITH_AUTHORIZED_WINDOWS_ADMINISTRATOR
+      hosts:
+        winhunt01:
+          ansible_host: REPLACE_WITH_WINHUNT_FQDN
+          # WINHUNT01 (.20). Sysmon may have a different installed service name.
+          patch_required_services:
+            - SplunkForwarder
+            - Sysmon64

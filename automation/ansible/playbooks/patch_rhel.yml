@@ -1,0 +1,122 @@
+---
+- name: Preview or apply RHEL security updates to one approved lab host
+  hosts: rhel_patch_targets
+  gather_facts: false
+  serial: 1
+  any_errors_fatal: true
+  become: true
+  vars_files:
+    - ../vars/patch_defaults.yml
+  vars:
+    patch_repository_root: "{{ playbook_dir }}/../../.."
+    patch_installing: "{{ patch_mode == 'apply' and not ansible_check_mode }}"
+  pre_tasks:
+    - name: Enforce controller-side policy before remote facts or changes
+      ansible.builtin.import_tasks: ../tasks/guard.yml
+    - name: Gather RHEL facts after policy validation
+      ansible.builtin.setup:
+        gather_subset:
+          - min
+    - name: Require the supported RHEL 10 DNF platform and a package list
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.distribution == 'RedHat'
+          - ansible_facts.distribution_major_version == '10'
+          - patch_rhel_packages is sequence and patch_rhel_packages is not string
+          - patch_rhel_packages | length > 0
+          - patch_rhel_extra_excludes is sequence and patch_rhel_extra_excludes is not string
+        fail_msg: This playbook supports RHEL 10 with DNF4 and reviewed package/service scope.
+    - name: Accept installed package names or the security-update wildcard only
+      ansible.builtin.assert:
+        that:
+          - item is string
+          - item is match('^(\*|[A-Za-z0-9][A-Za-z0-9+_.-]*)$')
+        fail_msg: Use package names from the configured repositories, not URLs, RPM paths, groups or version overrides.
+      loop: "{{ patch_rhel_packages }}"
+    - name: Confirm the target Python already has the DNF bindings
+      ansible.builtin.command:
+        argv:
+          - "{{ ansible_facts.python.executable }}"
+          - -c
+          - import dnf
+      changed_when: false
+      check_mode: false
+    - name: Require the installed restart-check command before any transaction
+      ansible.builtin.command:
+        argv: [dnf, needs-restarting, --help]
+      changed_when: false
+      check_mode: false
+    - name: Confirm reboot assessment is available before any package change
+      ansible.builtin.command:
+        argv: [dnf, needs-restarting, -r]
+      register: patch_reboot_before
+      changed_when: false
+      failed_when: patch_reboot_before.rc not in [0, 1] or patch_reboot_before.stderr | trim | length > 0
+      check_mode: false
+    - name: Check required services before the transaction
+      ansible.builtin.import_tasks: ../tasks/rhel_services.yml
+  tasks:
+    - name: Resolve security updates and install only for an approved apply run
+      ansible.builtin.dnf:
+        name: "{{ patch_rhel_packages }}"
+        state: latest
+        security: true
+        update_only: true
+        update_cache: true
+        use_backend: dnf4
+        exclude: "{{ ['splunk*', 'splunkforwarder*'] + patch_rhel_extra_excludes }}"
+        disable_gpg_check: false
+        sslverify: true
+        skip_broken: false
+        allowerasing: false
+        allow_downgrade: false
+        install_weak_deps: false
+        lock_timeout: 120
+      check_mode: "{{ not patch_installing }}"
+      register: patch_rhel_transaction
+
+    - name: Check whether the resulting RHEL state needs a reboot
+      ansible.builtin.command:
+        argv: [dnf, needs-restarting, -r]
+      register: patch_reboot_after
+      changed_when: false
+      failed_when: patch_reboot_after.rc not in [0, 1] or patch_reboot_after.stderr | trim | length > 0
+      check_mode: false
+
+    - name: Reboot only when this apply run explicitly permits it
+      ansible.builtin.reboot:
+        reboot_timeout: 900
+        post_reboot_delay: 30
+      when: patch_installing and patch_allow_reboot and patch_reboot_after.rc == 1
+
+    - name: Check required services after the transaction or authorized reboot
+      ansible.builtin.import_tasks: ../tasks/rhel_services.yml
+
+    - name: Obtain the final reboot status
+      ansible.builtin.command:
+        argv: [dnf, needs-restarting, -r]
+      register: patch_reboot_final
+      changed_when: false
+      failed_when: patch_reboot_final.rc not in [0, 1] or patch_reboot_final.stderr | trim | length > 0
+      check_mode: false
+
+    - name: Build the private RHEL patch record
+      ansible.builtin.set_fact:
+        patch_report:
+          schema_version: 1
+          target_alias: "{{ inventory_hostname }}"
+          run_id: "{{ patch_run_id }}"
+          platform: RHEL
+          mode: "{{ 'apply' if patch_installing else 'assess' }}"
+          change_id: "{{ patch_change_id }}"
+          os_release: "{{ ansible_facts.distribution_version }}"
+          reboot_required: "{{ patch_reboot_final.rc == 1 }}"
+          transaction: "{{ patch_rhel_transaction }}"
+          required_services: "{{ patch_required_services | default([]) }}"
+          vulnerability_retest: Pending independent validation
+    - name: Save and summarize the patch record
+      ansible.builtin.import_tasks: ../tasks/report.yml
+    - name: Keep a reboot-dependent change open
+      ansible.builtin.fail:
+        msg: Updates are installed but a reboot is still required. Complete recovery and independent checks before closing the finding.
+      when: patch_installing and patch_reboot_final.rc == 1
