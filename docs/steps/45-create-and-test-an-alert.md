@@ -354,7 +354,7 @@ A positive count is the first collection check, not completion of Step 45. Gener
 
 The later PowerShell check returned no loaded `Invoke-AtomicRedTeam` / `powershell-yaml` modules, and `Get-Command Invoke-AtomicTest -Syntax` raised `CommandNotFoundException`. That established that the command was unavailable in that session, not that the packages were absent from disk.
 
-The subsequent `Find-Module` result selected **Invoke-AtomicRedTeam 2.3.0** and **powershell-yaml 0.4.12**. The version-pinned `Install-Module` loop returned without a reported error. Both imports then failed because Windows PowerShell blocked the `powershell-yaml.psm1` script with **running scripts is disabled**, `PSSecurityException`, and `UnauthorizedAccess`. The framework depends on that module, so `Invoke-AtomicTest` remained unavailable. No successful import or Atomic test execution was supplied.
+The subsequent `Find-Module` result selected **Invoke-AtomicRedTeam 2.3.0** and **powershell-yaml 0.4.12**. The version-pinned `Install-Module` loop returned without a reported error. Both imports initially failed because Windows PowerShell blocked the `powershell-yaml.psm1` script with **running scripts is disabled**, `PSSecurityException`, and `UnauthorizedAccess`. The framework depends on that module, so `Invoke-AtomicTest` remained unavailable until the session-policy correction below.
 
 **Step 45's encoded-PowerShell marker does not require Atomic Red Team.** For the separate optional pipe-validation exercise, inspect discoverable modules and the actual policy scopes in the same PowerShell session:
 
@@ -382,13 +382,17 @@ Get-ExecutionPolicy
 After policy and discovery checks are satisfied, import the reviewed modules:
 
 ```powershell
-Import-Module powershell-yaml -ErrorAction Stop
-Import-Module Invoke-AtomicRedTeam -ErrorAction Stop
+Import-Module powershell-yaml -RequiredVersion 0.4.12 -ErrorAction Stop
+Import-Module Invoke-AtomicRedTeam -RequiredVersion 2.3.0 -ErrorAction Stop
 Get-Module Invoke-AtomicRedTeam,powershell-yaml | Select-Object Name,Version,Path
 Get-Command Invoke-AtomicTest -Syntax -ErrorAction Stop
 ```
 
-**Expected:** Both imports succeed and command syntax appears. Stop on the first failed import; repeating dependent commands will not repair it. Importing the framework and displaying syntax do not execute an Atomic test. The session-policy correction remains **proposed and unverified** in this record, and it does not resolve the separate forwarding failure. Complete collection verification before attempting the optional exercise.
+**Expected:** Both imports succeed and command syntax appears. Stop on the first failed import; repeating dependent commands will not repair it.
+
+**Verified result — module setup resolved for the supplied session:** All five policy scopes were initially `Undefined`. After `Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned`, the effective policy was confirmed as `RemoteSigned`. Imports of **powershell-yaml 0.4.12** and **Invoke-AtomicRedTeam 2.3.0** returned without errors; `Get-Module` listed both exact versions, and `Get-Command Invoke-AtomicTest -Syntax` displayed the command's syntax. This verifies the framework-loading correction in that window. The temporary policy and loaded modules must be established again in a new session when needed.
+
+No Atomic test execution was demonstrated by those checks. This success does not establish Sysmon delivery or resolve the separate forwarding failure. Complete collection verification before attempting the optional exercise.
 
 #### 7.7 — Preserve safe evidence
 
