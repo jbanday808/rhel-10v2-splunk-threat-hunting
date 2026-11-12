@@ -20,6 +20,7 @@ These 21 files were grouped from the top level of `docs/`. The [main README](../
 | File | Purpose |
 | --- | --- |
 | [Hunt report template](hunt-report-template.md) | Investigation record template |
+| [Splunk Threat Hunting Reference Guide](SPLUNK_THREAT_HUNTING_REFERENCE_GUIDE.md) | Search process, SPL examples, result interpretation, troubleshooting, mitigations, and prevention |
 | [Testing](testing.md) | Lab checks and validation guidance |
 | [Troubleshooting](troubleshooting.md) | General troubleshooting |
 | [Security and sanitization](security-and-sanitization.md) | Public evidence review checklist |
