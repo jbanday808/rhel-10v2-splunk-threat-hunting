@@ -15,7 +15,8 @@ Start with [benchmark metadata and exact source fingerprint](../docs/stig-rhel10
 - The uploaded V1R1 ZIP contains **one XML SCAP 1.3 data stream**, **396 XCCDF rules**: **28 high (CAT I)**, **364 medium (CAT II)**, **4 low (CAT III)**, plus **11 XCCDF profiles** (nine mission/sensitivity profiles and two special profiles).
 - The source ZIP and original XML are **not committed to public GitHub**. They remain with the user and on privately controlled VMs.
 - SCAP benchmark V1R1 is distinct from Red Hat's **RHEL 10.2 vendor-provided STIG profile**, which Red Hat documents as aligned with V1R2. Do not mix results or assert equivalent rule coverage. Follow an actual system owner's baseline decision.
-- **Never run indiscriminate remediation**, move mounted Splunk storage, turn on FIPS in-place, or restrict SSH/IdM networking without a snapshot, console access and tested recovery.
+- **Never run indiscriminate remediation**, move mounted Splunk storage, or restrict SSH/IdM networking without a snapshot, console access and tested recovery.
+- **Do not enable FIPS in-place on RHEL 10:** post-installation enablement is unsupported. If required, plan a separately approved replacement installation with FIPS enabled during installation; follow the [FIPS inspection and planning guidance](../docs/stig-rhel10/03-remediation-and-exceptions.md#example-3--fips-mode-requires-a-separate-architecture-plan).
 - Select an explicit **full-assessment** benchmark profile using `oscap info`. A limited “CAT I Only” profile is **not** a complete assessment. A profile name such as `MAC-3_Public` does not formally categorize the system.
 - This is educational guidance; passing an OpenSCAP assessment does **not** by itself grant STIG compliance, RMF authorization, or DoD ATO.
 

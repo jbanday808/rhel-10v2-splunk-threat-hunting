@@ -52,13 +52,19 @@ sudo firewall-cmd --zone=siem-lab --list-all
 
 `RHEL-10-000500` / `V-281009` is **CAT I** in the uploaded benchmark.
 
+**Read-only inspection (on each RHEL VM: RHEL-SPLUNK01 and RHEL-IDM01):**
+
 ```bash
-fips-mode-setup --check || true
+cat /proc/sys/crypto/fips_enabled
 update-crypto-policies --show
 openssl version -a
 ```
 
-**Command overview:** Reads current FIPS/cryptography state only. Do **not** casually run `fips-mode-setup --enable` or change system cryptographic policy on an existing Splunk/IdM VM. Changes can require a reboot and service/key reconfiguration; verify Red Hat-supported installation/transition guidance, the relevant validated modules, and compatibility with the installed Splunk and IdM versions. For an educational lab, a clean replacement VM built with an approved FIPS configuration may be safer than retrofitting a live directory/indexer.
+**Command overview:** Run each command separately and retain its output and exit status. `cat` reads the running kernel's FIPS flag: `1` means enabled; `0` means disabled. The other commands report the selected system cryptographic policy and OpenSSL build/version information. These inspections do not change configuration and require no rollback. Do not suppress errors with `|| true`; a missing/unreadable flag or unexpected output makes the inspection inconclusive, not enabled or compliant.
+
+**Validation boundary:** A flag value of `1`, a `FIPS` policy name, or OpenSSL version information does **not** independently establish FIPS 140 validation or STIG compliance. Review the relevant validated modules and their operating requirements, the exact benchmark check, and host-specific assessment evidence. Live scans, functional tests and compliance review remain **Pending** until performed and recorded; this documentation is not host validation or certification.
+
+**RHEL 10 planning constraint:** [Red Hat's RHEL 10 FIPS guidance](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/security_hardening/switching-rhel-to-fips-mode) documents that `fips-mode-setup` was removed and enabling FIPS after installation is unsupported. If FIPS is required, plan a separately approved replacement VM installation with FIPS enabled during installation. Do **not** attempt an in-place conversion or change system cryptographic policy on an existing Splunk/IdM VM as a shortcut. Before any replacement or cutover, verify compatibility with the installed Splunk and IdM versions, relevant validated modules, TLS/SSH, credentials, keys, certificates and service accounts; require owner approval, private backups, tested console recovery, rollback and functional regression tests.
 
 ## Example 4 — Do not remove IdM packages based on one generic package rule
 
@@ -104,4 +110,4 @@ sudo ausearch -m AVC -ts recent || true
 
 For any unresolved item, record `V-ID`, `SV-ID`, `RHEL-10-ID`, affected host, severity, observed test result, impact, change owner, compensating control, due date, status and approval decision. A risk decision must come from the **actual authorized decision maker**; a lab's student-facing POA&M does not grant an ATO or waive official requirements.
 
-**Never run an arbitrary SCAP auto-fix, system-wide chmod/chown, disk formatter, SSH policy overwrite or FIPS migration against the existing VMs without an approved, tested rollback.**
+**Never run an arbitrary SCAP auto-fix, system-wide chmod/chown, disk formatter or SSH policy overwrite against the existing VMs without an approved, tested rollback. Do not attempt an in-place FIPS conversion on RHEL 10.**
