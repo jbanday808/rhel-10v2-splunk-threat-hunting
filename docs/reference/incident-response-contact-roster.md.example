@@ -1,0 +1,45 @@
+# Private Incident Response Contact Roster Example
+
+Copy this empty example into approved private, access-controlled case/preparation storage before entering real information. Never commit the completed roster, internal bridge, duty schedule, personal contacts, customer data or incident details to this public repository. Store an independently accessible offline copy according to policy.
+
+## Ownership and availability
+
+- Organization / system: [PRIVATE VALUE]
+- Roster owner and deputy: [PRIVATE VALUES]
+- Approved response policy and emergency delegation: [PRIVATE REFERENCES]
+- Last verified UTC / next verification: [PRIVATE DATES]
+- Approved primary and independent backup communication channels: [PRIVATE REFERENCES]
+- Recovery vault access procedure and independent authentication: [PRIVATE REFERENCE]
+- Coverage hours, timezones, holidays and after-hours service: [PRIVATE VALUES]
+
+## Primary and backup people
+
+| Role | Primary person and duty channel | Backup person and independent channel | Coverage/timezone | Action/decision authority | Last contact test |
+| --- | --- | --- | --- | --- | --- |
+| SOC duty / help desk | [PRIVATE] | [PRIVATE] | [SET] | Intake and investigation scope | [SET] |
+| Incident commander / IR lead | [PRIVATE] | [PRIVATE] | [SET] | Incident declaration and emergency delegation | [SET] |
+| Security duty manager / CISO | [PRIVATE] | [PRIVATE] | [SET] | Cross-team escalation and security decisions | [SET] |
+| Forensic lead / evidence custodian | [PRIVATE] | [PRIVATE] | [SET] | Collection and custody | [SET] |
+| RHEL / application lead | [PRIVATE] | [PRIVATE] | [SET] | Approved host/app actions | [SET] |
+| Windows / endpoint lead | [PRIVATE] | [PRIVATE] | [SET] | Approved endpoint actions | [SET] |
+| Identity / IdM / cloud lead | [PRIVATE] | [PRIVATE] | [SET] | Approved identity/trust actions | [SET] |
+| Splunk / detection lead | [PRIVATE] | [PRIVATE] | [SET] | Approved logging/search changes | [SET] |
+| Network / firewall lead | [PRIVATE] | [PRIVATE] | [SET] | Approved network restrictions | [SET] |
+| Service / recovery / backup owner | [PRIVATE] | [PRIVATE] | [SET] | Continuity, recovery and acceptance | [SET] |
+| Legal / privacy / compliance | [PRIVATE] | [PRIVATE] | [SET] | Notification clocks and disclosure | [SET] |
+| Executive / continuity / communications | [PRIVATE] | [PRIVATE] | [SET] | Business decisions and external statements | [SET] |
+| Vulnerability / vendor PSIRT liaison | [PRIVATE] | [PRIVATE] | [SET] | Vendor cases and coordinated disclosure | [SET] |
+| ISSO / ISSM / risk authority if applicable | [PRIVATE] | [PRIVATE] | [SET] | Agency/contract reporting and risk decisions | [SET] |
+| External DFIR / provider / insurer | [PRIVATE] | [PRIVATE] | [SET] | Retainer/contract scope | [SET] |
+
+## Approved escalation and reporting register
+
+Record P1 through P4 triggers, acknowledgment targets, update cadence and the accepted fallback ladder. The playbook's example targets remain proposals until adopted. Document which person can withdraw an exposed service, isolate an endpoint, restrict a privileged identity, authorize a rebuild and accept restoration.
+
+| Duty or external recipient | Applicability rule/contract | Clock start and deadline | Authorized sender/backup | Secure route and fallback | Receipt/evidence reference |
+| --- | --- | --- | --- | --- | --- |
+| Vendor PSIRT and urgent support | [SET] | [SET] | [PRIVATE] | [VERIFY OFFICIAL ROUTE] | [PRIVATE] |
+| CISA / national CSIRT / law enforcement | [SET] | [SET] | [PRIVATE] | [VERIFY OFFICIAL ROUTE] | [PRIVATE] |
+| Regulator / agency chain / customer / insurer | [SET EACH SEPARATELY] | [SET] | [PRIVATE] | [PRIVATE] | [PRIVATE] |
+
+Test the primary and backup paths under approved exercise conditions, record acknowledgment times, and update after staffing or provider changes. Do not wait for a weekly publication to report a real critical incident.

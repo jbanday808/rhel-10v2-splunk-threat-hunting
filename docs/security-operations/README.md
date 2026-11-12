@@ -8,6 +8,7 @@ This optional workstream adds repeatable processes for handling threats and vuln
 
 | Task | Procedure | Reusable record |
 | --- | --- | --- |
+| Review weekly APT reporting, hunts and response | [Weekly guides](weekly-threat-hunting/README.md) | [Complete six-phase response, roles and escalation](APT_INCIDENT_RESPONSE_PLAYBOOK.md) |
 | Handle a suspected incident | [Incident management](INCIDENT_MANAGEMENT.md) | [Incident record](templates/incident-record.md) |
 | Manage a vulnerability or misconfiguration | [Vulnerability workflow](VULNERABILITY_MANAGEMENT.md) | [Vulnerability record](templates/vulnerability-record.md) |
 | Design and execute a hunt | [Threat-hunting method](THREAT_HUNTING_METHOD.md) | [Detailed plan](templates/threat-hunt-plan.md) |

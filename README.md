@@ -35,6 +35,7 @@ The [earlier network-defense workbench](website/network-defense-lab/) remains av
 - [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md)
 - [Kali Wireshark, Zeek, Suricata, Arkime, YARA and Sigma setup](docs/network-defense/KALI_DEPLOYMENT.md) · [Network defense](docs/network-defense/README.md) · [Complete RHEL Zeek deployment](docs/network-defense/ZEEK_DEPLOYMENT.md) · [RHEL Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
 - [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md)
+- [Weekly APT threat hunting guides](docs/security-operations/weekly-threat-hunting/README.md) · [Six-phase incident response, roles, escalation, mitigations and prevention](docs/security-operations/APT_INCIDENT_RESPONSE_PLAYBOOK.md)
 - [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
 
 ## NIST AI RMF and security governance (proposed extension)
