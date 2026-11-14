@@ -53,40 +53,40 @@ window.TV_CONTEXT = {
       "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/mitre-attack/hunt-playbook.md"
     },
     {
-      "title": "RHEL 10 STIG",
+      "title": "Historical: RHEL 10 STIG",
       "path": "docs/stig-rhel10/IMPLEMENTATION_GUIDE.md",
       "description": "Read-only assessment and controlled remediation workflow.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/stig-rhel10/IMPLEMENTATION_GUIDE.md"
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/IMPLEMENTATION_GUIDE.md"
     },
     {
-      "title": "Benchmark metadata",
+      "title": "Historical: Benchmark metadata",
       "path": "docs/stig-rhel10/BENCHMARK_METADATA.md",
       "description": "Uploaded V1R1 copy inspected offline: 396 rules, 11 profiles; distinguish vendor V1R2 content.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/stig-rhel10/BENCHMARK_METADATA.md"
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/BENCHMARK_METADATA.md"
     },
     {
-      "title": "STIG remediation",
+      "title": "Historical: STIG remediation",
       "path": "docs/stig-rhel10/03-remediation-and-exceptions.md",
       "description": "One approved rule or minimal change set at a time, with backup, test and rollback.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/stig-rhel10/03-remediation-and-exceptions.md"
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/03-remediation-and-exceptions.md"
     },
     {
-      "title": "RHEL STIG evidence",
+      "title": "Historical: RHEL STIG evidence",
       "path": "evidence/sanitized/rhel10-stig-validation.md",
       "description": "12 pending evidence requirements; live scans and remediation not performed.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/evidence/sanitized/rhel10-stig-validation.md"
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/evidence/sanitized/rhel10-stig-validation.md"
     },
     {
-      "title": "Windows 11 STIG",
+      "title": "Historical: Windows 11 STIG",
       "path": "docs/stig-windows11/IMPLEMENTATION_GUIDE.md",
       "description": "Windows 11 STIG assessment guide.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/stig-windows11/IMPLEMENTATION_GUIDE.md"
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-windows11/IMPLEMENTATION_GUIDE.md"
     },
     {
-      "title": "Windows Firewall STIG",
+      "title": "Historical: Windows Firewall STIG",
       "path": "docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md",
       "description": "Defender Firewall assessment guide.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md"
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md"
     },
     {
       "title": "Evidence sanitization",

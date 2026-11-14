@@ -113,7 +113,7 @@ Measure fixture detection recall (expected cases detected / expected cases), fal
 
 Tune `HOME_NET` and resolver roles before thresholds. Keep peer exceptions narrowly scoped and owner-approved; do not globally suppress SMB/RDP or disable a protocol parser to reduce noise. Preserve the prior rule revision, replay the same controls after changes, and record expected/observed results, reviewer, evidence ID, and retest date. Never tune against protected traffic on public infrastructure.
 
-Route suspected incidents through the [incident workflow](../security-operations/INCIDENT_MANAGEMENT.md) and configuration findings through the [vulnerability workflow](../security-operations/VULNERABILITY_MANAGEMENT.md). Proposed NIST SP 800-53 links include SI-4 (monitoring), CA-7 (continuous monitoring), and RA-5 (vulnerability monitoring); these are illustrative evidence relationships, not RMF authorization, DoD acceptance, or CMMC certification.
+Route suspected incidents through the [incident workflow](../security-operations/INCIDENT_MANAGEMENT.md) and send configuration findings to the appropriate system owner for review.
 
 **Rollback:** Offline runs install no rules or service changes; stop only the replay process you started and retain/dispose of its named private run directory under the approved retention policy. For a separately approved sensor change, restore only the added rule/config entries from the reviewed backup, run `-T`, and confirm existing passive feeds and core lab services remain unaffected. Live deployment and owner acceptance remain **Pending**.
 

@@ -40,7 +40,7 @@ Use approved acquisition and forensic methods for relevant process, file, persis
 
 ## Step 10 — Test alternatives and expand deliberately
 
-Ask the owner about authorized activity. Compare other available sources and document confidence. Expand hosts or time only within authority; record the change and its impact on baselines. Move to the [incident workflow](INCIDENT_MANAGEMENT.md) when adverse activity warrants response, and link exposures through the [vulnerability workflow](VULNERABILITY_MANAGEMENT.md).
+Ask the owner about authorized activity. Compare other available sources and document confidence. Expand hosts or time only within authority; record the change and its impact on baselines. Move to the [incident workflow](INCIDENT_MANAGEMENT.md) when adverse activity warrants response, and send exposure findings to the responsible owner.
 
 ## Step 11 — Brief decisions, not just data
 

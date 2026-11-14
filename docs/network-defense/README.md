@@ -2,7 +2,7 @@
 
 **[START HERE](../../start-here/START_HERE_NETWORK_DEFENSE.md)** · **[COMPLETE 30-STEP GUIDE](IMPLEMENTATION_GUIDE.md)**
 
-Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcpdump, Suricata, YARA, Sigma, Splunk, and CMMC Level 2 risk/evidence planning. This is an **optional extension**; the original 52 Splunk steps, IdM, Windows forwarder and RHEL STIG/Zero Trust plans remain intact.
+Build a **passive** network hunting lab with Zeek, Wireshark/TShark, tcpdump, Suricata, YARA, Sigma and Splunk. This is an **optional extension** to the core Splunk lab.
 
 ## Documents
 
@@ -19,7 +19,6 @@ Build a practical **passive** cybersecurity lab with Zeek, Wireshark/TShark, tcp
 | [SURICATA_CUSTOM_RULES.md](SURICATA_CUSTOM_RULES.md) | 12 custom passive-review rules, reproducible protocol controls, tuning, and senior-analyst triage |
 | [YARA_AND_SIGMA.md](YARA_AND_SIGMA.md) | Local file-matching and Sigma conversion to reviewed SPL |
 | [SPLUNK_INTEGRATION.md](SPLUNK_INTEGRATION.md) | Proposed indexes, verified TLS forwarding, timestamp and parser tests |
-| [CMMC_LEVEL2.md](CMMC_LEVEL2.md) | Illustrative 800-171 Rev 2 requirement/evidence links and scoping cautions |
 | [DETECTIONS_AND_TESTING.md](DETECTIONS_AND_TESTING.md) | Baseline, passive vulnerability identification and alert triage |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | No packets, missing logs, false positives, rollback |
 | [REFERENCES.md](REFERENCES.md) | Official 2026 vendor, NIST and DoD references |

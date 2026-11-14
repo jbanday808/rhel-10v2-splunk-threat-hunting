@@ -225,4 +225,5 @@ Use a private update containing: case/severity; UTC time; facts and confidence; 
 
 For every consequential action, retain exact target, authority, approver/delegation, executor, UTC times, intended effect, command/console/change reference, actual result, validation evidence and rollback. At shift change, the receiving lead acknowledges ownership, open hypotheses, containment state, evidence references, outstanding decisions and notifications due.
 
-Reuse the existing [incident record](templates/incident-record.md), [hunt plan](templates/threat-hunt-plan.md), [hunt report](templates/threat-hunt-report.md), [briefing](templates/hunt-briefing.md), and [vulnerability workflow](VULNERABILITY_MANAGEMENT.md) in approved private case storage. Use [the weekly hunt pack](weekly-threat-hunting/HUNT_QUERIES.md) for bounded searches and harmless controls.
+Reuse the existing [incident record](templates/incident-record.md), [hunt plan](templates/threat-hunt-plan.md), [hunt report](templates/threat-hunt-report.md), and [briefing](templates/hunt-briefing.md) in approved private case storage. Use [the weekly hunt pack](weekly-threat-hunting/HUNT_QUERIES.md) for bounded searches and harmless controls.
+

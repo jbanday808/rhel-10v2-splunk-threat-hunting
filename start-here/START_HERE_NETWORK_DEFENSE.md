@@ -50,7 +50,6 @@ Extend the existing three-VM VMware lab with an **optional, isolated passive net
 - [Architecture and visibility limits](../docs/network-defense/ARCHITECTURE.md)
 - [CONOPS and measures of performance](../docs/network-defense/CONOPS.md)
 - [Tool-by-tool instructions](../docs/network-defense/README.md)
-- [CMMC Level 2 and 800-171 evidence mapping](../docs/network-defense/CMMC_LEVEL2.md)
 - [Detection testing and review](../docs/network-defense/DETECTIONS_AND_TESTING.md)
 - [Risk, troubleshooting and rollback](../docs/network-defense/TROUBLESHOOTING.md)
 - [Official references](../docs/network-defense/REFERENCES.md)

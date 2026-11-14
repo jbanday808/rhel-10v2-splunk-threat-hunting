@@ -8,6 +8,8 @@ TraceVector brings guided Splunk hunts, MITRE ATT&CK context, evidence, document
 
 The hosted Site is private to James Banday and requires his ChatGPT sign-in. Repository visitors can read the source and screenshots; these files do not grant access to the hosted workspace.
 
+The repository source now labels its former STIG references as historical. The separately hosted Site was not updated as part of this repository cleanup and may still link to removed files.
+
 TraceVector saves progress, notes, attachments, drafts, and review decisions in the current browser. It does not run Splunk searches, connect to lab systems, apply remediation, or modify GitHub. Practice completion and tracked evidence remain separate from verified detections, live test results, and compliance findings.
 
 ## Explore the workspace
@@ -150,7 +152,8 @@ The [original private workbench](https://banday-network-workbench.jamesbanday.ch
 
 - [MITRE ATT&CK workstream](../mitre-attack/README.md): This guide connects hunting hypotheses, source coverage, and validation evidence.
 - [Splunk data-health search](../../hunts/00-data-health.spl): This search helps inspect data availability before adapting a detection draft.
-- [RHEL 10 STIG implementation guide](../stig-rhel10/IMPLEMENTATION_GUIDE.md): This guide explains assessment, controlled remediation, and evidence requirements.
+- [Historical RHEL 10 STIG implementation guide](https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/IMPLEMENTATION_GUIDE.md): This earlier reference is no longer maintained in the current repository.
 - [Kali deployment guide](KALI_DEPLOYMENT.md): This guide covers analysis tools, offline replay, optional capture, and acceptance checks.
 - [Lab architecture](../reference/architecture.md): This reference documents system roles, network addresses, and traffic visibility limits.
 - [Evidence sanitization](../reference/security-and-sanitization.md): This checklist explains how to review evidence before publishing it.
+

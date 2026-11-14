@@ -288,7 +288,7 @@ Expect one joined row for client port `51005`. A no-result query can indicate a 
 | Owner follow-up | Check the DNS record, virtual-host binding, HTTP-to-HTTPS behavior, whether access from the client segment is intended, and which other paths share the listener |
 | Recommendation and closure | Document the approved change, owner, due date, and retest with both the expected secure flow and the unwanted cleartext condition |
 
-Copy the [validation worksheet](../../evidence/sanitized/network-defense-validation.md) into the private run directory and record the case. For CMMC practice, index the alert and triage evidence against the applicable monitoring objective in [CMMC Level 2](CMMC_LEVEL2.md). Document the remaining assessment evidence and scope. Apply your retention policy to generated captures, logs and upload copies, and publish only reviewed summaries.
+Copy the [validation worksheet](../../evidence/sanitized/network-defense-validation.md) into the private run directory and record the case, its scope and remaining evidence gaps. Apply your retention policy to generated captures, logs and upload copies, and publish only reviewed summaries.
 
 ## References
 

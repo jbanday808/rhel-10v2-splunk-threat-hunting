@@ -26,7 +26,7 @@ code .
 
 ### Step 02 — Adopt a written CONOPS (WSL and security owner)
 
-Review [CONOPS](CONOPS.md), [architecture](ARCHITECTURE.md), [CMMC mapping](CMMC_LEVEL2.md). Record capture owner, approved sample PCAPs, intended devices/protocols, retention, security contacts, escalation thresholds, change approvals, and **prohibited active scanning**.
+Review the [CONOPS](CONOPS.md) and [architecture](ARCHITECTURE.md). Record the capture owner, approved sample PCAPs, intended devices/protocols, retention, security contacts, escalation thresholds, change approvals, and **prohibited active scanning**.
 
 **Validate:** No CUI or classified information in public GitHub. All live results remain Pending.
 
@@ -296,9 +296,9 @@ See [detection workflow](DETECTIONS_AND_TESTING.md) and [sample hunts](../../hun
 
 ## Phase 7 — Governance, evidence and rollback
 
-### Step 29 — Document incident workflow and CMMC Level 2 evidence
+### Step 29 — Document the investigation and evidence
 
-Read [CMMC Level 2 mapping](CMMC_LEVEL2.md) and [CONOPS](CONOPS.md). Map approved event collection, access logs, response process, risk assessments, incident documentation and monitoring to **select** NIST SP 800-171 Rev 2 requirements in the CMMC model. The map is illustrative: it does not demonstrate all 110 requirements. This synthetic lab has **no CUI** and no CMMC certification/assessment result.
+Review the [CONOPS](CONOPS.md) and document the approved collection scope, incident contacts and evidence-handling procedure. Keep real customer data out of this public repository.
 
 Update [validation evidence](../../evidence/sanitized/network-defense-validation.md) with actual run ID, product versions, source hash, expected vs observed, reviewer, limitations, false positives and private evidence location. Keep unperformed items marked **Pending**.
 
@@ -334,4 +334,4 @@ git diff --check
 
 ## References
 
-[Official guidance](REFERENCES.md) | [CONOPS](CONOPS.md) | [Architecture](ARCHITECTURE.md) | [Zeek/TShark](ZEEK_AND_WIRESHARK.md) | [Suricata](SURICATA.md) | [YARA/Sigma](YARA_AND_SIGMA.md) | [CMMC](CMMC_LEVEL2.md)
+[Official guidance](REFERENCES.md) | [CONOPS](CONOPS.md) | [Architecture](ARCHITECTURE.md) | [Zeek/TShark](ZEEK_AND_WIRESHARK.md) | [Suricata](SURICATA.md) | [YARA/Sigma](YARA_AND_SIGMA.md)

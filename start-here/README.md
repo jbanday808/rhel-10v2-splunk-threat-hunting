@@ -7,8 +7,8 @@ Choose the guide that matches your next task. The detailed procedures remain und
 | VS Code and WSL | [START_HERE_WSL.md](START_HERE_WSL.md) |
 | Core RHEL 10.2 Splunk lab | [START_HERE_RHEL10v2.md](START_HERE_RHEL10v2.md) |
 | Windows-only publishing alternative | [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md) |
-| Windows 11 STIG V2R11 | [START_HERE_WINDOWS11_STIG.md](START_HERE_WINDOWS11_STIG.md) |
-| Windows Defender Firewall STIG V2R2 | [START_HERE_WINDOWS_FIREWALL_STIG.md](START_HERE_WINDOWS_FIREWALL_STIG.md) |
+| Trellix threat-hunting presentation | [Plain-language guide](../presentations/trellix-threat-hunting/README.md) |
+| Tools and cloud hunting | [Zeek, Splunk, AWS, Azure and more](../docs/reference/tools-and-cloud.md) |
 | Passive network defense | [START_HERE_NETWORK_DEFENSE.md](START_HERE_NETWORK_DEFENSE.md) |
 | Arkime network analysis | [START_HERE_ARKIME.md](START_HERE_ARKIME.md) |
 

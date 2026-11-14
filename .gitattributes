@@ -9,4 +9,5 @@
 *.json text eol=lf
 *.ps1 text eol=crlf
 *.docx -text
+*.pptx -text
 *.png -text

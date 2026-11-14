@@ -1,6 +1,6 @@
 # Security Operations, Incident Management and Consultant Deliverables
 
-This optional workstream adds repeatable processes for handling threats and vulnerabilities, planning hunts, briefing stakeholders, writing reports, and reviewing forensic evidence with AI assistance. It builds on the existing Splunk, Sysmon, network-analysis and STIG material.
+This optional workstream adds repeatable processes for handling threats, planning hunts, briefing stakeholders, writing reports, and reviewing forensic evidence with AI assistance. It builds on the existing Splunk, Sysmon and network-analysis material.
 
 **Status:** proposed procedures and synthetic exercises. They are not an approved organizational incident-response plan, a deployment of Trellix products, or evidence that a customer engagement occurred. The existing lab has no validated Trellix deployment. Obtain the system owner's adoption of roles, response authority, reporting channels and retention rules before operational use. Use only synthetic examples in this public repository.
 
@@ -11,8 +11,7 @@ This optional workstream adds repeatable processes for handling threats and vuln
 | Review weekly APT reporting, hunts and response | [Weekly guides](weekly-threat-hunting/README.md) | [Complete six-phase response, roles and escalation](APT_INCIDENT_RESPONSE_PLAYBOOK.md) |
 | Handle a suspected incident | [Incident management](INCIDENT_MANAGEMENT.md) | [Incident record](templates/incident-record.md) |
 | Review account-security alerts | [Google account-alert triage findings](GOOGLE_ACCOUNT_ALERT_TRIAGE.md) | Synthetic evidence distinctions, verification, mitigations, and prevention |
-| Manage a vulnerability or misconfiguration | [Vulnerability workflow](VULNERABILITY_MANAGEMENT.md) | [Vulnerability record](templates/vulnerability-record.md) |
-| Preview and apply approved OS security updates | [Ansible patching runbook](../../automation/ansible/README.md) | [Pending live acceptance](../../evidence/sanitized/ansible-patching-validation.md) |
+| Explain the Trellix consultant role | [Presentation guide](../../presentations/trellix-threat-hunting/README.md) | PowerPoint and plain-language talking points |
 | Design and execute a hunt | [Threat-hunting method](THREAT_HUNTING_METHOD.md) | [Detailed plan](templates/threat-hunt-plan.md) |
 | Brief leaders and technical teams | [Hunt and stakeholder briefing](templates/hunt-briefing.md) | Six-slide briefing outline and decision log |
 | Document investigation results | [Detailed hunt report](templates/threat-hunt-report.md) | Evidence-linked findings, limitations and follow-up |
@@ -27,7 +26,6 @@ Copy a template into approved private case storage before filling it in. Do not 
 - [Cobalt Strike–associated pipe hunt](../../hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md): Validate a named-pipe hypothesis with an upstream Atomic test and separate matching/nonmatching controls. Do not attribute a pipe hit to a tool or a PenTest team without corroboration.
 - [Worked passive HTTP case](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md): Compare the baseline and candidate, review packet evidence and correlate synthetic Zeek/Suricata/Splunk data.
 - [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md): Establish network baselines and investigate protocol and traffic candidates within actual visibility limits.
-- [Windows 11 STIG guidance](../stig-windows11/IMPLEMENTATION_GUIDE.md) and [Defender Firewall STIG guidance](../stig-windows-firewall/IMPLEMENTATION_GUIDE.md): Feed verified applicability and remediation results into the vulnerability process.
 - [Existing short hunt report](../reference/hunt-report-template.md): Use for a compact lab record; use the detailed template here for an engagement report.
 
 The six existing Splunk indexes and three core VM roles remain the lab baseline. Optional sensors, licensed Trellix products, cloud AI services, SOAR actions and customer integrations require separate design and validation.
@@ -50,3 +48,4 @@ The six existing Splunk indexes and three core VM roles remain the lab baseline.
 - [NIST SP 800-86](https://csrc.nist.gov/pubs/sp/800/86/final): Forensic techniques within incident response; use alongside current tools and approved collection procedures.
 - [NIST AI 600-1](https://doi.org/10.6028/NIST.AI.600-1): Generative AI risk considerations, including unreliable output and data exposure.
 - [Trellix product portfolio](https://www.trellix.com/products/): Vendor descriptions; verify actual entitlement, platform and version support.
+

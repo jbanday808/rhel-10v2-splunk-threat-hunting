@@ -1,79 +1,49 @@
-# RHEL 10.2 Splunk Threat Hunting Lab
+# Threat Hunting Lab and Trellix Consultant Guide
 
-This VMware lab combines Splunk Enterprise on RHEL 10.2, a Windows 11 endpoint, and Red Hat IdM for security monitoring and threat-hunting exercises. The repository contains procedures and configuration examples. Optional network sensors, STIG assessments, and other extensions remain work in progress; published files do not prove a live deployment or completed assessment.
+Threat hunting means looking for signs of an attack that may not have raised an alert. This repository contains a practice lab, example searches, and guides for explaining a hunt to customers and decision-makers.
 
-## Start here
+## Choose where to start
 
-| Goal | Guide |
+| I want to… | Start here |
 | --- | --- |
-| Work in VS Code and WSL | [WSL quick start](start-here/START_HERE_WSL.md) · [Publishing guide](docs/reference/WSL_VSCODE_GITHUB_UPLOAD_GUIDE.md) |
-| Build the core lab | [RHEL and Splunk](start-here/START_HERE_RHEL10v2.md) · [Windows alternative](start-here/START_HERE_WINDOWS.md) |
-| Assess Windows 11 | [Windows 11 STIG V2R11](start-here/START_HERE_WINDOWS11_STIG.md) |
-| Assess Windows Firewall | [Defender Firewall STIG V2R2](start-here/START_HERE_WINDOWS_FIREWALL_STIG.md) |
-| Analyze network activity | [Kali workstation setup](docs/network-defense/KALI_DEPLOYMENT.md) · [Passive network defense](start-here/START_HERE_NETWORK_DEFENSE.md) · [Arkime sensor](start-here/START_HERE_ARKIME.md) |
+| Understand the Trellix threat hunter or consultant role | [Plain-language guide and PowerPoint](presentations/trellix-threat-hunting/README.md) |
+| Learn how to plan and report a hunt | [Threat-hunting method](docs/security-operations/THREAT_HUNTING_METHOD.md) and [report template](docs/security-operations/templates/threat-hunt-report.md) |
+| Explore sample hunting searches | [Splunk hunting reference](docs/reference/SPLUNK_THREAT_HUNTING_REFERENCE_GUIDE.md) and [hunt searches](hunts/) |
+| Build the practice lab | [Lab quick start](start-here/START_HERE_RHEL10v2.md) and [52-step guide](docs/steps/README.md) |
+| Investigate network activity | [Network hunting guide](docs/network-defense/README.md) and [Arkime playbook](docs/arkime/HUNTING_PLAYBOOK.md) |
+| Practice a guided hunt | [TraceVector guide](docs/network-defense/INTERACTIVE_LAB.md) and [source](website/tracevector-lab/) |
+| Understand the tools, including AWS and Azure | [Tools and cloud hunting overview](docs/reference/tools-and-cloud.md) |
 
-[Browse the current start guides](start-here/README.md).
+The [Trellix PowerPoint](presentations/trellix-threat-hunting/Trellix_Customer_Product_Brief.pptx) is a 56-slide customer product guide. The accompanying guide identifies the most useful slides for a threat-hunting conversation and explains the role in everyday language.
 
-## TraceVector · Threat Hunting Lab
+## How a hunt works
 
-[Open the private TraceVector Site](https://tracevector-lab.jamesbanday.chatgpt.site) · [Start a guided hunt](https://tracevector-lab.jamesbanday.chatgpt.site/#scenarios) · [Guide and nine screenshots](docs/network-defense/INTERACTIVE_LAB.md) · [Current source](website/tracevector-lab/)
+1. **Agree on the question.** For example: “Did someone misuse an employee account?”
+2. **Look for clues.** Review the permitted records, such as sign-in and device activity.
+3. **Check the story.** Compare the clues with normal activity and gather enough context to decide what they mean.
+4. **Explain the result.** Share what was found, what remains uncertain, and what the customer can consider doing next.
 
-TraceVector brings guided Splunk hunts and MITRE ATT&CK context together with evidence and documentation tracking, STIG guidance, detection drafts, progress tracking, and a review queue. Its nine sections include six learning objectives, three synthetic investigations, and twelve RHEL STIG evidence requirements. The hosted Site requires the owner’s ChatGPT sign-in; repository visitors can view the matching source and screenshots here.
+An unusual event is a clue, not proof of an attack. Run tests only in an authorized environment and keep customer records and credentials out of this public repository.
 
-Progress, notes, drafts, and evidence attachments save in the current browser, with backup export/import. Review decisions are local records; applying a proposal to GitHub is a separate reviewed action. Training results and checklist completion do not establish live detection coverage or STIG compliance.
+## What is in the repository
 
-[![TraceVector threat-hunting lab overview](screenshots/tracevector-lab/01-lab-overview.jpg)](docs/network-defense/INTERACTIVE_LAB.md)
-
-*Figure 1: The TraceVector dashboard brings lab topology, guided hunts, evidence, and progress into one personal workspace.*
-
-The [earlier network-defense workbench](website/network-defense-lab/) remains available for architecture, analysis-tool references, traffic paths, deployment phases, and its original ten-check validation workflow.
-
-## Project documentation
-
-- [Ansible security patching](automation/ansible/README.md): Preview RHEL and Windows updates, apply one approved host change at a time, and retain private evidence. Reboots are off by default; live acceptance remains pending.
-
-- [Complete 52-step deployment index](docs/steps/README.md) · [Full Markdown guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.md) · [Word guide](docs/reference/RHEL_10_2_Splunk_Complete_Guide_with_LDAP.docx)
-- [Optional appendices](docs/appendices/README.md) · [Reference files](docs/reference/README.md) · [Software downloads](docs/reference/downloads.md) · [Deployment order](docs/reference/deployment-order.md)
-- [MITRE ATT&CK hunting](docs/mitre-attack/README.md) · [Cobalt Strike-associated hunt and safe Atomic validation](hunts/cobalt-strike/COBALT_STRIKE_ATOMIC_VALIDATION.md)
-- [Kali Wireshark, Zeek, Suricata, Arkime, YARA and Sigma setup](docs/network-defense/KALI_DEPLOYMENT.md) · [Network defense](docs/network-defense/README.md) · [Complete RHEL Zeek deployment](docs/network-defense/ZEEK_DEPLOYMENT.md) · [RHEL Arkime installation and investigation](docs/arkime/IMPLEMENTATION_GUIDE.md)
-- [Incident management, hunt reports, and AI-assisted forensic review](docs/security-operations/README.md)
-- [Splunk search and threat-hunting reference](docs/reference/SPLUNK_THREAT_HUNTING_REFERENCE_GUIDE.md) · [Synthetic Google account-alert findings, mitigations, and prevention](docs/security-operations/GOOGLE_ACCOUNT_ALERT_TRIAGE.md)
-- [Weekly APT threat hunting guides](docs/security-operations/weekly-threat-hunting/README.md) · [Six-phase incident response, roles, escalation, mitigations and prevention](docs/security-operations/APT_INCIDENT_RESPONSE_PLAYBOOK.md)
-- [IdM setup troubleshooting](docs/troubleshooting/idm-installation-and-dns.md) · [Windows forwarding troubleshooting](docs/troubleshooting/splunk-forwarder-tls-and-kv-service.md) · [Windows test-account troubleshooting](docs/troubleshooting/windows-powershell-cmd-credentials.md)
-
-## NIST AI RMF and security governance (proposed extension)
-
-The [NIST AI RMF implementation guide](docs/ai-rmf/IMPLEMENTATION_GUIDE.md) and [AI risk governance documentation](docs/ai-rmf/README.md) describe an **optional future, read-only, human-reviewed AI-assisted Splunk alert summarizer**. This is a **Work in Progress**: no model is deployed, no AI test outcomes are asserted, and no security categorization or Authorization to Operate is granted. The documentation connects AI RMF `GOVERN/MAP/MEASURE/MANAGE` with SP 800-37 `PREPARE/CATEGORIZE/SELECT/IMPLEMENT/ASSESS/AUTHORIZE/MONITOR` and illustrative SP 800-53 controls.
-
-## Lab systems
-
-| System | Role |
+| Folder | Purpose |
 | --- | --- |
-| RHEL-SPLUNK01 | Splunk Enterprise, security searches, and TLS receiver |
-| WINHUNT01 | Windows event collection, Sysmon, and Universal Forwarder |
-| RHEL-IDM01 | IdM directory, DNS, and LDAPS |
-| Kali Linux analysis VM (optional) | Offline Wireshark, Zeek, Suricata, Arkime, YARA, and Sigma exercises; unique VMnet8 DHCP lease |
-| RHEL-SENSOR01 (optional; not installed) | Proposed passive network sensor and Arkime exercises |
+| [presentations](presentations/trellix-threat-hunting/) | Trellix customer presentation and plain-language role guide |
+| [docs](docs/steps/README.md) and [start-here](start-here/README.md) | Lab instructions, hunting methods, investigation guides and templates |
+| [hunts](hunts/) and [rules](rules/) | Sample searches and detection rules |
+| [apps](apps/), [configs](configs/) and [sysmon](sysmon/) | Example settings used by the lab |
+| [scripts](scripts/) and [tests](tests/) | Lab helpers and source checks |
+| [examples](examples/), [evidence](evidence/sanitized/) and [screenshots](screenshots/) | Synthetic examples, validation templates and lab images |
+| [website](website/) | Source for the guided threat-hunting and network-analysis workbenches |
 
-The core Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, and `lab`. Kali's offline outputs and the optional sensor do not automatically send Arkime sessions or network logs to Splunk. [Step 28.16](docs/steps/28-generate-harmless-hunting-activity.md#step-2816--optional-kali-linux-analysis-workstation) joins the Kali procedure to the 52-step path.
+The core practice environment describes Splunk on RHEL, a Windows endpoint, and a directory server. The six Splunk indexes are `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, and `lab`. The files describe a lab and proposed exercises; they do not demonstrate a live deployment or a completed customer engagement. Trellix products are discussed in the presentation and have not been validated in this lab.
 
-## Repository layout
+The guides retain Zeek, Wireshark, Splunk Enterprise, Arkime, RHEL 10.2, Kali Linux, VMware Workstation Pro, AWS, Azure and VS Code. Cloud log collection is a separate, unvalidated option; the existing Azure connection example does not automatically send cloud logs to Splunk.
 
-| Folder | Contents |
-| --- | --- |
-| [start-here](start-here/README.md) | Current quick-start and workstream guides |
-| [docs](docs/steps/README.md) | Detailed steps, appendices, STIGs, network and security-operations guides |
-| [docs/reference](docs/reference/README.md) | Complete guide, architecture, templates, configuration examples, and publication notes |
-| [apps](apps/) and [configs](configs/) | Splunk apps and reviewed configuration examples |
-| [automation/ansible](automation/ansible/README.md) | Assessment-first RHEL and Windows security patching, optional approved reboots, and offline policy tests |
-| [website/tracevector-lab](website/tracevector-lab/) | Published source snapshot for the current private TraceVector workspace |
-| [website/network-defense-lab](website/network-defense-lab/) | Earlier network-defense reference workbench and its original screenshot gallery |
-| [hunts](hunts/), [rules](rules/), and [scripts](scripts/) | Searches, detection examples, and lab helpers |
-| [evidence/sanitized](evidence/sanitized/) and [screenshots](screenshots/) | Pending result templates and author-supplied images that require review |
+## Check the files
 
-## Validate and publish
-
-From the repository root on RHEL or WSL, run:
+From the repository root on RHEL or WSL:
 
 ```bash
 python3 scripts/validate_project.py
@@ -81,4 +51,4 @@ python3 -B -m unittest discover -s tests -v
 python3 tools/publication_preflight.py
 ```
 
-These are source checks. Record live results in [sanitized validation templates](evidence/sanitized/validation.md) only after observing them. The historical `FILE_MANIFEST.json` describes the original ZIP, so its `--verify-manifest` mode applies to that unchanged package, not the reorganized checkout. Review [public repository safety](docs/reference/security-and-sanitization.md) and [SECURITY.md](SECURITY.md) before publishing screenshots or evidence. Never publish secrets.
+These commands check the source files without connecting to the lab. Record live results only after observing them. The historical `FILE_MANIFEST.json` describes the original download, so its optional manifest check applies to that unchanged package. Before publishing evidence, follow the [sanitization checklist](docs/reference/security-and-sanitization.md).

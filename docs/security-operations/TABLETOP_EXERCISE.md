@@ -4,7 +4,7 @@
 
 ## Step 1 — Prepare the exercise
 
-Assign functional analyst, coordinator, system owner, forensic reviewer and vulnerability owner roles, even if one learner covers several. Select a facilitator, time window, learning goals and private worksheet location. Copy the [plan](templates/threat-hunt-plan.md), [incident](templates/incident-record.md), [vulnerability](templates/vulnerability-record.md), [briefing](templates/hunt-briefing.md) and [report](templates/threat-hunt-report.md) templates into that private location.
+Assign functional analyst, coordinator, system owner, forensic reviewer and finding owner roles, even if one learner covers several. Select a facilitator, time window, learning goals and private worksheet location. Copy the [plan](templates/threat-hunt-plan.md), [incident](templates/incident-record.md), [briefing](templates/hunt-briefing.md) and [report](templates/threat-hunt-report.md) templates into that private location.
 
 Expected output: a bounded exercise with named role responsibilities, evidence conventions and completion criteria. Do not add actual customer identifiers to the public copies.
 
@@ -28,7 +28,7 @@ Expected output: a reviewed disposition of inconclusive or a conditional exercis
 
 Fictional input: a separate synthetic HTTP case shows a cleartext download using a hostname outside the exercise baseline. It is not evidence that the named-pipe activity caused the connection.
 
-Use the [worked HTTP case](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md) to explain the observed tuple, HTTP host and limitations. Open a linked vulnerability/misconfiguration record for owner validation of service/alias/encryption policy, without inventing a CVE or claiming exploitation. Assign a risk review and retest plan under the chosen policy.
+Use the [worked HTTP case](../network-defense/OFFLINE_HTTP_WALKTHROUGH.md) to explain the observed tuple, HTTP host and limitations. Record a linked misconfiguration finding for owner validation of service/alias/encryption policy, without inventing a CVE or claiming exploitation. Assign a risk review and retest plan under the chosen policy.
 
 Expected output: a distinct finding with applicability still to validate, owner, approved next check and no unsupported causal link.
 

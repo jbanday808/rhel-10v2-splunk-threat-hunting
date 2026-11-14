@@ -2,7 +2,7 @@
 
 [Open the private Site](https://tracevector-lab.jamesbanday.chatgpt.site) · [Guided hunts](https://tracevector-lab.jamesbanday.chatgpt.site/#scenarios) · [Guide and screenshots](../../docs/network-defense/INTERACTIVE_LAB.md)
 
-This folder contains the five static application files from **TraceVector Site version 1**, published November 11, 2026. They match source commit `69ab9c0e7cfe50e00e92a087c643f0356419e805` byte for byte. Hosting metadata, credentials, personal notes, attachments, and backup files are excluded.
+This folder contains the static application files based on **TraceVector Site version 1**, published November 11, 2026. The repository copy now labels its former STIG guides as historical and links to the earlier commit. The separately hosted Site has not been updated by this repository change and may still show links to removed files. Hosting metadata, credentials, personal notes, attachments, and backup files are excluded.
 
 | File | Purpose |
 | --- | --- |
