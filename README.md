@@ -41,6 +41,8 @@ The core practice environment describes Splunk on RHEL, a Windows endpoint, and 
 
 The guides retain Zeek, Wireshark, Splunk Enterprise, Arkime, RHEL 10.2, Kali Linux, VMware Workstation Pro, AWS, Azure and VS Code. Cloud log collection is a separate, unvalidated option; the existing Azure connection example does not automatically send cloud logs to Splunk.
 
+<a id="validate-and-publish"></a>
+
 ## Check the files
 
 From the repository root on RHEL or WSL:
