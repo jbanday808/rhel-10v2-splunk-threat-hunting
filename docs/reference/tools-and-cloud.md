@@ -5,6 +5,7 @@ These tools support different parts of the investigation. Start with the questio
 | Tool | How it helps | Where to learn more |
 | --- | --- | --- |
 | Splunk Enterprise | Brings available event records together so an analyst can search for patterns. | [Splunk hunting reference](SPLUNK_THREAT_HUNTING_REFERENCE_GUIDE.md) |
+| Syslog (with RHEL rsyslog) | Carries system and application activity into a local log file that Splunk can search. | [Simple syslog hunt](../security-operations/SYSLOG_HUNTING_GUIDE.md) |
 | Zeek | Summarizes observed network conversations for later investigation. | [Zeek guide](../network-defense/ZEEK_DEPLOYMENT.md) |
 | Wireshark | Lets an analyst inspect a permitted network capture in detail. | [Zeek and Wireshark](../network-defense/ZEEK_AND_WIRESHARK.md) |
 | Arkime | Helps investigators search and review captured network sessions. | [Arkime hunting playbook](../arkime/HUNTING_PLAYBOOK.md) |

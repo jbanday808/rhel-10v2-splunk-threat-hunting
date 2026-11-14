@@ -9,6 +9,7 @@ Threat hunting means looking for signs of an attack that may not have raised an 
 | Understand the Trellix threat hunter or consultant role | [Plain-language guide and PowerPoint](presentations/trellix-threat-hunting/README.md) |
 | Learn how to plan and report a hunt | [Threat-hunting method](docs/security-operations/THREAT_HUNTING_METHOD.md) and [report template](docs/security-operations/templates/threat-hunt-report.md) |
 | Explore sample hunting searches | [Splunk hunting reference](docs/reference/SPLUNK_THREAT_HUNTING_REFERENCE_GUIDE.md) and [hunt searches](hunts/) |
+| Learn to use syslog in a hunt | [Syslog practice guide](docs/security-operations/SYSLOG_HUNTING_GUIDE.md) |
 | Build the practice lab | [Lab quick start](start-here/START_HERE_RHEL10v2.md) and [52-step guide](docs/steps/README.md) |
 | Investigate network activity | [Network hunting guide](docs/network-defense/README.md) and [Arkime playbook](docs/arkime/HUNTING_PLAYBOOK.md) |
 | Practice a guided hunt | [TraceVector guide](docs/network-defense/INTERACTIVE_LAB.md) and [source](website/tracevector-lab/) |

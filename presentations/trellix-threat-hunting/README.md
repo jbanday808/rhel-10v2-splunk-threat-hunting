@@ -41,6 +41,10 @@ Imagine the customer asks whether an employee account was misused. Several faile
 
 An example briefing: “We saw several unsuccessful sign-ins followed by a successful one. We have not yet established whether the successful sign-in was authorized. The account owner should confirm the activity before we draw a conclusion.”
 
+## Where syslog helps
+
+The role calls for configuring and reviewing operating-system and application logs. Syslog is one way to collect those records. In the [syslog practice guide](../../docs/security-operations/SYSLOG_HUNTING_GUIDE.md), the RHEL lab records a harmless test message, Splunk makes it searchable, and the hunter checks sign-in clues before explaining what they mean. This demonstrates the logging and analysis workflow; it does not connect Trellix products to the lab.
+
 ## Useful words
 
 | Term | Plain-language meaning |
@@ -50,6 +54,7 @@ An example briefing: “We saw several unsuccessful sign-ins followed by a succe
 | Threat intelligence | Information about threats that helps a team decide what to investigate. |
 | Evidence | Records or observations that support a finding. A clue alone may have several explanations. |
 | Threat hunt | A planned search for signs of suspicious activity. |
+| Syslog | A way for a system or application to record an activity message for review. |
 | Proof of concept | A small, agreed test used to see whether an approach meets the customer's needs. |
 
 ## Further reading
