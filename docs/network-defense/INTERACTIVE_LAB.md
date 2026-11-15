@@ -49,6 +49,8 @@ For a step-by-step bridge from each practice story to the possible real lab reco
 
 Your progress, notes, drafts, and attachments are stored in the browser you use. Export a workspace backup from **Progress tracking** before clearing browser data or changing devices. Keep that backup private because it can contain your notes and evidence. Importing a backup replaces the current browser's TraceVector workspace after a confirmation step.
 
+Use the [private hunt-report handoff](TRACEVECTOR_PRIVATE_HANDOFF.md) when a practice idea becomes a separately approved investigation. It explains how to carry over the question and draft while keeping backups and real evidence private.
+
 The Site does not connect to Splunk, collect logs, test a host, or change GitHub. Proposed updates stay in your browser until someone reviews and applies them separately.
 
 ## Learn more
