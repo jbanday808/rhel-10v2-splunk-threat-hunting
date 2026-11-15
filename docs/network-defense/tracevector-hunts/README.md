@@ -10,6 +10,7 @@ The lab's existing indexes are `win_security`, `win_system`, `powershell`, `sysm
 | Privilege in the wrong hands | Local RHEL sudo actor, target, and command | [02 · sudo](02-privilege-in-the-wrong-hands.md) |
 | The job that came back | Cron and file-change visibility gap | [03 · cron](03-the-job-that-came-back.md) |
 | A script behind the switch | Sysmon process start and optional script-block context | [04 · PowerShell](04-a-script-behind-the-switch.md) |
+| An account fast-tracked to admin | Security 4720 to 4732 account SID relationship | [05 · account](05-an-account-fast-tracked-to-admin.md) |
 
 ## Use one guide at a time
 
