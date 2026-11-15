@@ -44,6 +44,7 @@ These in-memory cases use Splunk `makeresults` to exercise the linked search pip
 | [Monitored Run value](fixtures/05-run-key-scope.md) | Keeps the exact lab Run value and rejects lookalike value names and keys. |
 | [Log-clear provider](fixtures/06-log-clear-provider.md) | Labels the expected System provider and keeps a same-ID distractor visible for review. |
 | [PowerShell DNS processes](fixtures/08-powershell-dns-processes.md) | Keeps identical names from separate process GUIDs apart and excludes another image. |
+| [Rare pair by host](fixtures/10-rare-pair-baseline.md) | Applies the illustrative threshold per host before baseline review. |
 
 ## Optional Microsoft Defender XDR example
 
