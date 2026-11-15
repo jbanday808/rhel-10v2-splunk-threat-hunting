@@ -18,6 +18,10 @@ These tools support different parts of the investigation. Start with the questio
 
 The core lab describes RHEL, Splunk, Windows and IdM virtual machines. Kali and network sensors are optional. The repository includes an optional Azure sign-in example for GitHub Actions; that example is **not** a cloud activity feed. AWS and Azure log collection into Splunk is not configured or validated by these files. Confirm the actual products, versions and data available in your environment.
 
+## Worked cloud hunt guides
+
+- [Review a new AWS IAM user](../security-operations/AWS_ACCOUNT_CREATION_HUNT.md)
+
 ## A simple cloud hunting example
 
 1. Agree with the cloud owner on the account, time period and records you may inspect.
