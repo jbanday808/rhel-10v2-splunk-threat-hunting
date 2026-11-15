@@ -42,6 +42,7 @@ These in-memory cases use Splunk `makeresults` to exercise the linked search pip
 | --- | --- |
 | [Process and network identity](fixtures/01-process-network-identity.md) | Requires a start and connection on the same host and process GUID. |
 | [Success source separation](fixtures/02-success-source-separation.md) | Prevents failures from one source being assigned to a success from another. |
+| [Account and group host boundary](fixtures/03-account-group-host-boundary.md) | Keeps a group change on another host out of the new-account correlation. |
 | [Task creation and update](fixtures/04-scheduled-task-cases.md) | Separates task registration from later changes and excludes an unrelated event code. |
 | [Monitored Run value](fixtures/05-run-key-scope.md) | Keeps the exact lab Run value and rejects lookalike value names and keys. |
 | [Log-clear provider](fixtures/06-log-clear-provider.md) | Labels the expected System provider and keeps a same-ID distractor visible for review. |
