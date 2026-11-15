@@ -42,6 +42,7 @@ These in-memory cases use Splunk `makeresults` to exercise the linked search pip
 | --- | --- |
 | [Task creation and update](fixtures/04-scheduled-task-cases.md) | Separates task registration from later changes and excludes an unrelated event code. |
 | [Monitored Run value](fixtures/05-run-key-scope.md) | Keeps the exact lab Run value and rejects lookalike value names and keys. |
+| [Log-clear provider](fixtures/06-log-clear-provider.md) | Labels the expected System provider and keeps a same-ID distractor visible for review. |
 
 ## Optional Microsoft Defender XDR example
 
