@@ -70,6 +70,7 @@ Ask: **“Were unsuccessful SSH sign-ins followed by access that the owner canno
 
 - [SSH failures followed by a successful sign-in](syslog-hunts/SSH_FAILURE_TO_SUCCESS.md): compare the same account and source with approved maintenance before deciding what the sequence means.
 - [Sudo activity after a Linux sign-in](syslog-hunts/SUDO_AFTER_LOGIN.md): review account, command, session context, and the approved change record without assuming the events belong together.
+- [Tagged application syslog field check](syslog-hunts/TAGGED_APP_SYSLOG_FIELD_CHECK.md): use two harmless markers to check routing, time, host, source, and raw message context before a hunt.
 
 ## If the source is a different device
 
