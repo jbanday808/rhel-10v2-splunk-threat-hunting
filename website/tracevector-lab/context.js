@@ -2,7 +2,6 @@ window.TV_CONTEXT = {
   "repository": "jbanday808/rhel-10v2-splunk-threat-hunting",
   "repoUrl": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting",
   "readmeUrl": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/README.md",
-  "existingSiteUrl": "https://banday-network-workbench.jamesbanday.chatgpt.site",
   "docs": [
     {
       "title": "Lab deployment",
@@ -11,9 +10,9 @@ window.TV_CONTEXT = {
       "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/steps/README.md"
     },
     {
-      "title": "Network defense",
+      "title": "Network hunting context",
       "path": "docs/network-defense/README.md",
-      "description": "Optional passive network defense workstream and evidence boundaries.",
+      "description": "Passive network evidence that can support a scoped hunt.",
       "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/network-defense/README.md"
     },
     {
@@ -53,42 +52,6 @@ window.TV_CONTEXT = {
       "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/mitre-attack/hunt-playbook.md"
     },
     {
-      "title": "Historical: RHEL 10 STIG",
-      "path": "docs/stig-rhel10/IMPLEMENTATION_GUIDE.md",
-      "description": "Read-only assessment and controlled remediation workflow.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/IMPLEMENTATION_GUIDE.md"
-    },
-    {
-      "title": "Historical: Benchmark metadata",
-      "path": "docs/stig-rhel10/BENCHMARK_METADATA.md",
-      "description": "Uploaded V1R1 copy inspected offline: 396 rules, 11 profiles; distinguish vendor V1R2 content.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/BENCHMARK_METADATA.md"
-    },
-    {
-      "title": "Historical: STIG remediation",
-      "path": "docs/stig-rhel10/03-remediation-and-exceptions.md",
-      "description": "One approved rule or minimal change set at a time, with backup, test and rollback.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-rhel10/03-remediation-and-exceptions.md"
-    },
-    {
-      "title": "Historical: RHEL STIG evidence",
-      "path": "evidence/sanitized/rhel10-stig-validation.md",
-      "description": "12 pending evidence requirements; live scans and remediation not performed.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/evidence/sanitized/rhel10-stig-validation.md"
-    },
-    {
-      "title": "Historical: Windows 11 STIG",
-      "path": "docs/stig-windows11/IMPLEMENTATION_GUIDE.md",
-      "description": "Windows 11 STIG assessment guide.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-windows11/IMPLEMENTATION_GUIDE.md"
-    },
-    {
-      "title": "Historical: Windows Firewall STIG",
-      "path": "docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md",
-      "description": "Defender Firewall assessment guide.",
-      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/2b5891e042b02ff1a31a5980fa4a37407bb6feb4/docs/stig-windows-firewall/IMPLEMENTATION_GUIDE.md"
-    },
-    {
       "title": "Evidence sanitization",
       "path": "docs/reference/security-and-sanitization.md",
       "description": "Review screenshots and logs before publication; never publish secrets.",
@@ -107,10 +70,46 @@ window.TV_CONTEXT = {
       "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/security-operations/INCIDENT_MANAGEMENT.md"
     },
     {
-      "title": "TraceVector website",
+      "title": "TraceVector hunting guide",
       "path": "docs/network-defense/INTERACTIVE_LAB.md",
-      "description": "Existing private light green TraceVector interface, browser-local state and 10 pending acceptance checks.",
+      "description": "Simple guide to the ten practice hunts and browser-local workspace.",
       "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/network-defense/INTERACTIVE_LAB.md"
+    },
+    {
+      "title": "Threat-hunting method",
+      "path": "docs/security-operations/THREAT_HUNTING_METHOD.md",
+      "description": "Plan a scoped hunt, check evidence coverage, and report the result.",
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/security-operations/THREAT_HUNTING_METHOD.md"
+    },
+    {
+      "title": "Syslog hunting guide",
+      "path": "docs/security-operations/SYSLOG_HUNTING_GUIDE.md",
+      "description": "Trace local RHEL logging into Splunk and review SSH clues.",
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/security-operations/SYSLOG_HUNTING_GUIDE.md"
+    },
+    {
+      "title": "Syslog review search",
+      "path": "hunts/linux/01-syslog-review.spl",
+      "description": "A scoped SPL timeline for SSH, sudo, and safe lab markers.",
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/hunts/linux/01-syslog-review.spl"
+    },
+    {
+      "title": "Trellix consultant role guide",
+      "path": "presentations/trellix-threat-hunting/README.md",
+      "description": "Plain-language threat-hunting role and PowerPoint guide.",
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/presentations/trellix-threat-hunting/README.md"
+    },
+    {
+      "title": "Threat-hunt report template",
+      "path": "docs/security-operations/templates/threat-hunt-report.md",
+      "description": "Record findings, uncertainty, and owner decisions.",
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/security-operations/templates/threat-hunt-report.md"
+    },
+    {
+      "title": "Tools and cloud hunting",
+      "path": "docs/reference/tools-and-cloud.md",
+      "description": "The retained tools and what each contributes to a hunt.",
+      "url": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/docs/reference/tools-and-cloud.md"
     }
   ],
   "screenshots": [
@@ -284,79 +283,11 @@ window.TV_CONTEXT = {
     "Optional Kali uses a unique verified VMnet8 DHCP lease. RHEL-SENSOR01 is proposed, not installed.",
     "VMnet8 does not automatically mirror peer traffic. Offline network outputs are not automatically ingested into Splunk.",
     "Existing screenshot inventory contains 22 author-provided lab images and 5 TraceVector interface captures; images do not prove completed tests.",
-    "RHEL 10 STIG source documents an uploaded V1R1 benchmark inspected offline: 396 rules; this is not proof of vendor provenance or live compliance.",
-    "RHEL STIG live host scans and remediation have not been performed; all 12 evidence rows are pending.",
     "ATT&CK source uses v20.1 with candidate, context-only and gap labels; source availability is distinct from validated detection coverage.",
     "Proposed changes require human review before modifying the GitHub repository.",
     "Preserve existing light green surfaces, black typography and readable larger text.",
     "Existing TraceVector website stores validation status and sanitized notes in the current browser and exports JSON."
   ],
-  "snapshotDate": "2026-11-11",
-  "snapshotCommit": "393ed725efadca0c863c409ae0324ed51f1b94b8",
+  "snapshotDate": "2026-11-14",
   "screenshotTotal": 27
 };
-
-window.TV_STIG_REQUIREMENTS = [
-  {
-    "id": "STIG-01",
-    "title": "RHEL and scanner versions",
-    "description": "RHEL-SPLUNK01: record observed RHEL release and scanner version."
-  },
-  {
-    "id": "STIG-02",
-    "title": "RHEL and scanner versions",
-    "description": "RHEL-IDM01: record observed RHEL release and scanner version."
-  },
-  {
-    "id": "STIG-03",
-    "title": "Benchmark SHA-256 and approved full profile",
-    "description": "Both hosts: verify benchmark fingerprint and record the approved complete profile."
-  },
-  {
-    "id": "STIG-04",
-    "title": "Initial private full V1R1 scan",
-    "description": "RHEL-SPLUNK01: retain initial complete V1R1 scan privately; record only sanitized findings."
-  },
-  {
-    "id": "STIG-05",
-    "title": "Initial private full V1R1 scan",
-    "description": "RHEL-IDM01: retain initial complete V1R1 scan privately; record only sanitized findings."
-  },
-  {
-    "id": "STIG-06",
-    "title": "CAT I/II/III failure and applicability review",
-    "description": "Both hosts: review actual failures by severity and document rule applicability."
-  },
-  {
-    "id": "STIG-07",
-    "title": "Splunk/index/forwarding functional verification",
-    "description": "RHEL-SPLUNK01: observe and record Splunk service, index and verified forwarding behavior."
-  },
-  {
-    "id": "STIG-08",
-    "title": "IdM/DNS/Kerberos/LDAPS functional verification",
-    "description": "RHEL-IDM01: observe and record directory, DNS, Kerberos and certificate-verified LDAPS behavior."
-  },
-  {
-    "id": "STIG-09",
-    "title": "Approved changes, backups and rollback",
-    "description": "Both hosts: document explicit change approval, private backups and tested rollback before changes."
-  },
-  {
-    "id": "STIG-10",
-    "title": "Post-change scan, rule-level comparison",
-    "description": "Both hosts: privately rescan and compare rule-level results after each approved change set."
-  },
-  {
-    "id": "STIG-11",
-    "title": "Reviewed POA&M and exceptions",
-    "description": "Both hosts: document reviewed plan of action, unresolved findings and authorized exception decisions."
-  },
-  {
-    "id": "STIG-12",
-    "title": "Recovery and maintenance recheck",
-    "description": "Both hosts: observe recovery and maintenance rechecks; preserve dated sanitized evidence."
-  }
-];
-
-

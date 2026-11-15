@@ -12,7 +12,7 @@ Threat hunting means looking for signs of an attack that may not have raised an 
 | Learn to use syslog in a hunt | [Syslog practice guide](docs/security-operations/SYSLOG_HUNTING_GUIDE.md) |
 | Build the practice lab | [Lab quick start](start-here/START_HERE_RHEL10v2.md) and [52-step guide](docs/steps/README.md) |
 | Investigate network activity | [Network hunting guide](docs/network-defense/README.md) and [Arkime playbook](docs/arkime/HUNTING_PLAYBOOK.md) |
-| Practice a guided hunt | [TraceVector guide](docs/network-defense/INTERACTIVE_LAB.md) and [source](website/tracevector-lab/) |
+| Practice a guided hunt | [Current TraceVector Site](https://tracevector.jamesbanday.chatgpt.site/), [guide](docs/network-defense/INTERACTIVE_LAB.md) and [source](website/tracevector-lab/) |
 | Understand the tools, including AWS and Azure | [Tools and cloud hunting overview](docs/reference/tools-and-cloud.md) |
 
 The [Trellix PowerPoint](presentations/trellix-threat-hunting/Trellix_Customer_Product_Brief.pptx) is a 56-slide customer product guide. The accompanying guide identifies the most useful slides for a threat-hunting conversation and explains the role in everyday language.
