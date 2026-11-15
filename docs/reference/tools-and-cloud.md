@@ -22,6 +22,7 @@ The core lab describes RHEL, Splunk, Windows and IdM virtual machines. Kali and 
 
 - [Review a new AWS IAM user](../security-operations/AWS_ACCOUNT_CREATION_HUNT.md)
 - [Review an AWS IAM permission change](../security-operations/AWS_IAM_PERMISSION_CHANGE_HUNT.md)
+- [Review a Microsoft Entra sign-in](../security-operations/AZURE_ENTRA_SIGN_IN_HUNT.md)
 
 ## A simple cloud hunting example
 
