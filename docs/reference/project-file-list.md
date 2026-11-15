@@ -1,6 +1,8 @@
-# Included project files (complete ZIP)
+# Original ZIP file list
 
-This is the original expanded ZIP inventory, so paths below reflect that package rather than the current checkout. The former top-level documentation files are now under [`docs/reference/`](README.md); the remote `LICENSE` was preserved separately from the original GitHub checkout.
+This is a historical inventory of the original expanded project ZIP, **not a current repository file list or an upload checklist**. The paths below are relative to that ZIP. Some files have moved or changed since it was made: for example, the former top-level documentation files are now under [`docs/reference/`](README.md), and `START_HERE_WSL.md` is under [`start-here/`](../../start-here/README.md). The GitHub repository's `LICENSE` was not part of the original ZIP.
+
+For the maintained project structure and guides, start with the [current repository README](../../README.md) and [reference index](README.md). For the original ZIP's file origins, see the [historical file matrix](FILE_CREATION_MATRIX.md). Do not use this list to recreate or overwrite files in the current checkout.
 
 - `.editorconfig`
 - `.gitattributes`
