@@ -21,6 +21,7 @@ Build a **passive** network hunting lab with Zeek, Wireshark/TShark, tcpdump, Su
 | [YARA_AND_SIGMA.md](YARA_AND_SIGMA.md) | Local file-matching and Sigma conversion to reviewed SPL |
 | [SPLUNK_INTEGRATION.md](SPLUNK_INTEGRATION.md) | Proposed indexes, verified TLS forwarding, timestamp and parser tests |
 | [DETECTIONS_AND_TESTING.md](DETECTIONS_AND_TESTING.md) | Baseline, passive vulnerability identification and alert triage |
+| [DNS_NXDOMAIN_REVIEW.md](DNS_NXDOMAIN_REVIEW.md) | Review repeated missing DNS names with response coverage and benign controls |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | No packets, missing logs, false positives, rollback |
 | [REFERENCES.md](REFERENCES.md) | Official tool and deployment references |
 
