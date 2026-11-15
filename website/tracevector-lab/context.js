@@ -2,6 +2,18 @@ window.TV_CONTEXT = {
   "repository": "jbanday808/rhel-10v2-splunk-threat-hunting",
   "repoUrl": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting",
   "readmeUrl": "https://github.com/jbanday808/rhel-10v2-splunk-threat-hunting/blob/main/README.md",
+  "huntGuides": {
+    "ssh": "docs/network-defense/tracevector-hunts/01-a-noisy-ssh-neighbor.md",
+    "sudo": "docs/network-defense/tracevector-hunts/02-privilege-in-the-wrong-hands.md",
+    "cron": "docs/network-defense/tracevector-hunts/03-the-job-that-came-back.md",
+    "powershell": "docs/network-defense/tracevector-hunts/04-a-script-behind-the-switch.md",
+    "account": "docs/network-defense/tracevector-hunts/05-an-account-fast-tracked-to-admin.md",
+    "runkey": "docs/network-defense/tracevector-hunts/06-the-startup-entry-that-changed.md",
+    "logclear": "docs/network-defense/tracevector-hunts/07-when-the-log-goes-quiet.md",
+    "dns": "docs/network-defense/tracevector-hunts/08-a-name-worth-a-second-look.md",
+    "web": "docs/network-defense/tracevector-hunts/09-a-process-with-a-new-destination.md",
+    "spray": "docs/network-defense/tracevector-hunts/10-one-source-several-accounts.md"
+  },
   "docs": [
     {
       "title": "Lab deployment",

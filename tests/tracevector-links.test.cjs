@@ -27,3 +27,17 @@ test('TraceVector repository guides and screenshots point to files that exist', 
     assert.equal(entry.url, `${base}/blob/main/${entry.path}`, `URL mismatch: ${entry.path}`);
   }
 });
+
+test('every synthetic scenario has a matching lab validation guide', () => {
+  const scenarioSource = fs.readFileSync(path.join(root, 'website', 'tracevector-lab', 'scenarios.js'), 'utf8');
+  vm.runInNewContext(scenarioSource, sandbox);
+  const ids = Array.from(sandbox.window.TV_SCENARIOS, scenario => scenario.id).sort();
+  const guideIds = Object.keys(context.huntGuides).sort();
+  assert.deepEqual(guideIds, ids, 'each scenario must map to exactly one guide');
+
+  for (const id of ids) {
+    const guide = context.huntGuides[id];
+    assert.ok(guide.startsWith('docs/network-defense/tracevector-hunts/'), `unexpected guide location: ${id}`);
+    assert.ok(fs.existsSync(path.join(root, guide)), `missing lab guide: ${id}`);
+  }
+});
