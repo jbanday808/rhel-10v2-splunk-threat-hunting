@@ -1,3 +1,7 @@
-index=_internal earliest=-24h (log_level=ERROR OR log_level=WARN OR log_level=FATAL)
-| stats count by host component log_level
-| sort -count
+index=_internal source=*splunkd.log* earliest=-24h (log_level=ERROR OR log_level=WARN OR log_level=FATAL)
+| eval component=coalesce(component,"not_extracted"), log_level=upper(log_level)
+| bin _time span=1h
+| stats count(eval(log_level="WARN")) as warnings count(eval(log_level="ERROR")) as errors count(eval(log_level="FATAL")) as fatals by _time host component
+| eval hour_start=strftime(_time,"%Y-%m-%d %H:%M:%S")
+| sort 0 _time host component
+| table hour_start host component warnings errors fatals
