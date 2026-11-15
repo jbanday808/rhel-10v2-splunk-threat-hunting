@@ -66,6 +66,10 @@ Ask: **“Were unsuccessful SSH sign-ins followed by access that the owner canno
 
 **Summary:** verify that messages are collected, ask a scoped question, compare independent clues, and report only what the evidence supports. The two `logger` records check the pipeline; they are not a threat simulation or a detection test.
 
+## Worked investigations
+
+- [SSH failures followed by a successful sign-in](syslog-hunts/SSH_FAILURE_TO_SUCCESS.md): compare the same account and source with approved maintenance before deciding what the sequence means.
+
 ## If the source is a different device
 
 Remote syslog collection is an **optional future design**, not part of the configured lab. For another RHEL host, network device, or application, agree on which logs are permitted, choose a collector, protect logs in transit, separate sources and hosts, set file permissions and rotation, and then monitor the collector's files in Splunk. Review parsing, time zones, retention and ownership before using those records in a hunt. Avoid sending sensitive records over unencrypted TCP or UDP, and do not assume that a remote sender's claimed host name is trustworthy without checking the source.
