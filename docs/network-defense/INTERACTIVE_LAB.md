@@ -43,6 +43,8 @@ TraceVector is a practice space for asking a security question, reviewing clues,
 
 The searches use `index=tracevector_lab` and simplified training fields. That name is a **practice placeholder**, not an index configured in the lab. To adapt a search for the real Splunk lab, first check which logs are available and use one of its six documented indexes: `win_security`, `win_system`, `powershell`, `sysmon`, `linux`, or `lab`. A sample result or completed exercise does not prove that a detection works against live data.
 
+For a step-by-step bridge from each practice story to the possible real lab records, use the [TraceVector hunt transition guides](tracevector-hunts/README.md). Each guide includes a harmless comparison and a source-visibility check.
+
 ## Save your work
 
 Your progress, notes, drafts, and attachments are stored in the browser you use. Export a workspace backup from **Progress tracking** before clearing browser data or changing devices. Keep that backup private because it can contain your notes and evidence. Importing a backup replaces the current browser's TraceVector workspace after a confirmation step.
