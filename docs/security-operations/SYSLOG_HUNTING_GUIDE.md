@@ -69,6 +69,7 @@ Ask: **“Were unsuccessful SSH sign-ins followed by access that the owner canno
 ## Worked investigations
 
 - [SSH failures followed by a successful sign-in](syslog-hunts/SSH_FAILURE_TO_SUCCESS.md): compare the same account and source with approved maintenance before deciding what the sequence means.
+- [Sudo activity after a Linux sign-in](syslog-hunts/SUDO_AFTER_LOGIN.md): review account, command, session context, and the approved change record without assuming the events belong together.
 
 ## If the source is a different device
 
