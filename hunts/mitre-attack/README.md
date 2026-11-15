@@ -50,6 +50,7 @@ These in-memory cases use Splunk `makeresults` to exercise the linked search pip
 | [PowerShell DNS processes](fixtures/08-powershell-dns-processes.md) | Keeps identical names from separate process GUIDs apart and excludes another image. |
 | [SSH outcome context](fixtures/09-ssh-outcome-context.md) | Separates failed, accepted, and other SSH messages without assuming one session. |
 | [Rare pair by host](fixtures/10-rare-pair-baseline.md) | Applies the illustrative threshold per host before baseline review. |
+| [Timeline visibility](fixtures/11-timeline-visibility.md) | Retains Linux message context and makes ingest delay visible. |
 
 ## Optional Microsoft Defender XDR example
 
