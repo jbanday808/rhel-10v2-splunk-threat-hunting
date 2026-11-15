@@ -26,6 +26,8 @@ jobs:
         run: node --test tests/tracevector-backup.test.cjs
       - name: Test TraceVector mobile navigation
         run: node --test tests/tracevector-mobile-nav.test.cjs
+      - name: Check TraceVector repository links
+        run: node --test tests/tracevector-links.test.cjs
       - name: Test redaction and configuration merging
         run: python3 -B -m unittest discover -s tests -p 'test_*.py' -v
   windows:
