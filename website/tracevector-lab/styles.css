@@ -160,3 +160,6 @@ dialog { width: 800px; font-size: var(--text-body); }
   .pad { padding: 22px; }
   .source-links { gap: 14px; }
 }
+
+.mobile-close{display:none}
+@media(max-width:800px){.mobile-close{display:grid;place-items:center;position:absolute;top:16px;right:14px;width:38px;height:38px;border-radius:7px;background:#24453c;color:#e9f2e6}}
