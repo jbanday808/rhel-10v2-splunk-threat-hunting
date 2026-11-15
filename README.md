@@ -9,10 +9,12 @@ Threat hunting means looking for signs of an attack that may not have raised an 
 | Understand the Trellix threat hunter or consultant role | [Plain-language guide and PowerPoint](presentations/trellix-threat-hunting/README.md) |
 | Learn how to plan and report a hunt | [Threat-hunting method](docs/security-operations/THREAT_HUNTING_METHOD.md) and [report template](docs/security-operations/templates/threat-hunt-report.md) |
 | Explore sample hunting searches | [Splunk hunting reference](docs/reference/SPLUNK_THREAT_HUNTING_REFERENCE_GUIDE.md) and [hunt searches](hunts/) |
+| Check whether records are ready for a hunt | [Event time and arrival guide](docs/reference/SEARCH_TIME_AND_INGESTION_LAG.md), [data-health search](hunts/00-data-health.spl), and [endpoint acceptance checks](docs/security-operations/endpoint-acceptance/README.md) |
 | Learn to use syslog in a hunt | [Syslog practice guide](docs/security-operations/SYSLOG_HUNTING_GUIDE.md) |
 | Build the practice lab | [Lab quick start](start-here/START_HERE_RHEL10v2.md) and [52-step guide](docs/steps/README.md) |
 | Investigate network activity | [Network hunting guide](docs/network-defense/README.md) and [Arkime playbook](docs/arkime/HUNTING_PLAYBOOK.md) |
-| Practice a guided hunt | [Current TraceVector Site](https://tracevector.jamesbanday.chatgpt.site/), [guide](docs/network-defense/INTERACTIVE_LAB.md) and [source](website/tracevector-lab/) |
+| Practice a guided hunt | [Current TraceVector Site](https://tracevector.jamesbanday.chatgpt.site/), [ten real-lab follow-up guides](docs/network-defense/tracevector-hunts/README.md), and [source](website/tracevector-lab/) |
+| Review optional cloud identity hunts | [AWS account creation](docs/security-operations/AWS_ACCOUNT_CREATION_HUNT.md), [AWS permission changes](docs/security-operations/AWS_IAM_PERMISSION_CHANGE_HUNT.md), [Entra sign-ins](docs/security-operations/AZURE_ENTRA_SIGN_IN_HUNT.md), and [Entra role changes](docs/security-operations/AZURE_ENTRA_ROLE_CHANGE_HUNT.md) |
 | Understand the tools, including AWS and Azure | [Tools and cloud hunting overview](docs/reference/tools-and-cloud.md) |
 
 The [Trellix PowerPoint](presentations/trellix-threat-hunting/Trellix_Customer_Product_Brief.pptx) is a 56-slide customer product guide. The accompanying guide identifies the most useful slides for a threat-hunting conversation and explains the role in everyday language.
