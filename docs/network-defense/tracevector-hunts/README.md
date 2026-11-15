@@ -8,6 +8,7 @@ The lab's existing indexes are `win_security`, `win_system`, `powershell`, `sysm
 | --- | --- | --- |
 | A noisy SSH neighbor | Local RHEL SSH failures and accepted logins | [01 · SSH](01-a-noisy-ssh-neighbor.md) |
 | Privilege in the wrong hands | Local RHEL sudo actor, target, and command | [02 · sudo](02-privilege-in-the-wrong-hands.md) |
+| The job that came back | Cron and file-change visibility gap | [03 · cron](03-the-job-that-came-back.md) |
 
 ## Use one guide at a time
 
