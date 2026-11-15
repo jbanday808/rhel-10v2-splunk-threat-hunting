@@ -22,6 +22,8 @@ jobs:
           node --check website/tracevector-lab/app.js
           node --check website/network-defense-lab/data.js
           node --check website/network-defense-lab/app.js
+      - name: Test TraceVector backup validation
+        run: node --test tests/tracevector-backup.test.cjs
       - name: Test redaction and configuration merging
         run: python3 -B -m unittest discover -s tests -p 'test_*.py' -v
   windows:
