@@ -48,6 +48,7 @@ These in-memory cases use Splunk `makeresults` to exercise the linked search pip
 | [Log-clear provider](fixtures/06-log-clear-provider.md) | Labels the expected System provider and keeps a same-ID distractor visible for review. |
 | [Multi-account source boundary](fixtures/07-multiple-source-boundary.md) | Keeps failures from separate sources apart and excludes missing addresses. |
 | [PowerShell DNS processes](fixtures/08-powershell-dns-processes.md) | Keeps identical names from separate process GUIDs apart and excludes another image. |
+| [SSH outcome context](fixtures/09-ssh-outcome-context.md) | Separates failed, accepted, and other SSH messages without assuming one session. |
 | [Rare pair by host](fixtures/10-rare-pair-baseline.md) | Applies the illustrative threshold per host before baseline review. |
 
 ## Optional Microsoft Defender XDR example

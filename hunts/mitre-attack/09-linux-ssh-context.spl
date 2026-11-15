@@ -1,3 +1,5 @@
 index=linux sourcetype=syslog source="/var/log/siem-lab/linux.log" earliest=-24h "sshd" ```Question: What SSH authentication messages reached the local Linux lab log?```
-| table _time host source sourcetype _raw
+| where match(_raw,"(?i)sshd")
+| eval ssh_outcome=case(match(_raw,"(?i)Failed (password|publickey)"),"failed",match(_raw,"(?i)Accepted (password|publickey)"),"accepted",true(),"other sshd context")
+| table _time host source sourcetype ssh_outcome _raw
 | sort 0 -_time
