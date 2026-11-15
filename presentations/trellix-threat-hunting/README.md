@@ -30,6 +30,8 @@ You do not need to show every slide. For a 10–15 minute introduction, select t
 
 The deck's speaker notes provide additional talking points in a compatible presentation app. Slides 53–55 list additional product documentation and may include older or separately managed components.
 
+Before showing the deck to a customer, use the [product claim review worksheet](PRODUCT_CLAIM_REVIEW.md) to check names, licensing, supported systems, and the difference between a slide illustration and a validated customer result.
+
 Use the [customer threat-hunt evaluation worksheet](CUSTOMER_HUNT_EVALUATION_WORKSHEET.md) to turn the questions on slides 42–44 and the example evaluation on slides 50–52 into an agreed scope, evidence check, success measure, and next decision. Keep any completed customer copy private.
 
 ## Example conversation: an unusual sign-in
