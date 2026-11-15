@@ -1,4 +1,6 @@
 index=powershell earliest=-24h
-| stats count latest(_time) as last_event by host sourcetype
-| eval last_seen=strftime(last_event, "%Y-%m-%d %H:%M:%S")
-| table host sourcetype count last_seen
+| eval event_code=coalesce(tonumber(EventCode),tonumber(EventID))
+| stats count as all_events count(eval(event_code=4103)) as module_4103 count(eval(event_code=4104)) as script_block_4104 count(eval(isnull(event_code))) as code_not_extracted max(_time) as last_event by host sourcetype
+| eval last_seen=strftime(last_event,"%Y-%m-%d %H:%M:%S")
+| table host sourcetype all_events module_4103 script_block_4104 code_not_extracted last_seen
+| sort host sourcetype
