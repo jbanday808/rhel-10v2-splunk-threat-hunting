@@ -13,6 +13,7 @@ This optional workstream adds repeatable processes for handling threats, plannin
 | Review account-security alerts | [Google account-alert triage findings](GOOGLE_ACCOUNT_ALERT_TRIAGE.md) | Synthetic evidence distinctions, verification, mitigations, and prevention |
 | Explain the Trellix consultant role | [Presentation guide](../../presentations/trellix-threat-hunting/README.md) | PowerPoint and plain-language talking points |
 | Design and execute a hunt | [Threat-hunting method](THREAT_HUNTING_METHOD.md) | [Detailed plan](templates/threat-hunt-plan.md) |
+| Check whether the evidence can answer the question | [Telemetry readiness checklist](TELEMETRY_READINESS_CHECKLIST.md) | Source owners, coverage, retention, fields, and visibility gaps |
 | Brief leaders and technical teams | [Hunt and stakeholder briefing](templates/hunt-briefing.md) | Six-slide briefing outline and decision log |
 | See a plain-language briefing example | [Synthetic syslog customer briefing](SYNTHETIC_SYSLOG_CUSTOMER_BRIEFING.md) | Fictional SSH clues, uncertainty, owner decision, and handover |
 | Document investigation results | [Detailed hunt report](templates/threat-hunt-report.md) | Evidence-linked findings, limitations and follow-up |
