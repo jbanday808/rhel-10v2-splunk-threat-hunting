@@ -5,6 +5,12 @@ artifacts and identifies what would require additional platforms or real
 experience. It is not a claim that the lab has been deployed or that any
 individual has particular years of experience or certifications.
 
+The supplied Trellix Cyber Threat Hunter / Professional Services description
+(JR0038010) also emphasizes customer scoping, syslog or flat-file logging,
+SIEM analysis, packet interpretation, briefings, and end-of-engagement reports.
+The rows below identify practice material for those tasks. They do not establish
+Trellix product experience, a clearance, a customer engagement, or a live lab result.
+
 | Responsibility | Project artifact | Boundary / next step |
 | --- | --- | --- |
 | Build proactive hypotheses from intelligence, incidents, and visibility gaps | [Hunt playbook, sections 1-3](hunt-playbook.md) and [ATT&CK mapping](coverage.md) | Choose and cite the actual intelligence or incident; the example is not an attributed intrusion. |
@@ -17,3 +23,8 @@ individual has particular years of experience or certifications.
 | Investigate cloud and identity-based activity | [Prioritized cloud and identity gaps](coverage.md#prioritized-gaps-from-the-threat-hunter-role) | Azure OIDC example workflows are not cloud audit collection; IdM logs are not automatically ingested. |
 | Reconstruct timelines, preserve evidence, and escalate to IR | [Timeline](../../hunts/mitre-attack/11-investigation-timeline.spl), [DFIR handoff](hunt-playbook.md#5-document-escalate-and-improve), and [report template](../reference/hunt-report-template.md) | Follow the organization's actual chain-of-custody, authority, legal, and escalation procedures. |
 | Turn findings into improved detection opportunities | [Query validation and promotion](hunt-playbook.md#4-validate-the-query-not-just-its-appearance) and [validation record](../../evidence/sanitized/mitre-attack-validation.md) | No alert is automatically enabled or response action taken. Tune, test, approve, and assign an owner first. |
+| Configure and interpret operating-system or application logging | [Local syslog setup and marker checks](../security-operations/SYSLOG_HUNTING_GUIDE.md) and [field-quality exercise](../security-operations/syslog-hunts/TAGGED_APP_SYSLOG_FIELD_CHECK.md) | The configured example monitors a local RHEL file in `index=linux`; it is not a remote collector or proof of customer application coverage. |
+| Work with a SIEM analyst to explain event correlation | [Scoped SSH review](../security-operations/syslog-hunts/SSH_FAILURE_TO_SUCCESS.md) and [sudo timeline](../security-operations/syslog-hunts/SUDO_AFTER_LOGIN.md) | Confirm fields, source health, time order, and ordinary explanations before joining records or claiming a session. |
+| Explain packet and protocol clues in a customer hunt | [Zeek and Wireshark guidance](../network-defense/ZEEK_AND_WIRESHARK.md) and [Arkime playbook](../arkime/HUNTING_PLAYBOOK.md) | VMnet8 does not automatically expose peer traffic; offline captures and live sensor visibility are separate checks. |
+| Scope cloud and virtualized investigations | [Tools and cloud overview](../reference/tools-and-cloud.md), [AWS account-change example](../security-operations/AWS_ACCOUNT_CREATION_HUNT.md), and [Entra sign-in example](../security-operations/AZURE_ENTRA_SIGN_IN_HUNT.md) | AWS and Entra records are not sent to the six lab indexes by these guides. Obtain customer access, source ownership, and retention details first. |
+| Brief customers and deliver a reviewable report | [Trellix presentation guide](../../presentations/trellix-threat-hunting/README.md), [customer evaluation worksheet](../../presentations/trellix-threat-hunting/CUSTOMER_HUNT_EVALUATION_WORKSHEET.md), and [hunt briefing outline](../security-operations/templates/hunt-briefing.md) | Use approved private customer storage for filled copies; recommendations and response actions need an accountable owner. |
