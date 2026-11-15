@@ -95,6 +95,8 @@ index=sysmon
 
 For missing Windows events or TLS handshake errors, follow the [forwarder TLS and KV service troubleshooting guide](../troubleshooting/splunk-forwarder-tls-and-kv-service.md) and compare a recent local event with its indexed copy.
 
+For field-level acceptance after basic collection, use the [Windows endpoint telemetry checks](../security-operations/endpoint-acceptance/README.md). They keep local generation, indexed evidence, and interpretation as separate results.
+
 ## Reference
 
 - [Splunk time modifiers](https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/10.6/time-format-variables-and-modifiers/time-modifiers): Explains how inline `earliest` and `latest` settings interact with the time-range picker.
