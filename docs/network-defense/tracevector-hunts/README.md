@@ -12,6 +12,7 @@ The lab's existing indexes are `win_security`, `win_system`, `powershell`, `sysm
 | A script behind the switch | Sysmon process start and optional script-block context | [04 · PowerShell](04-a-script-behind-the-switch.md) |
 | An account fast-tracked to admin | Security 4720 to 4732 account SID relationship | [05 · account](05-an-account-fast-tracked-to-admin.md) |
 | The startup entry that changed | Selected Sysmon Run-key events and execution gap | [06 · startup](06-the-startup-entry-that-changed.md) |
+| When the log goes quiet | Security 1102 and provider-verified System 104 | [07 · log clear](07-when-the-log-goes-quiet.md) |
 
 ## Use one guide at a time
 
