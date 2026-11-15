@@ -17,11 +17,11 @@ The [data-health search](../../hunts/00-data-health.spl) groups records by index
 index=linux host="<approved-host>" earliest=-7d
 | eval arrival_delay_s=_indextime-_time
 | stats count min(_time) as first_event max(_time) as last_event max(_indextime) as last_arrival perc95(arrival_delay_s) as p95_arrival_delay_s count(eval(arrival_delay_s<0)) as future_dated_events by host source sourcetype
-| eval last_event_utc=strftime(last_event,"%Y-%m-%d %H:%M:%S UTC"), last_arrival_utc=strftime(last_arrival,"%Y-%m-%d %H:%M:%S UTC")
-| table host source sourcetype count last_event_utc last_arrival_utc p95_arrival_delay_s future_dated_events
+| eval last_event_local=strftime(last_event,"%Y-%m-%d %H:%M:%S"), last_arrival_local=strftime(last_arrival,"%Y-%m-%d %H:%M:%S")
+| table host source sourcetype count last_event_local last_arrival_local p95_arrival_delay_s future_dated_events
 ```
 
-**Search overview:** `arrival_delay_s` compares arrival with event time. The percentile summarizes the group; `future_dated_events` counts records whose event time appears later than their arrival time. The displayed date strings are only UTC if the Splunk user's time zone is set to UTC. Otherwise change the labels to that user's time zone or display the raw epoch values. Do not interpret a negative delay as a fast pipeline; check clocks and timestamp parsing.
+**Search overview:** `arrival_delay_s` compares arrival with event time. The percentile summarizes the group; `future_dated_events` counts records whose event time appears later than their arrival time. Splunk displays these date strings in the searching user's time zone. Record that time zone with the result, or display the raw epoch values when comparing systems. Do not interpret a negative delay as a fast pipeline; check clocks and timestamp parsing.
 
 3. Open a few underlying records around the suspected gap. Confirm `_time`, `_indextime`, `host`, `source`, `sourcetype`, and the actual message. The latest event and latest arrival in the grouped search can come from **different records**.
 4. Compare the result with the approved source schedule. A missing row means that the selected time range returned no matching events; it does not prove the source was silent or that no activity occurred. Check the file input, source permissions, collection path, and a wider authorized window before drawing a conclusion.
