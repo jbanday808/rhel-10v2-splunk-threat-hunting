@@ -34,6 +34,14 @@ datasets. `first_seen`, `last_seen`, `created_at`, and `added_at` are epoch valu
 convert to UTC for the report. Source IP and user/domain normalization may need
 adjustment for your actual events.
 
+## Synthetic search checks
+
+These in-memory cases use Splunk `makeresults` to exercise the linked search pipelines without creating host activity or indexing test data. Run them only in an authorized Search session. Passing a case does not validate collection, field extraction, or a live alert.
+
+| Case | What it checks |
+| --- | --- |
+| [Task creation and update](fixtures/04-scheduled-task-cases.md) | Separates task registration from later changes and excludes an unrelated event code. |
+
 ## Optional Microsoft Defender XDR example
 
 [`optional-defender-powershell-network.kql`](optional-defender-powershell-network.kql)
