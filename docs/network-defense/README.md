@@ -12,6 +12,7 @@ Build a **passive** network hunting lab with Zeek, Wireshark/TShark, tcpdump, Su
 | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) | 30-step planning, installation, configuration, PCAP lab, Splunk integration, baseline, triage and operations |
 | [ZEEK_DEPLOYMENT.md](ZEEK_DEPLOYMENT.md) | Complete 28-step Zeek installation, policy, offline validation, optional live service, Splunk integration, operations, and rollback |
 | [OFFLINE_HTTP_WALKTHROUGH.md](OFFLINE_HTTP_WALKTHROUGH.md) | Positive and negative fixture replay, alert tuning, file analysis, and correlation in the existing `lab` index |
+| [HOSTNAME_BASELINE_LIMITS.md](HOSTNAME_BASELINE_LIMITS.md) | Compare HTTP hostnames in the synthetic captures and keep TLS SNI conclusions separate |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | VM roles, offline vs live sensing, trust and privacy boundaries |
 | [VMNET8_VISIBILITY_ACCEPTANCE.md](VMNET8_VISIBILITY_ACCEPTANCE.md) | Confirm that an approved capture point sees a known peer conversation before claiming network coverage |
 | [CONOPS.md](CONOPS.md) | Mission, authorization, operation, analyst workflow, metrics, retention and escalation |
