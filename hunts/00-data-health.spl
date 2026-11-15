@@ -1,4 +1,6 @@
 (index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h
-| stats count max(_time) as last_event max(_indextime) as last_recv perc95(eval(_indextime-_time)) as p95_s by index host sourcetype
-| eval idle_s=now()-last_recv
-| convert ctime(last_*)
+| eval arrival_delay_s=_indextime-_time
+| stats count max(_time) as last_event max(_indextime) as last_arrival perc95(arrival_delay_s) as p95_arrival_delay_s count(eval(arrival_delay_s<0)) as future_dated_events by index host sourcetype
+| eval arrival_idle_s=now()-last_arrival
+| convert ctime(last_event) ctime(last_arrival)
+| table index host sourcetype count last_event last_arrival arrival_idle_s p95_arrival_delay_s future_dated_events
