@@ -15,6 +15,13 @@ jobs:
           persist-credentials: false
       - name: Validate source files
         run: python3 scripts/validate_project.py
+      - name: Parse website JavaScript
+        run: |
+          node --check website/tracevector-lab/context.js
+          node --check website/tracevector-lab/scenarios.js
+          node --check website/tracevector-lab/app.js
+          node --check website/network-defense-lab/data.js
+          node --check website/network-defense-lab/app.js
       - name: Test redaction and configuration merging
         run: python3 -B -m unittest discover -s tests -p 'test_*.py' -v
   windows:
