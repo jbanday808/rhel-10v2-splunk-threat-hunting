@@ -16,11 +16,8 @@
 | [Sigma CLI](https://github.com/SigmaHQ/sigma-cli) | Installation, plugins and Splunk translation |
 | [Sigma official documentation](https://sigmahq.io/docs/guide/getting-started.html) | Rule format, processing pipelines and backends |
 | [Splunk Enterprise documentation](https://help.splunk.com/en/splunk-enterprise) | UF TLS forwarding, parsing, roles, indexing and search |
-| [DoD CMMC](https://dodcio.defense.gov/CMMC/About/) | CMMC program level, assessment types and POA&M constraints |
-| [CMMC Level 2 Assessment Guide](https://dodcio.defense.gov/Portals/0/Documents/CMMC/AssessmentGuideL2v2.pdf) | 110 NIST SP 800-171 R2 requirements and assessment objectives |
-| [NIST SP 800-171 Rev. 2](https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final) | CUI safeguarding requirements used in current CMMC L2 model |
-| [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final) | Zero Trust architectural concepts; separate from CMMC |
+| [NIST SP 800-207](https://csrc.nist.gov/pubs/sp/800/207/final) | Zero Trust architectural context for network evidence |
 
 ## Verification boundaries
 
-Package names, plugin versions, repository availability, and exact supported Zeek image tags may change. Re-check official download pages when actually installing. No live installation, CMMC assessment, response authority or operational detection is asserted by these documents. The scenario is a public **synthetic lab**, not an approved DoD or Intelligence Community network.
+Package names, plugin versions, repository availability, and exact supported Zeek image tags may change. Re-check official download pages when actually installing. No live installation, response authority or operational detection is asserted by these documents. The examples use a public **synthetic lab**; authorize any real data source separately.

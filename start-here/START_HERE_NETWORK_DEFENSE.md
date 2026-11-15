@@ -1,4 +1,4 @@
-# START HERE — Passive Network Defense: Zeek, Wireshark, Suricata, YARA, Sigma and CMMC
+# START HERE — Passive Network Hunting: Zeek, Wireshark, Suricata, YARA and Sigma
 
 **Project:** RHEL 10.2 Splunk Threat Hunting Lab · **Status:** Work in Progress (documentation, sample detection content and offline tooling only; no sensor VM deployed or live captures validated).
 
@@ -14,7 +14,7 @@
 
 ## Purpose
 
-Extend the existing three-VM VMware lab with an **optional, isolated passive network analysis sensor** and a documented end-to-end workflow. Cover protocol analysis, network baselining, low-impact vulnerability discovery, Suricata IDS alert triage, Zeek telemetry, Splunk investigations, YARA file classification, Sigma-to-SPL detection engineering, incident reporting and **CMMC Level 2 evidence mapping**. The documentation is project-focused and contains no company/job advertisement.
+Extend the existing three-VM VMware lab with an **optional, isolated passive network analysis sensor** and a documented end-to-end workflow. Cover protocol analysis, network baselining, Suricata IDS alert triage, Zeek telemetry, Splunk investigations, YARA file classification, Sigma-to-SPL detection engineering, and hunt reporting. The documentation is project-focused and contains no company/job advertisement.
 
 ## Lab architecture
 
@@ -42,7 +42,7 @@ Extend the existing three-VM VMware lab with an **optional, isolated passive net
 8. Create optional `net_zeek`, `net_suricata`, and `net_yara` indexes separately from the existing six.
 9. Forward approved sanitized JSON logs to Splunk only after reviewing TLS, source access and timestamps.
 10. Establish baseline, investigate outliers and document findings with [evidence](../evidence/sanitized/network-defense-validation.md).
-11. Map practices to **CMMC Level 2 / NIST SP 800-171 Revision 2** as illustrative support—not a completed 110-requirement assessment.
+11. Summarize the hunt question, observed evidence, collection limits and next owner decision in a [report](../docs/security-operations/templates/threat-hunt-report.md).
 
 ## Repository navigation
 

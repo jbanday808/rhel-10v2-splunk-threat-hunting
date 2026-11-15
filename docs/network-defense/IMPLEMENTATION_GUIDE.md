@@ -1,6 +1,6 @@
-# Complete 30-Step Guide — Passive Network Defense Lab on RHEL 10.2 with Splunk
+# Complete 30-Step Guide — Passive Network Hunting Lab on RHEL 10.2 with Splunk
 
-**Scope:** Build a project-focused, *non-intrusive* workflow for Zeek, Wireshark/TShark, tcpdump, Suricata IDS, YARA, Sigma and CMMC Level 2/NIST SP 800-171 evidence mapping. Your existing VMware Splunk/IdM/Windows services are preserved. No live sensor, detection, capture or CMMC assessment is claimed by publishing this guide.
+**Scope:** Build a project-focused, *non-intrusive* workflow for Zeek, Wireshark/TShark, tcpdump, Suricata IDS, YARA, Sigma and Splunk investigation. Your existing VMware Splunk/IdM/Windows services are preserved. Publishing this guide does not establish live sensor deployment, live detection coverage or live capture.
 
 **Host plan:** RHEL-SPLUNK01 `172.25.250.10`; WINHUNT01 `172.25.250.20`; RHEL-IDM01 `172.25.250.30`; optional **NEW** RHEL-SENSOR01 `172.25.250.40` (verify no collision); Windows 11 host and WSL at VMnet8 `172.25.250.1`. Follow [architecture](ARCHITECTURE.md) and [CONOPS](CONOPS.md).
 
@@ -313,7 +313,7 @@ python3 tools/publication_preflight.py
 git diff --check
 ~~~
 
-**Command overview:** Checks code/fixtures, source structure, public-release safety and whitespace. GitHub Actions runs source checks for Linux and Windows. These checks do **not** install sensors, prove IDS alert performance, or certify CMMC.
+**Command overview:** Checks code/fixtures, source structure, public-release safety and whitespace. GitHub Actions runs source checks for Linux and Windows. These checks do **not** install sensors or prove IDS alert performance.
 
 **Rollback:** Remove only the optional sensor log sources/index permissions/configuration added under approved change control. Preserve the three existing lab VMs, original six indexes, keys, Splunk services, IdM DNS and Windows forwarding. For failures, revert the precise change or restore the verified snapshot from VMware console; never disable Selinux/TLS protections or flush all firewall rules to “make it work.”
 
@@ -330,7 +330,6 @@ git diff --check
 | Splunk | Reviewed new indexes and verified certificate and timestamps | Pending |
 | Baseline | Known-good period, outliers, measurement limits | Pending |
 | Reporting | Incident notes, false-positive review, root cause/owner feedback | Pending |
-| CMMC | Sample evidence mapping only, no certification claim | Documentation only |
 
 ## References
 

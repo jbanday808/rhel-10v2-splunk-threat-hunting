@@ -8,7 +8,7 @@
 
 For the **VS Code + WSL on Windows 11** workflow, see [START_HERE_WSL.md](START_HERE_WSL.md). For Windows PowerShell, see [START_HERE_WINDOWS.md](START_HERE_WINDOWS.md).
 
-**Optional passive network defense workstream:** [Start here](START_HERE_NETWORK_DEFENSE.md) for the tool setup, offline network investigations and CMMC evidence guide.
+**Optional passive network hunting workstream:** [Start here](START_HERE_NETWORK_DEFENSE.md) for tool setup, offline network investigations and evidence review.
 
 
 ## 1. Know where to run each task

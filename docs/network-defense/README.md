@@ -1,4 +1,4 @@
-# Passive Network Defense Workstream (WIP)
+# Passive Network Hunting Workstream (WIP)
 
 **[START HERE](../../start-here/START_HERE_NETWORK_DEFENSE.md)** · **[COMPLETE 30-STEP GUIDE](IMPLEMENTATION_GUIDE.md)**
 
@@ -21,7 +21,7 @@ Build a **passive** network hunting lab with Zeek, Wireshark/TShark, tcpdump, Su
 | [SPLUNK_INTEGRATION.md](SPLUNK_INTEGRATION.md) | Proposed indexes, verified TLS forwarding, timestamp and parser tests |
 | [DETECTIONS_AND_TESTING.md](DETECTIONS_AND_TESTING.md) | Baseline, passive vulnerability identification and alert triage |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | No packets, missing logs, false positives, rollback |
-| [REFERENCES.md](REFERENCES.md) | Official 2026 vendor, NIST and DoD references |
+| [REFERENCES.md](REFERENCES.md) | Official tool and deployment references |
 
 **Source content:** `scripts/network-defense/`, `configs/network-defense/`, `rules/yara/`, `rules/sigma/`, `hunts/network-defense/`, `examples/network-defense/`, and `tests/test_network_defense.py`.
 
@@ -32,7 +32,6 @@ Build a **passive** network hunting lab with Zeek, Wireshark/TShark, tcpdump, Su
 - **Suricata:** Passive network IDS/alerting from PCAPs or an authorized monitored interface; not run inline or in blocking mode here.
 - **YARA:** Match patterns in **authorized local files** (or separately integrated extracted objects); a YARA rule is not a network capture sensor.
 - **Sigma:** Detection rule representation that must be converted with the appropriate backend/pipeline and verified against actual Splunk fields.
-- **CMMC:** A regulatory assessment program applicable by contract/scope. The lab contains **no CUI** and is **not CMMC certified**.
 
 **Installation caveat:** Zeek does **not** currently guarantee official native binary packages for RHEL 10. Use a verified official container image or an independently tested source build; see [Zeek platform support](https://github.com/zeek/zeek/wiki/Zeek-Operating-System-Support-Matrix). Suricata's own instructions describe RHEL 10 packages through OISF COPR, subject to owner approval. No repository script installs third-party sources unattended.
 

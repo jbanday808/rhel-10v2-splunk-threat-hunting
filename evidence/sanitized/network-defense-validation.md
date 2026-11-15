@@ -1,6 +1,6 @@
-# Network Defense Lab — Sanitized Validation (Work in Progress)
+# Network Hunting Lab — Sanitized Validation (Work in Progress)
 
-**Repository content:** Prepared. **Sensor deployment:** Not verified. **Live captures:** None performed here. **CMMC assessment or certification:** Not claimed.
+**Repository content:** Prepared. **Sensor deployment:** Not verified. **Live captures:** None performed here.
 
 | ID | Milestone | Current status | Actual evidence |
 | --- | --- | --- | --- |
@@ -16,8 +16,9 @@
 | NET-10 | Splunk parsing, timestamp and RBAC verification | Pending | TBD |
 | NET-11 | Baseline coverage, anomalies and measured drops | Pending | TBD |
 | NET-12 | Case report and owner root-cause review | Pending | TBD |
-| NET-13 | CMMC Level 2 sample mapping | Documentation only | No assessment |
 | NET-14 | Existing Splunk, Windows and IdM regression | Pending | TBD |
+
+NET-13 is retired; evidence IDs are not renumbered.
 
 ## Zeek deployment acceptance
 

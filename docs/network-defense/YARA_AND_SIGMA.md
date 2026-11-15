@@ -54,6 +54,6 @@ Convert the [sample Sigma DNS test rule](../../rules/sigma/lab_network_dns_marke
 - SPL is visually reviewed for source index, sourcetype, field naming and timeframe.
 - False positives, missing data and unstable field mappings are recorded.
 - Any scheduled alert or escalation must be approved by the analyst/system owner.
-- Neither YARA nor Sigma test passing constitutes an approved detection control or CMMC assessment.
+- Passing a synthetic YARA or Sigma test does not establish live detection coverage or authorize a response.
 
 **References:** [YARA command-line docs](https://yara.readthedocs.io/en/latest/commandline.html) · [Sigma CLI](https://github.com/SigmaHQ/sigma-cli) · [Sigma Getting Started](https://sigmahq.io/docs/guide/getting-started.html).
