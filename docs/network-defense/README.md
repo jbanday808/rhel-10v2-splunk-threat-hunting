@@ -19,6 +19,7 @@ Build a **passive** network hunting lab with Zeek, Wireshark/TShark, tcpdump, Su
 | [ZEEK_AND_WIRESHARK.md](ZEEK_AND_WIRESHARK.md) | Zeek offline overview, TShark and PCAP analysis |
 | [SURICATA.md](SURICATA.md) | RHEL 10 package checks, offline IDS, rules and EVE logging |
 | [SURICATA_CUSTOM_RULES.md](SURICATA_CUSTOM_RULES.md) | 12 custom passive-review rules, reproducible protocol controls, tuning, and senior-analyst triage |
+| [SURICATA_TO_HUNT_HANDOFF.md](SURICATA_TO_HUNT_HANDOFF.md) | Turn a rule ID into a scoped analyst question, controls, evidence, and owner decision |
 | [YARA_AND_SIGMA.md](YARA_AND_SIGMA.md) | Local file-matching and Sigma conversion to reviewed SPL |
 | [SPLUNK_INTEGRATION.md](SPLUNK_INTEGRATION.md) | Proposed indexes, verified TLS forwarding, timestamp and parser tests |
 | [DETECTIONS_AND_TESTING.md](DETECTIONS_AND_TESTING.md) | Baseline, passive vulnerability identification and alert triage |
