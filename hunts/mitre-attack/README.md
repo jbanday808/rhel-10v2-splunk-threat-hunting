@@ -40,6 +40,7 @@ These in-memory cases use Splunk `makeresults` to exercise the linked search pip
 
 | Case | What it checks |
 | --- | --- |
+| [Process and network identity](fixtures/01-process-network-identity.md) | Requires a start and connection on the same host and process GUID. |
 | [Task creation and update](fixtures/04-scheduled-task-cases.md) | Separates task registration from later changes and excludes an unrelated event code. |
 | [Monitored Run value](fixtures/05-run-key-scope.md) | Keeps the exact lab Run value and rejects lookalike value names and keys. |
 | [Log-clear provider](fixtures/06-log-clear-provider.md) | Labels the expected System provider and keeps a same-ID distractor visible for review. |
