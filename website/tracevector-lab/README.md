@@ -46,3 +46,13 @@ node --check website/tracevector-lab/app.js
 ```
 
 The [repository checks](../../README.md#validate-and-publish) cover the wider project. Interface captures and sample results do not establish live lab validation.
+
+## Check a Site release
+
+The files in this GitHub folder and the hosted Site's source are separate copies. Merging a GitHub pull request does not update the live Site. Before publishing a Site version:
+
+1. **Review the source.** Confirm the five application files match the approved change. Check that no personal notes, evidence attachments, backups, credentials, or customer records were added. Follow the [publication checklist](../../docs/reference/security-and-sanitization.md).
+2. **Parse and preview.** Run the three `node --check` commands above and the repository checks. Start the local preview, then open every view: Lab overview, Lab objectives, Scenario lab, Evidence & screenshots, Hunt follow-up, Detection studio, Project documentation, Progress tracking, and Lab proposals. Confirm all ten synthetic investigations appear.
+3. **Try the browser workflow.** Start at the Site address with no `#` section, open Scenario lab, press Back, then Forward; the section should return without losing Forward history. Open a guide and check its repository link. In a disposable browser workspace with synthetic notes only, export a backup and import it after reviewing the replacement prompt. Keep the downloaded backup private because attachments may be included.
+4. **Publish and check the live Site.** Copy the approved source to the hosted Site project and publish a saved version. Sign in with an authorized ChatGPT workspace account; confirm the nine views, ten hunts, links, and browser history again. Check that the Site URL and access audience remain as intended.
+5. **Record what was observed.** Note the GitHub commit, Site version, check date, and any failed checks in the release review. A successful interface check does not establish Splunk ingestion, host changes, or live detection coverage; those require separate lab evidence.
