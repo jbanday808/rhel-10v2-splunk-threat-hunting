@@ -4,7 +4,7 @@ These searches provide **visibility evidence**, not DoD Zero Trust compliance. T
 
 | File | Purpose |
 | --- | --- |
-| [01-siem-data-coverage.spl](01-siem-data-coverage.spl) | Event counts and last seen by source |
+| [01-siem-data-coverage.spl](01-siem-data-coverage.spl) | Expected lab index/host pairs, including missing sources; [synthetic control](fixtures/01-expected-source-gaps.md) |
 | [02-windows-failed-logons.spl](02-windows-failed-logons.spl) | Windows failed authentication activity |
 | [03-powershell-activity.spl](03-powershell-activity.spl) | PowerShell operational logs, source counts |
 | [04-splunk-internal-errors.spl](04-splunk-internal-errors.spl) | Splunk internal warning/error activity |

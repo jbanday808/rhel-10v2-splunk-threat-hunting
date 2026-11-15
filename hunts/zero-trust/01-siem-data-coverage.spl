@@ -1,5 +1,13 @@
-(index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h
-| stats count latest(_time) as last_event by index host sourcetype
-| eval last_seen=strftime(last_event, "%Y-%m-%d %H:%M:%S")
-| table index host sourcetype count last_seen
+| makeresults
+| eval expected_pair=split("win_security|WINHUNT01,win_system|WINHUNT01,powershell|WINHUNT01,sysmon|WINHUNT01,linux|splunk01,lab|splunk01",",")
+| mvexpand expected_pair
+| eval index=mvindex(split(expected_pair,"|"),0), host=mvindex(split(expected_pair,"|"),1), expected=1
+| fields index host expected
+| append [ search (index=win_security OR index=win_system OR index=powershell OR index=sysmon OR index=linux OR index=lab) earliest=-24h
+    | stats count as observed_events max(_time) as last_event_epoch max(_indextime) as last_ingest_epoch by index host ]
+| stats max(expected) as expected max(observed_events) as observed_events max(last_event_epoch) as last_event_epoch max(last_ingest_epoch) as last_ingest_epoch by index host
+| where expected=1
+| eval observed_events=coalesce(observed_events,0), coverage=if(observed_events=0,"no events in window","events observed")
+| eval last_event_age_min=if(observed_events>0,round((now()-last_event_epoch)/60,1),null()), last_ingest_age_min=if(observed_events>0,round((now()-last_ingest_epoch)/60,1),null())
+| table index host coverage observed_events last_event_age_min last_ingest_age_min
 | sort index host
