@@ -1,4 +1,7 @@
 index=win_security earliest=-24h (EventCode=4625 OR EventID=4625)
-| stats count latest(_time) as last_failed by host user
-| eval last_failed=strftime(last_failed, "%Y-%m-%d %H:%M:%S")
-| sort -count
+| eval event_code=coalesce(tonumber(EventCode),tonumber(EventID))
+| where event_code=4625
+| eval account=coalesce(TargetUserName,"not_extracted"), account_domain=coalesce(TargetDomainName,"not_extracted"), source_ip=coalesce(IpAddress,"not_extracted"), logon_type=coalesce(LogonType,"not_extracted")
+| stats count as failures latest(_time) as last_failed values(Status) as status values(SubStatus) as substatus by host account_domain account source_ip logon_type
+| eval last_failed=strftime(last_failed,"%Y-%m-%d %H:%M:%S")
+| sort -failures host account_domain account
