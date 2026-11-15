@@ -14,6 +14,7 @@ This optional workstream adds repeatable processes for handling threats, plannin
 | Explain the Trellix consultant role | [Presentation guide](../../presentations/trellix-threat-hunting/README.md) | PowerPoint and plain-language talking points |
 | Design and execute a hunt | [Threat-hunting method](THREAT_HUNTING_METHOD.md) | [Detailed plan](templates/threat-hunt-plan.md) |
 | Brief leaders and technical teams | [Hunt and stakeholder briefing](templates/hunt-briefing.md) | Six-slide briefing outline and decision log |
+| See a plain-language briefing example | [Synthetic syslog customer briefing](SYNTHETIC_SYSLOG_CUSTOMER_BRIEFING.md) | Fictional SSH clues, uncertainty, owner decision, and handover |
 | Document investigation results | [Detailed hunt report](templates/threat-hunt-report.md) | Evidence-linked findings, limitations and follow-up |
 | Review forensic findings with AI | [AI-assisted forensics](AI_ASSISTED_FORENSICS.md) | [Forensic review record](templates/forensic-review.md) |
 | Deliver an engagement and handover | [Engagement workflow](ENGAGEMENT_DELIVERY.md) | [Closeout report](templates/engagement-closeout.md) |
