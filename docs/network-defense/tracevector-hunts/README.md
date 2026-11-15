@@ -15,6 +15,7 @@ The lab's existing indexes are `win_security`, `win_system`, `powershell`, `sysm
 | When the log goes quiet | Security 1102 and provider-verified System 104 | [07 · log clear](07-when-the-log-goes-quiet.md) |
 | A name worth a second look | Selected PowerShell DNS queries and process context | [08 · DNS](08-a-name-worth-a-second-look.md) |
 | A process with a new destination | Sysmon 1 and 3 pairing by host and ProcessGuid | [09 · destination](09-a-process-with-a-new-destination.md) |
+| One source, several accounts | Security 4625 across distinct account identities | [10 · account failures](10-one-source-several-accounts.md) |
 
 ## Use one guide at a time
 
