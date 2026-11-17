@@ -1,0 +1,32 @@
+name: RHEL Splunk Threat Hunting Source Check
+description: Validate the RHEL Splunk threat-hunting lab source layout and example configuration without contacting lab services.
+author: jbanday808
+branding:
+  icon: shield
+  color: blue
+inputs:
+  path:
+    description: Path to the checked-out lab repository, relative to GITHUB_WORKSPACE.
+    required: false
+    default: '.'
+  verify-manifest:
+    description: Verify the original download manifest; use only with the unchanged original package.
+    required: false
+    default: 'false'
+outputs:
+  result:
+    description: Source validation result, passed or failed.
+    value: ${{ steps.check.outputs.result }}
+  error-count:
+    description: Number of source validation errors, including invalid action inputs.
+    value: ${{ steps.check.outputs.error-count }}
+runs:
+  using: composite
+  steps:
+    - name: Validate lab source
+      id: check
+      shell: bash
+      env:
+        SOURCE_CHECK_PATH: ${{ inputs.path }}
+        SOURCE_CHECK_VERIFY_MANIFEST: ${{ inputs.verify-manifest }}
+      run: python3 "$GITHUB_ACTION_PATH/scripts/run_source_check_action.py"

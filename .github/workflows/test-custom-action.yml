@@ -1,0 +1,124 @@
+name: Test and release custom action
+
+on:
+  push:
+    paths:
+      - action.yml
+      - ACTION_VERSION
+      - scripts/validate_project.py
+      - scripts/run_source_check_action.py
+      - scripts/release_custom_action.py
+      - tests/**
+      - .github/workflows/test-custom-action.yml
+      - .github/action-release-notes.md
+      - docs/custom-github-action.md
+      - README.md
+  pull_request:
+    paths:
+      - action.yml
+      - ACTION_VERSION
+      - scripts/validate_project.py
+      - scripts/run_source_check_action.py
+      - scripts/release_custom_action.py
+      - tests/**
+      - .github/workflows/test-custom-action.yml
+      - .github/action-release-notes.md
+      - docs/custom-github-action.md
+      - README.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: custom-action-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      publish: ${{ steps.release-change.outputs.publish }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Verify Python runtime
+        run: python3.12 --version
+      - name: Validate project source
+        run: python3.12 scripts/validate_project.py
+      - name: Run Python tests
+        run: python3.12 -B -m unittest discover -s tests -v
+      - name: Check files before publication
+        run: python3.12 tools/publication_preflight.py
+      - name: Run the custom action
+        id: source-check
+        uses: ./
+      - name: Verify success outputs
+        env:
+          RESULT: ${{ steps.source-check.outputs.result }}
+          ERROR_COUNT: ${{ steps.source-check.outputs.error-count }}
+        run: |
+          test "$RESULT" = passed
+          test "$ERROR_COUNT" = 0
+      - name: Prepare invalid source fixture
+        id: fixture
+        shell: bash
+        run: |
+          fixture="$(mktemp -d "$GITHUB_WORKSPACE/.source-check-fixture.XXXXXX")"
+          git archive --format=tar HEAD | tar --extract --directory "$fixture"
+          printf '%s\n' '<broken>' > "$fixture/apps/LAB_SIEM/default/data/ui/views/overview.xml"
+          printf 'path=%s\n' "$fixture" >> "$GITHUB_OUTPUT"
+      - name: Reject malformed source
+        id: invalid-source
+        uses: ./
+        continue-on-error: true
+        with:
+          path: ${{ steps.fixture.outputs.path }}
+      - name: Verify failure outputs
+        env:
+          OUTCOME: ${{ steps.invalid-source.outcome }}
+          RESULT: ${{ steps.invalid-source.outputs.result }}
+          ERROR_COUNT: ${{ steps.invalid-source.outputs.error-count }}
+        run: |
+          test "$OUTCOME" = failure
+          test "$RESULT" = failed
+          test "$ERROR_COUNT" -gt 0
+      - name: Detect version release request
+        id: release-change
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+        shell: bash
+        run: |
+          publish=false
+          if [[ "$EVENT_NAME" == workflow_dispatch ]]; then
+            publish=true
+          elif [[ "$EVENT_NAME" == push && "$BEFORE_SHA" =~ ^[0-9a-f]{40}$ && "$BEFORE_SHA" != 0000000000000000000000000000000000000000 ]]; then
+            if ! git diff --quiet "$BEFORE_SHA" "$GITHUB_SHA" -- ACTION_VERSION; then
+              publish=true
+            fi
+          fi
+          printf 'publish=%s\n' "$publish" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: test
+    if: >-
+      needs.test.outputs.publish == 'true' &&
+      github.repository == 'jbanday808/rhel-10v2-splunk-threat-hunting' &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Publish tested action version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3.12 scripts/release_custom_action.py

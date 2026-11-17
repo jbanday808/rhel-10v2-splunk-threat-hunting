@@ -1,5 +1,32 @@
 # Threat Hunting Lab and Trellix Consultant Guide
 
+## Reusable GitHub Action
+
+**RHEL Splunk Threat Hunting Source Check** validates this lab's source layout and example configuration in GitHub Actions. It checks required files, Python/XML/JSON syntax, shell syntax when Bash is available, the six lab indexes, and selected TLS, redaction, and ingestion settings. It runs offline and needs no Splunk credentials.
+
+```yaml
+permissions:
+  contents: read
+
+jobs:
+  source-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check lab source
+        id: lab
+        uses: jbanday808/rhel-10v2-splunk-threat-hunting@v1
+        with:
+          path: '.'
+          verify-manifest: 'false'
+```
+
+Use this action for this lab or forks that retain its layout. Ubuntu 24.04 provides the required Bash and Python 3.10 or newer. Inputs are `path` (default `.`; inside the checked-out workspace) and `verify-manifest` (default `false`; only for the unchanged original download). Outputs are `result` (`passed` or `failed`) and `error-count`. Validation errors fail the step and add a count to the job summary. See the [action guide](docs/custom-github-action.md) for details, versioning, and release review steps. The action does not verify live deployments or provide a complete security audit.
+
+## Lab and consultant guides
+
 Threat hunting means looking for signs of an attack that may not have raised an alert. This repository contains a practice lab, example searches, and guides for explaining a hunt to customers and decision-makers.
 
 ## Choose where to start
